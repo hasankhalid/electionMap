@@ -34,17 +34,17 @@ NA-32,Chitral,,KP
 NA-33,Upper Dir,Lower Dir,KP
 NA-34,Lower Dir,,KP
 NA-35,Malakand,,KP
-NA-36,Bajaur Agency,,FATA
-NA-37,Bajaur Agency,,FATA
-NA-38,Bajaur Agency,,FATA
-NA-39,Mohmand Agency,,FATA
-NA-40,Khyber Agency,,FATA
-NA-41,Khyber Agency,,FATA
-NA-42,Kurram Agency,,FATA
-NA-43,Orakzai Agency,,FATA
-NA-44,North Waziristan Agency,,FATA
-NA-45,South Waziristan Agency,,FATA
-NA-46,South Waziristan Agency,,FATA
+NA-36,Mohmand Agency,,FATA
+NA-37,Kurram Agency,,FATA
+NA-38,Kurram Agency,,FATA
+NA-39,Orakzai Agency,,FATA
+NA-40,North Waziristan Agency,,FATA
+NA-41,South Waziristan Agency,,FATA
+NA-42,South Waziristan Agency,,FATA
+NA-43,Bajaur Agency,,FATA
+NA-44,Bajaur Agency,,FATA
+NA-45,Khyber Agency,,FATA
+NA-46,Khyber Agency,,FATA
 NA-47,FR Tank,FR Bannu - FR DI Khan - FR Lakki Marwat - FR Peshawar - FR Peshawar,FATA
 NA-48,Islamabad,,ICT
 NA-49,Islamabad,,ICT
@@ -208,7 +208,7 @@ NA-206,Kambar-Shahdadkot,,Sindh
 NA-207,Larkana,Kambar-Shahdadkot,Sindh
 NA-208,Jacobabad,,Sindh
 NA-209,Jacobabad,Kashmore,Sindh
-NA-210,Jacobabad,,Sindh
+NA-210,Kashmore,Jacobabad,Sindh
 NA-211,Naushehro Feroze,,Sindh
 NA-212,Naushehro Feroze,,Sindh
 NA-213,Shaheed Benazirabad,,Sindh
@@ -226,10 +226,10 @@ NA-224,Badin,,Sindh
 NA-225,Badin,,Sindh
 NA-226,Mirpurkhas,,Sindh
 NA-227,Mirpurkhas,,Sindh
-NA-228,Mirpurkhas,,Sindh
+NA-228,Umerkot,Mirpurkhas,Sindh
 NA-229,Tharparkar,,Sindh
 NA-230,Tharparkar,,Sindh
-NA-231,Dadu,,Sindh
+NA-231,Jamshoro,Dadu,Sindh
 NA-232,Dadu,,Sindh
 NA-233,Dadu,,Sindh
 NA-234,Sanghar,,Sindh
