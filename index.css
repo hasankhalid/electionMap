@@ -1,0 +1,270 @@
+#plotreelogo {
+  width: 100px;
+}
+
+#chorddiagram {
+  display: none;
+}
+.party_label {
+  font-size: 13px;
+}
+
+.electlink {
+  font-size: 14px;
+  color: #757575;
+  cursor: pointer;
+}
+
+.whitenav {
+  box-shadow: 0 0px 20px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  height: 55px;
+}
+
+#vizcontain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ballot {
+  height: 25px;
+  width: 25px;
+}
+
+.disclaimer {
+  background-color: #1976D2;
+  color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.electionbuttcontain {
+  flex-direction: row;
+}
+
+.vizbuttonscontainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.btnnavigate {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px;
+  background-color: white;
+  border-color: #E0E0E0;
+}
+
+.btnnavigate:active, .btnnavigate:focus {
+  background-color: #EEEEEE;
+}
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
+  background-color: #EEEEEE !important;
+
+}
+
+.btnnavigate:focus, .btnnavigate:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 991.98px) {
+  .disclaimer>.container, .disclaimer>.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .electionbuttcontain {
+    flex-direction: row;
+  }
+  .disclaimer {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .disclaimer {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .whitenav {
+    height: 80px;
+  }
+
+  .whitenav>.container {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .socialicons {
+    display: none;
+  }
+}
+
+/* D3 styling follows */
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+}
+
+g.legendOrdinal text{
+  font-family: sans-serif;
+  font-size: 9px;
+}
+
+.tool {
+  position: absolute;
+  background-color: #eeeeee;
+  color: #212121;
+  display: grid;
+  padding: 15px;
+  width: 250px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto auto;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+
+.NA {
+  font-size: 14px;
+}
+
+.dist {
+  font-size: 13px;
+}
+
+.turnout {
+  font-size: 12px;
+  color: #757575;
+}
+
+.toolhead {
+  grid-column: span 10;
+}
+
+.partyicon {
+  grid-column: span 2;
+}
+
+.nametitle {
+  grid-column: span 7;
+  font-size: 12px;
+  color: #757575;
+  padding-bottom: 5px;
+  border-bottom: 1px solid;
+  border-bottom-color: #BDBDBD;
+  margin-bottom: 5px;
+}
+
+.partytitle {
+  grid-column: span 3;
+  font-size: 12px;
+  color: #757575;
+  padding-bottom: 5px;
+  border-bottom: 1px solid;
+  border-bottom-color: #BDBDBD;
+  margin-bottom: 5px;
+}
+
+.voteTitle {
+  grid-column: span 2;
+  font-size: 12px;
+  color: #757575;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid;
+  border-bottom-color: #BDBDBD;
+  margin-bottom: 5px;
+}
+
+.candidatename {
+  grid-column: span 7;
+  font-size: 12px;
+  display: flex;
+  align-items: flex-end;
+  padding-right: 1px;
+}
+
+.partyname {
+  grid-column: span 3;
+  font-size: 12px;
+  display: flex;
+  align-items: flex-start;
+  color: #757575;
+}
+
+.votes {
+  grid-column: span 2;
+  font-size: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  color: #757575;
+}
+
+.chordtool {
+  position: absolute;
+  color: #212121;
+  background-color: white;
+  display: grid;
+  padding: 15px;
+  width: 175px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto auto;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+
+.party {
+  grid-column: span 9;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.cpartyicon {
+  grid-column: span 3;
+}
+
+.chordtoolexpand {
+  position: absolute;
+  color: #212121;
+  background-color: white;
+  display: grid;
+  padding: 15px;
+  width: 250px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto auto;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+
+.chordtoolheading {
+  grid-column: span 6;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+}
+
+.vsparty {
+  padding: 10px;
+  transition: all 0.4s ease;
+}
+
+.arrow {
+  grid-column: span 2;
+}
+
+.chordexpandicon {
+  grid-column: span 2;
+  padding: 0px 10px;
+}
+
+.chordexpandinfo {
+  grid-column: span 10;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+}
