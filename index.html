@@ -84,6 +84,19 @@
       </div>
     </div>
 
+    <footer id="footer" style="width: 100%; background: #303F9F; padding: 20px;">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div style="display: flex; justify-content: center;" class="container">
+          <img style="width: 100px; height: 100px;" src="./resources/ballotfoot.svg"></img>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
+        <div style="display: flex; flex-direction: column; color: white; font-size: 14px;" class="container">
+          <p style="margin-bottom: 0px; align-self: center;">Designed and developed by Plotree Info Design © 2018</p>
+       </div>
+      </div>
+    </footer>
+
     <script>
       $("#NA").click(function() {
         $(this).addClass('active');
@@ -93,6 +106,7 @@
         $(".map_in_a_box").show().addClass('animated fadeInDefault');
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
+        $("#footer").css('margin-top', '0px');
       });
       $("#PA").click(function() {
         $(this).addClass('active');
@@ -102,6 +116,7 @@
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
         $(".disclaimer").css('margin-bottom', '15px');
+        $("#footer").css('margin-top', '70vh');
       });
       $("#flow").click(function() {
         $(this).addClass('active');
@@ -111,11 +126,10 @@
         $(".disclaimer").css('margin-bottom', '0px');
         $("#chorddisclaim").show().addClass('animated fadeInDefault');
         $('#chorddiagram').show().addClass('animated fadeInDefault');
+        $("#footer").css('margin-top', '0px');
       });
 
-      $(document).ready( function() {
-        $('.dropdown-toggle').dropdown();
-      });
+
 
       /*  $(window).on("load", function() {
        setTimeout(function () {
