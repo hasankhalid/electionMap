@@ -5,6 +5,12 @@
 #chorddiagram {
   display: none;
 }
+
+.mobilenav {
+    font-size: 11px;
+    color: black;
+}
+
 .party_label {
   font-size: 13px;
 }

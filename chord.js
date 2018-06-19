@@ -42,9 +42,7 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
   // one_one_map = one_one_map.filter(d => d.party_2008 !=null && d.party_2013!=null);
   // console.log(one_one_map);
   // console.log(one_one_map.filter(function(d){ return d.party_2008_abb == 'Other'}));
-  console.log(one_one_map);
 
-  console.log(one_one_map.filter(function(d){ return d.party_2008_abb != 'Other' && d.party_2013_abb != 'Other'}));
 
   // removing Others/ nulls from data
   one_one_map = one_one_map.filter(function(d){ return d.party_2008_abb != 'Other' && d.party_2013_abb != 'Other'});
@@ -59,11 +57,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
   var party_abbs = party_abbs_2008.concat(party_abbs_2013);
   party_abbs = party_abbs.filter(unique);
 
-
-
-  // console.log(party_abbs_2013);
-  // console.log(party_abbs_2008);
-  // console.log(party_abbs);
 
   var party_matrix = []
   party_abbs.forEach(function(party2013){
@@ -87,22 +80,18 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
     [ 1013,   990,  940, 6907]
   ];
 
-  console.log(window.innerWidth);
 
   var width = 540,
       height = 540;
 
   window.onresize = function(){
-    console.log('I am resizing');
       if(window.innerWidth < 590){
         width = 380;
         height = 380;
-        console.log(window.innerWidth);
       }
       else if(window.innerWidth < 360){
         width = 310;
         height = 310;
-        console.log(window.innerWidth)
       }
       else {
         width = 540;
@@ -155,7 +144,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
       })
       .classed("party_label", true)
       .attr('transform', function(d, i){
-        console.log(d.angle/ 2);
         return  'rotate(' + (radians_to_degrees(d.angle/ 2) - 90) + ')' +
         'rotate('+ (d.angle > Math.PI ? -find_text_rot('.party_label') : find_text_rot('.party_label')) +')' +
         'translate('+ (outerRadius + 10) +') ' +
@@ -163,10 +151,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
       })
       .attr('text-anchor', d => (d.angle > Math.PI ? "end" : null));
 
-
-  console.log(group.data());
-
-  console.log(group.select('text').data());
 
 
   group.append("path")
@@ -213,16 +197,13 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
   // }
 
   // here ends the code for chord from mike bostocks block
-  console.log(outerRadius * 2 * Math.PI);
-  console.log((6/ (outerRadius * 2 * Math.PI))* 360)
+
 
   function find_text_rot(text_class){
     var font_size = d3.select(text_class).style('font-size').replace("px", "");
-    console.log(font_size);
     return ((font_size/ 2)/ (outerRadius * 2 * Math.PI)) * 360;
   }
 
-  console.log(find_text_rot('.party_label'));
 
   function fade_group(opacity, add_title) {
     return function(d, i) {
@@ -242,7 +223,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
 
         if(d3.event.pageY > window.innerHeight - 250) {
           var hoverbox = document.getElementById('hoverbox');
-          console.log(hoverbox.offsetHeight)
           d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 50 + "px")
           d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
         }
@@ -298,7 +278,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
 
             if(d3.event.pageY > window.innerHeight - 250) {
               var hoverbox = document.getElementById('hoverbox');
-              console.log(hoverbox.offsetHeight)
               d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 50 + "px")
               d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
             }
@@ -329,7 +308,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
 
             if(d3.event.pageY > window.innerHeight - 250) {
               var hoverbox = document.getElementById('hoverbox');
-              console.log(hoverbox.offsetHeight)
               d3.select('.chordtoolexpand').style('top', d3.event.pageY - hoverbox.offsetHeight - 130 + "px")
               d3.select('.chordtoolexpand').style('left', d3.event.pageX - 87.5 + "px")
             }
