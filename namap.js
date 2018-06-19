@@ -3,7 +3,7 @@
 var map_block = d3.select("#vizcontain")
 
 // width and height of the svg viewport
-var width = 1000, height = 800;
+var width = 1000, height = 600;
 
 // defining the projection for map (change center and scale to get desired size for the map)
 var projection = d3.geoMercator()
