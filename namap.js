@@ -224,36 +224,38 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
         .html(function(d){
           switch(datum.results[0].party) {
               case "Pakistan Tehreek-e-Insaf":
-                  return '<img src="./bat.svg"></img>';
+                  return '<img src="./resources/partylogos/bat.svg"></img>';
                   break;
               case "Pakistan Muslim League (N)":
-                  return '<img src="./tiger.svg"></img>';
+                  return '<img src="./resources/partylogos/tiger.svg"></img>';
                   break;
               case "Muttahida Qaumi Movement Pakistan":
-                  return '<img src="./kite.svg"></img>';
+                  return '<img src="./resources/partylogos/kite.svg"></img>';
                   break;
               case "Pakistan Peoples Party Parliamentarians":
-                  return '<img  style="transform: rotate(45deg);" src="./arrow.svg"></img>';
+                  return '<img  style="transform: rotate(45deg);" src="./resources/partylogos/arrow.svg"></img>';
                   break;
               case "All Pakistan Muslim League":
-                  return '<img src="./eagle.svg"></img>';
+                  return '<img src="./resources/partylogos/eagle.svg"></img>';
                   break;
               case "Pakistan Muslim League":
-                  return '<img src="./bicycle.svg"></img>';
+                  return '<img src="./resources/partylogos/bicycle.svg"></img>';
                   break;
               case "Pakistan Muslim League (F)":
-                  return '<img src="./rose.svg"></img>';
+                  return '<img src="./resources/partylogos/rose.svg"></img>';
                   break;
               case "Jamiat Ulama-e-Islam (F)":
-                  return '<img style="width: 100%;" src="./book.svg"></img>';
+                  return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
                   break;
               case "Jamaat-e-Islami Pakistan":
-                  return '<img style="width: 100%;" src="./balance.svg"></img>';
+                  return '<img style="width: 100%;" src="./resources/partylogos/balance.svg"></img>';
                   break;
               case "Pakistan Muslim League(Z)":
-                  return '<img style="width: 100%;" src="./helicopter.svg"></img>';
+                  return '<img style="width: 100%;" src="./resources/partylogos/helicopter.svg"></img>';
                   break;
-
+              default:
+                  return '<img style="width: 90%;" src="./resources/ballot2.svg"></img>';
+                  break;
         }});
 
         tooltip.append('div')

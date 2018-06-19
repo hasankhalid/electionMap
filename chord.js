@@ -87,9 +87,30 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
     [ 1013,   990,  940, 6907]
   ];
 
-  var width = 570,
-      height = 570,
-      svg = d3.select("#vizcontain").append("svg").attr("width", width).attr("height", height).attr('id', 'chorddiagram'),
+  console.log(window.innerWidth);
+
+  var width = 540,
+      height = 540;
+
+  window.onresize = function(){
+    console.log('I am resizing');
+      if(window.innerWidth < 590){
+        width = 380;
+        height = 380;
+        console.log(window.innerWidth);
+      }
+      else if(window.innerWidth < 360){
+        width = 310;
+        height = 310;
+        console.log(window.innerWidth)
+      }
+      else {
+        width = 540;
+        height = 540;
+      }
+  }
+
+      var svg = d3.select("#vizcontain").append("svg").attr("width", width).attr("height", height).attr('id', 'chorddiagram'),
       outerRadius = Math.min(width, height) * 0.5 - 50,
       innerRadius = outerRadius - 15;
 
@@ -218,8 +239,17 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
           .classed('animated', true)
           .classed('fadeIn', true)
           .attr('id', 'hoverbox')
-          .style('top', d3.event.pageY + 10 + "px")
-          .style('left', d3.event.pageX + 10 + "px")
+
+        if(d3.event.pageY > window.innerHeight - 250) {
+          var hoverbox = document.getElementById('hoverbox');
+          console.log(hoverbox.offsetHeight)
+          d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 50 + "px")
+          d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+        }
+        else {
+          d3.select('.chordtool').style('top', d3.event.pageY + 10 + "px")
+          d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+        }
 
         d3.select('.chordtool')
           .append('div')
@@ -228,43 +258,14 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
             return '<span>' + party_abbs[d.index] + ' - ' + d.value + ' seats' + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
           })
 
+
         d3.select('.chordtool')
           .append('div')
           .classed('cpartyicon', true)
           .html(function(){
-            switch(party_abbs[d.index]) {
-                case "PTI":
-                    return '<img src="./bat.svg"></img>';
-                    break;
-                case "PML-N":
-                    return '<img src="./tiger.svg"></img>';
-                    break;
-                case "MQM":
-                    return '<img src="./kite.svg"></img>';
-                    break;
-                case "PPPP":
-                    return '<img style="transform: rotate(45deg);" src="./arrow.svg"></img>';
-                    break;
-                case "APML":
-                    return '<img src="./eagle.svg"></img>';
-                    break;
-                case "PML":
-                    return '<img src="./bicycle.svg"></img>';
-                    break;
-                case "PML-F":
-                    return '<img src="./rose.svg"></img>';
-                    break;
-                case "JUI-F":
-                    return '<img style="width: 100%;" src="./book.svg"></img>';
-                    break;
-                case "JI":
-                    return '<img style="width: 100%;" src="./balance.svg"></img>';
-                    break;
-                case "PML-Z":
-                    return '<img style="width: 100%;" src="./helicopter.svg"></img>';
-                    break;
-          }});
-        }
+            return returnIntikhabiNishaan(party_abbs[d.index]);
+        })
+      }
       else {
         d3.select(".chordtool").remove();
       }
@@ -294,51 +295,30 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
             .classed('animated', true)
             .classed('fadeIn', true)
             .attr('id', 'hoverbox')
-            .style('top', d3.event.pageY + 10 + "px")
-            .style('left', d3.event.pageX + 10 + "px")
+
+            if(d3.event.pageY > window.innerHeight - 250) {
+              var hoverbox = document.getElementById('hoverbox');
+              console.log(hoverbox.offsetHeight)
+              d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 50 + "px")
+              d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+            }
+            else {
+              d3.select('.chordtool').style('top', d3.event.pageY + 10 + "px")
+              d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+            }
 
           d3.select('.chordtool')
             .append('div')
             .classed('party', true)
             .html(function(){
-              return '<span>' + party_abbs[d.source.index] + ' retained ' + gained + (gained > 1 ? " seats" : " seat") + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              return '<span style="padding: 2px;">' + party_abbs[d.source.index] + ' retained ' + gained + (gained > 1 ? " seats" : " seat") + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
             d3.select('.chordtool')
               .append('div')
               .classed('cpartyicon', true)
               .html(function(){
-                switch(party_abbs[d.source.index]) {
-                    case "PTI":
-                        return '<img src="./bat.svg"></img>';
-                        break;
-                    case "PML-N":
-                        return '<img src="./tiger.svg"></img>';
-                        break;
-                    case "MQM":
-                        return '<img src="./kite.svg"></img>';
-                        break;
-                    case "PPPP":
-                        return '<img style="transform: rotate(45deg);" src="./arrow.svg"></img>';
-                        break;
-                    case "APML":
-                        return '<img src="./eagle.svg"></img>';
-                        break;
-                    case "PML":
-                        return '<img src="./bicycle.svg"></img>';
-                        break;
-                    case "PML-F":
-                        return '<img src="./rose.svg"></img>';
-                        break;
-                    case "JUI-F":
-                        return '<img style="width: 100%;" src="./book.svg"></img>';
-                        break;
-                    case "JI":
-                        return '<img style="width: 100%;" src="./balance.svg"></img>';
-                        break;
-                    case "PML-Z":
-                        return '<img style="width: 100%;" src="./helicopter.svg"></img>';
-                        break;
-              }});
+                return returnIntikhabiNishaan(party_abbs[d.source.index])
+              });
         }
         else {
           d3.select('body').append('div')
@@ -346,8 +326,17 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
             .classed('animated', true)
             .classed('fadeIn', true)
             .attr('id', 'hoverbox')
-            .style('top', d3.event.pageY + 10 + "px")
-            .style('left', d3.event.pageX + 10 + "px")
+
+            if(d3.event.pageY > window.innerHeight - 250) {
+              var hoverbox = document.getElementById('hoverbox');
+              console.log(hoverbox.offsetHeight)
+              d3.select('.chordtoolexpand').style('top', d3.event.pageY - hoverbox.offsetHeight - 130 + "px")
+              d3.select('.chordtoolexpand').style('left', d3.event.pageX - 87.5 + "px")
+            }
+            else {
+              d3.select('.chordtoolexpand').style('top', d3.event.pageY + 10 + "px")
+              d3.select('.chordtoolexpand').style('left', d3.event.pageX - 87.5 + "px")
+            }
 
           d3.select('.chordtoolexpand')
             .append('div')
@@ -355,38 +344,8 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
             .classed('vsparty', true)
             .attr('id', 'winnericon')
             .html(function(){
-              switch(party_abbs[d.source.index]) {
-                  case "PTI":
-                      return '<img src="./bat.svg"></img>';
-                      break;
-                  case "PML-N":
-                      return '<img src="./tiger.svg"></img>';
-                      break;
-                  case "MQM":
-                      return '<img src="./kite.svg"></img>';
-                      break;
-                  case "PPPP":
-                      return '<img style="transform: rotate(45deg);" src="./arrow.svg"></img>';
-                      break;
-                  case "APML":
-                      return '<img src="./eagle.svg"></img>';
-                      break;
-                  case "PML":
-                      return '<img src="./bicycle.svg"></img>';
-                      break;
-                  case "PML-F":
-                      return '<img src="./rose.svg"></img>';
-                      break;
-                  case "JUI-F":
-                      return '<img style="width: 100%;" src="./book.svg"></img>';
-                      break;
-                  case "JI":
-                      return '<img style="width: 100%;" src="./balance.svg"></img>';
-                      break;
-                  case "PML-Z":
-                      return '<img style="width: 100%;" src="./helicopter.svg"></img>';
-                      break;
-            }});
+              return returnIntikhabiNishaan(party_abbs[d.source.index])
+          });
 
             setTimeout(function () {
               $('#winnericon').css('padding', '4px');}, 100
@@ -404,38 +363,8 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
               .classed('cpartyicon', true)
               .classed('vsparty', true)
               .html(function(){
-                switch(party_abbs[d.target.index]) {
-                    case "PTI":
-                        return '<img src="./bat.svg"></img>';
-                        break;
-                    case "PML-N":
-                        return '<img src="./tiger.svg"></img>';
-                        break;
-                    case "MQM":
-                        return '<img src="./kite.svg"></img>';
-                        break;
-                    case "PPPP":
-                        return '<img style="transform: rotate(45deg);" src="./arrow.svg"></img>';
-                        break;
-                    case "APML":
-                        return '<img src="./eagle.svg"></img>';
-                        break;
-                    case "PML":
-                        return '<img src="./bicycle.svg"></img>';
-                        break;
-                    case "PML-F":
-                        return '<img src="./rose.svg"></img>';
-                        break;
-                    case "JUI-F":
-                        return '<img style="width: 100%;" src="./book.svg"></img>';
-                        break;
-                    case "JI":
-                        return '<img style="width: 100%;" src="./balance.svg"></img>';
-                        break;
-                    case "PML-Z":
-                        return '<img style="width: 100%;" src="./helicopter.svg"></img>';
-                        break;
-              }});
+                return returnIntikhabiNishaan(party_abbs[d.target.index])
+            });
 
               d3.select('.chordtoolexpand')
                 .append('div')
@@ -481,7 +410,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
       else {
         d3.select(".chordtool").remove();
         d3.select(".chordtoolexpand").remove();
-
       }
     }
   }
@@ -495,6 +423,47 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
     .on("mouseout", fadeOnChord(0.70, 0.70, 0));
 
 })
+
+function returnIntikhabiNishaan(party) {
+  switch(party) {
+    case "PTI":
+        return '<img src="./resources/partylogos/bat.svg"></img>';
+        break;
+    case "PML-N":
+        return '<img src="./resources/partylogos/tiger.svg"></img>';
+        break;
+    case "MQM":
+        return '<img src="./resources/partylogos/kite.svg"></img>';
+        break;
+    case "PPPP":
+        return '<img style="transform: rotate(45deg);" src="./resources/partylogos/arrow.svg"></img>';
+        break;
+    case "APML":
+        return '<img src="./resources/partylogos/eagle.svg"></img>';
+        break;
+    case "PML":
+        return '<img src="./resources/partylogos/bicycle.svg"></img>';
+        break;
+    case "PML-F":
+        return '<img src="./resources/partylogos/rose.svg"></img>';
+        break;
+    case "JUI-F":
+        return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
+        break;
+    case "JI":
+        return '<img style="width: 100%;" src="./resources/partylogos/balance.svg"></img>';
+        break;
+    case "PML-Z":
+        return '<img style="width: 100%;" src="./resources/partylogos/helicopter.svg"></img>';
+        break;
+    case "Ind.":
+        return '<img style="width: 100%;" src="./resources/partylogos/ind.png"></img>';
+        break;
+    default:
+        return '<img style="width: 90%;" src="./resources/ballot1.svg"></img>';
+        break;
+  }
+}
 
 function abbreviate(party) {
   switch(party) {

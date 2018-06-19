@@ -1302,6 +1302,33 @@
   animation-name: bounceOutUp;
 }
 
+@-webkit-keyframes fadeInDefault {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDefault {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeInDefault {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  animation-duration: 0.8s;
+}
+
+
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;

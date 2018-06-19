@@ -9,6 +9,12 @@
   font-size: 13px;
 }
 
+@media screen and (max-width: 560px) {
+  .party_label {
+    font-size: 10px;
+  }
+}
+
 .electlink {
   font-size: 14px;
   color: #757575;
@@ -38,6 +44,16 @@
   padding-bottom: 10px;
   font-size: 13px;
   margin-bottom: 15px;
+}
+
+.disclaimerchord {
+  background-color: #FDD835;
+  color: black;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 12px;
+  margin-bottom: 15px;
+  display: none;
 }
 
 .electionbuttcontain {
@@ -72,22 +88,56 @@
   box-shadow: none !important;
 }
 
+#mobiledrop {
+  display: none;
+}
+
 @media screen and (max-width: 991.98px) {
   .disclaimer>.container, .disclaimer>.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
   }
+  .disclaimerchord>.container, .disclaimerchord>.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .viz {
+    padding: 5px;
+  }
+
+  .viz>.container, .viz>.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .vizbuttonscontainer>.container, .vizbuttonscontainer>.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .btnnavigate {
+    font-size: 11px;
+    padding: 5px
+}
   .electionbuttcontain {
     flex-direction: row;
   }
   .disclaimer {
     font-size: 12px;
   }
+  .disclaimerchord {
+    font-size: 11px;
+  }
 }
 
 @media screen and (max-width: 560px) {
   .disclaimer {
     font-size: 12px;
+    text-align: center;
+  }
+
+  .disclaimerchord {
+    font-size: 11px;
     text-align: center;
   }
 
@@ -102,6 +152,28 @@
 
   .socialicons {
     display: none;
+  }
+
+  #PA {
+    display: none;
+  }
+
+  #mobiledrop {
+    display: block;
+  }
+
+  #mobiledrop:hover {
+    background-color: #EEEEEE;
+  }
+
+  #mobiledrop:focus,  #mobiledrop:active {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  .btnnavigate {
+    background-color: white;
+    color: black;
   }
 }
 
