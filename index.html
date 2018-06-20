@@ -43,8 +43,8 @@
           </li>
           <li class="nav-item socialicons">
             <div style="display: flex; align-items: center; height: 100%; color: #57068c; font-size: 20px;">
-              <i style="margin-right: 10px; margin-left: 20px;" class="fab fa-twitter"></i>
-              <i class="fab fa-linkedin-in"></i>
+              <i id="plotreetwitter" style="margin-right: 10px; margin-left: 20px;" class="fab fa-twitter socicon"></i>
+              <i id="plotreelinkedin" class="fab fa-linkedin-in socicon"></i>
             </div>
           </li>
         </ul>
@@ -95,6 +95,26 @@
           <p style="margin-bottom: 0px; align-self: center;">Designed and developed by Plotree Info Design © 2018</p>
        </div>
       </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
+        <div style="display: flex; justify-content: space-around; color: white;" class="container">
+          <p class="footlink footlinkselect" style="margin-bottom: 0px; align-self: center;">NATIONAL ASSEMBLY</p>
+          <p class="footlink" style="margin-bottom: 0px; align-self: center;">PROVINCIAL ASSEMBLY</p>
+          <p class="footlink" style="margin-bottom: 0px; align-self: center;">FLOW OF NA SEATS</p>
+       </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
+        <div style="display: flex; justify-content: space-evenly; color: white;" class="container">
+          <div style="display: flex">
+            <img class="ballot" src="./resources/ballot1.svg"></img>
+            <span class="footlink footelect" style="align-self: center;">ELECTION 2008</span>
+          </div>
+          <div style="display: flex">
+            <img class="ballot" src="./resources/ballot2.svg"></img>
+            <span class="footlink footelect" style="align-self: center;">ELECTION 2013</span>
+          </div>
+        </div>
+      </div>
+
     </footer>
 
     <script>
@@ -129,8 +149,13 @@
         $("#footer").css('margin-top', '0px');
       });
 
+      $("#plotreelinkedin").click(function() {
+        window.open('https://www.linkedin.com/company/plotree/', '_blank');
+      });
 
-
+      $("#plotreetwitter").click(function() {
+        window.open('https://twitter.com/plotreeViz', '_blank');
+      });
       /*  $(window).on("load", function() {
        setTimeout(function () {
             $('.map_in_a_box').show().addClass('animated fadeIn');}, 100

@@ -15,9 +15,43 @@
   font-size: 13px;
 }
 
+.socicon {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.socicon:hover {
+  color: #E53935;
+}
+
+.footlink {
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.footlink:hover {
+  color: #FFEB3B;
+}
+
+.footlinkselect {
+  color: #FFEB3B;
+}
+
+.footelect {
+  margin-left: 5px;
+}
+
+.footelect:hover {
+  margin-left: 10px;
+}
+
 @media screen and (max-width: 560px) {
   .party_label {
     font-size: 10px;
+  }
+  .footlink {
+    font-size: 12px;
   }
 }
 
