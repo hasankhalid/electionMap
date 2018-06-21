@@ -24,6 +24,16 @@
   color: #E53935;
 }
 
+.footsocicon {
+  color: #FFEB3B;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.footsocicon:hover {
+  color: #03A9F4;
+}
+
 .footlink {
   transition: all 0.5s ease-in-out;
   cursor: pointer;
