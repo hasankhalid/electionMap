@@ -38,10 +38,11 @@
   transition: all 0.5s ease-in-out;
   cursor: pointer;
   font-size: 14px;
+  color: #FFEB3B;
 }
 
 .footlink:hover {
-  color: #FFEB3B;
+  color: #03A9F4;
 }
 
 .footlinkselect {
