@@ -1323,8 +1323,8 @@
 }
 
 .fadeInDefault {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
+  -webkit-animation-name: fadeInDefault;
+  animation-name: fadeInDefault;
   animation-duration: 0.8s;
 }
 

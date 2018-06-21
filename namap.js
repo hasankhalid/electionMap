@@ -31,7 +31,61 @@ d3.queue()
   .defer(d3.csv, "NA_seats_2013.csv")
   .await(drawElectMap)
 
-var colorScale = d3.scaleOrdinal(d3.schemeCategory20b);
+var parties = [
+  "Pakistan Tehreek-e-Insaf",
+  "Jamiat Ulama-e-Islam (F)",
+  "Qaumi Watan Party (Sherpao)",
+  "Awami National Party",
+  "Awami Jamhuri Ittehad Pakistan",
+  "Pakistan Muslim League (N)",
+  "Independent",
+  "Jamaat-e-Islami Pakistan",
+  "All Pakistan Muslim League",
+  "Awami Muslim League Pakistan",
+  "Pakistan Muslim League",
+  "Pakistan Muslim League(Z)",
+  "Pakistan Peoples Party Parliamentarians",
+  "National Peoples Party",
+  "Pakistan Muslim League (F)",
+  "Muttahida Qaumi Movement Pakistan",
+  "Pashtoonkhwa Milli Awami Party",
+  "National Party",
+  "Balochistan National Party"
+];
+
+
+
+var other_color = "#03A9F4";
+
+var party_colors = [
+  "#9C27B0",
+  "#4DB6AC",
+  other_color,
+  other_color,
+  other_color,
+  "#81C784",
+  "#CDDC39",
+  other_color,
+  other_color,
+  other_color,
+  "#4DD0E1",
+  other_color,
+  "#607D8B",
+  other_color,
+  "#FF8A65",
+  "#BDBDBD",
+  other_color,
+  other_color,
+  other_color
+];
+
+//var colorScale = d3.scaleOrdinal(d3.schemeCategory20b);
+
+var colorScale = d3.scaleOrdinal()
+                   .domain(parties)
+                   .range(party_colors);
+
+
 
 function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
   var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
@@ -110,6 +164,11 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
       d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
       d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
     })
+    // adding initial x and y positions of seats/ nodes
+    result.forEach(function(d){
+      d.x = getCentroid(d.PrimaryDistrict)[0];
+      d.y = getCentroid(d.PrimaryDistrict)[1];
+    });
 
     nodes = result;
 
@@ -126,9 +185,10 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
                       }))
                       .force('collision', d3.forceCollide().radius(function(d) {
                         //return d.dummy_voteMargin;
-                        return d.radius + 1;
+                        return d.radius + 0.80;
                       }))
                       .on('tick', ticked)
+                      .alpha(0.5)
 
     var u = d3.select('svg')
       .selectAll('circle')
@@ -136,11 +196,6 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
 
     u.enter()
       .append('circle')
-      .attr('r', function(d){
-        //return d.dummy_voteMargin;
-        // return 5
-        return base_bubble + ((d.voteMargin/ 100) * margin_range);
-      })
       .merge(u)
       .attr('cx', function(d) {
         return d.x
@@ -157,12 +212,55 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
       .attr("id", function(d){
         return d.seat;
       })
-      //.style("stroke", "#EEE")
-      //.style("stroke", "white")
-      //.style("stroke-width", 2);
-
+      .attr('r', 0)
+      .transition('bubble_up')
+      .duration(1000)
+      .ease(d3.easePoly)
+      .attr('r', function(d){
+        return base_bubble + ((d.voteMargin/ 100) * margin_range);
+      })
 
     u.exit().remove()
+
+    // add voronoi
+
+    var voronoi = d3.voronoi()
+                    .x(d => d.x)
+                    .y(d => d.y)
+                    .extent([[0, 0], [width, height]]);
+
+    //console.log(voronoi.polygons(nodes));
+
+    var polygon = svg.append("g")
+        .selectAll(".voronoi")
+        .data(voronoi.polygons(nodes)) //Use vononoi() with your dataset inside
+        .enter().append("path")
+        .attr("class", "voronoi")
+        //.attr("id", d => d[0]['data'].seat)
+        .call(redrawPolygon)
+        .each(function(d, i){
+          console.log(i, d)
+          if (d != null) { console.log(d.data.seat) }
+        })
+        // .attr("d", function(d, i) { return "M" + d.join("L") + "Z"; })
+        // .attr("class", function(d,i) { return "voronoi " + "year" + d.data.year; })
+        // .style("stroke", "#2074A0") //If you want to look at the cells
+        // .style("fill-opacity", 0)
+
+    function redrawPolygon(polygon) {
+      polygon
+          .attr("d", function(d) { return d ? "M" + d.join("L") + "Z" : null; })
+          //.style("stroke", "#2074A0") //If you want to look at the cells
+          //.style("stroke-width", 0.5)
+          .style("fill-opacity", 0)
+          .attr("id", d => (d != null) ? d.data.seat : "NA")
+    }
+
+    function redrawVoronoi() {
+      //var diagram = voronoi(nodes);
+      polygon = polygon.data(voronoi.polygons(nodes)).call(redrawPolygon);
+    }
+
 
   function ticked() {
         // update the x and y position of the bubbles
@@ -173,7 +271,19 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
           .attr('cy', function(d) {
             return d.y
           })
+
+        redrawVoronoi();
+
+        //console.log(nodes);
+
+        // svg.selectAll(".cell")
+        //     .transition()
+        //     .attr("d", function(d, i) { return "M" + d.join("L") + "Z"; })
+        //     .attr("class", function(d,i) { return "voronoi " + "year" + d.data.year; })
+        //     .style("stroke", "#2074A0") //If you want to look at the cells
+        //     .style("fill-opacity", 0)
     }
+
 
 
     d3.selectAll("circle")
@@ -567,8 +677,30 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
     // get unique values, see how to use this
     var unique_parties = parties.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
 
-    var ordinal = d3.scaleOrdinal(d3.schemeCategory20b)
-                    .domain(parties);
+    console.log(JSON.stringify(unique_parties));
+
+    var parties_legend = [
+      "Pakistan Tehreek-e-Insaf",
+      "Jamiat Ulama-e-Islam (F)",
+      "Pakistan Muslim League (N)",
+      "Independent",
+      "Pakistan Muslim League",
+      "Pakistan Peoples Party Parliamentarians",
+      "Pakistan Muslim League (F)",
+      "Muttahida Qaumi Movement Pakistan",
+      "Other"
+    ];
+
+    var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Rest"))
+
+    var parties_colors = parties_legend.map(d => (d != "Other" ? colorScale(d) : "#03A9F4"))
+
+    // var ordinal = d3.scaleOrdinal(d3.schemeCategory20b)
+    //                 .domain(parties);
+
+    var ordinal = d3.scaleOrdinal()
+                    .domain(parties_legend_abb)
+                    .range(parties_colors);
 
 
     var svg_act = d3.select("svg");
@@ -581,11 +713,14 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
       //d3 symbol creates a path-string, for example
       //"M0,-8.059274488676564L9.306048591020996,
       //8.059274488676564 -9.306048591020996,8.059274488676564Z"
-      .shape("path", d3.symbol().type(d3.symbolCircle).size(100)())
+      //.shape("path", d3.symbol().type(d3.symbolRect).size(100)())
       .shapePadding(3)
+      .shapeWidth(25)
+      .shapeHeight(10)
       //use cellFilter to hide the "e" cell
       //.cellFilter(function(d){ return d.label !== "e" })
-      .scale(ordinal);
+      .scale(ordinal)
+      .orient('horizontal');
     //
     svg_act.select(".legendOrdinal")
       .call(legendOrdinal);
