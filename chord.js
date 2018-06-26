@@ -22,6 +22,7 @@
 //
 // console.log(JSON.stringify(election_08));
 
+
 d3.csv('one_one_mapping.csv', function(error, one_one_map){
 
   function getWinParty(seat, year){
@@ -37,6 +38,7 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
     d.party_2008_abb = abbreviate(getWinParty(d['2008'], 2008));
     d.party_2013_abb = abbreviate(getWinParty(d['2013'], 2013));
   })
+
 
   // console.log(one_one_map);
   // one_one_map = one_one_map.filter(d => d.party_2008 !=null && d.party_2013!=null);
@@ -69,6 +71,7 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
     party_matrix.push(matrix_array);
   })
 
+
   //console.log(party_matrix);
 
   // now comes in the chord diagram code adpated from mike bostocks block
@@ -99,7 +102,7 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
       }
   }
 
-      var svg = d3.select("#vizcontain").append("svg").attr("width", width).attr("height", height).attr('id', 'chorddiagram'),
+      var svg = d3.select("#vizcontain").append("svg").attr("width", width).attr("height", height).attr('viewBox',"0 0 540 540").attr('perserveAspectRatio',"xMinYMid").attr('id', 'chorddiagram'),
       outerRadius = Math.min(width, height) * 0.5 - 50,
       innerRadius = outerRadius - 15;
 
@@ -126,6 +129,7 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
 
   var group = g.append("g")
       .attr("class", "groups")
+      .attr("id", "chordgroup")
     .selectAll("g")
     .data(function(chords) { return chords.groups; })
     .enter().append("g")
@@ -221,14 +225,31 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
           .classed('fadeIn', true)
           .attr('id', 'hoverbox')
 
+
         if(d3.event.pageY > window.innerHeight - 250) {
           var hoverbox = document.getElementById('hoverbox');
-          d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 50 + "px")
-          d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+          d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 50 + "px");
+          if (d3.event.pageX - 87.5 < 0) {
+            d3.select('.chordtool').style('left', d3.event.pageX +  4 + "px");
+          }
+          else if (d3.event.pageX + 87.5 > window.innerWidth) {
+            d3.select('.chordtool').style('left', d3.event.pageX - 175 + "px");
+          }
+          else {
+            d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px");
+          }
         }
         else {
-          d3.select('.chordtool').style('top', d3.event.pageY + 10 + "px")
-          d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+          d3.select('.chordtool').style('top', d3.event.pageY + 10 + "px");
+          if (d3.event.pageX - 87.5 < 0) {
+            d3.select('.chordtool').style('left', d3.event.pageX +  4 + "px");
+          }
+          else if (d3.event.pageX + 87.5 > window.innerWidth) {
+            d3.select('.chordtool').style('left', d3.event.pageX - 175 + "px");
+          }
+          else {
+            d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px");
+          }
         }
 
         d3.select('.chordtool')
@@ -237,7 +258,6 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
           .html(function(){
             return '<span>' + party_abbs[d.index] + ' - ' + d.value + ' seats' + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
           })
-
 
         d3.select('.chordtool')
           .append('div')
@@ -276,14 +296,31 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
             .classed('fadeIn', true)
             .attr('id', 'hoverbox')
 
+
             if(d3.event.pageY > window.innerHeight - 250) {
               var hoverbox = document.getElementById('hoverbox');
               d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 50 + "px")
-              d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+              if (d3.event.pageX - 87.5 < 0) {
+                d3.select('.chordtool').style('left', d3.event.pageX +  4 + "px");
+              }
+              else if (d3.event.pageX + 87.5 > window.innerWidth) {
+                d3.select('.chordtool').style('left', d3.event.pageX - 175 + "px");
+              }
+              else {
+                d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px");
+              }
             }
             else {
               d3.select('.chordtool').style('top', d3.event.pageY + 10 + "px")
-              d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px")
+              if (d3.event.pageX - 87.5 < 0) {
+                d3.select('.chordtool').style('left', d3.event.pageX +  4 + "px");
+              }
+              else if (d3.event.pageX + 87.5 > window.innerWidth) {
+                d3.select('.chordtool').style('left', d3.event.pageX - 175 + "px");
+              }
+              else {
+                d3.select('.chordtool').style('left', d3.event.pageX - 87.5 + "px");
+              }
             }
 
           d3.select('.chordtool')
@@ -306,14 +343,35 @@ d3.csv('one_one_mapping.csv', function(error, one_one_map){
             .classed('fadeIn', true)
             .attr('id', 'hoverbox')
 
+            var full = (document.getElementById('chorddiagram').getBoundingClientRect().x + document.getElementById('chorddiagram').getBoundingClientRect().width)
+            var half = full/2
+            var midfactor = (document.getElementById('chorddiagram').getBoundingClientRect().width - 250)/2
+
             if(d3.event.pageY > window.innerHeight - 250) {
               var hoverbox = document.getElementById('hoverbox');
-              d3.select('.chordtoolexpand').style('top', d3.event.pageY - hoverbox.offsetHeight - 130 + "px")
-              d3.select('.chordtoolexpand').style('left', d3.event.pageX - 87.5 + "px")
+              d3.select('.chordtoolexpand').style('top', d3.event.pageY - hoverbox.offsetHeight - 130 + "px");
+              if (d3.event.pageX - 125 < 0) {
+                d3.select('.chordtoolexpand').style('left', d3.event.pageX - 125 - (d3.event.pageX - 125) + 5 + "px");
+              }
+              else if ((d3.event.pageX + 125) > window.innerWidth) {
+                d3.select('.chordtoolexpand').style('right', 15 + "px");
+              }
+              else {
+                d3.select('.chordtoolexpand').style('left', d3.event.pageX - 125 + "px");
+              }
             }
             else {
-              d3.select('.chordtoolexpand').style('top', d3.event.pageY + 10 + "px")
-              d3.select('.chordtoolexpand').style('left', d3.event.pageX - 87.5 + "px")
+              console.log('goodbye');
+              d3.select('.chordtoolexpand').style('top', d3.event.pageY + 10 + "px");
+              if (d3.event.pageX - 125 < 0) {
+                d3.select('.chordtoolexpand').style('left', d3.event.pageX - 125 - (d3.event.pageX - 125) + 5 + "px");
+              }
+              else if ((d3.event.pageX + 125) > window.innerWidth) {
+                d3.select('.chordtoolexpand').style('right', 15 + "px");
+              }
+              else {
+                d3.select('.chordtoolexpand').style('left', d3.event.pageX - 125 + "px");
+              }
             }
 
           d3.select('.chordtoolexpand')

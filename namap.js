@@ -1,10 +1,8 @@
-
 // defining the map div with the id "map_strip"
 var map_block = d3.select("#vizcontain")
 
 // width and height of the svg viewport
 var width = 1000, height = 600;
-
 // defining the projection for map (change center and scale to get desired size for the map)
 var projection = d3.geoMercator()
     .center([68.38, 31.5])
@@ -47,6 +45,8 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
     object["centroid"] = path.centroid(feature)
     return object;
   });
+
+  // assigning centrids to a global variable
 
 
   svg.selectAll("path")
@@ -157,6 +157,7 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
       .attr("id", function(d){
         return d.seat;
       })
+      .attr("class", "na-circle")
       //.style("stroke", "#EEE")
       //.style("stroke", "white")
       //.style("stroke-width", 2);
@@ -590,6 +591,11 @@ function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
     svg_act.select(".legendOrdinal")
       .call(legendOrdinal);
 }
+
+
+
+//$.getScript("chord.js");
+
 
 // preprocessing elections 2013 data:
 // var election_13 = elections_2013.map(function(d){

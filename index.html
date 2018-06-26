@@ -16,6 +16,7 @@
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Electoral Map</title>
@@ -67,15 +68,35 @@
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer">
       <div class="btn-group" role="Select Visualization" aria-label="Basic example">
         <button id="NA" type="button" class="btn btn-light btnnavigate navbutt active">National Assembly</button>
-        <button id="PA" type="button" class="btn btn-light btnnavigate navbutt">Provincial Assembly</button>
+        <button id="PA" type="button" class="btn btn-light btnnavigate navbutt PA">Provincial Assembly</button>
         <button id="flow" type="button" class="btn btn-light btnnavigate navbutt">Flow of NA seats</button>
+        <button id="dwvs" type="button" class="btn btn-light btnnavigate navbutt dwvs">District Wise Vote Share</button>
         <div id="mobiledrop" class="dropdown">
           <a class="btn btn-light dropdown-toggle btnnavigate" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             More
           </a>
           <div style="width: 100%" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-            <a id="PAmobile" class="dropdown-item navbutt mobilenav" href="#">Provincial Assembly</a>
-            <a id="VRmobile" class="dropdown-item navbutt mobilenav" href="#">Voter Reach</a>
+            <a class="dropdown-item navbutt mobilenav PA" href="#">Provincial Assembly</a>
+            <a class="dropdown-item navbutt mobilenav dwvs" href="#">District Wise Vote Share</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="votesharedropdown"class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="container">
+        <div id="voteshareoptions" class="dropdown">
+          <a class="btn btn-light dropdown-toggle btnnavigate" style="padding: 5px;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Party
+          </a>
+          <div style="width: 200px" class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item navbutt mobilenav" href="#">Pakistan Tehreek e Insaf</a>
+            <a class="dropdown-item navbutt mobilenav" href="#">Pakistan Muslim League (N)</a>
+            <a class="dropdown-item navbutt mobilenav" href="#">Pakistan Peoples Party</a>
+            <a class="dropdown-item navbutt mobilenav" href="#">Jamiat Ulama-e-Islam (F)</a>
+            <a class="dropdown-item navbutt mobilenav" href="#">Independent</a>
+            <a class="dropdown-item navbutt mobilenav" href="#">Awami National Party</a>
+            <a class="dropdown-item navbutt mobilenav" href="#">Muttahida Qaumi Movement</a>
           </div>
         </div>
       </div>
@@ -86,20 +107,20 @@
       </div>
     </div>
 
-    <footer id="footer" style="width: 100%; background: #303F9F; padding: 50px;">
+    <footer id="footer" style="width: 100%; background: #303F9F;">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div style="display: flex; justify-content: center;" class="container">
           <img style="width: 100px; height: 100px;" src="./resources/ballotfoot.svg"></img>
         </div>
       </div>
-      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 footercol" style="margin-top: 20px;">
         <div style="display: flex; flex-direction: column; color: white; font-size: 14px;" class="container">
-          <p style="margin-bottom: 0px; align-self: center;">Designed and developed by <span class="footlink plotreeweb">Plotree Info Design</span> © 2018</p>
+          <p class="plotreename" style="margin-bottom: 0px;">Designed and developed by <span class="footlink plotreeweb">Plotree Info Design</span> © 2018</p>
        </div>
       </div>
-      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 footercol" style="margin-top: 20px;">
         <div style="display: flex; flex-direction: column; color: white; font-size: 14px;" class="container">
-          <p style="margin-bottom: 0px; align-self: center; text-align: center;">Plotree is an information design studio based in Lahore. We help organizations communicate insights underlying their data through interactive web based visualizations. Get in touch and collaborate with us to bring your data to life on your websites, publications or presentations.</p>
+          <p class="footerdesc" style="margin-bottom: 0px; align-self: center;">Plotree is an information design studio based in Lahore. We help organizations communicate insights underlying their data through interactive web based visualizations. Get in touch and collaborate with us to bring your data to life on your websites, publications or presentations.</p>
        </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
@@ -113,30 +134,53 @@
 
     <script>
 
+
       $("#NA").click(function() {
         $(this).addClass('active');
-        $("#PA").removeClass('active');
+        $(".PA").removeClass('active');
         $("#flow").removeClass('active');
+        $(".dwvs").removeClass('active');
         $(".disclaimer").css('margin-bottom', '15px');
         $(".map_in_a_box").show().addClass('animated fadeInDefault');
+        $(".na-circle").show();
+        $("#votesharedropdown").hide();
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
         $("#footer").css('margin-top', '0px');
       });
-      $("#PA").click(function() {
+      $(".PA").click(function() {
         $(this).addClass('active');
         $("#NA").removeClass('active');
         $("#flow").removeClass('active');
-        $(".map_in_a_box").hide();
+        $(".dwvs").removeClass('active');
+        $(".map_in_a_box").show().addClass('animated fadeInDefault');
+        $(".na-circle").hide();
+        $("#chorddisclaim").hide();
+        $("#chorddiagram").hide();
+        $("#votesharedropdown").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
+      });
+      $(".dwvs").click(function() {
+        $(this).addClass('active');
+        $("#NA").removeClass('active');
+        $("#flow").removeClass('active');
+        $(".PA").removeClass('active');
+        $(".map_in_a_box").show().addClass('animated fadeInDefault');
+        $(".na-circle").hide();
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#footer").css('margin-top', '70vh');
+        $("#votesharedropdown").show().addClass('animated fadeInDefault');
+        $("#votesharedropdown").css('position', 'relative');
+        $("#votesharedropdown").css('z-index', '1');
       });
       $("#flow").click(function() {
         $(this).addClass('active');
-        $("#PA").removeClass('active');
+        $(".PA").removeClass('active');
         $("#NA").removeClass('active');
+        $(".dwvs").removeClass('active');
+        $("#votesharedropdown").hide();
         $(".map_in_a_box").hide();
         $(".disclaimer").css('margin-bottom', '0px');
         $("#chorddisclaim").show().addClass('animated fadeInDefault');
@@ -156,14 +200,7 @@
         window.open('https://plotree.studio/', '_blank');
       });
 
-
-      /*  $(window).on("load", function() {
-       setTimeout(function () {
-            $('.map_in_a_box').show().addClass('animated fadeIn');}, 100
-          );
-        }); */
     </script>
-
     <script src="chord.js"></script>
     <script src="namap.js"></script>
   </body>
