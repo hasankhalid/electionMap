@@ -298,6 +298,8 @@ function drawNAMap(){
           .style("fill", "none")
           .style("opacity", 0.5)
           .style("pointer-events", "all")
+          .on("mouseover", activateMouseOv)
+          .on("mouseout", activateMouseOut)
           //Notice that we now have the mousover events on these circles
           // .on("mouseover", activateHover(100))
           // .on("mouseout",  deactivateHover(100));
@@ -337,8 +339,7 @@ function drawNAMap(){
       ////////////// Adding mouse over event //////////////
       /////////////////////////////////////////////////////
 
-      d3.selectAll(".circle-catcher")
-        .on("mouseover", function(d, i){
+      function activateMouseOv(d, i){
           // extract unique class of the hovered voronoi cell (replace "circle-catcher " to get seat)
           var unique_class = d3.select(this).attr('class').replace("circle-catcher ", "");
           // selecting the circle with the gotten id (first select group then circle)
@@ -352,7 +353,7 @@ function drawNAMap(){
           circle_select
             .transition()
             .ease(d3.easeElastic)
-            .duration(1500)
+            .duration(1700)
             .tween('radius', function(d) {
             	var that = d3.select(this);
             	var i = d3.interpolate(d.radius, 10);
@@ -492,44 +493,45 @@ function drawNAMap(){
           }
 
           // d3.selectAll('.voronoi').raise();
-        })
+      }
+
 
       /////////////////////////////////////////////////////
       ////////////// Adding mouse out event ///////////////
       /////////////////////////////////////////////////////
 
-      d3.selectAll(".circle-catcher")
-        .on("mouseout", function(d, i){
-          // retrieve unique class of voronoi circle catcher
-          var unique_class = d3.select(this).attr('class').replace("circle-catcher ", "");
-          // select the circle with the gotten id
-          circle_select = d3.select("circle" + "#" + unique_class);
 
-          // transition the circle back
-          circle_select
-            .transition()
-            .ease(d3.easeElastic)
-            .duration(1000)
-            .tween('radius', function(d) {
-            	var that = d3.select(this);
-            	var i = d3.interpolate(d.radius, d.radiusInit);
-            	return function(t) {
-                d.radius = i(t);
-                that.attr('r', d => (d.radius >=0) ? d.radius : 0 );
-                //simulation.nodes(nodes)
-              }
-          	})
-            .attr('fill', function(d){
-              return colorScale(d.results[0].party);
-            })
-            .attr('stroke', function(d){
-              d3.rgb(colorScale(d.results[0].party));
-            })
-            .attr('stroke-width', 0);
+      function activateMouseOut(d, i){
+        // retrieve unique class of voronoi circle catcher
+        var unique_class = d3.select(this).attr('class').replace("circle-catcher ", "");
+        // select the circle with the gotten id
+        circle_select = d3.select("circle" + "#" + unique_class);
 
-          // remove the tooltip
-          d3.selectAll('.tool').remove()
-        })
+        // transition the circle back
+        circle_select
+          .transition()
+          .ease(d3.easeElastic)
+          .duration(1200)
+          .tween('radius', function(d) {
+            var that = d3.select(this);
+            var i = d3.interpolate(d.radius, d.radiusInit);
+            return function(t) {
+              d.radius = i(t);
+              that.attr('r', d => (d.radius >=0) ? d.radius : 0 );
+              //simulation.nodes(nodes)
+            }
+          })
+          .attr('fill', function(d){
+            return colorScale(d.results[0].party);
+          })
+          .attr('stroke', function(d){
+            d3.rgb(colorScale(d.results[0].party));
+          })
+          .attr('stroke-width', 0);
+
+        // remove the tooltip
+        d3.selectAll('.tool').remove()
+      }
 
 
       function getCentroid(dist) {
