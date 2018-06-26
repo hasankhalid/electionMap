@@ -1,4 +1,3 @@
-
 function drawNAMap(){
 
   ////////////////////////////////////
@@ -248,6 +247,7 @@ function drawNAMap(){
       .attr("id", function(d){
         return d.seat;
       })
+
       .attr('r', 0)
       .transition('bubble_up')
       .duration(1000)
@@ -313,7 +313,6 @@ function drawNAMap(){
       function redrawVoronoi() {
         polygon = polygon.data(voronoi.polygons(nodes)).call(redrawPolygon);
       }
-
 
     function ticked() {
           // updating the circle positions
@@ -638,6 +637,7 @@ function drawNAMap(){
   //   };
   //
 }
+
 
 // call the draw na map function
 drawNAMap();

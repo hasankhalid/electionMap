@@ -6,9 +6,14 @@
   display: none;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .mobilenav {
-    font-size: 11px;
-    color: black;
+  font-size: 11px;
+  color: black;
+  cursor: pointer;
 }
 
 .party_label {
@@ -98,7 +103,7 @@
 }
 
 .disclaimerchord {
-  background-color: #FDD835;
+  background-color: #FFEE58;
   color: black;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -143,12 +148,27 @@
   display: none;
 }
 
+#votesharedropdown {
+  display: none;
+}
+
+#voteshareoptions {
+  display: flex;
+  justify-content: center;
+}
+
 @media screen and (max-width: 991.98px) {
   .disclaimer>.container, .disclaimer>.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
   }
+
   .disclaimerchord>.container, .disclaimerchord>.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .footercol>.container, .footercol>.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
   }
@@ -211,6 +231,16 @@
 
   #mobiledrop {
     display: block;
+  }
+
+  #dropdownMenuLink {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
+  }
+
+  #dwvs {
+    display: none;
   }
 
   #mobiledrop:hover {
@@ -390,4 +420,30 @@ g.legendOrdinal text{
   font-size: 13px;
   display: flex;
   align-items: center;
+}
+
+#footer {
+  padding: 50px;
+}
+
+.footerdesc {
+  text-align: center;
+}
+
+.plotreename {
+  align-self: center;
+}
+
+@media screen and (max-width: 767px) {
+  #footer {
+    padding: 50px 0px;
+  }
+
+  .plotreename {
+    align-self: flex-start;
+  }
+
+  .footerdesc {
+    text-align: left;
+  }
 }
