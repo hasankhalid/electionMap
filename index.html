@@ -2,6 +2,8 @@
 <meta name="robots" content="noindex">
 <html>
   <head>
+    <link rel="icon" href="./resources/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./resources/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -44,8 +46,8 @@
           </li>
           <li class="nav-item socialicons">
             <div style="display: flex; align-items: center; height: 100%; color: #57068c; font-size: 20px;">
-              <i id="plotreetwitter" style="margin-right: 10px; margin-left: 20px;" class="fab fa-twitter socicon"></i>
-              <i id="plotreelinkedin" class="fab fa-linkedin-in socicon"></i>
+              <i style="margin-right: 10px; margin-left: 20px;" class="fab fa-twitter socicon plotreetwitter"></i>
+              <i class="fab fa-linkedin-in socicon plotreelinkedin"></i>
             </div>
           </li>
         </ul>
@@ -65,16 +67,16 @@
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer">
       <div class="btn-group" role="Select Visualization" aria-label="Basic example">
-        <button id="NA" type="button" class="btn btn-light btnnavigate active">National Assembly</button>
-        <button id="PA" type="button" class="btn btn-light btnnavigate">Provincial Assembly</button>
-        <button id="flow" type="button" class="btn btn-light btnnavigate">Flow of NA seats</button>
+        <button id="NA" type="button" class="btn btn-light btnnavigate navbutt active">National Assembly</button>
+        <button id="PA" type="button" class="btn btn-light btnnavigate navbutt">Provincial Assembly</button>
+        <button id="flow" type="button" class="btn btn-light btnnavigate navbutt">Flow of NA seats</button>
         <div id="mobiledrop" class="dropdown">
           <a class="btn btn-light dropdown-toggle btnnavigate" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             More
           </a>
           <div style="width: 100%" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-            <a id="PAmobile" class="dropdown-item mobilenav" href="#">Provincial Assembly</a>
-            <a class="dropdown-item mobilenav" href="#">Voter Reach</a>
+            <a id="PAmobile" class="dropdown-item navbutt mobilenav" href="#">Provincial Assembly</a>
+            <a id="VRmobile" class="dropdown-item navbutt mobilenav" href="#">Voter Reach</a>
           </div>
         </div>
       </div>
@@ -85,7 +87,7 @@
       </div>
     </div>
 
-    <footer id="footer" style="width: 100%; background: #303F9F; padding: 20px;">
+    <footer id="footer" style="width: 100%; background: #303F9F; padding: 50px;">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div style="display: flex; justify-content: center;" class="container">
           <img style="width: 100px; height: 100px;" src="./resources/ballotfoot.svg"></img>
@@ -93,32 +95,25 @@
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
         <div style="display: flex; flex-direction: column; color: white; font-size: 14px;" class="container">
-          <p style="margin-bottom: 0px; align-self: center;">Designed and developed by Plotree Info Design © 2018</p>
+          <p style="margin-bottom: 0px; align-self: center;">Designed and developed by <span class="footlink plotreeweb">Plotree Info Design</span> © 2018</p>
        </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
-        <div style="display: flex; justify-content: space-around; color: white;" class="container">
-          <p class="footlink footlinkselect" style="margin-bottom: 0px; align-self: center;">NATIONAL ASSEMBLY</p>
-          <p class="footlink" style="margin-bottom: 0px; align-self: center;">PROVINCIAL ASSEMBLY</p>
-          <p class="footlink" style="margin-bottom: 0px; align-self: center;">FLOW OF NA SEATS</p>
+        <div style="display: flex; flex-direction: column; color: white; font-size: 14px;" class="container">
+          <p style="margin-bottom: 0px; align-self: center; text-align: center;">Plotree is an information design studio based in Lahore. We help organizations communicate insights underlying their data through interactive web based visualizations. Get in touch and collaborate with us to bring your data to life on your websites, publications or presentations.</p>
        </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
-        <div style="display: flex; justify-content: space-evenly; color: white;" class="container">
-          <div style="display: flex">
-            <img class="ballot" src="./resources/ballot1.svg"></img>
-            <span class="footlink footelect" style="align-self: center;">ELECTION 2008</span>
-          </div>
-          <div style="display: flex">
-            <img class="ballot" src="./resources/ballot2.svg"></img>
-            <span class="footlink footelect" style="align-self: center;">ELECTION 2013</span>
-          </div>
-        </div>
+        <div style="display: flex; justify-content: center; color: white; font-size: 14px;" class="container">
+          <i style="font-size: 20px" class="fas fa-link footsocicon plotreeweb"></i>
+          <i style="font-size: 20px; margin-right: 15px; margin-left: 15px;" class="fab fa-twitter footsocicon plotreetwitter"></i>
+          <i style="font-size: 20px" class="fab fa-linkedin-in footsocicon plotreelinkedin"></i>
+       </div>
       </div>
-
     </footer>
 
     <script>
+
       $("#NA").click(function() {
         $(this).addClass('active');
         $("#PA").removeClass('active');
@@ -150,13 +145,19 @@
         $("#footer").css('margin-top', '0px');
       });
 
-      $("#plotreelinkedin").click(function() {
+      $(".plotreelinkedin").click(function() {
         window.open('https://www.linkedin.com/company/plotree/', '_blank');
       });
 
-      $("#plotreetwitter").click(function() {
+      $(".plotreetwitter").click(function() {
         window.open('https://twitter.com/plotreeViz', '_blank');
       });
+
+      $(".plotreeweb").click(function() {
+        window.open('https://plotree.studio/', '_blank');
+      });
+
+
       /*  $(window).on("load", function() {
        setTimeout(function () {
             $('.map_in_a_box').show().addClass('animated fadeIn');}, 100
