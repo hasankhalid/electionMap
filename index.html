@@ -91,13 +91,13 @@
             Select Party
           </a>
           <div style="width: 200px" class="dropdown-menu " aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item navbutt mobilenav" href="#">Pakistan Tehreek e Insaf</a>
-            <a class="dropdown-item navbutt mobilenav" href="#">Pakistan Muslim League (N)</a>
-            <a class="dropdown-item navbutt mobilenav" href="#">Pakistan Peoples Party</a>
-            <a class="dropdown-item navbutt mobilenav" href="#">Jamiat Ulama-e-Islam (F)</a>
-            <a class="dropdown-item navbutt mobilenav" href="#">Independent</a>
-            <a class="dropdown-item navbutt mobilenav" href="#">Awami National Party</a>
-            <a class="dropdown-item navbutt mobilenav" href="#">Muttahida Qaumi Movement</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PTI" value= "Pakistan Tehreek-e-Insaf">Pakistan Tehreek e Insaf</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PMLN" value = "Pakistan Muslim League (N)">Pakistan Muslim League (N)</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PPP" value = "Pakistan Peoples Party Parliamentarians">Pakistan Peoples Party</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="JUIF" value = "Jamiat Ulama-e-Islam (F)">Jamiat Ulama-e-Islam (F)</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="ind" value = "Independent" >Independent</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="ANP" value = "Awami National Party" >Awami National Party</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="MQM" value = "Muttahida Qaumi Movement Pakistan">Muttahida Qaumi Movement</a>
           </div>
         </div>
       </div>
@@ -133,8 +133,13 @@
       </div>
     </footer>
 
+    <script src="namap.js"></script>
+    <script src="cartogram.js"></script>
+    <script src="chord.js"></script>
+
     <script>
 
+    createNAMap();
 
       $("#NA").click(function() {
         $(this).addClass('active');
@@ -142,22 +147,22 @@
         $("#flow").removeClass('active');
         $(".dwvs").removeClass('active');
         $(".disclaimer").css('margin-bottom', '15px');
-        $(".map_in_a_box").show().addClass('animated fadeInDefault');
-        $(".na-circle").show();
+        createNAMap();
         $("#votesharedropdown").hide();
         $("#chorddisclaim").hide();
-        $("#chorddiagram").hide();
         $("#footer").css('margin-top', '0px');
+        $("#NAmap").show().addClass('animated fadeInDefault');
+
       });
       $(".PA").click(function() {
         $(this).addClass('active');
         $("#NA").removeClass('active');
         $("#flow").removeClass('active');
         $(".dwvs").removeClass('active');
-        $(".map_in_a_box").hide();
-        $(".na-circle").hide();
+        $("#NAmap").remove();
+        $("#chorddiagram").remove();
+        $("#cartogram").remove();
         $("#chorddisclaim").hide();
-        $("#chorddiagram").hide();
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
       });
@@ -166,15 +171,14 @@
         $("#NA").removeClass('active');
         $("#flow").removeClass('active');
         $(".PA").removeClass('active');
-        $(".map_in_a_box").hide();
-        $(".na-circle").hide();
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
         $(".disclaimer").css('margin-bottom', '15px');
-        $("#footer").css('margin-top', '70vh');
         $("#votesharedropdown").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").css('position', 'relative');
         $("#votesharedropdown").css('z-index', '1');
+        createCartogram();
+        $("#cartogram").show().addClass('animated fadeInDefault');
       });
       $("#flow").click(function() {
         $(this).addClass('active');
@@ -182,10 +186,11 @@
         $("#NA").removeClass('active');
         $(".dwvs").removeClass('active');
         $("#votesharedropdown").hide();
-        $(".map_in_a_box").hide();
         $(".disclaimer").css('margin-bottom', '0px');
+        $("#NAmap").hide();
+        $("#cartogram").hide();
+        createChord();
         $("#chorddisclaim").show().addClass('animated fadeInDefault');
-        $('#chorddiagram').show().addClass('animated fadeInDefault');
         $("#footer").css('margin-top', '0px');
       });
 
@@ -202,8 +207,6 @@
       });
 
     </script>
-    <script src="chord.js"></script>
-    <script src="namap.js"></script>
-    <script src="cartogram.js"></script>
+
   </body>
 </html>

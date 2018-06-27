@@ -2,8 +2,8 @@
   width: 100px;
 }
 
-#chorddiagram {
-  display: none;
+#vizcontain {
+  min-height: 600px;
 }
 
 body {
