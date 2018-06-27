@@ -326,9 +326,9 @@ function createCartogram(){
           seconDistricts = seconDistricts.map(d => d.split(" - "))
           seconDistricts = [].concat.apply([], seconDistricts);
           // remove empty strings
-          seconDistricts = seconDistricts.filter(d => (d != ""));
+          seconDistricts_withWS = seconDistricts.filter(d => (d != ""));
           // removing spaces
-          seconDistricts = seconDistricts.map(d => whiteSpaceRem(d) );
+          seconDistricts = seconDistricts_withWS.map(d => whiteSpaceRem(d) );
 
           // important stats for tooltip
           var total_seats = resDistObj[d.key].values.length;

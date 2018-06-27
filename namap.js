@@ -338,7 +338,7 @@ function createNAMap(){
                 return d.y
               })
 
-            // redraw thw voronoi clippaths
+            // redraw the voronoi clippaths
 
             polygon = polygon.data(voronoi.polygons(nodes)).call(redrawPolygon);
 
