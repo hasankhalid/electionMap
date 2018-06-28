@@ -447,3 +447,56 @@ g.legendOrdinal text{
     text-align: left;
   }
 }
+
+.cartogramtool {
+  position: absolute;
+  color: black;
+  background-color: #EeEeEe;
+  display: grid;
+  padding: 15px;
+  width: 260px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto auto;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
+}
+
+.cartotoolhead {
+  grid-column: span 12;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cartotoolop {
+  grid-column: span 12;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cartotoolparty {
+  grid-column: span 6;
+  font-size: 12px;
+  padding-top: 5px;
+  margin-top: 5px;
+  text-align: center;
+  padding-bottom: 5px;
+  color: white;
+}
+
+.cartotoolpartylogo {
+  grid-column: span 6;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+}
+
+.cartotoolpartydetail {
+  grid-column: span 6;
+  padding-bottom: 1px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+}
