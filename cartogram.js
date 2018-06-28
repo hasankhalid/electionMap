@@ -21,13 +21,13 @@ function createCartogram(){
 
     // replace these with the colors from the naseats map
     var party_colors = [
-      "#D32F2F",
-      "#2E7D32",
-      "#212121",
-      "#E0E0E0",
-      "#039BE5",
-      "#546E7A",
-      "#795548"
+      "#9C27B0",
+      "#81C784",
+      "#607D8B",
+      "#4DB6AC",
+      "#CDDC39",
+      "#03A9F4",
+      "#BDBDBD"
     ]
 
     // color scale for parties, put in party and it gives you color
@@ -239,7 +239,7 @@ function createCartogram(){
           return getCentroid(d.key)[1];
         })
         .style("fill", d => colorScale(selected_party))
-        .style("opacity", 0.6)
+        .style("opacity", 0.7)
         .each(function(d, i){
           total_votes = list_votes(d, selected_party);
           total_valid_votes = list_valid_votes(d);
@@ -317,7 +317,9 @@ function createCartogram(){
 
           // datum of the hovered element
           var selectedDatum = d3.select(this).data()[0]
+          console.log(selectedDatum);
           // district of the hovered element without spaces
+          var selected_district_WS = selectedDatum.key;
           var selected_district = whiteSpaceRem(selectedDatum.key);
 
           // secondary districts for hovered element
@@ -326,9 +328,9 @@ function createCartogram(){
           seconDistricts = seconDistricts.map(d => d.split(" - "))
           seconDistricts = [].concat.apply([], seconDistricts);
           // remove empty strings
-          seconDistricts_withWS = seconDistricts.filter(d => (d != ""));
+          seconDistricts_WS = seconDistricts.filter(d => (d != ""));
           // removing spaces
-          seconDistricts = seconDistricts_withWS.map(d => whiteSpaceRem(d) );
+          seconDistricts = seconDistricts_WS.map(d => whiteSpaceRem(d) );
 
           // important stats for tooltip
           var total_seats = resDistObj[d.key].values.length;
@@ -342,13 +344,22 @@ function createCartogram(){
             }
           })
 
+          var winnParty = distPartyObj[selected_district_WS].values[0].key;
+
+          var winnPartySeats = 0;
+          partyWinArr.forEach(function(d){
+            if (d === winnParty){
+              winnPartySeats ++;
+            }
+          })
+
           // appending circles for seats/ district
           svg.append('circle')
             .attr('r', 0)
             .attr('cx', getCentroid(d.key)[0])
             .attr('cy', getCentroid(d.key)[1])
             .style('fill', 'none')
-            .style('stroke', 'grey')
+            .style('stroke', '#212121')
             .style('stroke-width', 0.5)
             .style('stroke-dasharray', 2)
             .classed('seatBubble', true)
@@ -357,14 +368,115 @@ function createCartogram(){
             .style('stroke-width', 2);
 
           // appending title on hover
-          d3.select(this).append("title")
+          d3.select('body').append('div')
+            .classed('animated', true)
+            .classed('fadeIn', true)
+            .classed('cartogramtool', true)
+            .attr('id', 'hoverbox')
+
+            var tooltip = d3.select('.cartogramtool');
+
+          tooltip.append('div')
+            .classed('cartotoolhead', true)
+            .html(function(d){
+              return '<span>District: <span style="color: #283593">' + selected_district_WS + '</span></span><span>Valid Votes: <span style="color: #283593">' + selectedDatum.ValidVotesTotal + '</span></span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+            })
+
+          tooltip.append('div')
+            .classed('cartotoolop', true)
+            .html(function(d){
+              var otherdist = seconDistricts_WS.join(" | ");
+              if (otherdist == '') {
+                return '<span style="color: #283593">Other districts: None</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              }
+              else {
+                return '<span style="font-size: 11px">Other districts: ' +  otherdist  + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              }
+            })
+
+            tooltip.append('div')
+              .classed('cartotoolparty', true)
+              .style('background', d3.rgb(colorScale(selected_party)).darker(1))
+              .html(function(d){
+                return '<span>SELECTED PARTY</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+
+            tooltip.append('div')
+              .classed('cartotoolparty', true)
+              .style('background', d3.rgb(colorScale(distPartyObj[selected_district_WS].values[0].key)).darker(1))
+              .html(function(d){
+                return '<span>MAJORITY VOTE</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+
+          tooltip.append('div')
+            .classed('cartotoolpartylogo', true)
+            .html(image(selected_party)) //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+
+          tooltip.append('div')
+            .classed('cartotoolpartylogo', true)
+            .html(image(distPartyObj[selected_district_WS].values[0].key))
+
+          tooltip.append('div')
+            .classed('cartotoolpartydetail', true)
+            .html(function(d){
+              return '<span>Party: ' + abbreviate(selected_party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+            })
+
+
+          tooltip.append('div')
+            .classed('cartotoolpartydetail', true)
+            .html(function(d){
+              return '<span>Party: '+ abbreviate(distPartyObj[selected_district_WS].values[0].key) +'</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+            })
+
+          tooltip.append('div')
+            .classed('cartotoolpartydetail', true)
+            .html(function(d){
+              return '<span>Vote share: '+ selectedDatum.VotePerc + '%</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+            })
+
+
+          tooltip.append('div')
+            .classed('cartotoolpartydetail', true)
+            .html(function(d){
+              var winnVotes = distPartyObj[selected_district_WS].values[0].value
+              var winnVotePerc = (winnVotes/ selectedDatum.ValidVotesTotal) * 100;
+              return '<span>Vote share: ' + Math.round(winnVotePerc * 10)/ 10 +'%</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+            })
+
+
+          tooltip.append('div')
+            .classed('cartotoolpartydetail', true)
+            .html(function(d){
+              return '<span>Seats Won: ' + party_seats + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+            })
+
+          tooltip.append('div')
+            .classed('cartotoolpartydetail', true)
+            .html(function(d){
+              return '<span>Seats Won: ' + winnPartySeats + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+            })
+
+            if (d3.event.pageY >= 460) {
+              var hoverbox = document.getElementById('hoverbox');
+              tooltip.style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px")
+              tooltip.style('left', d3.event.pageX - 125 + "px")
+            }
+            else {
+              tooltip.style('top', d3.event.pageY + 14 + "px")
+              tooltip.style('left', d3.event.pageX - 125 + "px")
+            }
+
+
+
+      /*    d3.select(this).append("title")
             .text(function(d){
               var winnVotes = distPartyObj[d.key].values[0].value
               var winnParty = distPartyObj[d.key].values[0].key
               var winnVotePerc = (winnVotes/ d.ValidVotesTotal) * 100
               winnVotePerc = Math.round(winnVotePerc * 10)/ 10
               return d.key + " - " + (d.VotePerc) + "%" + "|" + winnParty + " - " + winnVotePerc + '%';
-            })
+            }) */
 
           // raise the hovered district path
           d3.selectAll('path.' + selected_district).raise();
@@ -425,7 +537,7 @@ function createCartogram(){
             .style('stroke-width', 0)
 
           // remove title
-          d3.select(this).select("title").remove();
+          d3.selectAll('.cartogramtool').remove();
           // remove seat bubble
           d3.select('.seatBubble').remove();
           // remove district boundary
