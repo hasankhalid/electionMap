@@ -319,6 +319,7 @@ function createCartogram(){
           var selectedDatum = d3.select(this).data()[0]
           // district of the hovered element without spaces
           var selected_district = whiteSpaceRem(selectedDatum.key);
+          console.log(selected_district);
 
           // secondary districts for hovered element
           var seconDistricts = selectedDatum.values.map(d => d.SeconDistrict);
