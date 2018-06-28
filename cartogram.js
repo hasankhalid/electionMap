@@ -321,6 +321,7 @@ function createCartogram(){
           // district of the hovered element without spaces
           var selected_district_WS = selectedDatum.key;
           var selected_district = whiteSpaceRem(selectedDatum.key);
+          console.log(selected_district);
 
           // secondary districts for hovered element
           var seconDistricts = selectedDatum.values.map(d => d.SeconDistrict);
@@ -328,6 +329,7 @@ function createCartogram(){
           seconDistricts = seconDistricts.map(d => d.split(" - "))
           seconDistricts = [].concat.apply([], seconDistricts);
           // remove empty strings
+
           seconDistricts_WS = seconDistricts.filter(d => (d != ""));
           // removing spaces
           seconDistricts = seconDistricts_WS.map(d => whiteSpaceRem(d) );
