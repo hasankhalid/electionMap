@@ -174,3 +174,8 @@ function image(party){
             break;
   }}
 }
+
+// function for generating random number within a range
+function randRange(min, max){
+  return (Math.random() * (max - min) + min)
+}
