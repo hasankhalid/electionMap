@@ -209,7 +209,7 @@ function createNAMap(){
       // force with charge, forceX, forceY and collision detection
 
       var simulation = d3.forceSimulation(nodes)
-                        .force('charge', d3.forceManyBody().strength(0.3))
+                        .force('charge', d3.forceManyBody().strength(0.7))
                         .force('x', d3.forceX().x(function(d) {
                           return getCentroid(d.PrimaryDistrict)[0];
                         }))
@@ -220,7 +220,9 @@ function createNAMap(){
                           return d.radius + 0.80;
                         }))
                         .on('tick', ticked)
-                        .alpha(0.5)
+                        .on('end', console.log("ended MF!"))
+                        .alpha(0.525)
+                        .alphaDecay(0.07)
 
       //////////////////////////////////////////////////////////////
       ////////////// Adding bubble nodes for na seats //////////////
@@ -307,7 +309,7 @@ function createNAMap(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 20)
-            .style("fill", "none")
+            .style("fill", "grey")
             .style("opacity", 0.5)
             .style("pointer-events", "all")
 
@@ -622,10 +624,6 @@ function createNAMap(){
       return centroids
     }
 
-    // function for generating random number within a range
-    function randRange(min, max){
-      return (Math.random() * (max - min) + min)
-    }
 
     // keep the preprocessing code in comments
 
