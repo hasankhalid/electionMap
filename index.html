@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <script src="elections_2013.js"></script>
     <script src="elections_2008.js"></script>
-    <script src="utils.js"></script>
     <script src="filterNAmap.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -134,13 +133,14 @@
       </div>
     </footer>
 
+    <script src="utils.js"></script>
     <script src="namap.js"></script>
     <script src="cartogram.js"></script>
     <script src="chord.js"></script>
 
     <script>
 
-    createNAMap();
+      createNAMap();
 
       $("#NA").click(function() {
         $(this).addClass('active');
