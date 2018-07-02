@@ -121,7 +121,6 @@ body {
   justify-content: center;
   margin-bottom: 15px;
   position: relative;
-  z-index: 3;
 }
 
 .filtercontainer {
@@ -601,5 +600,33 @@ g.legendOrdinal text{
   #legendcontain {
     flex-direction: column;
     align-items: center;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .mobiletoolremove {
+    display: none;
+  }
+  .NA {
+    font-size: 12px;
+  }
+  .turnout {
+    font-size: 11px;
+  }
+  .partyicon {
+    width: 30px;
+  }
+  .cartotoolpartyhead {
+    font-size: 11px;
+  }
+  .cartotoolparty {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .cartotoolpartylogo {
+    height: 30px;
+  }
+  .cartotoolpartydetail {
+    font-size: 11px;
   }
 }

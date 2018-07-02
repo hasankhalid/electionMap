@@ -424,14 +424,14 @@ function createCartogram(){
               .classed('cartotoolparty', true)
               .style('background', d3.rgb(colorScale(selected_party)).darker(1))
               .html(function(d){
-                return '<span>SELECTED PARTY</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+                return '<span class="cartotoolpartyhead">SELECTED PARTY</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
               })
 
             tooltip.append('div')
               .classed('cartotoolparty', true)
               .style('background', d3.rgb(colorScale(distPartyObj[selected_district_WS].values[0].key)).darker(1))
               .html(function(d){
-                return '<span>MAJORITY VOTE</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+                return '<span class="cartotoolpartyhead">MAJORITY VOTE</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
               })
 
           tooltip.append('div')
@@ -486,11 +486,35 @@ function createCartogram(){
             if (d3.event.pageY >= 460) {
               var hoverbox = document.getElementById('hoverbox');
               tooltip.style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', d3.event.pageX + 4 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                console.log('abc')
+                tooltip.style('left', d3.event.pageX - 260 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
             else {
               tooltip.style('top', d3.event.pageY + 14 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', d3.event.pageX + 4 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                console.log('abc')
+                tooltip.style('left', d3.event.pageX - 260 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
 
 

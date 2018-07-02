@@ -503,17 +503,17 @@ function createNAMap(){
             tooltip.append('div')
             .classed('candidatename', true)
             .html(function(d){
-              return '<span>' + titleCase(datum.results[2].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
             tooltip.append('div')
             .classed('partyname', true)
             .html(function(d){
-              return '<span>' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
             tooltip.append('div')
             .classed('votes', true)
             .html(function(d){
-              return '<span>' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
 
             // create the tooltip for na-map
@@ -522,13 +522,39 @@ function createNAMap(){
             // positioning the tooltip
 
             if (d3.event.pageY >= 460) {
+              console.log(window.innerWidth);
               var hoverbox = document.getElementById('hoverbox');
               tooltip.style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', d3.event.pageX + 4 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                console.log('abc')
+                tooltip.style('left', d3.event.pageX - 260 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
             else {
+              console.log(window.innerWidth);
               tooltip.style('top', d3.event.pageY + 14 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', d3.event.pageX + 4 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                console.log('abc')
+                tooltip.style('left', d3.event.pageX - 260 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
 
             // d3.selectAll('.voronoi').raise();
@@ -630,7 +656,7 @@ function createNAMap(){
 
         var party_legend_svg = party_legend_div.append("svg")
                                               .classed("partyLegendSVG", true)
-                                              .attr('width', 300)
+                                              .attr('width', 280)
                                               .attr('height', 50);
 
         party_legend_svg.append("g")
