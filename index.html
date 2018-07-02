@@ -101,7 +101,7 @@
         </div>
       </div>
 
-      <button type="button" class="btn btn-primary filterbutton" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border: 0px;">Reset</button>
+      <button type="button" class="btn btn-primary filterbutton" id="resetAll" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border: 0px;">Reset</button>
     </div>
     <div class="filterscontstantheight">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="partyFilters">
@@ -455,6 +455,12 @@
           filterCircles(provinces, parties, margin);
         }
       });
+
+
+      $("#resetAll").click(function() {
+        filterCircles(null, null, null);
+      });
+
 
     </script>
 
