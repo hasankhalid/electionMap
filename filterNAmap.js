@@ -14,6 +14,48 @@ var filtTransTime = 1000; // ms
 // circle catch (voronoi) radius
 var circle_catch_rad = 20;
 
+// defining an array function for difference
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
+
+//listing unique parties
+var unique_parties = [
+  "Pakistan Tehreek-e-Insaf",
+  "Jamiat Ulama-e-Islam (F)",
+  "Qaumi Watan Party (Sherpao)",
+  "Awami National Party",
+  "Awami Jamhuri Ittehad Pakistan",
+  "Pakistan Muslim League (N)",
+  "Independent",
+  "Jamaat-e-Islami Pakistan",
+  "All Pakistan Muslim League",
+  "Awami Muslim League Pakistan",
+  "Pakistan Muslim League",
+  "Pakistan Muslim League(Z)",
+  "Pakistan Peoples Party Parliamentarians",
+  "National Peoples Party",
+  "Pakistan Muslim League (F)",
+  "Muttahida Qaumi Movement Pakistan",
+  "Pashtoonkhwa Milli Awami Party",
+  "National Party",
+  "Balochistan National Party"];
+
+var parties_in_legend = [
+  "Pakistan Tehreek-e-Insaf",
+  "Jamiat Ulama-e-Islam (F)",
+  "Awami National Party",
+  "Pakistan Muslim League (N)",
+  "Independent",
+  "Pakistan Muslim League",
+  "Pakistan Peoples Party Parliamentarians",
+  "Pakistan Muslim League (F)",
+  "Muttahida Qaumi Movement Pakistan",
+];
+
+var rest_parties = unique_parties.diff(parties_in_legend)
+//
+console.log(rest_parties);
 // get size of the na seat circles
 function getCircleSize(voteMargin){
   return base_bubble + ((voteMargin/ 100) * margin_range)
@@ -38,6 +80,13 @@ function filterCircles(province, party, voteMargin){
       return true;
     }
     else {
+      // appending rest parties in case of selected rest
+      if (party.includes("Rest")){
+        party = party.filter(d => d != "Rest")
+        party = party.concat(rest_parties);
+        console.log(party);
+
+      }
       return party.includes(datum);
     }
   }
@@ -64,7 +113,6 @@ function filterCircles(province, party, voteMargin){
       }
     }
   }
-
 
   ///// transition for the na seat circles /////
 
@@ -137,7 +185,7 @@ function redrawPolygon(polygon) {
       .attr("d", function(d) { return d ? "M" + d.join(",") + "Z" : null; })
 }
 
-// main voronoi definition 
+// main voronoi definition
 var voronoi = d3.voronoi()
                 .x(d => d.x) // with some noise on x and y centers
                 .y(d => d.y)
