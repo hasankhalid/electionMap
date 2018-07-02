@@ -145,7 +145,7 @@
             <label class="form-check-label" for="MQMfilter">MQM</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input partyfilter" value="rest" active="disabled" id="Restfilter">
+            <input type="checkbox" class="form-check-input partyfilter" value="Rest" active="disabled" id="Restfilter">
             <label class="form-check-label" for="Restfilter">Rest</label>
           </div>
         </div>
@@ -459,6 +459,18 @@
 
       $("#resetAll").click(function() {
         filterCircles(null, null, null);
+        $('.provincefilter').attr("active", "disabled");
+        $('.provincefilter').prop('checked', false);
+        provinces = [];
+        $('.partyfilter').attr("active", "disabled");
+        $('.partyfilter').prop('checked', false);
+        parties = [];
+        $('.provincecheck').prop('checked', false);
+        $('.provincecheck').attr("toggleClass", "provinceDisabled");
+        $('#displayAll').prop('checked', false);
+        $('#displayAll').attr("toggleClass", "disabled")
+        $("#voteMargin").data("ionRangeSlider").reset();
+        margin = [];
       });
 
 
