@@ -591,3 +591,15 @@ g.legendOrdinal text{
   display: block;
   width: 100%; /* only required for <img /> */
 }
+
+#legendcontain {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 585px) {
+  #legendcontain {
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,7 +1,13 @@
 function createNAMap(){
 
   function removeAllDisplay(){
+    // remove all contents of viz
     d3.select("#vizcontain")
+      .selectAll('*')
+      .remove()
+
+    // remove all contents of legend
+    d3.select("#legendcontain")
       .selectAll('*')
       .remove()
   }
@@ -18,12 +24,15 @@ function createNAMap(){
     var map_block = d3.select("#vizcontain")
 
     // width and height of the svg viewport
-    var width = 1000, height = 600;
+    // var width = 1000, height = 600;
+    // var width = 404, height = 436;
 
     // defining the projection for map (change center and scale to get desired size for the map)
     var projection = d3.geoMercator()
-        .center([68.38, 31.5])
-        .scale([150 * 14]);
+        // .center([68.38, 31.5])
+        // .scale([150 * 14]);
+        .center([75, 31.5])
+        .scale([150 * 13]);
 
     // defining the paths for the maps
     var path = d3.geoPath().projection(projection);
@@ -31,7 +40,8 @@ function createNAMap(){
     // defining the svg view port for the map within the div
     var svg = map_block.append("svg")
               .attr("preserveAspectRatio", "xMinYMin meet")
-              .attr("viewBox", "0 0 1000 600")
+              //.attr("viewBox", "0 0 1000 600")
+              .attr("viewBox", "0 0 636 600")
               .style("opacity", 1)
               .classed("map_in_a_box", "true")
               .attr("id", "NAmap")
@@ -151,8 +161,6 @@ function createNAMap(){
             .style("stroke-width", 0.5)
               .style("fill", "#FFF")
               .style("opacity", 0.9);
-
-
 
 
       // generating path for Pakistan national boundary (class Pakistan)
@@ -610,7 +618,16 @@ function createNAMap(){
                         .domain(parties_legend_abb)
                         .range(parties_colors);
 
-        svg.append("g")
+        var party_legend_svg = d3.select("#legendcontain")
+                            .append("div")
+                            .classed("partyLegendSVGDiv", true)
+                            .append("svg")
+                            .classed("partyLegendSVG", true)
+                            .attr('width', 300)
+                            .attr('height', 50);
+
+
+        party_legend_svg.append("g")
           .attr("class", "legendOrdinal")
           .attr("transform", "translate(20,20)");
         //
@@ -621,8 +638,45 @@ function createNAMap(){
           .scale(ordinal)
           .orient('horizontal');
 
-        svg.select(".legendOrdinal")
+        party_legend_svg.select(".legendOrdinal")
           .call(legendOrdinal);
+
+        var VM_legend_svg = d3.select("#legendcontain")
+                            .append("div")
+                            .classed("VMLegendSVGDiv", true)
+                            .append("svg")
+                            .classed("VMLegendSVG", true)
+                            .attr('width', 300)
+                            .attr('height', 50);
+
+        var circLegDomain = [0,25,50,75,100];
+        var circLegRange = circLegDomain.map(d => getCircleSize(d));
+        var circLegDomain = circLegDomain.map(d => d + "%");
+
+        var circLegScale = d3.scaleOrdinal().domain(circLegDomain).range(circLegRange);
+
+
+        VM_legend_svg.append("g")
+          .attr("class", "legendSize")
+          .attr("transform", "translate(25, 20)");
+
+        var legendSize = d3.legendSize()
+          .scale(circLegScale )
+          .shape('circle')
+          .shapePadding(20)
+          .labelOffset(15)
+          .orient('horizontal');
+
+        VM_legend_svg.select(".legendSize")
+          .call(legendSize);
+
+        // changing the style of legend text and circles
+        d3.selectAll(".VMLegendSVG text")
+          .style('font-size', 9);
+
+        d3.selectAll(".VMLegendSVG circle")
+          .style('fill', 'none')
+          .style('stroke', 'black');
     }
 
     // creating an array with district centrids
