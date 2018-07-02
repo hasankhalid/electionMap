@@ -30,8 +30,8 @@ function createNAMap(){
 
     // defining the svg view port for the map within the div
     var svg = map_block.append("svg")
-              .attr("width", width)
-              .attr("height", height)
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 1000 600")
               .style("opacity", 1)
               .classed("map_in_a_box", "true")
               .attr("id", "NAmap")
@@ -309,7 +309,7 @@ function createNAMap(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 20)
-            .style("fill", "grey")
+            .style("fill", "none")
             .style("opacity", 0.5)
             .style("pointer-events", "all")
 

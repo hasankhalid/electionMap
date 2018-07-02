@@ -120,6 +120,14 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
+  position: relative;
+  z-index: 3;
+}
+
+.filtercontainer {
+  display: flex;
+  justify-content: center;
+  min-height: 40px;
 }
 
 .btnnavigate {
@@ -136,12 +144,15 @@ body {
 
 .btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
   background-color: #EEEEEE !important;
-
 }
 
 .btnnavigate:focus, .btnnavigate:active {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.filteritem {
+  font-size: 13px;
 }
 
 #mobiledrop {
@@ -177,6 +188,10 @@ body {
     padding: 5px;
   }
 
+  #vizcontain {
+    min-height: 0px;
+  }
+
   .viz>.container, .viz>.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
@@ -186,6 +201,13 @@ body {
     padding-left: 0px;
     padding-right: 0px;
   }
+
+  .filtercontainer>.container, .filtercontainer>.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+
   .btnnavigate {
     font-size: 11px;
     padding: 5px
@@ -499,4 +521,73 @@ g.legendOrdinal text{
   text-align: center;
   font-size: 12px;
   font-weight: 600;
+}
+
+.filterContain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 725px) {
+  .filtercontainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+.filterbutton {
+  font-size: 13px;
+  background-color: #1976D2;
+}
+
+.filterbutton:focus, .filterbutton:active {
+  background: #1976D2;
+  border-color: #1565C0;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.filterbutton:hover {
+  background: #1565C0;
+  border-color: #1565C0;
+}
+
+#partyFilters {
+  display: none;
+}
+
+#provinceFilters {
+  display: none;
+}
+
+#rangeFilters {
+  display: none;
+}
+
+.filterscontstantheight {
+  min-height: 62px;
+  position: relative;
+  z-index: 1;
+}
+
+.vizcontain {
+ display: inline-block;
+ position: relative;
+ width: 50%;
+ padding-bottom: 60%; /* depends on svg ratio, for my zebra height/width = 1.2 so padding-bottom = 50% * 1.2 = 60% */
+
+ vertical-align: middle; /* top | middle | bottom ... do what you want */
+}
+
+
+.map_in_a_box { /* svg into : object, img or inline */
+  display: block;
+  width: 100%; /* only required for <img /> */
+}
+
+.map_group { /* svg into : object, img or inline */
+  display: block;
+  width: 100%; /* only required for <img /> */
 }

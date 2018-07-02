@@ -23,6 +23,10 @@
     <title>Electoral Map</title>
     <link rel="stylesheet" type="text/css" href="animate.css">
     <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="./ionrange/ion.rangeSlider.css">
+    <link rel="stylesheet" type="text/css" href="./ionrange/ion.rangeSlider.skinNice.css">
+    <script src="./ionrange/ion.rangeSlider.min.js"></script>
+
   </head>
   <body>
 
@@ -84,6 +88,113 @@
       </div>
     </div>
 
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="filterdropdown" style="margin-bottom: 10px; margin-top: -5px;">
+      <div class="dropdown">
+        <a class="btn btn-primary dropdown-toggle filterbutton" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border: 0px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item filteritem" id="partyfilterbutt">Party</a>
+          <a class="dropdown-item filteritem" id="provincefilterbutt">Province</a>
+          <a class="dropdown-item filteritem" id="votemarginbutt">Vote Margin</a>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary filterbutton" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border: 0px;">Reset</button>
+    </div>
+    <div class="filterscontstantheight">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="partyFilters">
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partycheck" toggleClass="disabled" value="null" id="displayAll">
+            <label class="form-check-label" for="displayAll">All</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Tehreek-e-Insaf" active="disabled" id="PTIfilter">
+            <label class="form-check-label" for="PTIfilter">PTI</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League (N)" active="disabled" id="PMLNfilter">
+            <label class="form-check-label" for="PMLNfilter">PMLN</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Jamiat Ulama-e-Islam (F)" active="disabled" id="JUIFfilter">
+            <label class="form-check-label" for="JUIFfilter">JUIF</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Peoples Party Parliamentarians" active="disabled" id="PPPPfilter">
+            <label class="form-check-label" for="INDfilter">PPPP</label>
+          </div>
+        </div>
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League" active="disabled" id="PMLfilter">
+            <label class="form-check-label" for="PMLfilter">PML</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Independent" active="disabled" id="Indfilter">
+            <label class="form-check-label" for="PPPPfilter">Ind.</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League (F)" active="disabled" id="PMLFfilter">
+            <label class="form-check-label" for="PMLFfilter">PMLF</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Muttahida Qaumi Movement Pakistan" active="disabled" id="MQMfilter">
+            <label class="form-check-label" for="MQMfilter">MQM</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="rest" active="disabled" id="Restfilter">
+            <label class="form-check-label" for="Restfilter">Rest</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="provinceFilters">
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincecheck" toggleClass="provinceDisabled" id="displayAll">
+            <label class="form-check-label" for="displayAll">All</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="Punjab" active="disabled" id="PUNfilter">
+            <label class="form-check-label" for="PUNfilter">Punjab</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="Sindh" active="disabled" id="SNDfilter">
+            <label class="form-check-label" for="SNDfilter">Sindh</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="FATA" active="disabled" id="FATAfilter">
+            <label class="form-check-label" for="FATAfilter">FATA</label>
+          </div>
+        </div>
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="Balochistan" active="disabled" id="BALfilter">
+            <label class="form-check-label" for="BALfilter">Balochistan</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" active="disabled" value="KP" id="KPKfilter">
+            <label class="form-check-label" for="KPKfilter">KPK</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="ICT" active="disabled" id="ICTfilter">
+            <label class="form-check-label" for="ICTfilter">ICT</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="rangeFilters">
+        <div style="width: 275px">
+          <input type="text" id="voteMargin" name="vote_margin" value="" />
+        </div>
+      </div>
+    </div>
+
+
+
     <div id="votesharedropdown"class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
       <div class="container">
         <div id="voteshareoptions" class="dropdown">
@@ -137,6 +248,7 @@
     <script src="namap.js"></script>
     <script src="cartogram.js"></script>
     <script src="chord.js"></script>
+    <script src="filterNAmap.js"></script>
 
     <script>
 
@@ -147,13 +259,16 @@
         $(".PA").removeClass('active');
         $("#flow").removeClass('active');
         $(".dwvs").removeClass('active');
-        $(".disclaimer").css('margin-bottom', '15px');
         createNAMap();
         $("#votesharedropdown").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
         $("#chorddisclaim").hide();
         $("#footer").css('margin-top', '0px');
         $("#NAmap").show().addClass('animated fadeInDefault');
-
+        $(".filterscontstantheight").show();
+        $("#provincefilterbutt").show();
+        $("#filterdropdown").show().addClass('animated fadeInDefault');
+        $(".filtercontainer").hide();
       });
       $(".PA").click(function() {
         $(this).addClass('active');
@@ -166,6 +281,11 @@
         $("#chorddisclaim").hide();
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
+        $("#filterdropdown").show().addClass('animated fadeInDefault');
+        $(".filtercontainer").show();
+        $("#provincefilterbutt").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").show();
       });
       $(".dwvs").click(function() {
         $(this).addClass('active');
@@ -180,6 +300,9 @@
         $("#votesharedropdown").css('z-index', '1');
         createCartogram();
         $("#cartogram").show().addClass('animated fadeInDefault');
+        $("#filterdropdown").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").hide();
       });
       $("#flow").click(function() {
         $(this).addClass('active');
@@ -193,6 +316,9 @@
         createChord();
         $("#chorddisclaim").show().addClass('animated fadeInDefault');
         $("#footer").css('margin-top', '0px');
+        $("#filterdropdown").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").hide();
       });
 
       $(".plotreelinkedin").click(function() {
@@ -205,6 +331,127 @@
 
       $(".plotreeweb").click(function() {
         window.open('https://plotree.studio/', '_blank');
+      });
+
+      $("#partyfilterbutt").click(function() {
+        $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
+        $("#provinceFilters").hide();
+        $('#rangeFilters').hide();
+      });
+
+      $("#provincefilterbutt").click(function() {
+        $("#provinceFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
+        $("#partyFilters").hide();
+        $('#rangeFilters').hide()
+      });
+
+      $("#votemarginbutt").click(function() {
+        $("#provinceFilters").hide();
+        $("#partyFilters").hide();
+        $('#rangeFilters').show().addClass('animated fadeInDefault').css('display', 'flex');
+      });
+
+      //Filter functions follow
+
+      //variables so filterNAmap is only called once
+      var parties = [];
+      var provinces = [];
+      var margin = [];
+
+      //For each partyfilter classed element, this function checks its active prop. In case the button is selected, it sets it to active and pushes the party, else it removes party
+      $('.partyfilter').change(function() {
+        var isActive = $(this).attr("active");
+        if(isActive === "disabled") {
+          this.setAttribute("active", "active");
+          parties.push($(this).attr("value"));
+          $('#displayAll').prop('checked', false);
+        }
+        else {
+          this.setAttribute("active", "disabled");
+          var index = parties.indexOf($(this).attr("value"));
+          if (index >= 0) {
+            parties.splice(index, 1);
+          }
+        }
+      })
+
+      $('.provincefilter').change(function() {
+        var isActive = $(this).attr("active");
+        if(isActive === "disabled") {
+          this.setAttribute("active", "active");
+          provinces.push($(this).attr("value"));
+          $('.provincecheck').prop('checked', false);
+        }
+        else {
+          this.setAttribute("active", "disabled");
+          var index = provinces.indexOf($(this).attr("value"));
+          if (index >= 0) {
+            provinces.splice(index, 1);
+          }
+        }
+      })
+
+      $('.partycheck').change(function() {
+        var toggleValue = $(this).attr("toggleClass")
+        if(toggleValue === "disabled") {
+          this.setAttribute("toggleClass", "active")
+          $('.partyfilter').attr("active", "disabled");
+          $('.partyfilter').prop('checked', false);
+          parties = [];
+        }
+        else {
+          this.setAttribute("toggleClass", "disabled")
+          $('.partyfilter').attr("disabled", false);
+        }
+      })
+
+      $('.provincecheck').change(function() {
+        var toggleValue = $(this).attr("toggleClass")
+        if(toggleValue === "provinceDisabled") {
+          this.setAttribute("toggleClass", "active")
+          $('.provincefilter').attr("active", "disabled");
+          $('.provincefilter').prop('checked', false);
+          provinces = [];
+        }
+        else {
+          this.setAttribute("toggleClass", "provinceDisabled")
+          $('.provincefilter').attr("disabled", false);
+        }
+      })
+
+      $("#voteMargin").ionRangeSlider({
+          type: "double",
+          grid: true,
+          min: 0,
+          max: 100,
+          from: 0,
+          to: 100,
+          postfix: " %"
+      });
+
+      margin.push($("#voteMargin").data("ionRangeSlider").result.from);
+      margin.push($("#voteMargin").data("ionRangeSlider").result.to);
+
+      $('#voteMargin, input:checkbox').change(function() {
+        // Saving Ion range instance to var
+        var slider = $("#voteMargin").data("ionRangeSlider");
+        // Get values
+        var from = slider.result.from;
+        var to = slider.result.to;
+        margin[0] = from;
+        margin[1] = to;
+        if (provinces.length == 0 && parties.length == 0) {
+          filterCircles(null, null, margin);
+        }
+        else if (provinces.length == 0 && parties.length > 0) {
+          filterCircles(null, parties, margin);
+        }
+        else if (parties.length == 0 && provinces.length > 0) {
+          filterCircles(provinces, null, margin);
+        }
+        else {
+          filterCircles(provinces, parties, margin);
+        }
       });
 
     </script>
