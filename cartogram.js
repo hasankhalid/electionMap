@@ -63,14 +63,16 @@ function createCartogram(){
       .defer(d3.json, "pakistan_districts.topojson")
       .defer(d3.json, "JAndKashmir.topojson")
       .defer(d3.json, "Pakistan_NationalBoundary.topojson")
+      .defer(d3.json, "Pak_prov.topojson")
       .defer(d3.csv, "NA_seats_2013.csv")
       .await(drawCartogram)
 
     // function executed by d3.queue
-    function drawCartogram(error, topology, k_topology, pak_topology, na_seats_2013){
+    function drawCartogram(error, topology, k_topology, pak_topology, pak_prov_topology, na_seats_2013){
       var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
       var kshmr_path_data = topojson.feature(k_topology, k_topology.objects.JAndKashmir).features;
       var nat_path_data = topojson.feature(pak_topology, pak_topology.objects.Pakistan_NationalBoundary).features;
+      var nat_prov_data = topojson.feature(pak_prov_topology, pak_prov_topology.objects.Pak_prov).features;
 
       console.log(path_data);
 
@@ -128,6 +130,17 @@ function createCartogram(){
           //.style("fill", "#EEE")
           .style("fill", "white")
           .style("fill-opacity", 0);
+
+      // generating path for Pakistan provinces (class PakProv)
+      svg_g.selectAll(".Pak_prov")
+            .data(nat_prov_data)
+            .enter().append("path")
+            .classed("PakProv", true)
+            .attr("d", function (d, i){ return path(d)})
+            .style("stroke", "grey")
+            .style("stroke-width", 0.25)
+            .style("fill", "white")
+            .style("fill-opacity", 0.0);
 
       // elections data set joined with the seats information
       var result = join(na_seats_2013, elections_2013, "Seat", "seat", function(election_row, seat_row) {
@@ -310,7 +323,7 @@ function createCartogram(){
           circle_select = d3.select('.votePerc' + "#" + whiteSpaceRem(unique_dist));
           // transitions for circle
           circle_select
-            .transition()
+            .transition("districtSelectTrans")
             .duration(100)
             .style('stroke', "black")
             .style('stroke-width', 1)
@@ -533,7 +546,7 @@ function createCartogram(){
 
           // unselect vote Perc circles
           circle_select
-            .transition()
+            .transition("districtSelectTrans")
             .duration(100)
             .style('stroke', "black")
             .style('stroke-width', 0)
@@ -591,7 +604,7 @@ function createCartogram(){
           d.VotePerc = (d3.sum(total_votes)/ d3.sum(total_valid_votes)) * 100;
           d.VotePerc = Math.round(d.VotePerc * 10)/ 10;
         })
-        .transition()
+        .transition("partySwitchTrans")
         .duration(1000)
         .attr("r", function(d, i){
           return rad_scale(d.VotePerc);

@@ -45,6 +45,7 @@ function createNAMap(){
     d3.queue()
       .defer(d3.json, "pakistan_districts.topojson")
       .defer(d3.json, "JAndKashmir.topojson")
+      .defer(d3.json, "Pak_prov.topojson")
       .defer(d3.json, "Pakistan_NationalBoundary.topojson")
       .defer(d3.csv, "NA_seats_2013.csv")
       .await(drawElectMap)
@@ -107,10 +108,11 @@ function createNAMap(){
     ////////////////////////////////////////////////
 
     // execution function (Draws map and gets bubbles positioned on map)
-    function drawElectMap(error, topology, k_topology, pak_topology, na_seats_2013){
+    function drawElectMap(error, topology, k_topology, pak_prov_topology, pak_topology, na_seats_2013){
       // relevant data extracted from topojson files
       var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
       var kshmr_path_data = topojson.feature(k_topology, k_topology.objects.JAndKashmir).features;
+      var nat_prov_data = topojson.feature(pak_prov_topology, pak_prov_topology.objects.Pak_prov).features;
       var nat_path_data = topojson.feature(pak_topology, pak_topology.objects.Pakistan_NationalBoundary).features;
 
       // getting district Centroids using the distCentroids function
@@ -151,6 +153,8 @@ function createNAMap(){
               .style("opacity", 0.9);
 
 
+
+
       // generating path for Pakistan national boundary (class Pakistan)
       svg_g.selectAll(".Pak_boundary")
             .data(nat_path_data)
@@ -161,6 +165,18 @@ function createNAMap(){
             .style("stroke-width", 1)
             .style("fill", "white")
             .style("opacity", 0.9);
+
+      // generating path for Pakistan provinces (class PakProv)
+      svg_g.selectAll(".Pak_prov")
+            .data(nat_prov_data)
+            .enter().append("path")
+            .classed("PakProv", true)
+            .attr("d", function (d, i){ return path(d)})
+            .style("stroke", "grey")
+            .style("stroke-width", 0.0)
+            .style("fill", "white")
+            .style("opacity", 0.9);
+
 
 
       //////////////////////////////////////////////////
