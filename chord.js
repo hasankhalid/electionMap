@@ -23,6 +23,19 @@
 // console.log(JSON.stringify(election_08));
 
 function createChord() {
+  function removeAllDisplay(){
+    // remove all contents of viz
+    d3.select("#vizcontain")
+      .selectAll('*')
+      .remove()
+
+    // remove all contents of legend
+    d3.select("#legendcontain")
+      .selectAll('*')
+      .remove()
+  }
+
+  removeAllDisplay();
 
   d3.csv('one_one_mapping.csv', function(error, one_one_map){
 

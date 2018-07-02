@@ -1,7 +1,13 @@
 function createCartogram(){
 
   function removeAllDisplay(){
+    // remove all contents of viz
     d3.select("#vizcontain")
+      .selectAll('*')
+      .remove()
+
+    // remove all contents of legend
+    d3.select("#legendcontain")
       .selectAll('*')
       .remove()
   }
@@ -42,16 +48,21 @@ function createCartogram(){
 
     // defining the projection for map (change center and scale to get desired size for the map)
     var projection = d3.geoMercator()
-        .center([68.38, 31.5])
-        .scale([150 * 14]);
+        // .center([68.38, 31.5])
+        // .scale([150 * 14]);
+        .center([75, 31.5])
+        .scale([150 * 13]);
 
     // defining the paths for the maps
     var path = d3.geoPath().projection(projection);
 
     // defining the svg view port for the map within the div
     var svg = map_block.append("svg")
-                      .attr("width", width)
-                      .attr("height", height)
+                      // .attr("width", width)
+                      // .attr("height", height)
+                      .attr("preserveAspectRatio", "xMinYMin meet")
+                      //.attr("viewBox", "0 0 1000 600")
+                      .attr("viewBox", "0 0 636 600")
                       .style("opacity", 1)
                       .classed("map_in_a_box", "true")
                       .attr("id", "cartogram");
