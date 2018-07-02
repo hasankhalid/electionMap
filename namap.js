@@ -625,6 +625,8 @@ function createNAMap(){
         party_legend_div.append('p')
                       .text('Political Party')
                       .style('font-size', '12px')
+                      .style('text-align', 'center')
+                      .style('margin-bottom', '-10px');
 
         var party_legend_svg = party_legend_div.append("svg")
                                               .classed("partyLegendSVG", true)
@@ -651,11 +653,13 @@ function createNAMap(){
 
         VM_legend_div.append('p')
                       .text('Vote Margin')
-                      .style('font-size', '12px');
+                      .style('font-size', '12px')
+                      .style('text-align', 'center')
+                      .style('margin-bottom', '-10px');
 
         var VM_legend_svg =  VM_legend_div.append("svg")
                                           .classed("VMLegendSVG", true)
-                                          .attr('width', 300)
+                                          .attr('width', 170)
                                           .attr('height', 50);
 
         var circLegDomain = [0,25,50,75,100];
