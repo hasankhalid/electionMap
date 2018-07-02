@@ -365,6 +365,7 @@
           this.setAttribute("active", "active");
           parties.push($(this).attr("value"));
           $('#displayAll').prop('checked', false);
+          $('#displayAll').attr("toggleClass", "disabled")
         }
         else {
           this.setAttribute("active", "disabled");
@@ -381,6 +382,7 @@
           this.setAttribute("active", "active");
           provinces.push($(this).attr("value"));
           $('.provincecheck').prop('checked', false);
+          $('.provincecheck').attr("toggleClass", "provinceDisabled");
         }
         else {
           this.setAttribute("active", "disabled");
