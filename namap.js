@@ -618,14 +618,18 @@ function createNAMap(){
                         .domain(parties_legend_abb)
                         .range(parties_colors);
 
-        var party_legend_svg = d3.select("#legendcontain")
+        var party_legend_div = d3.select("#legendcontain")
                             .append("div")
                             .classed("partyLegendSVGDiv", true)
-                            .append("svg")
-                            .classed("partyLegendSVG", true)
-                            .attr('width', 300)
-                            .attr('height', 50);
 
+        party_legend_div.append('p')
+                      .text('Political Party')
+                      .style('font-size', '12px')
+
+        var party_legend_svg = party_legend_div.append("svg")
+                                              .classed("partyLegendSVG", true)
+                                              .attr('width', 300)
+                                              .attr('height', 50);
 
         party_legend_svg.append("g")
           .attr("class", "legendOrdinal")
@@ -641,13 +645,18 @@ function createNAMap(){
         party_legend_svg.select(".legendOrdinal")
           .call(legendOrdinal);
 
-        var VM_legend_svg = d3.select("#legendcontain")
+        var VM_legend_div = d3.select("#legendcontain")
                             .append("div")
                             .classed("VMLegendSVGDiv", true)
-                            .append("svg")
-                            .classed("VMLegendSVG", true)
-                            .attr('width', 300)
-                            .attr('height', 50);
+
+        VM_legend_div.append('p')
+                      .text('Vote Margin')
+                      .style('font-size', '12px');
+
+        var VM_legend_svg =  VM_legend_div.append("svg")
+                                          .classed("VMLegendSVG", true)
+                                          .attr('width', 300)
+                                          .attr('height', 50);
 
         var circLegDomain = [0,25,50,75,100];
         var circLegRange = circLegDomain.map(d => getCircleSize(d));
