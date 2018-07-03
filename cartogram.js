@@ -720,6 +720,8 @@ function createCartogram(){
       // vote share legend
       var seatLegDiv = legendDiv.append("div")
                                 .classed("seatLegDiv", true)
+                                .style("max-width", '350px')
+                                .style('min-width', '300px')
 
       seatLegDiv.append('p')
                 .text('Number of Seats')
@@ -729,8 +731,10 @@ function createCartogram(){
 
       var seatLegSVG = seatLegDiv.append("svg")
                                 .classed("seatLegSVG", true)
-                                .attr('width', 350)
-                                .attr('height', 90);
+                              //  .attr('width', 350)
+                              //  .attr('height', 90);
+                                .attr("preserveAspectRatio", "xMinYMin meet")
+                                .attr("viewBox", "0 0 350 90")
 
       seatLegSVG.append("g")
         .attr("class", "seatLegG")
