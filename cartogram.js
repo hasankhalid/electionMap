@@ -360,6 +360,10 @@ function createCartogram(){
 
           // important stats for tooltip
           var total_seats = resDistObj[d.key].values.length;
+          var seat_arr = resDistObj[d.key].values.map(d => +d.seat.replace("NA-", ""));
+          var min_seat = d3.min(seat_arr);
+          var max_seat = d3.max(seat_arr);
+          console.log(min_seat, max_seat);
           var partyWinArr = resDistObj[d.key].values.map( d => d.results[0].party);
 
           // how many seats ahas the party won?
@@ -419,6 +423,17 @@ function createCartogram(){
                 return '<span style="font-size: 11px">Other districts: ' +  otherdist  + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
               }
             })
+
+            tooltip.append('div')
+              .classed('cartotoolfooter', true)
+              .html(function(d){
+                if (min_seat === max_seat) {
+                  return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + '</span>'
+                }
+                else {
+                  return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + ' - NA' + max_seat + '</span>'
+                }
+              })
 
             tooltip.append('div')
               .classed('cartotoolparty', true)
@@ -482,6 +497,8 @@ function createCartogram(){
             .html(function(d){
               return '<span>Seats Won: ' + winnPartySeats + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
+
+
 
             if (d3.event.pageY >= 460) {
               var hoverbox = document.getElementById('hoverbox');
@@ -646,6 +663,98 @@ function createCartogram(){
         })
         .style("fill", d => colorScale(new_party));
       }
+
+      // code for putting in legends for the vis
+      var legendDiv = d3.select("#legendcontain")
+      legendDiv.style('padding-left', '150px')
+      legendDiv.style('padding-right', '150px')
+      legendDiv.style('justify-content', 'space-around')
+
+      var VSLegDomain = d3.range(20, 101, 20)
+      var VSLegRange = VSLegDomain.map(d => rad_scale(d))
+      var VSLegDomain = VSLegDomain.map(d => d + "%");
+
+      var VMLegScale = d3.scaleOrdinal().domain(VSLegDomain).range(VSLegRange);
+
+      // vote share legend
+      var voteShrLegDiv = legendDiv.append("div")
+                                .classed("voteShrLegDiv", true)
+
+      voteShrLegDiv.append('p')
+                    .text('Vote Share')
+                    .style('font-size', '12px')
+                    .style('text-align', 'center')
+                    .style('margin-bottom', '1px');
+
+      var voteShrLegSVG = voteShrLegDiv.append("svg")
+                                      .classed("voteShrLegSVG", true)
+                                      .attr('width', 220)
+                                      .attr('height', 90);
+
+      voteShrLegSVG.append("g")
+        .attr("class", "voteShrLegG")
+        .attr("transform", "translate(25, 29)");
+
+      var voteShrLeg = d3.legendSize()
+        .scale(VMLegScale)
+        .shape('circle')
+        .shapePadding(20)
+        .labelOffset(15)
+        .orient('horizontal');
+
+      voteShrLegSVG.select(".voteShrLegG").call(voteShrLeg);
+
+      // changing the style of legend text and circles
+      d3.selectAll(".voteShrLegSVG text")
+        .style('font-size', '10px');
+
+      d3.selectAll(".voteShrLegSVG circle")
+        .style('fill', 'none')
+        .style('stroke', 'black');
+
+      var seatLegDomain = d3.range(1, 6, 1)
+      var seatLegRange = seatLegDomain.map(d => seat_rad_scale(d))
+
+      var seatLegScale = d3.scaleOrdinal().domain(seatLegDomain).range(seatLegRange);
+
+      // vote share legend
+      var seatLegDiv = legendDiv.append("div")
+                                .classed("seatLegDiv", true)
+
+      seatLegDiv.append('p')
+                .text('Number of Seats')
+                .style('font-size', '12px')
+                .style('text-align', 'center')
+                .style('margin-bottom', '1px');
+
+      var seatLegSVG = seatLegDiv.append("svg")
+                                .classed("seatLegSVG", true)
+                                .attr('width', 350)
+                                .attr('height', 90);
+
+      seatLegSVG.append("g")
+        .attr("class", "seatLegG")
+        .attr("transform", "translate(25, 20)");
+
+      var seatLeg = d3.legendSize()
+        .scale(seatLegScale)
+        .shape('circle')
+        .shapePadding(25)
+        .labelOffset(15)
+        .orient('horizontal');
+
+      seatLegSVG.select(".seatLegG").call(seatLeg);
+
+      // changing the style of legend text and circles
+      d3.selectAll(".seatLegSVG text")
+        .style('font-size', '10px');
+
+      d3.selectAll(".seatLegSVG circle")
+        .style('fill', 'none')
+        .style('stroke', 'black')
+        .style('stroke-width', 2)
+        .style('stroke-dasharray', 2);
+
 
       // join datasets functions by key
       function join(lookupTable, mainTable, lookupKey, mainKey, select) {

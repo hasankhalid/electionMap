@@ -645,8 +645,12 @@ function createNAMap(){
                         .range(parties_colors);
 
         var party_legend_div = d3.select("#legendcontain")
+                            .style('padding-left', '150px')
+                            .style('padding-right', '150px')
+                            .style('justify-content', 'space-around')
                             .append("div")
                             .classed("partyLegendSVGDiv", true)
+
 
         party_legend_div.append('p')
                       .text('Political Party')

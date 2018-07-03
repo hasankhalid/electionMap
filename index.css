@@ -489,6 +489,14 @@ g.legendOrdinal text{
   font-weight: 600;
 }
 
+.cartotoolfooter {
+  grid-column: span 12;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .cartotoolop {
   grid-column: span 12;
   font-size: 12px;
