@@ -40,13 +40,13 @@
           <li class="nav-item">
             <div style="display: flex">
               <img class="ballot" src="./resources/ballot1.svg"></img>
-              <span class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
+              <span year="2008" class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
             </div>
           </li>
           <li class="nav-item">
             <div style="display: flex">
               <img class="ballot" src="./resources/ballot2.svg"></img>
-              <span class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2013</span>
+              <span year="2013" class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2013</span>
             </div>
           </li>
           <li class="nav-item socialicons">
@@ -88,16 +88,16 @@
       </div>
     </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="filterdropdown" style="margin-bottom: 10px; margin-top: -5px;">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="filterdropdown" style="margin-bottom: 10px; margin-top: -5px; z-index: 9">
       <div class="dropdown">
         <a class="btn btn-primary dropdown-toggle filterbutton" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border: 0px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item filteritem" id="partyfilterbutt">Party</a>
-          <a class="dropdown-item filteritem" id="provincefilterbutt">Province</a>
-          <a class="dropdown-item filteritem" id="votemarginbutt">Vote Margin</a>
+          <a class="dropdown-item filteritem" id="partyfilterbutt" style="cursor: pointer;">Party</a>
+          <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
+          <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
         </div>
       </div>
 
@@ -257,6 +257,19 @@
     <script src="filterNAmap.js"></script>
 
     <script>
+
+      var electionYear = 2013;
+
+      $(".electlink").click(function() {
+        electionYear = parseInt($(this).attr('year'));
+
+        if (electionYear === 2008) {
+          $('#flow').hide()
+        }
+        else {
+          $('#flow').show()
+        }
+      })
 
       createNAMap();
 
