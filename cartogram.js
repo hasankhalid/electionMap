@@ -504,11 +504,10 @@ function createCartogram(){
               var hoverbox = document.getElementById('hoverbox');
               tooltip.style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px")
               if (d3.event.pageX - 125 < 0) {
-                tooltip.style('left', d3.event.pageX + 4 + "px")
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
               }
               else if (d3.event.pageX + 125 > window.innerWidth) {
-                console.log('abc')
-                tooltip.style('left', d3.event.pageX - 260 + "px")
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
               }
               else if (window.innerWidth < 450) {
                 tooltip.style('left', window.innerWidth/2 - 125 + "px")
@@ -520,11 +519,10 @@ function createCartogram(){
             else {
               tooltip.style('top', d3.event.pageY + 14 + "px")
               if (d3.event.pageX - 125 < 0) {
-                tooltip.style('left', d3.event.pageX + 4 + "px")
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
               }
               else if (d3.event.pageX + 125 > window.innerWidth) {
-                console.log('abc')
-                tooltip.style('left', d3.event.pageX - 260 + "px")
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
               }
               else if (window.innerWidth < 450) {
                 tooltip.style('left', window.innerWidth/2 - 125 + "px")

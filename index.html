@@ -90,11 +90,11 @@
 
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="filterdropdown" style="margin-bottom: 10px; margin-top: -5px; z-index: 9">
       <div class="dropdown">
-        <a class="btn btn-primary dropdown-toggle filterbutton" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border: 0px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary dropdown-toggle filterbutton" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border: 0px;" href="#" role="button" id="dropdownFilterLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter
         </a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-menu" aria-labelledby="dropdownFilterLink">
           <a class="dropdown-item filteritem" id="partyfilterbutt" style="cursor: pointer;">Party</a>
           <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
           <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
@@ -102,6 +102,19 @@
       </div>
 
       <button type="button" class="btn btn-primary filterbutton" id="resetAll" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border: 0px;">Reset</button>
+
+      <div class="dropdown" id="dropdownProvinceLink">
+        <a class="btn btn-primary dropdown-toggle filterbutton" style="border: 0px; margin-left: 5px; font-size: 12px;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Select Party
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownProvinceLink">
+          <a class="dropdown-item filteritem" id="kpProvinceButt" style="cursor: pointer;">Khyber Pakhtunkhwa</a>
+          <a class="dropdown-item filteritem" id="punProvinceButt" style="cursor: pointer;">Punjab</a>
+          <a class="dropdown-item filteritem" id="balProvinceButt" style="cursor: pointer;">Balochistan</a>
+          <a class="dropdown-item filteritem" id="sindhProvinceButt" style="cursor: pointer;">Sindh</a>
+        </div>
+      </div>
     </div>
     <div class="filterscontstantheight">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="partyFilters">
@@ -201,7 +214,7 @@
           <a class="btn btn-light dropdown-toggle btnnavigate" style="padding: 5px;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Select Party
           </a>
-          <div style="width: 200px" class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+          <div style="width: 200px" class="dropdown-menu">
             <a class="dropdown-item cartinput navbutt mobilenav" id="PTI" value= "Pakistan Tehreek-e-Insaf">Pakistan Tehreek e Insaf</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="PMLN" value = "Pakistan Muslim League (N)">Pakistan Muslim League (N)</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="PPP" value = "Pakistan Peoples Party Parliamentarians">Pakistan Peoples Party</a>
@@ -271,7 +284,13 @@
         }
       })
 
-      createNAMap();
+
+      $(document).ready(function() {
+        createNAMap();
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+      });
+
+
 
       $("#NA").click(function() {
         $(this).addClass('active');
@@ -282,12 +301,14 @@
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#chorddisclaim").hide();
+        $("#dropdownProvinceLink").hide();
         $("#footer").css('margin-top', '0px');
         $("#NAmap").show().addClass('animated fadeInDefault');
         $(".filterscontstantheight").show();
         $("#provincefilterbutt").show();
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
       });
       $(".PA").click(function() {
         $(this).addClass('active');
@@ -298,6 +319,7 @@
         $("#chorddiagram").remove();
         $("#cartogram").remove();
         $("#chorddisclaim").hide();
+        $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#filterdropdown").show().addClass('animated fadeInDefault');
@@ -313,6 +335,7 @@
         $(".PA").removeClass('active');
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
+        $("#dropdownProvinceLink").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#votesharedropdown").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").css('position', 'relative');
@@ -329,6 +352,7 @@
         $("#NA").removeClass('active');
         $(".dwvs").removeClass('active');
         $("#votesharedropdown").hide();
+        $("#dropdownProvinceLink").hide();
         $(".disclaimer").css('margin-bottom', '0px');
         $("#NAmap").hide();
         $("#cartogram").hide();
@@ -476,7 +500,7 @@
       });
 
 
-      $("#resetAll").click(function() {
+      $("#resetAll, #NA, .PA, .dwvs, #flow").click(function() {
         filterCircles(null, null, null);
         $('.provincefilter').attr("active", "disabled");
         $('.provincefilter').prop('checked', false);

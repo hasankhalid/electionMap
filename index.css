@@ -6,6 +6,10 @@
   min-height: 600px;
 }
 
+#dropdownProvinceLink {
+  display: none;
+}
+
 body {
   overflow-x: hidden;
 }
