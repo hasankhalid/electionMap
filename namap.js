@@ -154,7 +154,11 @@ function createNAMap(){
             .enter().append("path")
             .classed("Kashmir", true)
             .attr("d", function (d, i){ return path(d)})
-
+            .style("fill-opacity", 1)
+            .style("stroke", "grey")
+            .style("stroke-dasharray", 2)
+            .style("stroke-width", 0.5)
+            .style("fill", "#FFF")
 
 
       // generating path for Pakistan national boundary (class Pakistan)
