@@ -664,9 +664,6 @@ function createCartogram(){
 
       // code for putting in legends for the vis
       var legendDiv = d3.select("#legendcontain")
-      legendDiv.style('padding-left', '150px')
-      legendDiv.style('padding-right', '150px')
-      legendDiv.style('justify-content', 'space-around')
 
       var VSLegDomain = d3.range(20, 101, 20)
       var VSLegRange = VSLegDomain.map(d => rad_scale(d))
