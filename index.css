@@ -158,6 +158,10 @@ body {
   font-size: 13px;
 }
 
+.dropdown-item:active {
+  background-color: #eee;
+}
+
 #mobiledrop {
   display: none;
 }
