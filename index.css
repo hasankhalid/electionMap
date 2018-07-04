@@ -641,13 +641,13 @@ g.legendOrdinal text{
   .cartotoolpartydetail {
     font-size: 11px;
   }
-  .partycheck, .partyfilter {
+  #partyFilters {
     font-size: 12px;
   }
 }
 
 @media screen and (max-width: 340px) {
-  .partycheck, .partyfilter {
+  #partyFilters {
     font-size: 11px;
   }
 }
