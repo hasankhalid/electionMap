@@ -673,6 +673,6 @@ g.legendOrdinal text{
   justify-content: space-around;
 }
 
-.NAmap {
+.NAmap, .map_in_a_box {
   -webkit-transform: translate3d(0, 0, 0);
 }
