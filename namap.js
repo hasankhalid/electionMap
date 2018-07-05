@@ -332,7 +332,7 @@ function createNAMap(){
             //Make the radius a lot bigger
             .attr("r", 20)
             .style("fill", "none")
-          //  .style("fill-opacity", 0.5)
+            //.style("fill-opacity", 0.5)
             .style("pointer-events", "all")
 
         d3.selectAll('circle.circle-catcher.NAmap')
@@ -371,6 +371,8 @@ function createNAMap(){
               .attr('cx', d => d.x)
               .attr('cy', d => d.y);
         }
+
+      //  d3.timer(ticked);
 
         /////////////////////////////////////////////////////
         ////////////// Adding mouse over event //////////////

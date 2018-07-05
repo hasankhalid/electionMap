@@ -619,6 +619,7 @@ g.legendOrdinal text{
 #legendcontain {
   display: flex;
   justify-content: center;
+  min-height: 70px;
 }
 
 @media screen and (max-width: 585px) {
@@ -666,16 +667,6 @@ g.legendOrdinal text{
 }
 
 /*d3 styling section 2 */
-
-.Kashmir {
-  opacity: 1;
-  stroke: grey;
-  stroke-dasharray: 2;
-  stroke-width: 0.5;
-  fill: #FFF;
-  opacity: 0.9;
-}
-
 #legendcontain {
   padding-left: 150px;
   padding-right: 150px;

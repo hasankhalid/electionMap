@@ -63,7 +63,7 @@ function createCartogram(){
                       .attr("preserveAspectRatio", "xMinYMin meet")
                       //.attr("viewBox", "0 0 1000 600")
                       .attr("viewBox", "0 0 636 600")
-                      .style("opacity", 1)
+                      .style("fill-opacity", 1)
                       .classed("map_in_a_box", "true")
                       .attr("id", "cartogram");
 
@@ -103,11 +103,10 @@ function createCartogram(){
             .data(path_data)
             .enter().append("path")
             .attr("d", function (d, i){ return path(d)})
-            .style("opacity", 1)
             .style("stroke", "white")
             .style("stroke-width", 0.2)
             .style("fill", "#FFF")
-            .style("opacity", 0.9)
+            .style("fill-opacity", 0.9)
             //.attr("district", d => d.properties.districts)
             .attr("class", function(d, i){
               return whiteSpaceRem(d.properties.districts);
@@ -122,12 +121,11 @@ function createCartogram(){
           .enter().append("path")
           .classed("Kashmir", true)
           .attr("d", function (d, i){ return path(d)})
-          .style("opacity", 1)
+          .style("fill-opacity", 1)
           .style("stroke", "grey")
           .style("stroke-dasharray", 2)
           .style("stroke-width", 0.5)
           .style("fill", "#FFF")
-          .style("opacity", 0.9);
 
       // drawing the Pakistan boundary
       svg_g.append("g").classed("Pak_boundary", true)
@@ -263,7 +261,7 @@ function createCartogram(){
           return getCentroid(d.key)[1];
         })
         .style("fill", d => colorScale(selected_party))
-        .style("opacity", 0.7)
+        .style("fill-opacity", 0.7)
         .each(function(d, i){
           total_votes = list_votes(d, selected_party);
           total_valid_votes = list_valid_votes(d);
@@ -319,7 +317,7 @@ function createCartogram(){
             //Make the radius a lot bigger
             .attr("r", 20)
             .style("fill", "none")
-            .style("opacity", 0.5)
+            //.style("opacity", 0.5)
             .style("pointer-events", "all")
             // .on("mouseover", activateMouseOv)
             // .on("mouseout", activateMouseOut)
@@ -632,7 +630,6 @@ function createCartogram(){
             .style('stroke-width', 0)
             .style('fill', 'none')
             .style('opacity', 1);
-
         });
 
       // event for updating party

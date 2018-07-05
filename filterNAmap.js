@@ -3,8 +3,8 @@
 // class of voronoi circle region is circle-catcher
 
 // global variables for scaling na seat size
-const base_bubble = 3 // min size that all bubbles take
-const margin_range = 5 // range for vote margin
+var base_bubble = 3 // min size that all bubbles take
+var margin_range = 5 // range for vote margin
 
 // width and height for voronoi boundaries
 var width = 1000, height = 600;
