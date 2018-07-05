@@ -195,6 +195,10 @@ body {
     padding: 5px;
   }
 
+  #vizcontain {
+    min-height: 0px;
+  }
+
   .viz>.container, .viz>.container-fluid {
     padding-left: 0px;
     padding-right: 0px;
