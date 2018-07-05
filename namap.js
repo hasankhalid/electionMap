@@ -242,9 +242,9 @@ function createNAMap(){
                           return d.radius + 0.80;
                         }))
                         .on('tick', ticked)
-                      //  .on('end', console.log("ended MF!"))
                         .alpha(0.525)
                         .alphaDecay(0.07)
+                        .on('end', function() { redrawVoronoi() })
 
       //////////////////////////////////////////////////////////////
       ////////////// Adding bubble nodes for na seats //////////////
@@ -331,8 +331,8 @@ function createNAMap(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 20)
-            .style("fill", "none")
-            //.style("fill-opacity", 0.5)
+            .style("fill", "grey")
+            .style("fill-opacity", 0.5)
             .style("pointer-events", "all")
 
         d3.selectAll('circle.circle-catcher.NAmap')
@@ -364,7 +364,7 @@ function createNAMap(){
 
             // redraw the voronoi clippaths
 
-            polygon = polygon.data(voronoi.polygons(nodes)).call(redrawPolygon);
+          //polygon = polygon.data(voronoi.polygons(nodes)).call(redrawPolygon);
 
             // changing the positions of the voronoi circle
             d3.select('svg').selectAll(".circle-catcher.NAmap").data(nodes)
@@ -372,7 +372,9 @@ function createNAMap(){
               .attr('cy', d => d.y);
         }
 
-      //  d3.timer(ticked);
+      /*  if (simulation.alpha() > 0) {
+          d3.timer(ticked);
+        } */
 
         /////////////////////////////////////////////////////
         ////////////// Adding mouse over event //////////////
