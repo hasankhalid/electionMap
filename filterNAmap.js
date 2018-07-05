@@ -55,7 +55,7 @@ var parties_in_legend = [
 
 var rest_parties = unique_parties.diff(parties_in_legend)
 //
-console.log(rest_parties);
+//console.log(rest_parties);
 // get size of the na seat circles
 function getCircleSize(voteMargin){
   return base_bubble + ((voteMargin/ 100) * margin_range)
@@ -84,7 +84,7 @@ function filterCircles(province, party, voteMargin){
       if (party.includes("Rest")){
         party = party.filter(d => d != "Rest")
         party = party.concat(rest_parties);
-        console.log(party);
+        //console.log(party);
 
       }
       return party.includes(datum);

@@ -3,7 +3,7 @@
 }
 
 #vizcontain {
-  min-height: 600px;
+  min-height: 680px;
 }
 
 #dropdownProvinceLink {
@@ -193,10 +193,6 @@ body {
 
   .viz {
     padding: 5px;
-  }
-
-  #vizcontain {
-    min-height: 0px;
   }
 
   .viz>.container, .viz>.container-fluid {
