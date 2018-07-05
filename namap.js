@@ -241,7 +241,7 @@ function createNAMap(){
                         .force('collision', d3.forceCollide().radius(function(d) {
                           return d.radius + 0.80;
                         }))
-                      //  .on('tick', ticked)
+                        .on('tick', ticked)
                       //  .on('end', console.log("ended MF!"))
                         .alpha(0.525)
                         .alphaDecay(0.07)
@@ -372,7 +372,7 @@ function createNAMap(){
               .attr('cy', d => d.y);
         }
 
-       d3.timer(ticked);
+      //  d3.timer(ticked);
 
         /////////////////////////////////////////////////////
         ////////////// Adding mouse over event //////////////
