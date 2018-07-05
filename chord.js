@@ -187,7 +187,8 @@ function createChord() {
         .attr("d", ribbon)
         .style("fill", function(d) { return color(d.source.index); })
         .style("stroke", function(d) { return d3.rgb(color(d.source.index)).darker(); })
-        .style('opacity', 0.7);
+        .style('fill-opacity', 0.7)
+        .style('stroke-opacity', 0.7);
 
     //console.log(d3.select('.ribbons').data());
 
@@ -215,7 +216,8 @@ function createChord() {
         d3.select("g.ribbons").selectAll("path")
           .filter(function(rib) { return rib.source.index !== i && rib.target.index !== i; })
           .transition()
-          .style("opacity", opacity);
+          .style("fill-opacity", opacity)
+          .style("stroke-opacity", opacity);
           // remove transparency of little groups when mouse is hovered
         if (add_title){
           d3.select('body').append('div')
@@ -277,7 +279,10 @@ function createChord() {
         var chosen = d;
         d3.select("g.ribbons").selectAll("path")
           .transition()
-          .style("opacity", function(d) {
+          .style("fill-opacity", function(d) {
+            return d.source.index === chosen.source.index && d.target.index === chosen.target.index ? opac1 : opac2;
+          })
+          .style("stroke-opacity", function(d) {
             return d.source.index === chosen.source.index && d.target.index === chosen.target.index ? opac1 : opac2;
           });
 

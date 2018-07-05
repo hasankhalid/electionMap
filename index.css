@@ -672,3 +672,7 @@ g.legendOrdinal text{
   padding-right: 150px;
   justify-content: space-around;
 }
+
+.NAmap {
+  -webkit-transform: translate3d(0, 0, 0);
+}
