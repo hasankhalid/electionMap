@@ -14,6 +14,10 @@ body {
   overflow-x: hidden;
 }
 
+.applicationWrap {
+  overflow-x: hidden;
+}
+
 .mobilenav {
   font-size: 11px;
   color: black;
