@@ -370,7 +370,6 @@ function createNAMap(){
             d3.select('svg').selectAll(".circle-catcher.NAmap").data(nodes)
               .attr('cx', d => d.x)
               .attr('cy', d => d.y)
-              .attr('onclick', 'void(0)');
         }
 
       /*  if (simulation.alpha() > 0) {
