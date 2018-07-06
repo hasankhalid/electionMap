@@ -336,8 +336,8 @@ function createNAMap(){
             .style("pointer-events", "all")
 
         d3.selectAll('circle.circle-catcher.NAmap')
-            .on("mouseover", activateMouseOv)
-            .on("mouseout", activateMouseOut)
+            .on("mouseover touchstart", activateMouseOv)
+            .on("mouseout touchend", activateMouseOut)
             //Notice that we now have the mousover events on these circles
             // .on("mouseover", activateHover(100))
             // .on("mouseout",  deactivateHover(100));
