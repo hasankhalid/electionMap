@@ -336,8 +336,8 @@ function createNAMap(){
             .style("pointer-events", "all")
 
         d3.selectAll('circle.circle-catcher.NAmap')
-            .on("mouseover touchstart", activateMouseOv)
-            .on("mouseout touchend", activateMouseOut)
+            .on("mouseover", activateMouseOv)
+            .on("mouseout", activateMouseOut)
             //Notice that we now have the mousover events on these circles
             // .on("mouseover", activateHover(100))
             // .on("mouseout",  deactivateHover(100));
@@ -369,7 +369,8 @@ function createNAMap(){
             // changing the positions of the voronoi circle
             d3.select('svg').selectAll(".circle-catcher.NAmap").data(nodes)
               .attr('cx', d => d.x)
-              .attr('cy', d => d.y);
+              .attr('cy', d => d.y)
+              .attr('onclick', 'void(0)');
         }
 
       /*  if (simulation.alpha() > 0) {
