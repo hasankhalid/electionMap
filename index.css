@@ -306,10 +306,10 @@ g.legendOrdinal text{
   position: absolute;
   background-color: #eeeeee;
   color: #212121;
-  display: grid;
   z-index: 1000;
   padding: 15px;
   width: 250px;
+  display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto auto auto;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
@@ -679,4 +679,50 @@ g.legendOrdinal text{
 
 .NAmap, .map_in_a_box {
   -webkit-transform: translate3d(0, 0, 0);
+}
+
+@supports not (display: grid) {
+  .tool {
+    display: inline-block;
+  }
+
+  .toolhead {
+    grid-column: span 10;
+  }
+
+  .partyicon {
+    width: 25%;
+    float: left;
+  }
+
+  .nametitle {
+    width: 60%;
+    float: left;
+  }
+
+  .partytitle {
+    width: 20%;
+    float: left;
+  }
+
+  .voteTitle {
+    width: 20%;
+    float: left;
+  }
+
+  .candidatename {
+    width: 60%;
+    float: left;
+  }
+
+  .partyname {
+    width: 20%;
+    float: left;
+  }
+
+  .votes {
+    width: 20%;
+    float: left;
+  }
+
 }
