@@ -599,7 +599,7 @@ function createCartogram(){
             .style('stroke', "black")
             .style('stroke-width', 0)
 
-          // remove title
+          // remove tooltip
           d3.selectAll('.cartogramtool').remove();
           // remove seat bubble
           d3.select('.seatBubble').remove();

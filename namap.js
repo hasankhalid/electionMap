@@ -588,7 +588,7 @@ function createNAMap(){
             .attr('stroke-width', 0);
 
           // remove the tooltip
-          //d3.selectAll('.tool').remove()
+          d3.selectAll('.tool').remove()
         }
 
 

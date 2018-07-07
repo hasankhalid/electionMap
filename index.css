@@ -687,7 +687,8 @@ g.legendOrdinal text{
   }
 
   .toolhead {
-    grid-column: span 10;
+    width: 75%;
+    float: left;
   }
 
   .partyicon {
@@ -722,6 +723,64 @@ g.legendOrdinal text{
 
   .votes {
     width: 20%;
+    float: left;
+  }
+
+  .cartogramtool {
+    display: inline-block;
+  }
+
+  .cartotoolparty {
+    width: 50%;
+    float: left;
+  }
+
+  .cartotoolpartylogo {
+    width: 50%;
+    float: left;
+  }
+
+  .cartotoolpartydetail {
+    width: 50%;
+    float: left;
+  }
+
+  .chordtool {
+    display: inline-block;
+  }
+
+  .party {
+    width: 75%;
+    float: left;
+  }
+
+  .cpartyicon {
+    width: 25%;
+    float: left;
+  }
+
+  .chordtoolexpand {
+    display: inline-block;
+  }
+
+  .vsparty {
+    width: 25%;
+    float: left;
+    padding: 0px;
+  }
+
+  .chordtoolheading {
+    width: 50%;
+    float: left;
+  }
+
+  .chordexpandicon {
+    width: 12.5%;
+    float: left;
+  }
+
+  .chordexpandinfo {
+    width: calc(87.5% - 20px);
     float: left;
   }
 
