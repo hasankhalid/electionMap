@@ -78,9 +78,9 @@ function createChord() {
     party_abbs.forEach(function(party2013){
       var matrix_array = []
       party_abbs.forEach(function(party2008){
-        var eval = one_one_map.filter(d => (d.party_2013_abb == party2013 && d.party_2008_abb == party2008)).length
-        //console.log(party2013, ", ",party2008, " ", eval);
-        matrix_array.push(eval);
+        var evalvar = one_one_map.filter(d => (d.party_2013_abb == party2013 && d.party_2008_abb == party2008)).length
+        //console.log(party2013, ", ",party2008, " ", evalvar);
+        matrix_array.push(evalvar);
       });
       party_matrix.push(matrix_array);
     })
