@@ -800,6 +800,10 @@ g.legendOrdinal text{
   transform: translate3d(0, 0, 0);
 }
 
+.map_group_province, .circle-catcher, .pSeatCircle {
+  will-change: transform;
+}
+
 @supports not ((display: -ms-grid) or (display: grid)) {
   .tool {
     display: inline-block;
