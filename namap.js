@@ -630,7 +630,7 @@ function createNAMap(){
 
         var party_legend_svg = party_legend_div.append("svg")
                                               .classed("partyLegendSVG", true)
-                                              .attr('width', 300)
+                                              .attr('width', 280)
                                               .attr('height', 50);
 
         party_legend_svg.append("g")
