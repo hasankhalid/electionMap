@@ -20,8 +20,8 @@ function makeProvMaps(){
 
   // defining the projection for map (change center and scale to get desired size for the map)
   var projection = d3.geoMercator()
-      .center([68.38, 31.5])
-      .scale([150 * 14]);
+      .center([75, 31.5])
+      .scale([150 * 13]);
 
   var zoom = d3.zoom()
     // no longer in d3 v4 - zoom initialises with zoomIdentity, so it's already at origin
@@ -35,8 +35,11 @@ function makeProvMaps(){
 
   // defining the svg view port for the map within the div
   var svg = map_block.append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
+                    // .attr("width", width)
+                    // .attr("height", height)
+                    .attr("preserveAspectRatio", "xMinYMin meet")
+                    //.attr("viewBox", "0 0 1000 600")
+                    .attr("viewBox", "0 0 636 600")
                     .style("opacity", 1)
                     .classed("map_in_a_box", "true")
 
@@ -169,6 +172,8 @@ function makeProvMaps(){
     const base_bubble = 3 * 0.7 // min size that all bubbles take
     const margin_range = 5 * 0.7 // range for vote margin
 
+    var y_offset_tx = -50;
+
     // adding vote margin and radius and init radius to results
     result.forEach(function(d){
       //console.log(d.results[0].votes);
@@ -280,9 +285,6 @@ function makeProvMaps(){
       }
 
 
-
-
-
     function end_force(){
         // making clip circles over the seat circles
         //Append larger circles (that are clipped by clipPaths)
@@ -307,8 +309,8 @@ function makeProvMaps(){
             .on("mouseout", activateMouseOut);
 
         // hard code the translate params for KP
-        scale = 1.794
-        translate = [-606.1086487623315, 56.60442772150898]
+        scale = 1.770600970553169
+        translate = [-345.4863342221814,54.93697529051545 + y_offset_tx]
 
         d3.selectAll(".circle-catcher")
           .attr("transform", "translate(" + translate[0] + "," + translate[1] + ")" + " scale(" + scale + ")");
@@ -449,30 +451,36 @@ function makeProvMaps(){
             .duration(trans_time)
             .attr('r', '0');
 
+      height = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().height - 60
+      width = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().width - 60
+
+      console.log(height, width);
+
       var bounds = path.bounds(active.datum()),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
           //scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-          scale = 1.794
-          translate = [width / 2 - scale * x, height / 2 - scale * y];
+          scale = 1.770600970553169
 
-      //console.log(scale, JSON.stringify(translate));
+          translate = [width / 2 - scale * x, (height / 2 - scale * y) + y_offset_tx];
+
+      console.log(scale, JSON.stringify(translate));
 
 
-      svg.transition('zoom_trans')
-          //.delay(delay_time)
-          .duration(trans_time)
-          // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-          .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
+      // svg.transition('zoom_trans')
+      //     //.delay(delay_time)
+      //     .duration(trans_time)
+      //     // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
+      //     .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
       //     //////////////////////////////////////////////////////////////
           ////////////// Adding bubble nodes for provincial seats //////////////
           //////////////////////////////////////////////////////////////
-      // d3.selectAll(".pSeatCircle").transition()
-      //     .duration(750)
-      //     // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-      //     .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) );
+      d3.selectAll(".pSeatCircle").transition()
+          .duration(750)
+          // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
+          .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) );
 
       d3.selectAll(".pSeatCircle")
           //.delay()
