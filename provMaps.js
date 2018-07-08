@@ -313,7 +313,7 @@ function makeProvMaps(){
         translate = [-345.4863342221814,54.93697529051545 + y_offset_tx]
 
         d3.selectAll(".circle-catcher")
-          .attr("transform", "translate(" + translate[0] + "," + translate[1] + ")" + " scale(" + scale + ")");
+          .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
 
         console.log(nodes)
         console.log(voronoi.polygons(nodes))
@@ -486,12 +486,11 @@ function makeProvMaps(){
           //.delay()
           .transition('zoom_trans')
           .duration(trans_time)
-          .attr("transform", "translate(" + translate[0] + "," + translate[1] + ")" + " scale(" + scale + ")");
-
+          .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
       d3.selectAll(".circle-catcher")
         .transition('zoom_trans')
         .duration(trans_time)
-        .attr("transform", "translate(" + translate[0] + "," + translate[1] + ")" + " scale(" + scale + ")")
+        .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
         .style("display", d => (d.province == Prov) ? "block" : "none");
 
 
@@ -577,7 +576,7 @@ function makeProvMaps(){
 
   function zoomed() {
     //g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
-    // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
+    //g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     svg_g.attr("transform", d3.event.transform); // updated for d3 v4
   }
 
