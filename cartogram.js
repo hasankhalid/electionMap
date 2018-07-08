@@ -63,7 +63,7 @@ function createCartogram(){
                       .attr("preserveAspectRatio", "xMinYMin meet")
                       //.attr("viewBox", "0 0 1000 600")
                       .attr("viewBox", "0 0 636 600")
-                      .style("opacity", 1)
+                      .style("fill-opacity", 1)
                       .classed("map_in_a_box", "true")
                       .attr("id", "cartogram");
 
@@ -103,11 +103,10 @@ function createCartogram(){
             .data(path_data)
             .enter().append("path")
             .attr("d", function (d, i){ return path(d)})
-            .style("opacity", 1)
             .style("stroke", "white")
             .style("stroke-width", 0.2)
             .style("fill", "#FFF")
-            .style("opacity", 0.9)
+            .style("fill-opacity", 0.9)
             //.attr("district", d => d.properties.districts)
             .attr("class", function(d, i){
               return whiteSpaceRem(d.properties.districts);
@@ -122,12 +121,11 @@ function createCartogram(){
           .enter().append("path")
           .classed("Kashmir", true)
           .attr("d", function (d, i){ return path(d)})
-          .style("opacity", 1)
+          .style("fill-opacity", 1)
           .style("stroke", "grey")
           .style("stroke-dasharray", 2)
           .style("stroke-width", 0.5)
           .style("fill", "#FFF")
-          .style("opacity", 0.9);
 
       // drawing the Pakistan boundary
       svg_g.append("g").classed("Pak_boundary", true)
@@ -263,7 +261,7 @@ function createCartogram(){
           return getCentroid(d.key)[1];
         })
         .style("fill", d => colorScale(selected_party))
-        .style("opacity", 0.7)
+        .style("fill-opacity", 0.7)
         .each(function(d, i){
           total_votes = list_votes(d, selected_party);
           total_valid_votes = list_valid_votes(d);
@@ -319,7 +317,7 @@ function createCartogram(){
             //Make the radius a lot bigger
             .attr("r", 20)
             .style("fill", "none")
-            .style("opacity", 0.5)
+            //.style("opacity", 0.5)
             .style("pointer-events", "all")
             // .on("mouseover", activateMouseOv)
             // .on("mouseout", activateMouseOut)
@@ -360,6 +358,10 @@ function createCartogram(){
 
           // important stats for tooltip
           var total_seats = resDistObj[d.key].values.length;
+          var seat_arr = resDistObj[d.key].values.map(d => +d.seat.replace("NA-", ""));
+          var min_seat = d3.min(seat_arr);
+          var max_seat = d3.max(seat_arr);
+          console.log(min_seat, max_seat);
           var partyWinArr = resDistObj[d.key].values.map( d => d.results[0].party);
 
           // how many seats ahas the party won?
@@ -421,17 +423,28 @@ function createCartogram(){
             })
 
             tooltip.append('div')
+              .classed('cartotoolfooter', true)
+              .html(function(d){
+                if (min_seat === max_seat) {
+                  return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + '</span>'
+                }
+                else {
+                  return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + ' - NA' + max_seat + '</span>'
+                }
+              })
+
+            tooltip.append('div')
               .classed('cartotoolparty', true)
               .style('background', d3.rgb(colorScale(selected_party)).darker(1))
               .html(function(d){
-                return '<span>SELECTED PARTY</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+                return '<span class="cartotoolpartyhead">SELECTED PARTY</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
               })
 
             tooltip.append('div')
               .classed('cartotoolparty', true)
               .style('background', d3.rgb(colorScale(distPartyObj[selected_district_WS].values[0].key)).darker(1))
               .html(function(d){
-                return '<span>MAJORITY VOTE</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+                return '<span class="cartotoolpartyhead">MAJORITY VOTE</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
               })
 
           tooltip.append('div')
@@ -483,14 +496,38 @@ function createCartogram(){
               return '<span>Seats Won: ' + winnPartySeats + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
 
+
+
             if (d3.event.pageY >= 460) {
               var hoverbox = document.getElementById('hoverbox');
               tooltip.style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
             else {
               tooltip.style('top', d3.event.pageY + 14 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
 
 
@@ -562,7 +599,7 @@ function createCartogram(){
             .style('stroke', "black")
             .style('stroke-width', 0)
 
-          // remove title
+          // remove tooltip
           d3.selectAll('.cartogramtool').remove();
           // remove seat bubble
           d3.select('.seatBubble').remove();
@@ -593,7 +630,6 @@ function createCartogram(){
             .style('stroke-width', 0)
             .style('fill', 'none')
             .style('opacity', 1);
-
         });
 
       // event for updating party
@@ -622,6 +658,99 @@ function createCartogram(){
         })
         .style("fill", d => colorScale(new_party));
       }
+
+      // code for putting in legends for the vis
+      var legendDiv = d3.select("#legendcontain")
+
+      var VSLegDomain = d3.range(20, 101, 20)
+      var VSLegRange = VSLegDomain.map(d => rad_scale(d))
+      var VSLegDomain = VSLegDomain.map(d => d + "%");
+
+      var VMLegScale = d3.scaleOrdinal().domain(VSLegDomain).range(VSLegRange);
+
+      // vote share legend
+      var voteShrLegDiv = legendDiv.append("div")
+                                .classed("voteShrLegDiv", true)
+
+      voteShrLegDiv.append('p')
+                    .text('Vote Share')
+                    .style('font-size', '12px')
+                    .style('text-align', 'center')
+                    .style('margin-bottom', '1px');
+
+      var voteShrLegSVG = voteShrLegDiv.append("svg")
+                                      .classed("voteShrLegSVG", true)
+                                      .attr('width', 220)
+                                      .attr('height', 90);
+
+      voteShrLegSVG.append("g")
+        .attr("class", "voteShrLegG")
+        .attr("transform", "translate(25, 29)");
+
+      var voteShrLeg = d3.legendSize()
+        .scale(VMLegScale)
+        .shape('circle')
+        .shapePadding(20)
+        .labelOffset(15)
+        .orient('horizontal');
+
+      voteShrLegSVG.select(".voteShrLegG").call(voteShrLeg);
+
+      // changing the style of legend text and circles
+      d3.selectAll(".voteShrLegSVG text")
+        .style('font-size', '10px');
+
+      d3.selectAll(".voteShrLegSVG circle")
+        .style('fill', 'none')
+        .style('stroke', 'black');
+
+      var seatLegDomain = d3.range(1, 6, 1)
+      var seatLegRange = seatLegDomain.map(d => seat_rad_scale(d))
+
+      var seatLegScale = d3.scaleOrdinal().domain(seatLegDomain).range(seatLegRange);
+
+      // vote share legend
+      var seatLegDiv = legendDiv.append("div")
+                                .classed("seatLegDiv", true)
+                                .style("max-width", '350px')
+                                .style('min-width', '300px')
+
+      seatLegDiv.append('p')
+                .text('Number of Seats')
+                .style('font-size', '12px')
+                .style('text-align', 'center')
+                .style('margin-bottom', '1px');
+
+      var seatLegSVG = seatLegDiv.append("svg")
+                                .classed("seatLegSVG", true)
+                              //  .attr('width', 350)
+                              //  .attr('height', 90);
+                                .attr("preserveAspectRatio", "xMinYMin meet")
+                                .attr("viewBox", "0 0 350 90")
+
+      seatLegSVG.append("g")
+        .attr("class", "seatLegG")
+        .attr("transform", "translate(25, 20)");
+
+      var seatLeg = d3.legendSize()
+        .scale(seatLegScale)
+        .shape('circle')
+        .shapePadding(25)
+        .labelOffset(15)
+        .orient('horizontal');
+
+      seatLegSVG.select(".seatLegG").call(seatLeg);
+
+      // changing the style of legend text and circles
+      d3.selectAll(".seatLegSVG text")
+        .style('font-size', '10px');
+
+      d3.selectAll(".seatLegSVG circle")
+        .style('fill', 'none')
+        .style('stroke', 'black')
+        .style('stroke-width', 2)
+        .style('stroke-dasharray', 2);
+
 
       // join datasets functions by key
       function join(lookupTable, mainTable, lookupKey, mainKey, select) {
