@@ -1,8 +1,22 @@
 function makeProvMaps(){
-  var map_block = d3.select("body")
+  var map_block = d3.select("#vizcontain")
 
   // width and height of the svg viewport
   var width = 1000, height = 600;
+
+  function removeAllDisplay(){
+    // remove all contents of viz
+    d3.select("#vizcontain")
+      .selectAll('*')
+      .remove()
+
+    // remove all contents of legend
+    d3.select("#legendcontain")
+      .selectAll('*')
+      .remove()
+  }
+
+  removeAllDisplay();
 
   // defining the projection for map (change center and scale to get desired size for the map)
   var projection = d3.geoMercator()
@@ -30,10 +44,10 @@ function makeProvMaps(){
                 .classed("map_group", "true");
 
   d3.queue()
-    .defer(d3.json, "GeoData/pakistan_districts.topojson")
-    .defer(d3.json, "GeoData/Pak_prov.topojson")
-    .defer(d3.json, "ProvinceData/prov2013.json")
-    .defer(d3.csv, "ProvinceData/prov_seats_2013.csv")
+    .defer(d3.json, "/pakistan_districts.topojson")
+    .defer(d3.json, "/Pak_prov.topojson")
+    .defer(d3.json, "/prov2013.json")
+    .defer(d3.csv, "/prov_seats_2013.csv")
     .await(drawProvincial)
 
   // listing the parties from na map
@@ -491,11 +505,18 @@ function makeProvMaps(){
     //makeProvMap("KP");
 
     // event listener for province
-    d3.select('#Province').on("input", function(){
+    d3.select('#dropdownProvinceLink').on("input", function(){
+      console.log(this);
       selected_prov = this.value;
       makeProvMap(selected_prov);
       //update_bubbles(selected_party);
     });
+
+    $('.provinceButt').click(function() {
+      console.log($(this).attr("value"));
+      selected_prov = $(this).attr("value");
+      makeProvMap(selected_prov);
+    })
 
     // preprocessing_data
     function voteDataPreP(data){
@@ -567,5 +588,3 @@ function makeProvMaps(){
     return text.split(" ").join("")
   }
 }
-
-makeProvMaps()

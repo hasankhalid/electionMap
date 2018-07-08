@@ -149,7 +149,7 @@ function image(party){
             return '<img src="./resources/partylogos/kite.svg"></img>';
             break;
         case "Pakistan Peoples Party Parliamentarians":
-            return '<img  style="transform: rotate(45deg);" src="./resources/partylogos/arrow.svg"></img>';
+            return '<img  style="transform: rotate(45deg); -ms-transform: rotate(45deg); -webkit-transform: rotate(45deg);" src="./resources/partylogos/arrow.svg"></img>';
             break;
         case "All Pakistan Muslim League":
             return '<img src="./resources/partylogos/eagle.svg"></img>';

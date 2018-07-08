@@ -1,0 +1,575 @@
+seat,district,province
+PK-1,Peshawar,KP
+PK-2,Peshawar,KP
+PK-3,Peshawar,KP
+PK-4,Peshawar,KP
+PK-5,Peshawar,KP
+PK-6,Peshawar,KP
+PK-7,Peshawar,KP
+PK-8,Peshawar,KP
+PK-9,Peshawar,KP
+PK-10,Peshawar,KP
+PK-11,Peshawar,KP
+PK-12,Nowshera,KP
+PK-13,Nowshera,KP
+PK-14,Nowshera,KP
+PK-15,Nowshera,KP
+PK-16,Nowshera,KP
+PK-17,Charsadda,KP
+PK-18,Charsadda,KP
+PK-19,Charsadda,KP
+PK-20,Charsadda,KP
+PK-21,Charsadda,KP
+PK-22,Charsadda,KP
+PK-23,Mardan,KP
+PK-24,Mardan,KP
+PK-25,Mardan,KP
+PK-26,Mardan,KP
+PK-27,Mardan,KP
+PK-28,Mardan,KP
+PK-29,Mardan,KP
+PK-30,Mardan,KP
+PK-31,Swabi,KP
+PK-32,Swabi,KP
+PK-33,Swabi,KP
+PK-34,Swabi,KP
+PK-35,Swabi,KP
+PK-36,Swabi,KP
+PK-37,Kohat,KP
+PK-38,Kohat,KP
+PK-39,Kohat,KP
+PK-40,Karak,KP
+PK-41,Karak,KP
+PK-42,Hangu,KP
+PK-43,Hangu,KP
+PK-44,Abbottabad,KP
+PK-45,Abbottabad,KP
+PK-46,Abbottabad,KP
+PK-47,Abbottabad,KP
+PK-48,Abbottabad,KP
+PK-49,Haripur,KP
+PK-50,Haripur,KP
+PK-51,Haripur,KP
+PK-52,Haripur,KP
+PK-53,Mansehra,KP
+PK-54,Mansehra,KP
+PK-55,Mansehra,KP
+PK-56,Mansehra,KP
+PK-57,Mansehra,KP
+PK-58,Tor Ghar,KP
+PK-59,Batagram,KP
+PK-60,Batagram,KP
+PK-61,Kohistan,KP
+PK-62,Kohistan,KP
+PK-63,Kohistan,KP
+PK-64,Dera Ismail Khan,KP
+PK-65,Dera Ismail Khan,KP
+PK-66,Dera Ismail Khan,KP
+PK-67,Dera Ismail Khan,KP
+PK-68,Dera Ismail Khan,KP
+PK-69,Tank,KP
+PK-70,Bannu,KP
+PK-71,Bannu,KP
+PK-72,Bannu,KP
+PK-73,Bannu,KP
+PK-74,Lakki Marwat,KP
+PK-75,Lakki Marwat,KP
+PK-76,Lakki Marwat,KP
+PK-77,Buner,KP
+PK-78,Buner,KP
+PK-79,Buner,KP
+PK-80,Swat,KP
+PK-81,Swat,KP
+PK-82,Swat,KP
+PK-83,Swat,KP
+PK-84,Swat,KP
+PK-85,Swat,KP
+PK-86,Swat,KP
+PK-87,Shangla,KP
+PK-88,Shangla,KP
+PK-89,Chitral,KP
+PK-90,Chitral,KP
+PK-91,Upper Dir,KP
+PK-92,Upper Dir,KP
+PK-93,Upper Dir,KP
+PK-94,Lower Dir,KP
+PK-95,Lower Dir,KP
+PK-96,Lower Dir,KP
+PK-97,Lower Dir,KP
+PK-98,Malakand,KP
+PK-99,Malakand,KP
+PP-1,Rawalpindi,Punjab
+PP-2,Rawalpindi,Punjab
+PP-3,Rawalpindi,Punjab
+PP-4,Rawalpindi,Punjab
+PP-5,Rawalpindi,Punjab
+PP-6,Rawalpindi,Punjab
+PP-7,Rawalpindi,Punjab
+PP-8,Rawalpindi,Punjab
+PP-9,Rawalpindi,Punjab
+PP-10,Rawalpindi,Punjab
+PP-11,Rawalpindi,Punjab
+PP-12,Rawalpindi,Punjab
+PP-13,Rawalpindi,Punjab
+PP-14,Rawalpindi,Punjab
+PP-15,Attock,Punjab
+PP-16,Attock,Punjab
+PP-17,Attock,Punjab
+PP-18,Attock,Punjab
+PP-19,Attock,Punjab
+PP-20,Chakwal,Punjab
+PP-21,Chakwal,Punjab
+PP-22,Chakwal,Punjab
+PP-23,Chakwal,Punjab
+PP-24,Jhelum,Punjab
+PP-25,Jhelum,Punjab
+PP-26,Jhelum,Punjab
+PP-27,Jhelum,Punjab
+PP-28,Sargodha,Punjab
+PP-29,Sargodha,Punjab
+PP-30,Sargodha,Punjab
+PP-31,Sargodha,Punjab
+PP-32,Sargodha,Punjab
+PP-33,Sargodha,Punjab
+PP-34,Sargodha,Punjab
+PP-35,Sargodha,Punjab
+PP-36,Sargodha,Punjab
+PP-37,Sargodha,Punjab
+PP-38,Sargodha,Punjab
+PP-39,Khushab,Punjab
+PP-40,Khushab,Punjab
+PP-41,Khushab,Punjab
+PP-42,Khushab,Punjab
+PP-43,Mianwali,Punjab
+PP-44,Mianwali,Punjab
+PP-45,Mianwali,Punjab
+PP-46,Mianwali,Punjab
+PP-47,Bhakkar,Punjab
+PP-48,Bhakkar,Punjab
+PP-49,Bhakkar,Punjab
+PP-50,Bhakkar,Punjab
+PP-51,Faisalabad,Punjab
+PP-52,Faisalabad,Punjab
+PP-53,Faisalabad,Punjab
+PP-54,Faisalabad,Punjab
+PP-55,Faisalabad,Punjab
+PP-56,Faisalabad,Punjab
+PP-57,Faisalabad,Punjab
+PP-58,Faisalabad,Punjab
+PP-59,Faisalabad,Punjab
+PP-60,Faisalabad,Punjab
+PP-61,Faisalabad,Punjab
+PP-62,Faisalabad,Punjab
+PP-63,Faisalabad,Punjab
+PP-64,Faisalabad,Punjab
+PP-65,Faisalabad,Punjab
+PP-66,Faisalabad,Punjab
+PP-67,Faisalabad,Punjab
+PP-68,Faisalabad,Punjab
+PP-69,Faisalabad,Punjab
+PP-70,Faisalabad,Punjab
+PP-71,Faisalabad,Punjab
+PP-72,Faisalabad,Punjab
+PP-73,Jhang,Punjab
+PP-74,Jhang,Punjab
+PP-75,Jhang,Punjab
+PP-76,Chiniot,Punjab
+PP-77,Jhang,Punjab
+PP-78,Jhang,Punjab
+PP-79,Jhang,Punjab
+PP-80,Jhang,Punjab
+PP-81,Chiniot,Punjab
+PP-82,Jhang,Punjab
+PP-83,Jhang,Punjab
+PP-84,Toba Tek Singh,Punjab
+PP-85,Toba Tek Singh,Punjab
+PP-86,Toba Tek Singh,Punjab
+PP-87,Toba Tek Singh,Punjab
+PP-88,Toba Tek Singh,Punjab
+PP-89,Toba Tek Singh,Punjab
+PP-90,Toba Tek Singh,Punjab
+PP-91,Gujranwala,Punjab
+PP-92,Gujranwala,Punjab
+PP-93,Gujranwala,Punjab
+PP-94,Gujranwala,Punjab
+PP-95,Gujranwala,Punjab
+PP-96,Gujranwala,Punjab
+PP-97,Gujranwala,Punjab
+PP-98,Gujranwala,Punjab
+PP-99,Gujranwala,Punjab
+PP-100,Gujranwala,Punjab
+PP-101,Gujranwala,Punjab
+PP-102,Gujranwala,Punjab
+PP-103,Gujranwala,Punjab
+PP-104,Gujranwala,Punjab
+PP-105,Hafizabad,Punjab
+PP-106,Hafizabad,Punjab
+PP-107,Hafizabad,Punjab
+PP-108,Gujrat,Punjab
+PP-109,Gujrat,Punjab
+PP-110,Gujrat,Punjab
+PP-111,Gujrat,Punjab
+PP-112,Gujrat,Punjab
+PP-113,Gujrat,Punjab
+PP-114,Gujrat,Punjab
+PP-115,Gujrat,Punjab
+PP-116,Mandi Bahauddin,Punjab
+PP-117,Mandi Bahauddin,Punjab
+PP-118,Mandi Bahauddin,Punjab
+PP-119,Mandi Bahauddin,Punjab
+PP-120,Mandi Bahauddin,Punjab
+PP-121,Sialkot,Punjab
+PP-122,Sialkot,Punjab
+PP-123,Sialkot,Punjab
+PP-124,Sialkot,Punjab
+PP-125,Sialkot,Punjab
+PP-126,Sialkot,Punjab
+PP-127,Sialkot,Punjab
+PP-128,Sialkot,Punjab
+PP-129,Sialkot,Punjab
+PP-130,Sialkot,Punjab
+PP-131,Sialkot,Punjab
+PP-132,Narowal,Punjab
+PP-133,Narowal,Punjab
+PP-134,Narowal,Punjab
+PP-135,Narowal,Punjab
+PP-136,Narowal,Punjab
+PP-137,Lahore,Punjab
+PP-138,Lahore,Punjab
+PP-139,Lahore,Punjab
+PP-140,Lahore,Punjab
+PP-141,Lahore,Punjab
+PP-142,Lahore,Punjab
+PP-143,Lahore,Punjab
+PP-144,Lahore,Punjab
+PP-145,Lahore,Punjab
+PP-146,Lahore,Punjab
+PP-147,Lahore,Punjab
+PP-148,Lahore,Punjab
+PP-149,Lahore,Punjab
+PP-150,Lahore,Punjab
+PP-151,Lahore,Punjab
+PP-152,Lahore,Punjab
+PP-153,Lahore,Punjab
+PP-154,Lahore,Punjab
+PP-155,Lahore,Punjab
+PP-156,Lahore,Punjab
+PP-157,Lahore,Punjab
+PP-158,Lahore,Punjab
+PP-159,Lahore,Punjab
+PP-160,Lahore,Punjab
+PP-161,Lahore,Punjab
+PP-162,Sheikhupura,Punjab
+PP-163,Sheikhupura,Punjab
+PP-164,Sheikhupura,Punjab
+PP-165,Sheikhupura,Punjab
+PP-166,Sheikhupura,Punjab
+PP-167,Sheikhupura,Punjab
+PP-168,Sheikhupura,Punjab
+PP-169,Sheikhupura,Punjab
+PP-170,Nankana Sahib,Punjab
+PP-171,Nankana Sahib,Punjab
+PP-172,Nankana Sahib,Punjab
+PP-173,Nankana Sahib,Punjab
+PP-174,Nankana Sahib,Punjab
+PP-175,Kasur,Punjab
+PP-176,Kasur,Punjab
+PP-177,Kasur,Punjab
+PP-178,Kasur,Punjab
+PP-179,Kasur,Punjab
+PP-180,Kasur,Punjab
+PP-181,Kasur,Punjab
+PP-182,Kasur,Punjab
+PP-183,Kasur,Punjab
+PP-184,Kasur,Punjab
+PP-185,Okara,Punjab
+PP-186,Okara,Punjab
+PP-187,Okara,Punjab
+PP-188,Okara,Punjab
+PP-189,Okara,Punjab
+PP-190,Okara,Punjab
+PP-191,Okara,Punjab
+PP-192,Okara,Punjab
+PP-193,Okara,Punjab
+PP-194,Multan,Punjab
+PP-195,Multan,Punjab
+PP-196,Multan,Punjab
+PP-197,Multan,Punjab
+PP-198,Multan,Punjab
+PP-199,Multan,Punjab
+PP-200,Multan,Punjab
+PP-201,Multan,Punjab
+PP-202,Multan,Punjab
+PP-203,Multan,Punjab
+PP-204,Multan,Punjab
+PP-205,Multan,Punjab
+PP-206,Multan,Punjab
+PP-207,Lodhran,Punjab
+PP-208,Lodhran,Punjab
+PP-209,Lodhran,Punjab
+PP-210,Lodhran,Punjab
+PP-211,Lodhran,Punjab
+PP-212,Khanewal,Punjab
+PP-213,Khanewal,Punjab
+PP-214,Khanewal,Punjab
+PP-215,Khanewal,Punjab
+PP-216,Khanewal,Punjab
+PP-217,Khanewal,Punjab
+PP-218,Khanewal,Punjab
+PP-219,Khanewal,Punjab
+PP-220,Sahiwal,Punjab
+PP-221,Sahiwal,Punjab
+PP-222,Sahiwal,Punjab
+PP-223,Sahiwal,Punjab
+PP-224,Sahiwal,Punjab
+PP-225,Sahiwal,Punjab
+PP-226,Sahiwal,Punjab
+PP-227,Pakpattan,Punjab
+PP-228,Pakpattan,Punjab
+PP-229,Pakpattan,Punjab
+PP-230,Pakpattan,Punjab
+PP-231,Pakpattan,Punjab
+PP-232,Vehari,Punjab
+PP-233,Vehari,Punjab
+PP-234,Vehari,Punjab
+PP-235,Vehari,Punjab
+PP-236,Vehari,Punjab
+PP-237,Vehari,Punjab
+PP-238,Vehari,Punjab
+PP-239,Vehari,Punjab
+PP-240,Dera Ghazi Khan,Punjab
+PP-241,Dera Ghazi Khan,Punjab
+PP-242,Dera Ghazi Khan,Punjab
+PP-243,Dera Ghazi Khan,Punjab
+PP-244,Dera Ghazi Khan,Punjab
+PP-245,Dera Ghazi Khan,Punjab
+PP-246,Dera Ghazi Khan,Punjab
+PP-247,Rajanpur,Punjab
+PP-248,Rajanpur,Punjab
+PP-249,Rajanpur,Punjab
+PP-250,Rajanpur,Punjab
+PP-251,Muzaffargarh,Punjab
+PP-252,Muzaffargarh,Punjab
+PP-253,Muzaffargarh,Punjab
+PP-254,Muzaffargarh,Punjab
+PP-255,Muzaffargarh,Punjab
+PP-256,Muzaffargarh,Punjab
+PP-257,Muzaffargarh,Punjab
+PP-258,Muzaffargarh,Punjab
+PP-259,Muzaffargarh,Punjab
+PP-260,Muzaffargarh,Punjab
+PP-261,Muzaffargarh,Punjab
+PP-262,Layyah,Punjab
+PP-263,Layyah,Punjab
+PP-264,Layyah,Punjab
+PP-265,Layyah,Punjab
+PP-266,Layyah,Punjab
+PP-267,Bahawalpur,Punjab
+PP-268,Bahawalpur,Punjab
+PP-269,Bahawalpur,Punjab
+PP-270,Bahawalpur,Punjab
+PP-271,Bahawalpur,Punjab
+PP-272,Bahawalpur,Punjab
+PP-273,Bahawalpur,Punjab
+PP-274,Bahawalpur,Punjab
+PP-275,Bahawalpur,Punjab
+PP-276,Bahawalpur,Punjab
+PP-277,Bahawalnagar,Punjab
+PP-278,Bahawalnagar,Punjab
+PP-279,Bahawalnagar,Punjab
+PP-280,Bahawalnagar,Punjab
+PP-281,Bahawalnagar,Punjab
+PP-282,Bahawalnagar,Punjab
+PP-283,Bahawalnagar,Punjab
+PP-284,Bahawalnagar,Punjab
+PP-285,Rahim Yar Khan,Punjab
+PP-286,Rahim Yar Khan,Punjab
+PP-287,Rahim Yar Khan,Punjab
+PP-288,Rahim Yar Khan,Punjab
+PP-289,Rahim Yar Khan,Punjab
+PP-290,Rahim Yar Khan,Punjab
+PP-291,Rahim Yar Khan,Punjab
+PP-292,Rahim Yar Khan,Punjab
+PP-293,Rahim Yar Khan,Punjab
+PP-294,Rahim Yar Khan,Punjab
+PP-295,Rahim Yar Khan,Punjab
+PP-296,Rahim Yar Khan,Punjab
+PP-297,Rahim Yar Khan,Punjab
+PB-33,Khuzdar,Balochistan
+PB-34,Khuzdar,Balochistan
+PB-35,Khuzdar,Balochistan
+PB-36,Kalat,Balochistan
+PB-37,Kalat,Balochistan
+PB-38,Mastung,Balochistan
+PB-39,Chaghi,Balochistan
+PB-40,Nushki,Balochistan
+PB-41,Awaran,Balochistan
+PB-42,Panjgur,Balochistan
+PB-43,Panjgur,Balochistan
+PB-44,Lasbela,Balochistan
+PB-45,Lasbela,Balochistan
+PB-46,Kharan,Balochistan
+PB-47,Washuk,Balochistan
+PB-48,Kech,Balochistan
+PB-49,Kech,Balochistan
+PB-50,Kech,Balochistan
+PB-51,Gwadar,Balochistan
+PB-1,Quetta,Balochistan
+PB-2,Quetta,Balochistan
+PB-3,Quetta,Balochistan
+PB-4,Quetta,Balochistan
+PB-5,Quetta,Balochistan
+PB-6,Quetta,Balochistan
+PB-7,Ziarat,Balochistan
+PB-8,Pishin,Balochistan
+PB-9,Pishin,Balochistan
+PB-10,Pishin,Balochistan
+PB-11,Killa Abdullah,Balochistan
+PB-12,Killa Abdullah,Balochistan
+PB-13,Killa Abdullah,Balochistan
+PB-14,Loralai,Balochistan
+PB-15,Musakhail,Balochistan
+PB-16,Loralai,Balochistan
+PB-17,Barkhan,Balochistan
+PB-18,Sherani,Balochistan
+PB-19,Zhob,Balochistan
+PB-20,Killa Saifullah,Balochistan
+PB-21,Sibi,Balochistan
+PB-22,Harnai,Balochistan
+PB-23,Kohlu,Balochistan
+PB-24,Dera Bugti,Balochistan
+PB-25,Jaffarabad,Balochistan
+PB-26,Jaffarabad,Balochistan
+PB-27,Jaffarabad,Balochistan
+PB-28,Nasirabad,Balochistan
+PB-29,Nasirabad,Balochistan
+PB-30,Kachhi,Balochistan
+PB-31,Kachhi,Balochistan
+PS-1,Sukkur,Sindh
+PS-2,Sukkur,Sindh
+PS-3,Sukkur,Sindh
+PS-4,Sukkur,Sindh
+PS-5,Ghotki,Sindh
+PS-6,Ghotki,Sindh
+PS-7,Ghotki,Sindh
+PS-8,Ghotki,Sindh
+PS-9,Shikarpur,Sindh
+PS-10,Shikarpur,Sindh
+PS-11,Shikarpur,Sindh
+PS-12,Shikarpur,Sindh
+PS-13,Jacobabad,Sindh
+PS-14,Jacobabad,Sindh
+PS-15,Jacobabad,Sindh
+PS-16,Jacobabad,Sindh
+PS-17,Kashmore,Sindh
+PS-18,Kashmore,Sindh
+PS-19,Naushehro Feroze,Sindh
+PS-20,Naushehro Feroze,Sindh
+PS-21,Naushehro Feroze,Sindh
+PS-22,Naushehro Feroze,Sindh
+PS-23,Naushehro Feroze,Sindh
+PS-24,Shaheed Benazirabad,Sindh
+PS-25,Shaheed Benazirabad,Sindh
+PS-26,Shaheed Benazirabad,Sindh
+PS-27,Shaheed Benazirabad,Sindh
+PS-28,Shaheed Benazirabad,Sindh
+PS-29,Khairpur,Sindh
+PS-30,Khairpur,Sindh
+PS-31,Khairpur,Sindh
+PS-32,Khairpur,Sindh
+PS-33,Khairpur,Sindh
+PS-34,Khairpur,Sindh
+PS-35,Larkana,Sindh
+PS-36,Larkana,Sindh
+PS-37,Larkana,Sindh
+PS-38,Larkana,Sindh
+PS-39,Kambar-Shahdadkot,Sindh
+PS-40,Kambar-Shahdadkot,Sindh
+PS-41,Kambar-Shahdadkot,Sindh
+PS-42,Kambar-Shahdadkot,Sindh
+PS-43,Matiari,Sindh
+PS-44,Matiari,Sindh
+PS-45,Hyderabad,Sindh
+PS-46,Hyderabad,Sindh
+PS-47,Hyderabad,Sindh
+PS-48,Hyderabad,Sindh
+PS-49,Hyderabad,Sindh
+PS-50,Hyderabad,Sindh
+PS-51,Tando Allah Yar,Sindh
+PS-52,Tando Allah Yar,Sindh
+PS-53,Tando Allah Yar,Sindh
+PS-54,Tando Allah Yar,Sindh
+PS-55,Badin,Sindh
+PS-56,Badin,Sindh
+PS-57,Badin,Sindh
+PS-58,Badin,Sindh
+PS-59,Badin,Sindh
+PS-60,Tharparkar,Sindh
+PS-61,Tharparkar,Sindh
+PS-62,Tharparkar,Sindh
+PS-63,Tharparkar,Sindh
+PS-65,Mirpurkhas,Sindh
+PS-66,Mirpurkhas,Sindh
+PS-67,Mirpurkhas,Sindh
+PS-68,Umerkot,Sindh
+PS-69,Umerkot,Sindh
+PS-70,Umerkot,Sindh
+PS-71,Jamshoro,Sindh
+PS-72,Jamshoro,Sindh
+PS-73,Jamshoro,Sindh
+PS-74,Dadu,Sindh
+PS-75,Dadu,Sindh
+PS-76,Dadu,Sindh
+PS-77,Dadu,Sindh
+PS-78,Sanghar,Sindh
+PS-79,Sanghar,Sindh
+PS-80,Sanghar,Sindh
+PS-81,Sanghar,Sindh
+PS-82,Sanghar,Sindh
+PS-83,Sanghar,Sindh
+PS-84,Thatta,Sindh
+PS-85,Thatta,Sindh
+PS-86,Thatta,Sindh
+PS-87,Thatta,Sindh
+PS-88,Thatta,Sindh
+PS-89,Karachi,Sindh
+PS-90,Karachi,Sindh
+PS-91,Karachi,Sindh
+PS-92,Karachi,Sindh
+PS-93,Karachi,Sindh
+PS-94,Karachi,Sindh
+PS-96,Karachi,Sindh
+PS-97,Karachi,Sindh
+PS-98,Karachi,Sindh
+PS-99,Karachi,Sindh
+PS-100,Karachi,Sindh
+PS-101,Karachi,Sindh
+PS-102,Karachi,Sindh
+PS-103,Karachi,Sindh
+PS-104,Karachi,Sindh
+PS-105,Karachi,Sindh
+PS-106,Karachi,Sindh
+PS-107,Karachi,Sindh
+PS-108,Karachi,Sindh
+PS-109,Karachi,Sindh
+PS-110,Karachi,Sindh
+PS-111,Karachi,Sindh
+PS-112,Karachi,Sindh
+PS-113,Karachi,Sindh
+PS-114,Karachi,Sindh
+PS-115,Karachi,Sindh
+PS-116,Karachi,Sindh
+PS-117,Karachi,Sindh
+PS-118,Karachi,Sindh
+PS-119,Karachi,Sindh
+PS-120,Karachi,Sindh
+PS-121,Karachi,Sindh
+PS-122,Karachi,Sindh
+PS-123,Karachi,Sindh
+PS-124,Karachi,Sindh
+PS-125,Karachi,Sindh
+PS-126,Karachi,Sindh
+PS-127,Karachi,Sindh
+PS-128,Karachi,Sindh
+PS-129,Karachi,Sindh
+PS-130,Karachi,Sindh

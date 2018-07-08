@@ -101,10 +101,10 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownProvinceLink">
-          <a class="dropdown-item filteritem" id="kpProvinceButt" style="cursor: pointer;">Khyber Pakhtunkhwa</a>
-          <a class="dropdown-item filteritem" id="punProvinceButt" style="cursor: pointer;">Punjab</a>
-          <a class="dropdown-item filteritem" id="balProvinceButt" style="cursor: pointer;">Balochistan</a>
-          <a class="dropdown-item filteritem" id="sindhProvinceButt" style="cursor: pointer;">Sindh</a>
+          <a class="dropdown-item filteritem provinceButt" value="KP" id="kpProvinceButt" style="cursor: pointer;">Khyber Pakhtunkhwa</a>
+          <a class="dropdown-item filteritem provinceButt" value="Punjab" id="punProvinceButt" style="cursor: pointer;">Punjab</a>
+          <a class="dropdown-item filteritem provinceButt" value="Balochistan" id="balProvinceButt" style="cursor: pointer;">Balochistan</a>
+          <a class="dropdown-item filteritem provinceButt" value="Sindh" id="sindhProvinceButt" style="cursor: pointer;">Sindh</a>
         </div>
       </div>
     </div>
@@ -260,12 +260,11 @@
     <script src="./ionrange/ion.rangeSlider.min.js"></script>
     <script async src="elections_2013.js"></script>
     <script async src="elections_2008.js"></script>
-    <script async src="filterNAmap.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="utils.js"></script>
-    
+
     <script src="provMaps.js"></script>
     <script src="namap-compiled.min.js"></script>
     <script async src="cartogram-compiled.min.js"></script>
@@ -319,6 +318,7 @@
         $("#chorddiagram").remove();
         $("#cartogram").remove();
         $("#chorddisclaim").hide();
+        makeProvMaps();
         $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
