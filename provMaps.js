@@ -372,6 +372,139 @@ function makeProvMaps(){
          return d3.rgb(colorScale(d.results[0].party)).darker();
        })
        .attr('stroke-width', 0.75);
+
+       datum = circle_select.data()[0];
+       color = colorScale(datum.results[0].party);
+
+       // append tooltip
+       d3.select('body').append('div')
+         .classed('animated', true)
+         .classed('zoomIn', true)
+         .classed('tool', true)
+         .attr('id', 'hoverbox')
+       // tooltip selection
+       var tooltip = d3.select('.tool');
+
+       tooltip.append('div')
+       .classed('toolhead', true)
+       .html(function(d){
+         return '<span class="NA">' + datum.seat + ' </span><span class="turnout">(' + datum["Percentage of Votes Polled to Registered Voters"] + '% voter turnout)</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       tooltip.append('div')
+       .classed('partyicon', true)
+       .html(image(datum.results[0].party));
+
+       tooltip.append('div')
+       .classed('toolhead', true)
+       .html(function(d){
+         return '<span class="dist">District: </span><span class="turnout">' + datum.PrimaryDistrict + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       tooltip.append('div')
+       .classed('nametitle', true)
+       .html(function(d){
+         return '<span>Name</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       tooltip.append('div')
+       .classed('partytitle', true)
+       .html(function(d){
+         return '<span>Party</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       tooltip.append('div')
+       .classed('voteTitle', true)
+       .html(function(d){
+         return '<span>Votes</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       //colored bar on top of tooltip showing the victorious party
+       tooltip.append('div')
+       .classed('partyColorToolBar', true)
+       .style('background-color', color)
+
+       tooltip.append('div')
+       .classed('candidatename', true)
+       .html(function(d){
+         return '<span>' + titleCase(datum.results[0].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+       tooltip.append('div')
+       .classed('partyname', true)
+       .html(function(d){
+         return '<span>' + abbreviate(datum.results[0].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+       tooltip.append('div')
+       .classed('votes', true)
+       .html(function(d){
+         return '<span>' + datum.results[0].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       tooltip.append('div')
+       .classed('candidatename', true)
+       .html(function(d){
+         return '<span>' + titleCase(datum.results[1].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+       tooltip.append('div')
+       .classed('partyname', true)
+       .html(function(d){
+         return '<span>' + abbreviate(datum.results[1].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+       tooltip.append('div')
+       .classed('votes', true)
+       .html(function(d){
+         return '<span>' + datum.results[1].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       tooltip.append('div')
+       .classed('candidatename', true)
+       .html(function(d){
+         return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+       tooltip.append('div')
+       .classed('partyname', true)
+       .html(function(d){
+         return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+       tooltip.append('div')
+       .classed('votes', true)
+       .html(function(d){
+         return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+       })
+
+       // positioning the tooltip
+
+       if (d3.event.pageY >= 460) {
+         var hoverbox = document.getElementById('hoverbox');
+         tooltip.style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px")
+         if (d3.event.pageX - 125 < 0) {
+           tooltip.style('left', window.innerWidth/2 - 125 + "px")
+         }
+         else if (d3.event.pageX + 125 > window.innerWidth) {
+           tooltip.style('left', window.innerWidth/2 - 125 + "px")
+         }
+         else if (window.innerWidth < 450) {
+           tooltip.style('left', window.innerWidth/2 - 125 + "px")
+         }
+         else {
+           tooltip.style('left', d3.event.pageX - 125 + "px")
+         }
+       }
+       else {
+         tooltip.style('top', d3.event.pageY + 14 + "px")
+         if (d3.event.pageX - 125 < 0) {
+           tooltip.style('left', window.innerWidth/2 - 125 + "px")
+         }
+         else if (d3.event.pageX + 125 > window.innerWidth) {
+           tooltip.style('left', window.innerWidth/2 - 125 + "px")
+         }
+         else if (window.innerWidth < 450) {
+           tooltip.style('left', window.innerWidth/2 - 125 + "px")
+         }
+         else {
+           tooltip.style('left', d3.event.pageX - 125 + "px")
+         }
+       }
     }
 
     function activateMouseOut(d, i){
@@ -401,6 +534,9 @@ function makeProvMaps(){
             d3.rgb(colorScale(d.results[0].party));
           })
           .attr('stroke-width', 0);
+
+          // remove the tooltip
+          d3.selectAll('.tool').remove()
     }
 
 
