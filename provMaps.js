@@ -449,7 +449,7 @@ function makeProvMaps(){
       height = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().height - 60
       width = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().width - 60
 
-      console.log(height, width);
+      //console.log(height, width);
 
       var bounds = path.bounds(active.datum()),
           dx = bounds[1][0] - bounds[0][0],
@@ -461,7 +461,7 @@ function makeProvMaps(){
 
           translate = [width / 2 - scale * x, (height / 2 - scale * y) + y_offset_tx];
 
-      console.log(scale, JSON.stringify(translate));
+      //console.log(scale, JSON.stringify(translate));
 
 
       // svg.transition('zoom_trans')
@@ -567,7 +567,6 @@ function makeProvMaps(){
     //g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
     // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     svg_g.attr("transform", d3.event.transform);
-    console.log(svg_g) // updated for d3 v4
   }
 
   provAbb = {
