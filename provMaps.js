@@ -47,10 +47,10 @@ function makeProvMaps(){
                 .classed("map_group_province", "true");
 
   d3.queue()
-    .defer(d3.json, "./pakistan_districts.topojson")
-    .defer(d3.json, "./Pak_prov.topojson")
-    .defer(d3.json, "./prov2013.json")
-    .defer(d3.csv, "./prov_seats_2013.csv")
+    .defer(d3.json, "pakistan_districts.topojson")
+    .defer(d3.json, "Pak_prov.topojson")
+    .defer(d3.json, "prov2013.json")
+    .defer(d3.csv, "prov_seats_2013.csv")
     .await(drawProvincial)
 
   // listing the parties from na map
