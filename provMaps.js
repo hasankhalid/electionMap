@@ -40,11 +40,11 @@ function makeProvMaps(){
                     .attr("preserveAspectRatio", "xMinYMin meet")
                     //.attr("viewBox", "0 0 1000 600")
                     .attr("viewBox", "0 0 636 600")
-                    .style("opacity", 1)
+                    .style("fill-opacity", 1)
                     .classed("map_in_a_box", "true")
 
   var svg_g = svg.append("g")
-                .classed("map_group", "true");
+                .classed("map_group_province", "true");
 
   d3.queue()
     .defer(d3.json, "/pakistan_districts.topojson")
@@ -119,11 +119,10 @@ function makeProvMaps(){
           .data(path_data)
           .enter().append("path")
           .attr("d", function (d, i){ return path(d)})
-          .style("opacity", 1)
           .style("stroke", "black")
           .style("stroke-width", 0.2)
           .style("fill", "#FFF")
-          .style("opacity", 0.9)
+          .style("fill-opacity", 0.9)
           //.attr("district", d => d.properties.districts)
           .attr("class", function(d, i){
             return whiteSpaceRem(d.properties.districts);
@@ -136,11 +135,10 @@ function makeProvMaps(){
           .data(prov_path_data)
           .enter().append("path")
           .attr("d", function (d, i){ return path(d)})
-          .style("opacity", 1)
           .style("stroke", "black")
           .style("stroke-width", 00)
           .style("fill", "#FFF")
-          .style("opacity", 1)
+          .style("fill-opacity", 1)
           //.attr("district", d => d.properties.districts)
           .attr("prov", function(d, i){
             return d.properties.province_territory;
@@ -177,8 +175,6 @@ function makeProvMaps(){
     // adding vote margin and radius and init radius to results
     result.forEach(function(d){
       //console.log(d.results[0].votes);
-
-
       d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
       d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
       d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
@@ -216,8 +212,7 @@ function makeProvMaps(){
                         return d.radius + 0.65;
                       }))
                       .on('tick', ticked)
-                      .on('end', end_force)
-                      //.on('end', console.log("ended MF!"))
+                      .on('end', function() {end_force()})
                       .alpha(0.525)
                       .alphaDecay(0.07)
 
@@ -301,8 +296,8 @@ function makeProvMaps(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 20)
-            .style("fill", "grey")
-            .style("fill-opacity", 0.5)
+            .style("fill", "none")
+          //  .style("fill-opacity", 0.5)
             .style("pointer-events", "all")
             .style("display", d => (d.province == "KP") ? "block" : "none")
             .on("mouseover", activateMouseOv)
@@ -315,8 +310,8 @@ function makeProvMaps(){
         d3.selectAll(".circle-catcher")
           .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
 
-        console.log(nodes)
-        console.log(voronoi.polygons(nodes))
+      //  console.log(nodes)
+      //  console.log(voronoi.polygons(nodes))
 
         var polygon =  svg.append("defs")
                           .selectAll(".clip")
@@ -454,7 +449,7 @@ function makeProvMaps(){
       height = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().height - 60
       width = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().width - 60
 
-      console.log(height, width);
+      //console.log(height, width);
 
       var bounds = path.bounds(active.datum()),
           dx = bounds[1][0] - bounds[0][0],
@@ -466,7 +461,7 @@ function makeProvMaps(){
 
           translate = [width / 2 - scale * x, (height / 2 - scale * y) + y_offset_tx];
 
-      console.log(scale, JSON.stringify(translate));
+      //console.log(scale, JSON.stringify(translate));
 
 
       // svg.transition('zoom_trans')
@@ -512,15 +507,8 @@ function makeProvMaps(){
     //makeProvMap("KP");
 
     // event listener for province
-    d3.select('#dropdownProvinceLink').on("input", function(){
-      console.log(this);
-      selected_prov = this.value;
-      makeProvMap(selected_prov);
-      //update_bubbles(selected_party);
-    });
 
     $('.provinceButt').click(function() {
-      console.log($(this).attr("value"));
       selected_prov = $(this).attr("value");
       makeProvMap(selected_prov);
     })
@@ -578,6 +566,7 @@ function makeProvMaps(){
     //g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
     //g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     svg_g.attr("transform", d3.event.transform); // updated for d3 v4
+
   }
 
   provAbb = {
