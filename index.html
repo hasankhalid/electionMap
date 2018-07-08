@@ -5,16 +5,9 @@
     <link rel="icon" href="./resources/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="./resources/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
-    <script src="elections_2013.js"></script>
-    <script src="elections_2008.js"></script>
-    <script src="filterNAmap.js"></script>
-    <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
@@ -25,10 +18,9 @@
     <link rel="stylesheet" type="text/css" href="index.css">
     <link rel="stylesheet" type="text/css" href="./ionrange/ion.rangeSlider.css">
     <link rel="stylesheet" type="text/css" href="./ionrange/ion.rangeSlider.skinNice.css">
-    <script src="./ionrange/ion.rangeSlider.min.js"></script>
-
   </head>
   <body>
+    <div class='applicationWrap' onclick="void(0)">
 
     <nav class="navbar navbar-expand-lg navbar-dark whitenav">
       <div class="container">
@@ -40,13 +32,13 @@
           <li class="nav-item">
             <div style="display: flex">
               <img class="ballot" src="./resources/ballot1.svg"></img>
-              <span class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
+              <span year="2008" class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
             </div>
           </li>
           <li class="nav-item">
             <div style="display: flex">
               <img class="ballot" src="./resources/ballot2.svg"></img>
-              <span class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2013</span>
+              <span year="2013" class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2013</span>
             </div>
           </li>
           <li class="nav-item socialicons">
@@ -81,27 +73,40 @@
             More
           </a>
           <div style="width: 100%" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item navbutt mobilenav PA" href="#">Provincial Assembly</a>
-            <a class="dropdown-item navbutt mobilenav dwvs" href="#">District Wise Vote Share</a>
+            <a class="dropdown-item navbutt mobilenav PA">Provincial Assembly</a>
+            <a class="dropdown-item navbutt mobilenav dwvs">District Wise Vote Share</a>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="filterdropdown" style="margin-bottom: 10px; margin-top: -5px;">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="filterdropdown" style="margin-bottom: 10px; margin-top: -5px; z-index: 9">
       <div class="dropdown">
-        <a class="btn btn-primary dropdown-toggle filterbutton" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border: 0px;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary dropdown-toggle filterbutton" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border: 0px;" href="#" role="button" id="dropdownFilterLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Filter
         </a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <a class="dropdown-item filteritem" id="partyfilterbutt">Party</a>
-          <a class="dropdown-item filteritem" id="provincefilterbutt">Province</a>
-          <a class="dropdown-item filteritem" id="votemarginbutt">Vote Margin</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownFilterLink">
+          <a class="dropdown-item filteritem" id="partyfilterbutt" style="cursor: pointer;">Party</a>
+          <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
+          <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
         </div>
       </div>
 
       <button type="button" class="btn btn-primary filterbutton" id="resetAll" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border: 0px;">Reset</button>
+
+      <div class="dropdown" id="dropdownProvinceLink">
+        <a class="btn btn-primary dropdown-toggle filterbutton" style="border: 0px; margin-left: 5px; font-size: 12px;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Province
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownProvinceLink">
+          <a class="dropdown-item filteritem" id="kpProvinceButt" style="cursor: pointer;">Khyber Pakhtunkhwa</a>
+          <a class="dropdown-item filteritem" id="punProvinceButt" style="cursor: pointer;">Punjab</a>
+          <a class="dropdown-item filteritem" id="balProvinceButt" style="cursor: pointer;">Balochistan</a>
+          <a class="dropdown-item filteritem" id="sindhProvinceButt" style="cursor: pointer;">Sindh</a>
+        </div>
+      </div>
     </div>
     <div class="filterscontstantheight">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="partyFilters">
@@ -123,14 +128,14 @@
             <label class="form-check-label" for="JUIFfilter">JUIF</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Peoples Party Parliamentarians" active="disabled" id="PPPPfilter">
-            <label class="form-check-label" for="INDfilter">PPPP</label>
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League" active="disabled" id="PMLfilter">
+            <label class="form-check-label" for="INDfilter">PML</label>
           </div>
         </div>
         <div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League" active="disabled" id="PMLfilter">
-            <label class="form-check-label" for="PMLfilter">PML</label>
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Peoples Party Parliamentarians" active="disabled" id="PPPPfilter">
+            <label class="form-check-label" for="PMLfilter">PPPP</label>
           </div>
           <div class="form-group form-check form-check-inline">
             <input type="checkbox" class="form-check-input partyfilter" value="Independent" active="disabled" id="Indfilter">
@@ -201,7 +206,7 @@
           <a class="btn btn-light dropdown-toggle btnnavigate" style="padding: 5px;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Select Party
           </a>
-          <div style="width: 200px" class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+          <div style="width: 200px" class="dropdown-menu">
             <a class="dropdown-item cartinput navbutt mobilenav" id="PTI" value= "Pakistan Tehreek-e-Insaf">Pakistan Tehreek e Insaf</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="PMLN" value = "Pakistan Muslim League (N)">Pakistan Muslim League (N)</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="PPP" value = "Pakistan Peoples Party Parliamentarians">Pakistan Peoples Party</a>
@@ -249,17 +254,43 @@
        </div>
       </div>
     </footer>
+  </div>
 
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./ionrange/ion.rangeSlider.min.js"></script>
+    <script async src="elections_2013.js"></script>
+    <script async src="elections_2008.js"></script>
+    <script async src="filterNAmap.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="utils.js"></script>
-    <script src="namap.js"></script>
-    <script src="cartogram.js"></script>
-    <script src="chord.js"></script>
-    <script src="filterNAmap.js"></script>
+    
     <script src="provMaps.js"></script>
+    <script src="namap-compiled.min.js"></script>
+    <script async src="cartogram-compiled.min.js"></script>
+    <script async src="chord-compiled.min.js"></script>
+    <script async src="filterNAmap-compiled.min.js"></script>
 
     <script>
 
-      createNAMap();
+      var electionYear = 2013;
+
+      $(".electlink").click(function() {
+        electionYear = parseInt($(this).attr('year'));
+
+        if (electionYear === 2008) {
+          $('#flow').hide()
+        }
+        else {
+          $('#flow').show()
+        }
+      })
+
+      $(window).on('load', function() {
+        createNAMap();
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+      })
 
       $("#NA").click(function() {
         $(this).addClass('active');
@@ -270,12 +301,14 @@
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#chorddisclaim").hide();
+        $("#dropdownProvinceLink").hide();
         $("#footer").css('margin-top', '0px');
         $("#NAmap").show().addClass('animated fadeInDefault');
         $(".filterscontstantheight").show();
         $("#provincefilterbutt").show();
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
       });
       $(".PA").click(function() {
         $(this).addClass('active');
@@ -286,6 +319,7 @@
         $("#chorddiagram").remove();
         $("#cartogram").remove();
         $("#chorddisclaim").hide();
+        $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#filterdropdown").show().addClass('animated fadeInDefault');
@@ -301,6 +335,7 @@
         $(".PA").removeClass('active');
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
+        $("#dropdownProvinceLink").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#votesharedropdown").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").css('position', 'relative');
@@ -317,6 +352,7 @@
         $("#NA").removeClass('active');
         $(".dwvs").removeClass('active');
         $("#votesharedropdown").hide();
+        $("#dropdownProvinceLink").hide();
         $(".disclaimer").css('margin-bottom', '0px');
         $("#NAmap").hide();
         $("#cartogram").hide();
@@ -464,7 +500,7 @@
       });
 
 
-      $("#resetAll").click(function() {
+      $("#resetAll, #NA, .PA, .dwvs, #flow").click(function() {
         filterCircles(null, null, null);
         $('.provincefilter').attr("active", "disabled");
         $('.provincefilter').prop('checked', false);

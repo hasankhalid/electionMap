@@ -3,8 +3,8 @@
 // class of voronoi circle region is circle-catcher
 
 // global variables for scaling na seat size
-const base_bubble = 3 // min size that all bubbles take
-const margin_range = 5 // range for vote margin
+var base_bubble = 3 // min size that all bubbles take
+var margin_range = 5 // range for vote margin
 
 // width and height for voronoi boundaries
 var width = 1000, height = 600;
@@ -55,7 +55,7 @@ var parties_in_legend = [
 
 var rest_parties = unique_parties.diff(parties_in_legend)
 //
-console.log(rest_parties);
+//console.log(rest_parties);
 // get size of the na seat circles
 function getCircleSize(voteMargin){
   return base_bubble + ((voteMargin/ 100) * margin_range)
@@ -84,7 +84,7 @@ function filterCircles(province, party, voteMargin){
       if (party.includes("Rest")){
         party = party.filter(d => d != "Rest")
         party = party.concat(rest_parties);
-        console.log(party);
+        //console.log(party);
 
       }
       return party.includes(datum);

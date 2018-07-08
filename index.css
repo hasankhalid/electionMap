@@ -3,10 +3,18 @@
 }
 
 #vizcontain {
-  min-height: 600px;
+  min-height: 680px;
+}
+
+#dropdownProvinceLink {
+  display: none;
 }
 
 body {
+  overflow-x: hidden;
+}
+
+.applicationWrap {
   overflow-x: hidden;
 }
 
@@ -121,7 +129,6 @@ body {
   justify-content: center;
   margin-bottom: 15px;
   position: relative;
-  z-index: 3;
 }
 
 .filtercontainer {
@@ -153,6 +160,10 @@ body {
 
 .filteritem {
   font-size: 13px;
+}
+
+.dropdown-item:active {
+  background-color: #eee;
 }
 
 #mobiledrop {
@@ -295,9 +306,10 @@ g.legendOrdinal text{
   position: absolute;
   background-color: #eeeeee;
   color: #212121;
-  display: grid;
+  z-index: 1000;
   padding: 15px;
   width: 250px;
+  display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto auto auto auto;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12), 0 3px 5px -1px rgba(0, 0, 0, .2);
@@ -318,6 +330,14 @@ g.legendOrdinal text{
 
 .toolhead {
   grid-column: span 10;
+}
+
+.partyColorToolBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 7px;
 }
 
 .partyicon {
@@ -490,6 +510,14 @@ g.legendOrdinal text{
   font-weight: 600;
 }
 
+.cartotoolfooter {
+  grid-column: span 12;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
 .cartotoolop {
   grid-column: span 12;
   font-size: 12px;
@@ -595,6 +623,7 @@ g.legendOrdinal text{
 #legendcontain {
   display: flex;
   justify-content: center;
+  min-height: 70px;
 }
 
 @media screen and (max-width: 585px) {
@@ -602,4 +631,157 @@ g.legendOrdinal text{
     flex-direction: column;
     align-items: center;
   }
+}
+
+@media screen and (max-width: 450px) {
+  .mobiletoolremove {
+    display: none;
+  }
+  .NA {
+    font-size: 12px;
+  }
+  .turnout {
+    font-size: 11px;
+  }
+  .partyicon {
+    width: 30px;
+  }
+  .cartotoolpartyhead {
+    font-size: 11px;
+  }
+  .cartotoolparty {
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  .cartotoolpartylogo {
+    height: 30px;
+  }
+  .cartotoolpartydetail {
+    font-size: 11px;
+  }
+  #partyFilters {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  #partyFilters {
+    font-size: 11px;
+  }
+}
+
+/*d3 styling section 2 */
+#legendcontain {
+  padding-left: 150px;
+  padding-right: 150px;
+  justify-content: space-around;
+}
+
+.NAmap, .map_in_a_box {
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+@supports not (display: grid) {
+  .tool {
+    display: inline-block;
+  }
+
+  .toolhead {
+    width: 75%;
+    float: left;
+  }
+
+  .partyicon {
+    width: 25%;
+    float: left;
+  }
+
+  .nametitle {
+    width: 60%;
+    float: left;
+  }
+
+  .partytitle {
+    width: 20%;
+    float: left;
+  }
+
+  .voteTitle {
+    width: 20%;
+    float: left;
+  }
+
+  .candidatename {
+    width: 60%;
+    float: left;
+  }
+
+  .partyname {
+    width: 20%;
+    float: left;
+  }
+
+  .votes {
+    width: 20%;
+    float: left;
+  }
+
+  .cartogramtool {
+    display: inline-block;
+  }
+
+  .cartotoolparty {
+    width: 50%;
+    float: left;
+  }
+
+  .cartotoolpartylogo {
+    width: 50%;
+    float: left;
+  }
+
+  .cartotoolpartydetail {
+    width: 50%;
+    float: left;
+  }
+
+  .chordtool {
+    display: inline-block;
+  }
+
+  .party {
+    width: 75%;
+    float: left;
+  }
+
+  .cpartyicon {
+    width: 25%;
+    float: left;
+  }
+
+  .chordtoolexpand {
+    display: inline-block;
+  }
+
+  .vsparty {
+    width: 25%;
+    float: left;
+    padding: 0px;
+  }
+
+  .chordtoolheading {
+    width: 50%;
+    float: left;
+  }
+
+  .chordexpandicon {
+    width: 12.5%;
+    float: left;
+  }
+
+  .chordexpandinfo {
+    width: calc(87.5% - 20px);
+    float: left;
+  }
+
 }

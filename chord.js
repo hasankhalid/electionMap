@@ -78,9 +78,9 @@ function createChord() {
     party_abbs.forEach(function(party2013){
       var matrix_array = []
       party_abbs.forEach(function(party2008){
-        var eval = one_one_map.filter(d => (d.party_2013_abb == party2013 && d.party_2008_abb == party2008)).length
-        //console.log(party2013, ", ",party2008, " ", eval);
-        matrix_array.push(eval);
+        var evalvar = one_one_map.filter(d => (d.party_2013_abb == party2013 && d.party_2008_abb == party2008)).length
+        //console.log(party2013, ", ",party2008, " ", evalvar);
+        matrix_array.push(evalvar);
       });
       party_matrix.push(matrix_array);
     })
@@ -187,7 +187,8 @@ function createChord() {
         .attr("d", ribbon)
         .style("fill", function(d) { return color(d.source.index); })
         .style("stroke", function(d) { return d3.rgb(color(d.source.index)).darker(); })
-        .style('opacity', 0.7);
+        .style('fill-opacity', 0.7)
+        .style('stroke-opacity', 0.7);
 
     //console.log(d3.select('.ribbons').data());
 
@@ -215,7 +216,8 @@ function createChord() {
         d3.select("g.ribbons").selectAll("path")
           .filter(function(rib) { return rib.source.index !== i && rib.target.index !== i; })
           .transition()
-          .style("opacity", opacity);
+          .style("fill-opacity", opacity)
+          .style("stroke-opacity", opacity);
           // remove transparency of little groups when mouse is hovered
         if (add_title){
           d3.select('body').append('div')
@@ -277,7 +279,10 @@ function createChord() {
         var chosen = d;
         d3.select("g.ribbons").selectAll("path")
           .transition()
-          .style("opacity", function(d) {
+          .style("fill-opacity", function(d) {
+            return d.source.index === chosen.source.index && d.target.index === chosen.target.index ? opac1 : opac2;
+          })
+          .style("stroke-opacity", function(d) {
             return d.source.index === chosen.source.index && d.target.index === chosen.target.index ? opac1 : opac2;
           });
 
@@ -443,8 +448,8 @@ function createChord() {
         }
 
         else {
-          d3.select(".chordtool").remove();
-          d3.select(".chordtoolexpand").remove();
+      //    d3.select(".chordtool").remove();
+        //  d3.select(".chordtoolexpand").remove();
         }
       }
     }

@@ -42,7 +42,7 @@ function createNAMap(){
               .attr("preserveAspectRatio", "xMinYMin meet")
               //.attr("viewBox", "0 0 1000 600")
               .attr("viewBox", "0 0 636 600")
-              .style("opacity", 1)
+              .style("fill-opacity", 1)
               .classed("map_in_a_box", "true")
               .attr("id", "NAmap")
 
@@ -138,11 +138,10 @@ function createNAMap(){
             .data(path_data)
             .enter().append("path")
             .attr("d", function (d, i){ return path(d)})
-            .style("opacity", 1)
             .style("stroke", "#FFF")
             .style("stroke-width", 0.25)
             .style("fill", "#FFF")
-            .style("opacity", 0.9)
+            .style("fill-opacity", 0.9)
             // each district path is classed by a district name
             .attr("class", function(d, i){
               return d.properties.districts;
@@ -155,12 +154,11 @@ function createNAMap(){
             .enter().append("path")
             .classed("Kashmir", true)
             .attr("d", function (d, i){ return path(d)})
-            .style("opacity", 1)
+            .style("fill-opacity", 1)
             .style("stroke", "grey")
             .style("stroke-dasharray", 2)
             .style("stroke-width", 0.5)
-              .style("fill", "#FFF")
-              .style("opacity", 0.9);
+            .style("fill", "#FFF")
 
 
       // generating path for Pakistan national boundary (class Pakistan)
@@ -172,7 +170,7 @@ function createNAMap(){
             .style("stroke", "grey")
             .style("stroke-width", 1)
             .style("fill", "white")
-            .style("opacity", 0.9);
+            .style("fill-opacity", 0.9);
 
       // generating path for Pakistan provinces (class PakProv)
       svg_g.selectAll(".Pak_prov")
@@ -183,7 +181,7 @@ function createNAMap(){
             .style("stroke", "grey")
             .style("stroke-width", 0.0)
             .style("fill", "white")
-            .style("opacity", 0.9);
+            .style("fill-opacity", 0.9);
 
 
 
@@ -244,9 +242,9 @@ function createNAMap(){
                           return d.radius + 0.80;
                         }))
                         .on('tick', ticked)
-                        .on('end', console.log("ended MF!"))
                         .alpha(0.525)
                         .alphaDecay(0.07)
+                        .on('end', function() { redrawVoronoi() })
 
       //////////////////////////////////////////////////////////////
       ////////////// Adding bubble nodes for na seats //////////////
@@ -334,7 +332,7 @@ function createNAMap(){
             //Make the radius a lot bigger
             .attr("r", 20)
             .style("fill", "none")
-            .style("opacity", 0.5)
+          //  .style("fill-opacity", 0.5)
             .style("pointer-events", "all")
 
         d3.selectAll('circle.circle-catcher.NAmap')
@@ -366,13 +364,17 @@ function createNAMap(){
 
             // redraw the voronoi clippaths
 
-            polygon = polygon.data(voronoi.polygons(nodes)).call(redrawPolygon);
+          //polygon = polygon.data(voronoi.polygons(nodes)).call(redrawPolygon);
 
             // changing the positions of the voronoi circle
             d3.select('svg').selectAll(".circle-catcher.NAmap").data(nodes)
               .attr('cx', d => d.x)
-              .attr('cy', d => d.y);
+              .attr('cy', d => d.y)
         }
+
+      /*  if (simulation.alpha() > 0) {
+          d3.timer(ticked);
+        } */
 
         /////////////////////////////////////////////////////
         ////////////// Adding mouse over event //////////////
@@ -460,12 +462,7 @@ function createNAMap(){
 
             //colored bar on top of tooltip showing the victorious party
             tooltip.append('div')
-            .classed('toolhead', true)
-            .style('position', 'absolute')
-            .style('top', 0)
-            .style('left', 0)
-            .style('width', '100%')
-            .style('height', '7px')
+            .classed('partyColorToolBar', true)
             .style('background-color', color)
 
             tooltip.append('div')
@@ -503,17 +500,17 @@ function createNAMap(){
             tooltip.append('div')
             .classed('candidatename', true)
             .html(function(d){
-              return '<span>' + titleCase(datum.results[2].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
             tooltip.append('div')
             .classed('partyname', true)
             .html(function(d){
-              return '<span>' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
             tooltip.append('div')
             .classed('votes', true)
             .html(function(d){
-              return '<span>' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
 
             // create the tooltip for na-map
@@ -524,11 +521,33 @@ function createNAMap(){
             if (d3.event.pageY >= 460) {
               var hoverbox = document.getElementById('hoverbox');
               tooltip.style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
             else {
               tooltip.style('top', d3.event.pageY + 14 + "px")
-              tooltip.style('left', d3.event.pageX - 125 + "px")
+              if (d3.event.pageX - 125 < 0) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (d3.event.pageX + 125 > window.innerWidth) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else if (window.innerWidth < 450) {
+                tooltip.style('left', window.innerWidth/2 - 125 + "px")
+              }
+              else {
+                tooltip.style('left', d3.event.pageX - 125 + "px")
+              }
             }
 
             // d3.selectAll('.voronoi').raise();
@@ -592,8 +611,6 @@ function createNAMap(){
         // get unique values, see how to use this
         var unique_parties = parties.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
 
-        console.log(JSON.stringify(unique_parties));
-
         /////////////////////////////////////////////////
         ////////////// Legend for parties ///////////////
         /////////////////////////////////////////////////
@@ -621,6 +638,7 @@ function createNAMap(){
         var party_legend_div = d3.select("#legendcontain")
                             .append("div")
                             .classed("partyLegendSVGDiv", true)
+
 
         party_legend_div.append('p')
                       .text('Political Party')
