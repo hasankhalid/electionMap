@@ -64,7 +64,8 @@ function makeProvMaps(){
                         .attr('y', 18)
                         .text("Khyber Pakhtunkhwa")
                         .style("text-anchor", "middle")
-                        .style("font-size", "14px")
+                        .style("font-size", "13px")
+                        .style("fill", "#9E9E9E");
 
   var svg_g = svg.append("g")
                 .classed("map_group_province", "true");

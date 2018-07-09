@@ -274,6 +274,7 @@
     <script>
 
       var electionYear = 2013;
+      var nationalFilter = true;
 
       $(".electlink").click(function() {
         electionYear = parseInt($(this).attr('year'));
@@ -292,6 +293,7 @@
       })
 
       $("#NA").click(function() {
+        nationalFilter = true;
         $(this).addClass('active');
         $(".PA").removeClass('active');
         $("#flow").removeClass('active');
@@ -310,6 +312,7 @@
         createNAMap();
       });
       $(".PA").click(function() {
+        nationalFilter = false;
         $(this).addClass('active');
         $("#NA").removeClass('active');
         $("#flow").removeClass('active');
@@ -397,6 +400,14 @@
       var parties = [];
       var provinces = [];
       var margin = [];
+      var selectedProvince = ["KP"];
+
+      $('.provinceButt').click(function() {
+        var selectedprov = $(this).attr("value");
+        selectedProvince = [];
+        selectedProvince.push(selectedprov);
+        console.log(selectedProvince);
+      })
 
       //For each partyfilter classed element, this function checks its active prop. In case the button is selected, it sets it to active and pushes the party, else it removes party
       $('.partyfilter').change(function() {
@@ -482,23 +493,35 @@
         var to = slider.result.to;
         margin[0] = from;
         margin[1] = to;
-        if (provinces.length == 0 && parties.length == 0) {
-          filterCircles(null, null, margin);
+        if (nationalFilter === true) {
+          if (provinces.length == 0 && parties.length == 0) {
+            filterCircles(null, null, margin);
+          }
+          else if (provinces.length == 0 && parties.length > 0) {
+            filterCircles(null, parties, margin);
+          }
+          else if (parties.length == 0 && provinces.length > 0) {
+            filterCircles(provinces, null, margin);
+          }
+          else {
+            filterCircles(provinces, parties, margin);
+          }
         }
-        else if (provinces.length == 0 && parties.length > 0) {
-          filterCircles(null, parties, margin);
-        }
-        else if (parties.length == 0 && provinces.length > 0) {
-          filterCircles(provinces, null, margin);
-        }
-        else {
-          filterCircles(provinces, parties, margin);
+        if (nationalFilter === false) {
+          if (parties.length == 0) {
+            filterCirclesPr(selectedProvince, null, margin);
+          }
+          else {
+            filterCirclesPr(selectedProvince, parties, margin);
+          }
         }
       });
 
 
-      $("#resetAll, #NA, .PA, .dwvs, #flow").click(function() {
-        filterCircles(null, null, null);
+      $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt").click(function() {
+        if (nationalFilter === true) {
+          filterCircles(null, null, null);
+        }
         $('.provincefilter').attr("active", "disabled");
         $('.provincefilter').prop('checked', false);
         provinces = [];
