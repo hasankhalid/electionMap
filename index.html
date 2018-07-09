@@ -296,7 +296,6 @@
         $(".PA").removeClass('active');
         $("#flow").removeClass('active');
         $(".dwvs").removeClass('active');
-        createNAMap();
         $("#votesharedropdown").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         $("#chorddisclaim").hide();
@@ -308,6 +307,7 @@
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
         setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+        createNAMap();
       });
       $(".PA").click(function() {
         $(this).addClass('active');

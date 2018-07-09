@@ -4,19 +4,20 @@ function makeProvMaps(){
   // width and height of the svg viewport
   var width = 1000, height = 600;
 
-  function removeAllDisplay(){
-    // remove all contents of viz
-    d3.select("#vizcontain")
-      .selectAll('*')
-      .remove()
+  // getting height and width of svg on full screen on mac
+  var mac_pro_height = 679.234375;
+  var mac_pro_width = 720;
 
-    // remove all contents of legend
-    d3.select("#legendcontain")
-      .selectAll('*')
-      .remove()
-  }
+  // giving some padding
+  var height_pad = 60;
+  var width_pad = 60;
 
-  removeAllDisplay();
+  // calculating ultimate width and height
+  var height = mac_pro_height - height_pad
+  var width = mac_pro_width - width_pad;
+
+  // constant scale (pick the one calculated for balochistan, so that scale is constant for all provinces)
+  var scale = 1.770600970553169
 
   // defining the projection for map (change center and scale to get desired size for the map)
   var projection = d3.geoMercator()
@@ -32,6 +33,20 @@ function makeProvMaps(){
 
   // defining the paths for the maps
   var path = d3.geoPath().projection(projection);
+
+  function removeAllDisplay(){
+    // remove all contents of viz
+    d3.select("#vizcontain")
+      .selectAll('*')
+      .remove()
+
+    // remove all contents of legend
+    d3.select("#legendcontain")
+      .selectAll('*')
+      .remove()
+  }
+
+  removeAllDisplay();
 
   // defining the svg view port for the map within the div
   var svg = map_block.append("svg")
@@ -144,7 +159,7 @@ function makeProvMaps(){
           .enter().append("path")
           .attr("d", function (d, i){ return path(d)})
           .style("stroke", "black")
-          .style("stroke-width", 00)
+          .style("stroke-width", 0)
           .style("fill", "#FFF")
           .style("fill-opacity", 1)
           //.attr("district", d => d.properties.districts)
@@ -221,9 +236,10 @@ function makeProvMaps(){
                         return d.radius + 0.65;
                       }))
                       .on('tick', ticked)
-                      .on('end', function() {end_force()})
                       .alpha(0.525)
                       .alphaDecay(0.07)
+                      .on('end', function() {end_force()})
+
 
       // a group containing all na seat circles
       var u = svg.append('g')
@@ -248,7 +264,7 @@ function makeProvMaps(){
         .attr('cy', function(d) {
           return d.y;
         })
-        .style("fill", function(d){
+       .style("fill", function(d){
           return colorScale(d.results[0].party);
         })
         //.style("opacity", d => (d.province == "KP") ? 1 : 0)
@@ -290,6 +306,7 @@ function makeProvMaps(){
 
 
     function end_force(){
+
         // making clip circles over the seat circles
         //Append larger circles (that are clipped by clipPaths)
         svg.append('g').classed('clip-circles', true)
@@ -312,8 +329,6 @@ function makeProvMaps(){
             .on("mouseover", activateMouseOv)
             .on("mouseout", activateMouseOut);
 
-        // hard code the translate params for KP
-        scale = 1.770600970553169
         translate = [-345.4863342221814,54.93697529051545 + y_offset_tx]
 
         d3.selectAll(".circle-catcher.pMap")
@@ -347,7 +362,6 @@ function makeProvMaps(){
              .attr('cy', function(d) {
                return d.y
              })
-
        }
 
     makeProvMap("KP", "init")
@@ -553,21 +567,19 @@ function makeProvMaps(){
 
     function makeProvMap(Prov, type){
 
-      selected_prov = Prov
 
-      //console.log(selected_prov)
+      var selected_prov = Prov;
 
-      active = d3.select("path" + "." + selected_prov).classed("active", true).raise();
-      inactive = d3.selectAll("path:not(" + "." + selected_prov + ")").classed("inactive", true);
-      active_circles = d3.selectAll("circle.pSeatCircle" + "." + selected_prov).classed("active", true);
-      inactive_circles = d3.selectAll("circle.pSeatCircle:not(" + "." + selected_prov + ")").classed("inactive", true);
+      var active = d3.select("path" + "." + selected_prov).classed("active", true).raise();
+      var inactive = d3.selectAll("path:not(" + "." + selected_prov + ")").classed("inactive", true);
+      var active_circles = d3.selectAll("circle.pSeatCircle" + "." + selected_prov).classed("active", true);
+      var inactive_circles = d3.selectAll("circle.pSeatCircle:not(" + "." + selected_prov + ")").classed("inactive", true);
 
-      //console.log(active_circles)
-      //console.log(inactive_circles)
+      active_circles.attr('r', 0);
 
-
-      delay_time = 5000
-      trans_time = 1000
+      var delay_time = 1000;
+      var trans_time = 1000;
+      var trans_bubble_time = 600;
 
       if (type == "update"){
         filterCirclesPr([Prov])
@@ -579,35 +591,25 @@ function makeProvMaps(){
             .style('stroke-width', 0.75)
             .style('stroke', 'grey')
             .style('fill', 'white');
+
       inactive.transition('map_move')
               //.delay(delay_time)
               .duration(trans_time)
-              .style('stroke-width', 0.0)
+              .style('stroke-width', 0);
 
-      active_circles.transition('circle_trans')
-            //.delay(delay_time)
-            .duration(trans_time)
+    inactive_circles.transition('circle_trans')
+          //.delay(delay_time)
+          .duration(trans_time)
+          .attr('r', '0');
+
+     active_circles.style("display", "block");
+
+     active_circles.transition('circle_trans')
+            .delay(delay_time)
+            .duration(trans_bubble_time)
             .attr('r', function(d){
-              return base_bubble + ((d.voteMargin/ 100) * margin_range);
-            })
-            .style("display", "block")
-
-      inactive_circles.transition('circle_trans')
-            //.delay(delay_time)
-            .duration(trans_time)
-            .attr('r', '0');
-
-      // getting height and width of svg on full screen on mac
-      mac_pro_height = 679.234375;
-      mac_pro_width = 720;
-
-      // giving some padding
-      height_pad = 60;
-      width_pad = 60;
-
-      // calculating ultimate width and height
-      height = mac_pro_height - height_pad
-      width = mac_pro_width - width_pad;
+                 return base_bubble + ((d.voteMargin/ 100) * margin_range);
+             })
 
       // getting bounds
       var bounds = path.bounds(active.datum()),
@@ -618,9 +620,6 @@ function makeProvMaps(){
 
           // // calculating different scale for all provinces
           //scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-
-          // constant scale (pick the one calculated for balochistan, so that scale is constant for all provinces)
-          scale = 1.770600970553169
 
           // getting the translate coordinates
           translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
@@ -676,6 +675,7 @@ function makeProvMaps(){
 
 
     $('.provinceButt').click(function() {
+
       selected_prov = $(this).attr("value");
 
       d3.select("#prov_title").remove();
@@ -729,15 +729,14 @@ function makeProvMaps(){
       })[0].centroid
     }
 
-
   }
 
   function zoomed() {
     //g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
     //g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     svg_g.attr("transform", d3.event.transform); // updated for d3 v4
-
   }
+
 
   provAbb = {
     "Federally Administered Tribal Areas": "FATA",
