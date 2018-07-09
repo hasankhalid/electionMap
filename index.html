@@ -310,8 +310,6 @@
         createNAMap();
       });
       $(".PA").click(function() {
-        const startTime = performance.now();
-
         $(this).addClass('active');
         $("#NA").removeClass('active');
         $("#flow").removeClass('active');
@@ -326,9 +324,6 @@
         $("#provincefilterbutt").hide();
         $(".filtercontainer").hide();
         $(".filterscontstantheight").show();
-
-        const duration = performance.now() - startTime;
-        console.log(`Provincial click took ${duration}ms`);
       });
       $(".dwvs").click(function() {
         $(this).addClass('active');

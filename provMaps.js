@@ -4,19 +4,20 @@ function makeProvMaps(){
   // width and height of the svg viewport
   var width = 1000, height = 600;
 
-  function removeAllDisplay(){
-    // remove all contents of viz
-    d3.select("#vizcontain")
-      .selectAll('*')
-      .remove()
+  // getting height and width of svg on full screen on mac
+  var mac_pro_height = 679.234375;
+  var mac_pro_width = 720;
 
-    // remove all contents of legend
-    d3.select("#legendcontain")
-      .selectAll('*')
-      .remove()
-  }
+  // giving some padding
+  var height_pad = 60;
+  var width_pad = 60;
 
-  removeAllDisplay();
+  // calculating ultimate width and height
+  var height = mac_pro_height - height_pad
+  var width = mac_pro_width - width_pad;
+
+  // constant scale (pick the one calculated for balochistan, so that scale is constant for all provinces)
+  var scale = 1.770600970553169
 
   // defining the projection for map (change center and scale to get desired size for the map)
   var projection = d3.geoMercator()
@@ -32,6 +33,20 @@ function makeProvMaps(){
 
   // defining the paths for the maps
   var path = d3.geoPath().projection(projection);
+
+  function removeAllDisplay(){
+    // remove all contents of viz
+    d3.select("#vizcontain")
+      .selectAll('*')
+      .remove()
+
+    // remove all contents of legend
+    d3.select("#legendcontain")
+      .selectAll('*')
+      .remove()
+  }
+
+  removeAllDisplay();
 
   // defining the svg view port for the map within the div
   var svg = map_block.append("svg")
@@ -109,9 +124,6 @@ function makeProvMaps(){
 
   function drawProvincial(error, topology, prov_topology, prov2013, prov_seats_2013){
 
-    const startTime = performance.now();
-
-
     var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
     var prov_path_data = topojson.feature(prov_topology, prov_topology.objects.Pak_prov).features;
 
@@ -139,7 +151,7 @@ function makeProvMaps(){
           .enter().append("path")
           .attr("d", function (d, i){ return path(d)})
           .style("stroke", "black")
-          .style("stroke-width", 00)
+          .style("stroke-width", 0)
           .style("fill", "#FFF")
           .style("fill-opacity", 1)
           //.attr("district", d => d.properties.districts)
@@ -215,9 +227,10 @@ function makeProvMaps(){
                         return d.radius + 0.65;
                       }))
                       .on('tick', ticked)
-                      .on('end', function() {end_force()})
                       .alpha(0.525)
                       .alphaDecay(0.07)
+                      .on('end', function() {end_force()})
+
 
       // a group containing all na seat circles
       var u = svg.append('g')
@@ -242,7 +255,7 @@ function makeProvMaps(){
         .attr('cy', function(d) {
           return d.y;
         })
-        .style("fill", function(d){
+       .style("fill", function(d){
           return colorScale(d.results[0].party);
         })
         //.style("opacity", d => (d.province == "KP") ? 1 : 0)
@@ -307,8 +320,6 @@ function makeProvMaps(){
             .on("mouseover", activateMouseOv)
             .on("mouseout", activateMouseOut);
 
-        // hard code the translate params for KP
-        scale = 1.770600970553169
         translate = [-345.4863342221814,54.93697529051545 + y_offset_tx]
 
         d3.selectAll(".circle-catcher.pMap")
@@ -543,10 +554,9 @@ function makeProvMaps(){
           d3.selectAll('.tool').remove()
     }
 
-
     function makeProvMap(Prov){
 
-      var selected_prov = Prov
+      var selected_prov = Prov;
 
       var active = d3.select("path" + "." + selected_prov).classed("active", true).raise();
       var inactive = d3.selectAll("path:not(" + "." + selected_prov + ")").classed("inactive", true);
@@ -569,7 +579,7 @@ function makeProvMaps(){
       inactive.transition('map_move')
               //.delay(delay_time)
               .duration(trans_time)
-              .style('stroke-width', 0.0);
+              .style('stroke-width', 0);
 
     inactive_circles.transition('circle_trans')
           //.delay(delay_time)
@@ -585,18 +595,6 @@ function makeProvMaps(){
                  return base_bubble + ((d.voteMargin/ 100) * margin_range);
              })
 
-      // getting height and width of svg on full screen on mac
-      var mac_pro_height = 679.234375;
-      var mac_pro_width = 720;
-
-      // giving some padding
-      var height_pad = 60;
-      var width_pad = 60;
-
-      // calculating ultimate width and height
-      var height = mac_pro_height - height_pad
-      var width = mac_pro_width - width_pad;
-
       // getting bounds
       var bounds = path.bounds(active.datum()),
           dx = bounds[1][0] - bounds[0][0],
@@ -606,9 +604,6 @@ function makeProvMaps(){
 
           // // calculating different scale for all provinces
           //scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-
-          // constant scale (pick the one calculated for balochistan, so that scale is constant for all provinces)
-          scale = 1.770600970553169
 
           // getting the translate coordinates
           translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
@@ -719,6 +714,7 @@ function makeProvMaps(){
     //g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     svg_g.attr("transform", d3.event.transform); // updated for d3 v4
   }
+
 
   provAbb = {
     "Federally Administered Tribal Areas": "FATA",
