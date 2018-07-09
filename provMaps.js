@@ -173,7 +173,7 @@ function makeProvMaps(){
     const base_bubble = 3 * 0.7 // min size that all bubbles take
     const margin_range = 5 * 0.7 // range for vote margin
 
-    var y_offset_tx = -50;
+    var y_offset_tx = - 60;
 
     // adding vote margin and radius and init radius to results
     result.forEach(function(d){
@@ -290,10 +290,10 @@ function makeProvMaps(){
         // making clip circles over the seat circles
         //Append larger circles (that are clipped by clipPaths)
         svg.append('g').classed('clip-circles', true)
-            .selectAll(".circle-catcher")
+            .selectAll(".circle-catcher.pMap")
             .data(nodes)
             .enter().append("circle")
-            .attr("class", function(d,i) { return "circle-catcher " + d.seat; })
+            .attr("class", function(d,i) { return "circle-catcher pMap " + d.seat; })
             //Apply the clipPath element by referencing the one with the same countryCode
             .attr("clip-path", function(d, i) { return "url(#clip" + d.seat + ")"; })
             //Bottom line for safari, which doesn't accept attr for clip-path
@@ -301,9 +301,9 @@ function makeProvMaps(){
             .attr("cx", d => d.x)
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
-            .attr("r", 20)
-            .style("fill", "grey")
-           .style("fill-opacity", 0.5)
+            .attr("r", 14)
+            .style("fill", "none")
+          //  .style("fill-opacity", 0.5)
             .style("pointer-events", "all")
             .style("display", d => (d.province == "KP") ? "block" : "none")
             .on("mouseover", activateMouseOv)
@@ -313,7 +313,7 @@ function makeProvMaps(){
         scale = 1.770600970553169
         translate = [-345.4863342221814,54.93697529051545 + y_offset_tx]
 
-        d3.selectAll(".circle-catcher")
+        d3.selectAll(".circle-catcher.pMap")
           .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
 
       //  console.log(nodes)
@@ -354,7 +354,7 @@ function makeProvMaps(){
 
     function activateMouseOv(d, i){
       // extract unique class of the hovered voronoi cell (replace "circle-catcher " to get seat)
-      var unique_class = d3.select(this).attr('class').replace("circle-catcher ", "");
+      var unique_class = d3.select(this).attr('class').replace("circle-catcher pMap ", "");
       // selecting the circle with the gotten id (first select group then circle)
       var circle_group = d3.select('g' + "." + unique_class)
       var circle_select = circle_group.select('circle');
@@ -520,7 +520,7 @@ function makeProvMaps(){
 
     function activateMouseOut(d, i){
         // retrieve unique class of voronoi circle catcher
-        var unique_class = d3.select(this).attr('class').replace("circle-catcher ", "");
+        var unique_class = d3.select(this).attr('class').replace("circle-catcher pMap ", "");
         // select the circle with the gotten id
         circle_select = d3.select("circle" + "#" + unique_class);
 
@@ -595,23 +595,35 @@ function makeProvMaps(){
             //.delay(delay_time)
             .duration(trans_time)
             .attr('r', '0');
+      // getting height and width of svg on full screen on mac
+      var mac_pro_height = 679.234375;
+      var mac_pro_width = 720;
 
-      var height = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().height - 60;
-      var width = d3.select("#vizcontain").select('svg').node().getBoundingClientRect().width - 60;
+      // giving some padding
+      var height_pad = 60;
+      var width_pad = 60;
 
-      //console.log(height, width);
+      // calculating ultimate width and height
+      height = mac_pro_height - height_pad
+      width = mac_pro_width - width_pad;
 
+      // getting bounds
       var bounds = path.bounds(active.datum()),
           dx = bounds[1][0] - bounds[0][0],
           dy = bounds[1][1] - bounds[0][1],
           x = (bounds[0][0] + bounds[1][0]) / 2,
           y = (bounds[0][1] + bounds[1][1]) / 2,
+
+          // // calculating different scale for all provinces
           //scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+
+          // constant scale (pick the one calculated for balochistan, so that scale is constant for all provinces)
           scale = 1.770600970553169
 
-          translate = [width / 2 - scale * x, (height / 2 - scale * y) + y_offset_tx];
+          // getting the translate coordinates
+          translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
 
-      //console.log(scale, JSON.stringify(translate));
+
 
 
       // svg.transition('zoom_trans')
@@ -632,7 +644,7 @@ function makeProvMaps(){
           .transition('zoom_trans')
           .duration(trans_time)
           .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
-      d3.selectAll(".circle-catcher")
+      d3.selectAll(".circle-catcher.pMap")
         .transition('zoom_trans')
         .duration(trans_time)
         .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")

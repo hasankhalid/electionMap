@@ -244,7 +244,11 @@ function createNAMap(){
                         .on('tick', ticked)
                         .alpha(0.525)
                         .alphaDecay(0.07)
-                        .on('end', function() { redrawVoronoi() })
+                        .on('end', function() {
+                          redrawVoronoi()
+                          d3.select('svg').selectAll(".circle-catcher")
+                            .style('display', 'block')
+                        })
 
       //////////////////////////////////////////////////////////////
       ////////////// Adding bubble nodes for na seats //////////////
@@ -332,8 +336,9 @@ function createNAMap(){
             //Make the radius a lot bigger
             .attr("r", 20)
             .style("fill", "none")
-          //  .style("fill-opacity", 0.5)
+            //.style("fill-opacity", 0.5)
             .style("pointer-events", "all")
+            .style('display', 'none')
 
         d3.selectAll('circle.circle-catcher.NAmap')
             .on("mouseover", activateMouseOv)
@@ -370,6 +375,7 @@ function createNAMap(){
             d3.select('svg').selectAll(".circle-catcher.NAmap").data(nodes)
               .attr('cx', d => d.x)
               .attr('cy', d => d.y)
+
         }
 
       /*  if (simulation.alpha() > 0) {
