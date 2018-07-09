@@ -43,6 +43,14 @@ function makeProvMaps(){
                     .style("fill-opacity", 1)
                     .classed("map_in_a_box", "true")
 
+  var prov_title = svg.append("text")
+                        .attr("id", "prov_title")
+                        .attr('x', "50%")
+                        .attr('y', 18)
+                        .text("Khyber Pakhtunkhwa")
+                        .style("text-anchor", "middle")
+                        .style("font-size", "14px")
+
   var svg_g = svg.append("g")
                 .classed("map_group_province", "true");
 
@@ -165,6 +173,7 @@ function makeProvMaps(){
           results: election_row['results']
       }
     });
+
 
 
     const base_bubble = 3 * 0.7 // min size that all bubbles take
@@ -296,8 +305,8 @@ function makeProvMaps(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 14)
-            .style("fill", "none")
-          //  .style("fill-opacity", 0.5)
+            .style("fill", "grey")
+            .style("fill-opacity", 0.5)
             .style("pointer-events", "all")
             .style("display", d => (d.province == "KP") ? "block" : "none")
             .on("mouseover", activateMouseOv)
@@ -325,6 +334,8 @@ function makeProvMaps(){
                           .append("path")
                           .attr("class", "clip-path-circle")
                           .call(redrawPolygon);
+
+          filterCirclesPr(["KP"])
     }
 
     function ticked() {
@@ -339,7 +350,7 @@ function makeProvMaps(){
 
        }
 
-    makeProvMap("KP")
+    makeProvMap("KP", "init")
 
     function activateMouseOv(d, i){
       // extract unique class of the hovered voronoi cell (replace "circle-catcher " to get seat)
@@ -540,7 +551,7 @@ function makeProvMaps(){
     }
 
 
-    function makeProvMap(Prov){
+    function makeProvMap(Prov, type){
 
       selected_prov = Prov
 
@@ -557,6 +568,10 @@ function makeProvMaps(){
 
       delay_time = 5000
       trans_time = 1000
+
+      if (type == "update"){
+        filterCirclesPr([Prov])
+      }
 
       active.transition('map_move')
             //.delay(delay_time)
@@ -631,13 +646,14 @@ function makeProvMaps(){
           .transition('zoom_trans')
           .duration(trans_time)
           .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
+
       d3.selectAll(".circle-catcher.pMap")
         .transition('zoom_trans')
         .duration(trans_time)
         .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
         .style("display", d => (d.province == Prov) ? "block" : "none");
 
-
+      //filterCirclesPr(["Prov"]);
 
       // // getting district Centroids using the distCentroids function
       // var centroids = distCentroids(path_data);
@@ -657,9 +673,14 @@ function makeProvMaps(){
 
     // event listener for province
 
+
+
     $('.provinceButt').click(function() {
       selected_prov = $(this).attr("value");
-      makeProvMap(selected_prov);
+
+      d3.select("#prov_title").remove();
+
+      makeProvMap(selected_prov, "update");
     })
 
     // preprocessing_data

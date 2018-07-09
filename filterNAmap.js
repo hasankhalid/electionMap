@@ -13,6 +13,7 @@ var width = 1000, height = 600;
 var filtTransTime = 1000; // ms
 // circle catch (voronoi) radius
 var circle_catch_rad = 20;
+var circle_catch_rad_prov = 14;
 
 // defining an array function for difference
 Array.prototype.diff = function(a) {
@@ -129,6 +130,7 @@ function filterCircles(province, party, voteMargin){
     .duration(filtTransTime)
     .attr('r', 0)
 
+
   ///// transition for the circle catchers /////
 
   // filtered circle catchers remain
@@ -153,7 +155,7 @@ function filterCircles(province, party, voteMargin){
   var nodes_filtered = nodes.filter(compFilter(true));
 
   // update selection/ update clipPaths
-  var polygon = d3.selectAll(".clip.NAmap")
+  var polygon = d3.selectAll(".clip")
                   .data(voronoi.polygons(nodes_filtered), d => d.data.seat) // make sure to make data joins wrt seat
                     //Make sure each clipPath will have a unique id (connected to the circle element)
                     .attr("id", d => (d != null) ? "clipNAmap" + d.data.seat : "clipNAmap" + "NA")
@@ -161,7 +163,7 @@ function filterCircles(province, party, voteMargin){
                     .attr("class", "clip-path-circle NAmap")
                     .call(redrawPolygon)
   // enter selection, create new clipPaths
-  var polygon_enter = d3.selectAll(".clip.NAmap")
+  var polygon_enter = d3.selectAll(".clip")
                     .enter()
                     .append("clipPath")
                     .attr("class", "clip NAmap")
@@ -173,7 +175,7 @@ function filterCircles(province, party, voteMargin){
                     .call(redrawPolygon)
 
   // exite selection, remove old clipPaths
-  var polygon_exit = d3.selectAll(".clip.NAmap")
+  var polygon_exit = d3.selectAll(".clip")
                       .exit()
                       .remove()
 }
@@ -190,3 +192,123 @@ var voronoi = d3.voronoi()
                 .x(d => d.x) // with some noise on x and y centers
                 .y(d => d.y)
                 .extent([[0, 0], [width, height]]);
+
+
+
+// master function for filtering
+function filterCirclesPr(province, party, voteMargin){
+
+  // in case the argument is null, do not filter in that category
+  // province filter
+  function filterProvince(datum){
+    if (province == null){
+      return true;
+    }
+    else {
+      return province.includes(datum);
+    }
+  }
+  // Party filter
+  function filterParty(datum){
+    if (party == null){
+      return true;
+    }
+    else {
+      // appending rest parties in case of selected rest
+      if (party.includes("Rest")){
+        party = party.filter(d => d != "Rest")
+        party = party.concat(rest_parties);
+        //console.log(party);
+
+      }
+      return party.includes(datum);
+    }
+  }
+  // VoteMargin filter
+  function filterVoteMargin(datum){
+    if (voteMargin == null) {
+      return true;
+    }
+    else {
+      return (voteMargin[0] <= datum && datum <= voteMargin[1]);
+    }
+  }
+
+  // composite filter combining by and(ing) the above category logicals
+  // filteres true means filteres elements whereas false means unfiltered elements
+  function compFilter(filtered){
+    return function(d){
+      var logical = filterProvince(d.province) && filterParty(d.results[0].party) && filterVoteMargin(d.voteMargin)
+      if (filtered == true){
+        return logical;
+      }
+      else {
+        return !(logical);
+      }
+    }
+  }
+
+  ///// transition for the na seat circles /////
+
+  // filtered remain
+  d3.selectAll(".pSeatCircle")
+    .filter(compFilter(true))
+    .transition()
+    .duration(filtTransTime)
+    .attr('r', d => d.radiusInit)
+  // unfiltered fadeout
+  d3.selectAll(".pSeatCircle")
+    .filter(compFilter(false))
+    .transition()
+    .duration(filtTransTime)
+    .attr('r', 0)
+
+
+  ///// transition for the circle catchers /////
+
+  // filtered circle catchers remain
+  d3.selectAll(".circle-catcher")
+    .filter(compFilter(true))
+    .transition("cicleCatchTrans")
+    .duration(filtTransTime)
+    .attr('r', d => circle_catch_rad_prov)
+    .style('display', 'block')
+  // unfilteres circle catchers fadeout
+  d3.selectAll(".circle-catcher")
+    .filter(compFilter(false))
+    .transition("cicleCatchTrans")
+    .duration(filtTransTime)
+    .attr('r', 0)
+    .style('display', 'none')
+
+  // original nodes
+  var nodes = d3.selectAll(".pSeatCircle").data();
+
+  // filteres nodes
+  var nodes_filtered = nodes.filter(compFilter(true));
+
+  // update selection/ update clipPaths
+  var polygon = d3.selectAll(".clip")
+                  .data(voronoi.polygons(nodes_filtered), d => d.data.seat) // make sure to make data joins wrt seat
+                    //Make sure each clipPath will have a unique id (connected to the circle element)
+                    .attr("id", d => (d != null) ? "clip" + d.data.seat : "clipPMap")
+                    .select("path")
+                    .attr("class", "clip-path-circle NAmap")
+                    .call(redrawPolygon)
+  // enter selection, create new clipPaths
+  var polygon_enter = d3.selectAll(".clip")
+                    .enter()
+                    .append("clipPath")
+                    .attr("class", "clip NAmap")
+                    //Make sure each clipPath will have a unique id (connected to the circle element)
+                    .attr("id", d => (d != null) ? "clip" + d.data.seat : "clipPMap")
+                    //Then append a path element that will define the shape of the clipPath
+                    .append("path")
+                    .attr("class", "clip-path-circle NAmap")
+                    .call(redrawPolygon)
+
+  // exite selection, remove old clipPaths
+  var polygon_exit = d3.selectAll(".clip")
+                      .exit()
+                      .remove()
+}
