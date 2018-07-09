@@ -62,6 +62,12 @@
       </div>
     </div>
 
+    <div id="2008disclaim"class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimerchord" style="background-color: red; color: white;">
+      <div class="container">
+        <p style="margin-bottom: 0px;">The visualizations for elections 2008 are currently under development. The tool will be live soon</p>
+      </div>
+    </div>
+
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer">
       <div class="btn-group" role="Select Visualization" aria-label="Basic example">
         <button id="NA" type="button" class="btn btn-light btnnavigate navbutt active">National Assembly</button>
@@ -280,10 +286,25 @@
         electionYear = parseInt($(this).attr('year'));
 
         if (electionYear === 2008) {
-          $('#flow').hide()
+          $('#flow').hide();
+          $(".disclaimer").css('margin-bottom', '0px');
+          $('#2008disclaim').show().addClass('animated fadeInDefault');
+
+          d3.select("#vizcontain")
+            .selectAll('*')
+            .remove()
+
+          // remove all contents of legend
+          d3.select("#legendcontain")
+            .selectAll('*')
+            .remove()
         }
         else {
           $('#flow').show()
+          $('#2008disclaim').hide();
+          $(".disclaimer").css('margin-bottom', '15px');
+          createNAMap();
+          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
         }
       })
 
@@ -299,7 +320,6 @@
         $("#flow").removeClass('active');
         $(".dwvs").removeClass('active');
         $("#votesharedropdown").hide();
-        $(".disclaimer").css('margin-bottom', '15px');
         $("#chorddisclaim").hide();
         $("#dropdownProvinceLink").hide();
         $("#footer").css('margin-top', '0px');
@@ -308,8 +328,11 @@
         $("#provincefilterbutt").show();
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
-        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
-        createNAMap();
+        if (electionYear === 2013) {
+          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+          createNAMap();
+          $(".disclaimer").css('margin-bottom', '15px');
+        }
       });
       $(".PA").click(function() {
         nationalFilter = false;
@@ -320,10 +343,12 @@
         $("#chorddisclaim").hide();
         $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
         $("#filterdropdown").show().addClass('animated fadeInDefault');
-        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);
-        makeProvMaps();
+        if (electionYear === 2013) {
+          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);
+          makeProvMaps();
+          $(".disclaimer").css('margin-bottom', '15px');
+        }
         $("#votesharedropdown").hide();
-        $(".disclaimer").css('margin-bottom', '15px');
         $("#provincefilterbutt").hide();
         $(".filtercontainer").hide();
         $(".filterscontstantheight").show();
@@ -336,11 +361,13 @@
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
         $("#dropdownProvinceLink").hide();
-        $(".disclaimer").css('margin-bottom', '15px');
         $("#votesharedropdown").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").css('position', 'relative');
         $("#votesharedropdown").css('z-index', '1');
-        createCartogram();
+        if (electionYear === 2013) {
+          createCartogram();
+          $(".disclaimer").css('margin-bottom', '15px');
+        }
         $("#cartogram").show().addClass('animated fadeInDefault');
         $("#filterdropdown").hide();
         $(".filtercontainer").hide();
