@@ -285,8 +285,6 @@ function makeProvMaps(){
 
     function end_force(){
 
-      const startTime = performance.now();
-
         // making clip circles over the seat circles
         //Append larger circles (that are clipped by clipPaths)
         svg.append('g').classed('clip-circles', true)
@@ -332,12 +330,9 @@ function makeProvMaps(){
                           .attr("class", "clip-path-circle")
                           .call(redrawPolygon);
 
-          const duration = performance.now() - startTime;
-          console.log(`end_force took ${duration}ms`);
     }
 
     function ticked() {
-      const startTime = performance.now();
            // updating the circle positions
            d3.selectAll(".pSeatCircle")
              .attr('cx', function(d) {
@@ -346,8 +341,6 @@ function makeProvMaps(){
              .attr('cy', function(d) {
                return d.y
              })
-           const duration = performance.now() - startTime;
-           console.log(`ticked took ${duration}ms`);
        }
 
     makeProvMap("KP")
@@ -553,23 +546,18 @@ function makeProvMaps(){
 
     function makeProvMap(Prov){
 
-      const startTime = performance.now();
-
       var selected_prov = Prov
-
-      //console.log(selected_prov)
 
       var active = d3.select("path" + "." + selected_prov).classed("active", true).raise();
       var inactive = d3.selectAll("path:not(" + "." + selected_prov + ")").classed("inactive", true);
       var active_circles = d3.selectAll("circle.pSeatCircle" + "." + selected_prov).classed("active", true);
       var inactive_circles = d3.selectAll("circle.pSeatCircle:not(" + "." + selected_prov + ")").classed("inactive", true);
 
-      //console.log(active_circles)
-      //console.log(inactive_circles)
+      active_circles.attr('r', 0);
 
-
-      var delay_time = 5000
-      var trans_time = 1000
+      var delay_time = 1000;
+      var trans_time = 1000;
+      var trans_bubble_time = 600;
 
       active.transition('map_move')
             //.delay(delay_time)
@@ -581,20 +569,22 @@ function makeProvMaps(){
       inactive.transition('map_move')
               //.delay(delay_time)
               .duration(trans_time)
-              .style('stroke-width', 0.0)
+              .style('stroke-width', 0.0);
+
+    inactive_circles.transition('circle_trans')
+          //.delay(delay_time)
+          .duration(trans_time)
+          .attr('r', '0');
+
+     active_circles.style("display", "block");
 
      active_circles.transition('circle_trans')
-            //.delay(delay_time)
-            .duration(trans_time)
+            .delay(delay_time)
+            .duration(trans_bubble_time)
             .attr('r', function(d){
-              return base_bubble + ((d.voteMargin/ 100) * margin_range);
-            })
-            .style("display", "block");
+                 return base_bubble + ((d.voteMargin/ 100) * margin_range);
+             })
 
-      inactive_circles.transition('circle_trans')
-            //.delay(delay_time)
-            .duration(trans_time)
-            .attr('r', '0');
       // getting height and width of svg on full screen on mac
       var mac_pro_height = 679.234375;
       var mac_pro_width = 720;
@@ -604,8 +594,8 @@ function makeProvMaps(){
       var width_pad = 60;
 
       // calculating ultimate width and height
-      height = mac_pro_height - height_pad
-      width = mac_pro_width - width_pad;
+      var height = mac_pro_height - height_pad
+      var width = mac_pro_width - width_pad;
 
       // getting bounds
       var bounds = path.bounds(active.datum()),
@@ -664,9 +654,6 @@ function makeProvMaps(){
       // d3.selectAll(".circle-catcher")
       //   .style("display", d => (d.province == Prov) ? "block" : "none");
 
-      const duration = performance.now() - startTime;
-      console.log(`MakeProvMap took ${duration}ms`);
-
     }
 
     //makeProvMap("KP");
@@ -674,13 +661,9 @@ function makeProvMaps(){
     // event listener for province
 
     $('.provinceButt').click(function() {
-      const startTime = performance.now();
 
       selected_prov = $(this).attr("value");
       makeProvMap(selected_prov);
-
-      const duration = performance.now() - startTime;
-      console.log(`Change Prov took ${duration}ms`);
     })
 
     // preprocessing_data
@@ -729,20 +712,12 @@ function makeProvMaps(){
       })[0].centroid
     }
 
-    const duration = performance.now() - startTime;
-    console.log(`wrapper took ${duration}ms`);
-
   }
 
   function zoomed() {
-    const startTime = performance.now();
-
     //g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
     //g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
     svg_g.attr("transform", d3.event.transform); // updated for d3 v4
-    const duration = performance.now() - startTime;
-    console.log(`zoomed took ${duration}ms`);
-
   }
 
   provAbb = {
@@ -757,11 +732,6 @@ function makeProvMaps(){
   }
 
   function whiteSpaceRem(text){
-    const startTime = performance.now();
-
     return text.split(" ").join("")
-
-    const duration = performance.now() - startTime;
-    console.log(`whitespacerem took ${duration}ms`);
   }
 }
