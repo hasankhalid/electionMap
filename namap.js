@@ -224,6 +224,8 @@ function createNAMap(){
       // assigning results to nodes
       nodes = result;
 
+
+
       /////////////////////////////////////////////////////////
       ////////////// Setting up force simulation //////////////
       /////////////////////////////////////////////////////////
@@ -406,7 +408,7 @@ function createNAMap(){
               	var i = d3.interpolate(d.radius, 10);
               	return function(t) {
                   d.radius = i(t);
-                  that.attr('r', function(d) { return d.radius; });
+                  that.attr('r', d => (d.radius >= 0) ? d.radius : 0 );
                   //simulation.nodes(nodes)
                 }
             	})
