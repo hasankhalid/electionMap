@@ -73,7 +73,8 @@ function createCartogram(){
                           .attr('y', 18)
                           .text("Pakistan Tehreek-e-Insaf")
                           .style("text-anchor", "middle")
-                          .style("font-size", "14px")
+                          .style("font-size", "13px")
+                          .style("fill", "#9E9E9E")
 
     console.log(party_title.node().getBoundingClientRect());
 
