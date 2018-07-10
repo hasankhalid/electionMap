@@ -282,6 +282,7 @@ function makeProvMaps(){
     });
 
 
+
     const base_bubble = 3 * 0.7 // min size that all bubbles take
     const margin_range = 5 * 0.7 // range for vote margin
 
@@ -415,7 +416,7 @@ function makeProvMaps(){
             //Make the radius a lot bigger
             .attr("r", 14)
             .style("fill", "none")
-          //  .style("fill-opacity", 0.5)
+            //.style("fill-opacity", 0.5)
             .style("pointer-events", "all")
             .style("display", d => (d.province == "KP") ? "block" : "none")
             .on("mouseover", activateMouseOv)
@@ -442,6 +443,7 @@ function makeProvMaps(){
                           .attr("class", "clip-path-circle")
                           .call(redrawPolygon);
 
+          filterCirclesPr(["KP"])
     }
 
     function ticked() {
@@ -455,7 +457,7 @@ function makeProvMaps(){
              })
        }
 
-    makeProvMap("KP");
+    makeProvMap("KP", "init")
 
     function activateMouseOv(d, i){
       // extract unique class of the hovered voronoi cell (replace "circle-catcher " to get seat)
@@ -655,8 +657,6 @@ function makeProvMaps(){
           d3.selectAll('.tool').remove()
     }
 
-
-
     function waitForAllTransitions(transition, callback) { 
 	    var n = 0; 
 	    transition 
@@ -766,16 +766,24 @@ function makeProvMaps(){
   	}
 
   	function scaleVoronoi(translate, Prov, inactive_circles){
+
+      var sp = new SimplePromise();
+
   		d3.selectAll(".circle-catcher.pMap")
       .transition('zoom_trans')
       .duration(1)
       .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
-      .style("display", d => (d.province == Prov) ? "block" : "none");
+      .style("display", d => (d.province == Prov) ? "block" : "none")
+      .call(waitForAllTransitions,function(){
+        sp.resolve(translate);
+      });
 
       inactive_circles.style('opacity', 0);
+
+      return sp;
   	}  	
 
-    function makeProvMap(Prov){
+    function makeProvMap(Prov, type){
 
       var selected_prov = Prov;
 
@@ -809,176 +817,24 @@ function makeProvMaps(){
     		}
     	).then(function(translate){
     		scaleVoronoi(translate, selected_prov, inactive_circles);
-    	});
-
-      /*inactive_circles.transition('circle_trans')
-          .duration(300)
-          .attr('r', '0').call(waitForAllTransitions,
-          //callback hell	
-          function(){
-          	inactive.transition('map_move')
-			.duration(200)
-			.style('stroke-width', 0)
-			.call(waitForAllTransitions, 
-			function(){
-				inactive.transition('map_move')
-				.duration(200)
-				.style('stroke-width', 0)
-				
-				console.log('coloring outline');
-
-						active.transition('map_move')
-			            .duration(0)
-			            .style('stroke-width', 0.75)
-			            .style('stroke', 'grey')
-			            .style('fill', 'white').call(waitForAllTransitions,
-			            function(){
-			            	active_circles.transition('circle_trans')
-				            .duration(0)
-				            .attr('r', function(d){
-				                 return base_bubble + ((d.voteMargin/ 100) * margin_range);
-				             }).call(waitForAllTransitions,
-				             function(){
-				             	var bounds = path.bounds(active.datum()),
-									dx = bounds[1][0] - bounds[0][0],
-									dy = bounds[1][1] - bounds[0][1],
-									x = (bounds[0][0] + bounds[1][0]) / 2,
-									y = (bounds[0][1] + bounds[1][1]) / 2,
-
-									// // calculating different scale for all provinces
-									//scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-
-									// getting the translate coordinates
-									translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
-
-									/*d3.selectAll(".pSeatCircle").transition()
-									.delay(10)
-									.duration(1000)
-									// .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-									.call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) )
-									.on('end', function(){console.log('end')});*/
-
-									//interpolateZoom([translate[0], translate[1]],scale);
-
-									/*console.log('moving map');
-
-									svg.transition()
-									.duration(200)
-									.call(zoom.transform,
-										d3.zoomIdentity
-										.translate(translate[0], translate[1])
-										.scale(scale)
-									)
-									.call(waitForAllTransitions, function(){
-										console.log('moved map');
-										d3.selectAll(".pSeatCircle")
-										.style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
-										 
-										d3.selectAll(".pSeatCircle")
-										.transition('zoom_trans')
-										.duration(300)
-										.style('opacity', '1')
-                    .call(waitForAllTransitions,function(){
-                      d3.selectAll(".circle-catcher.pMap")
-                      .transition('zoom_trans')
-                      .duration(1)
-                      .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
-                      .style("display", d => (d.province == Prov) ? "block" : "none")
-                      })
-									});
-				        })
-			     })
-			})
-  });
-
-
-
-      /*inactive.transition('map_move')
-          .delay(450)
-          .duration(200)
-          .style('stroke-width', 0);
-
-      active.transition('map_move')
-            .delay(700)
-            .duration(400)
-            .style('stroke-width', 0.75)
-            .style('stroke', 'grey')
-            .style('fill', 'white');
-
-     active_circles.transition('circle_trans')
-            .delay(1150)
-            .duration(400)
-            .attr('r', function(d){
-                 return base_bubble + ((d.voteMargin/ 100) * margin_range);
-             })
-
-      // getting bounds
-      var bounds = path.bounds(active.datum()),
-          dx = bounds[1][0] - bounds[0][0],
-          dy = bounds[1][1] - bounds[0][1],
-          x = (bounds[0][0] + bounds[1][0]) / 2,
-          y = (bounds[0][1] + bounds[1][1]) / 2,
-
-          // // calculating different scale for all provinces
-          //scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-
-          // getting the translate coordinates
-          translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
-
-
-
-
-      // svg.transition('zoom_trans')
-      //     //.delay(delay_time)
-      //     .duration(trans_time)
-      //     // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-      //     .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
-      //     //////////////////////////////////////////////////////////////
-          ////////////// Adding bubble nodes for provincial seats //////////////
-          //////////////////////////////////////////////////////////////
-      d3.selectAll(".pSeatCircle").transition()
-      	  .delay(1700)
-	      .duration(650)
-	      // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-	      .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) );
-
-      d3.selectAll(".pSeatCircle")
-          .transition('zoom_trans')
-          .delay(2400)
-          .duration(500)
-          .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
-      
-      d3.selectAll(".circle-catcher.pMap")
-        .transition('zoom_trans')
-        .delay(2900)
-        .duration(trans_time)
-        .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
-        .style("display", d => (d.province == Prov) ? "block" : "none");
-
-
-
-      // // getting district Centroids using the distCentroids function
-      // var centroids = distCentroids(path_data);
-      //
-      // // adding initial x and y positions of seats/ nodes (start of the force simulation)
-      // nodes.forEach(function(d){
-      //   d.x = getCentroid(d.PrimaryDistrict)[0];
-      //   d.y = getCentroid(d.PrimaryDistrict)[1];
-      // });
-
-      // d3.selectAll(".circle-catcher")
-      //   .style("display", d => (d.province == Prov) ? "block" : "none");
-      */
+    	}).then(function(){
+        if (type == "update"){
+          filterCirclesPr([Prov])
+        }
+      });
     }
 
     //makeProvMap("KP");
 
     // event listener for province
 
+
+
     $('.provinceButt').click(function() {
 
       selected_prov = $(this).attr("value");
-      makeProvMap(selected_prov);
+
+      makeProvMap(selected_prov, "update");
     })
 
     // preprocessing_data

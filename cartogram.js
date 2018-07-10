@@ -67,6 +67,18 @@ function createCartogram(){
                       .classed("map_in_a_box", "true")
                       .attr("id", "cartogram");
 
+    var party_title = svg.append("text")
+                          .attr("id", "party_title")
+                          .attr('x', "50%")
+                          .attr('y', 18)
+                          .text("Pakistan Tehreek-e-Insaf")
+                          .style("text-anchor", "middle")
+                          .style("font-size", "13px")
+                          .style("fill", "#9E9E9E")
+
+    console.log(party_title.node().getBoundingClientRect());
+
+
     var svg_g = svg.append("g")
                   .classed("map_group", "true");
     // queue function to read in multiple flat files
@@ -638,7 +650,10 @@ function createCartogram(){
 
         selected_party = d3.select(this).attr('value');
         console.log(selected_party);
+        // update party title
+        d3.select('#party_title').text(selected_party)
         update_bubbles(selected_party);
+
       })
 
       // update bubble function when new party is selected

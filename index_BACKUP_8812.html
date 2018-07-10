@@ -343,11 +343,16 @@
         $("#chorddisclaim").hide();
         $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
         $("#filterdropdown").show().addClass('animated fadeInDefault');
+<<<<<<< HEAD
+        /*setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);*/
+        makeProvMaps();
+=======
         if (electionYear === 2013) {
           setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);
           makeProvMaps();
           $(".disclaimer").css('margin-bottom', '15px');
         }
+>>>>>>> master
         $("#votesharedropdown").hide();
         $("#provincefilterbutt").hide();
         $(".filtercontainer").hide();

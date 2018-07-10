@@ -25,7 +25,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark whitenav">
       <div class="container">
         <div>
-          <img class="navbar-brand logo plotreeweb" id="plotreelogo" src="./resources/logo.svg"></img>
+          <img class="navbar-brand logo" id="plotreelogo" src="./resources/logo.svg"></img>
         </div>
 
         <ul class="navbar-nav electionbuttcontain">
@@ -59,12 +59,6 @@
     <div id="chorddisclaim"class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimerchord">
       <div class="container">
         <p style="margin-bottom: 0px;">This visualization contains data of 263 NA seats for which results for both 2008 and 2013 elections are reported on the ECP website.</p>
-      </div>
-    </div>
-
-    <div id="2008disclaim"class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimerchord" style="background-color: red; color: white;">
-      <div class="container">
-        <p style="margin-bottom: 0px;">The visualizations for elections 2008 are currently under development. The tool will be live soon</p>
       </div>
     </div>
 
@@ -273,38 +267,22 @@
 
     <script async src="provMaps.js"></script>
     <script src="namap.js"></script>
-    <script async src="cartogram.js"></script>
+    <script async src="cartogram-compiled.min.js"></script>
     <script async src="chord-compiled.min.js"></script>
-    <script async src="filterNAmap.js"></script>
+    <script async src="filterNAmap-compiled.min.js"></script>
 
     <script>
 
       var electionYear = 2013;
-      var nationalFilter = true;
 
       $(".electlink").click(function() {
         electionYear = parseInt($(this).attr('year'));
 
         if (electionYear === 2008) {
-          $('#flow').hide();
-          $(".disclaimer").css('margin-bottom', '0px');
-          $('#2008disclaim').show().addClass('animated fadeInDefault');
-
-          d3.select("#vizcontain")
-            .selectAll('*')
-            .remove()
-
-          // remove all contents of legend
-          d3.select("#legendcontain")
-            .selectAll('*')
-            .remove()
+          $('#flow').hide()
         }
         else {
           $('#flow').show()
-          $('#2008disclaim').hide();
-          $(".disclaimer").css('margin-bottom', '15px');
-          createNAMap();
-          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
         }
       })
 
@@ -314,12 +292,12 @@
       })
 
       $("#NA").click(function() {
-        nationalFilter = true;
         $(this).addClass('active');
         $(".PA").removeClass('active');
         $("#flow").removeClass('active');
         $(".dwvs").removeClass('active');
         $("#votesharedropdown").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
         $("#chorddisclaim").hide();
         $("#dropdownProvinceLink").hide();
         $("#footer").css('margin-top', '0px');
@@ -328,14 +306,10 @@
         $("#provincefilterbutt").show();
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
-        if (electionYear === 2013) {
-          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
-          createNAMap();
-          $(".disclaimer").css('margin-bottom', '15px');
-        }
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+        createNAMap();
       });
       $(".PA").click(function() {
-        nationalFilter = false;
         $(this).addClass('active');
         $("#NA").removeClass('active');
         $("#flow").removeClass('active');
@@ -343,12 +317,10 @@
         $("#chorddisclaim").hide();
         $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
         $("#filterdropdown").show().addClass('animated fadeInDefault');
-        if (electionYear === 2013) {
-          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);
-          makeProvMaps();
-          $(".disclaimer").css('margin-bottom', '15px');
-        }
+        /*setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);*/
+        makeProvMaps();
         $("#votesharedropdown").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
         $("#provincefilterbutt").hide();
         $(".filtercontainer").hide();
         $(".filterscontstantheight").show();
@@ -361,13 +333,11 @@
         $("#chorddisclaim").hide();
         $("#chorddiagram").hide();
         $("#dropdownProvinceLink").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
         $("#votesharedropdown").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").css('position', 'relative');
         $("#votesharedropdown").css('z-index', '1');
-        if (electionYear === 2013) {
-          createCartogram();
-          $(".disclaimer").css('margin-bottom', '15px');
-        }
+        createCartogram();
         $("#cartogram").show().addClass('animated fadeInDefault');
         $("#filterdropdown").hide();
         $(".filtercontainer").hide();
@@ -427,14 +397,6 @@
       var parties = [];
       var provinces = [];
       var margin = [];
-      var selectedProvince = ["KP"];
-
-      $('.provinceButt').click(function() {
-        var selectedprov = $(this).attr("value");
-        selectedProvince = [];
-        selectedProvince.push(selectedprov);
-        console.log(selectedProvince);
-      })
 
       //For each partyfilter classed element, this function checks its active prop. In case the button is selected, it sets it to active and pushes the party, else it removes party
       $('.partyfilter').change(function() {
@@ -520,35 +482,23 @@
         var to = slider.result.to;
         margin[0] = from;
         margin[1] = to;
-        if (nationalFilter === true) {
-          if (provinces.length == 0 && parties.length == 0) {
-            filterCircles(null, null, margin);
-          }
-          else if (provinces.length == 0 && parties.length > 0) {
-            filterCircles(null, parties, margin);
-          }
-          else if (parties.length == 0 && provinces.length > 0) {
-            filterCircles(provinces, null, margin);
-          }
-          else {
-            filterCircles(provinces, parties, margin);
-          }
+        if (provinces.length == 0 && parties.length == 0) {
+          filterCircles(null, null, margin);
         }
-        if (nationalFilter === false) {
-          if (parties.length == 0) {
-            filterCirclesPr(selectedProvince, null, margin);
-          }
-          else {
-            filterCirclesPr(selectedProvince, parties, margin);
-          }
+        else if (provinces.length == 0 && parties.length > 0) {
+          filterCircles(null, parties, margin);
+        }
+        else if (parties.length == 0 && provinces.length > 0) {
+          filterCircles(provinces, null, margin);
+        }
+        else {
+          filterCircles(provinces, parties, margin);
         }
       });
 
 
-      $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt").click(function() {
-        if (nationalFilter === true) {
-          filterCircles(null, null, null);
-        }
+      $("#resetAll, #NA, .PA, .dwvs, #flow").click(function() {
+        filterCircles(null, null, null);
         $('.provincefilter').attr("active", "disabled");
         $('.provincefilter').prop('checked', false);
         provinces = [];
