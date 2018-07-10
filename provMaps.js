@@ -1,3 +1,103 @@
+function SimplePromise(){
+	this.fulfillReactions = [];
+  this.rejectReactions = [];
+  this.promiseResult = undefined;
+  this.promiseState = 'pending';
+}
+
+SimplePromise.prototype = {
+	then : function(onFulfilled, onRejected){
+		var returnValue = new SimplePromise();
+    var self = this;
+
+    var fulfilledTask;
+    if (typeof onFulfilled === 'function') {
+        fulfilledTask = function () {
+            var res = onFulfilled(self.promiseResult);
+            returnValue.resolve(res); 
+        };
+    } else {
+        fulfilledTask = function () {
+            returnValue.resolve(self.promiseResult);
+        };
+    }
+
+    var rejectedTask;
+    if (typeof onRejected === 'function') {
+        rejectedTask = function () {
+            var res = onRejected(self.promiseResult);
+            returnValue.resolve(res);
+        };
+    } else {
+        rejectedTask = function () {
+            returnValue.reject(self.promiseResult);
+        };
+    }
+
+    switch (this.promiseState) {
+      case 'pending':
+          this.fulfillReactions.push(fulfilledTask);
+          this.rejectReactions.push(rejectedTask);
+          break;
+      case 'fulfilled':
+          addToTaskQueue(fulfilledTask);
+          break;
+      case 'rejected':
+          addToTaskQueue(rejectedTask);
+          break;
+  	}
+  	return returnValue;
+	},
+	resolve : function(value) {
+      if (this.promiseState !== 'pending') return;
+      if (this.alreadyResolved) return;
+	    this.alreadyResolved = true;
+	    this._doResolve(value);
+	    return this; // enable chaining
+    },
+  _clearAndEnqueueReactions : function(reactions) {
+        this.fulfillReactions = undefined;
+        this.rejectReactions = undefined;
+        reactions.map(addToTaskQueue);
+    },
+  _doResolve : function(value) {
+    var self = this;
+    // Is `value` a thenable?
+    if (typeof value === 'object' && value !== null && 'then' in value) {
+      // Forward fulfillments and rejections from `value` to `this`.
+      // Added as a task (versus done immediately) to preserve async semantics.
+      addToTaskQueue(function () { // (A)
+          value.then(
+              function onFulfilled(result) {
+                  self._doResolve(result);
+              },
+              function onRejected(error) {
+                  self._doReject(error);
+              });
+      });
+    } else {
+      this.promiseState = 'fulfilled';
+      this.promiseResult = value;
+      this._clearAndEnqueueReactions(this.fulfillReactions);
+    }
+	},
+	reject : function(error) {
+    if (this.alreadyResolved) return;
+    this.alreadyResolved = true;
+    this._doReject(error);
+    return this; // enable chaining
+	},
+  _doReject : function(error) { 
+    this.promiseState = 'rejected';
+    this.promiseResult = error;
+    this._clearAndEnqueueReactions(this.rejectReactions);
+   }
+};
+
+function addToTaskQueue(task) {
+  setTimeout(task, 0);
+}
+
 function makeProvMaps(){
   var map_block = d3.select("#vizcontain")
 
@@ -17,7 +117,7 @@ function makeProvMaps(){
   var width = mac_pro_width - width_pad;
 
   // constant scale (pick the one calculated for balochistan, so that scale is constant for all provinces)
-  var scale = 1.770600970553169
+  var scale = 1.770600970553169;
 
   // defining the projection for map (change center and scale to get desired size for the map)
   var projection = d3.geoMercator()
@@ -57,15 +157,6 @@ function makeProvMaps(){
                     .attr("viewBox", "0 0 636 600")
                     .style("fill-opacity", 1)
                     .classed("map_in_a_box", "true")
-
-  var prov_title = svg.append("text")
-                        .attr("id", "prov_title")
-                        .attr('x', "50%")
-                        .attr('y', 18)
-                        .text("Khyber Pakhtunkhwa")
-                        .style("text-anchor", "middle")
-                        .style("font-size", "13px")
-                        .style("fill", "#9E9E9E");
 
   var svg_g = svg.append("g")
                 .classed("map_group_province", "true");
@@ -268,6 +359,7 @@ function makeProvMaps(){
        .style("fill", function(d){
           return colorScale(d.results[0].party);
         })
+       .style("opacity", 0)
         //.style("opacity", d => (d.province == "KP") ? 1 : 0)
         .style("display", d => (d.province == "KP") ? "block" : "none")
         .attr("party", function(d){
@@ -323,14 +415,14 @@ function makeProvMaps(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 14)
-            .style("fill", "grey")
-            .style("fill-opacity", 0.5)
+            .style("fill", "none")
+            //.style("fill-opacity", 0.5)
             .style("pointer-events", "all")
             .style("display", d => (d.province == "KP") ? "block" : "none")
             .on("mouseover", activateMouseOv)
             .on("mouseout", activateMouseOut);
 
-        translate = [-345.4863342221814,54.93697529051545 + y_offset_tx]
+        translate = [-345.4863342221814,54.93697529051545 + y_offset_tx];
 
         d3.selectAll(".circle-catcher.pMap")
           .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
@@ -565,108 +657,171 @@ function makeProvMaps(){
           d3.selectAll('.tool').remove()
     }
 
+    function waitForAllTransitions(transition, callback) { 
+	    var n = 0; 
+	    transition 
+	        .on("start",function() { ++n; }) 
+	        .on("end", function() { if (!--n) {
+	        	callback.apply(this, arguments);
+	        } 
+	    }); 
+  	}
+
+  	function removeInactiveCircles(inactive_circles){
+
+  		var sp = new SimplePromise(); 
+  		inactive_circles.transition('circle_trans')
+      .duration(300)
+      .attr('r', '0').call(waitForAllTransitions,
+      	function(){
+      		sp.resolve();
+      })
+
+      return sp;
+  	}
+
+  	function repaintStrokes(inactive, active){
+
+  		var sp = new SimplePromise(); 
+
+  		inactive.transition('map_move')
+			.duration(200)
+			.style('stroke-width', 0)
+
+			active.transition('map_move')
+      .duration(0)
+      .style('stroke-width', 0.75)
+      .style('stroke', 'grey')
+      .style('fill', 'white').call(waitForAllTransitions,
+      	function(){
+      		sp.resolve();
+      })
+
+      return sp;
+  	}
+
+  	function setActiveCircleRadius(active_circles){
+
+  		var sp = new SimplePromise(); 
+
+			active_circles.transition('circle_trans')
+      .duration(0)
+      .attr('r', function(d){
+           return base_bubble + ((d.voteMargin/ 100) * margin_range);
+       }).call(waitForAllTransitions,
+       	function(){
+       		sp.resolve();
+       	}
+       )
+
+      return sp;
+  	}
+
+  	function zoomAndPanMap(active){
+
+  		var sp = new SimplePromise(); 
+
+			var bounds = path.bounds(active.datum()),
+					dx = bounds[1][0] - bounds[0][0],
+					dy = bounds[1][1] - bounds[0][1],
+					x = (bounds[0][0] + bounds[1][0]) / 2,
+					y = (bounds[0][1] + bounds[1][1]) / 2,
+
+					// // calculating different scale for all provinces
+					//scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+
+					// getting the translate coordinates
+					translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
+
+					svg.transition()
+					.duration(600)
+					.call(zoom.transform,
+						d3.zoomIdentity
+						.translate(translate[0], translate[1])
+						.scale(scale)
+					)
+					.call(waitForAllTransitions, function(){
+						sp.resolve(translate);
+					})
+
+      return sp;
+  	}
+
+  	function translateAndScaleProvincialSeats(translate) {
+
+  		var sp = new SimplePromise();
+
+  		d3.selectAll(".pSeatCircle")
+			.style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
+			 
+			d3.selectAll(".pSeatCircle")
+			.transition('zoom_trans')
+			.duration(300)
+			.style('opacity', '1')
+      .call(waitForAllTransitions,function(){
+      	sp.resolve(translate);
+      })
+
+      return sp;
+  	}
+
+  	function scaleVoronoi(translate, Prov, inactive_circles){
+
+      var sp = new SimplePromise();
+
+  		d3.selectAll(".circle-catcher.pMap")
+      .transition('zoom_trans')
+      .duration(1)
+      .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
+      .style("display", d => (d.province == Prov) ? "block" : "none")
+      .call(waitForAllTransitions,function(){
+        sp.resolve(translate);
+      });
+
+      inactive_circles.style('opacity', 0);
+
+      return sp;
+  	}  	
 
     function makeProvMap(Prov, type){
 
-
       var selected_prov = Prov;
 
-      var active = d3.select("path" + "." + selected_prov).classed("active", true).raise();
-      var inactive = d3.selectAll("path:not(" + "." + selected_prov + ")").classed("inactive", true);
-      var active_circles = d3.selectAll("circle.pSeatCircle" + "." + selected_prov).classed("active", true);
-      var inactive_circles = d3.selectAll("circle.pSeatCircle:not(" + "." + selected_prov + ")").classed("inactive", true);
+      var active = d3.select("path" + "." + selected_prov).classed("active", true).classed("inactive", false).raise();
+      var inactive = d3.selectAll("path:not(" + "." + selected_prov + ")").classed("inactive", true).classed("active", false);
+      var active_circles = d3.selectAll("circle.pSeatCircle" + "." + selected_prov).classed("active", true).classed("inactive", false);
+      var inactive_circles = d3.selectAll("circle.pSeatCircle:not(" + "." + selected_prov + ")").classed("inactive", true).classed("active", false);
 
-      active_circles.attr('r', 0);
+ /*     active_circles.attr('r', function(){
+                 return 0;
+             }); */
 
       var delay_time = 1000;
       var trans_time = 1000;
       var trans_bubble_time = 600;
 
-      if (type == "update"){
-        filterCirclesPr([Prov])
-      }
+      active_circles.style("display", "block");
+      active_circles.style("opacity", "0");
 
-      active.transition('map_move')
-            //.delay(delay_time)
-            .duration(trans_time)
-            .style('stroke-width', 0.75)
-            .style('stroke', 'grey')
-            .style('fill', 'white');
-
-      inactive.transition('map_move')
-              //.delay(delay_time)
-              .duration(trans_time)
-              .style('stroke-width', 0);
-
-    inactive_circles.transition('circle_trans')
-          //.delay(delay_time)
-          .duration(trans_time)
-          .attr('r', '0');
-
-     active_circles.style("display", "block");
-
-     active_circles.transition('circle_trans')
-            .delay(delay_time)
-            .duration(trans_bubble_time)
-            .attr('r', function(d){
-                 return base_bubble + ((d.voteMargin/ 100) * margin_range);
-             })
-
-      // getting bounds
-      var bounds = path.bounds(active.datum()),
-          dx = bounds[1][0] - bounds[0][0],
-          dy = bounds[1][1] - bounds[0][1],
-          x = (bounds[0][0] + bounds[1][0]) / 2,
-          y = (bounds[0][1] + bounds[1][1]) / 2,
-
-          // // calculating different scale for all provinces
-          //scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
-
-          // getting the translate coordinates
-          translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
-
-
-
-
-      // svg.transition('zoom_trans')
-      //     //.delay(delay_time)
-      //     .duration(trans_time)
-      //     // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-      //     .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) ); // updated for d3 v4
-      //     //////////////////////////////////////////////////////////////
-          ////////////// Adding bubble nodes for provincial seats //////////////
-          //////////////////////////////////////////////////////////////
-      d3.selectAll(".pSeatCircle").transition()
-          .duration(750)
-          // .call(zoom.translate(translate).scale(scale).event); // not in d3 v4
-          .call( zoom.transform, d3.zoomIdentity.translate(translate[0],translate[1]).scale(scale) );
-
-      d3.selectAll(".pSeatCircle")
-          //.delay()
-          .transition('zoom_trans')
-          .duration(trans_time)
-          .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
-
-      d3.selectAll(".circle-catcher.pMap")
-        .transition('zoom_trans')
-        .duration(trans_time)
-        .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
-        .style("display", d => (d.province == Prov) ? "block" : "none");
-
-      //filterCirclesPr(["Prov"]);
-
-      // // getting district Centroids using the distCentroids function
-      // var centroids = distCentroids(path_data);
-      //
-      // // adding initial x and y positions of seats/ nodes (start of the force simulation)
-      // nodes.forEach(function(d){
-      //   d.x = getCentroid(d.PrimaryDistrict)[0];
-      //   d.y = getCentroid(d.PrimaryDistrict)[1];
-      // });
-
-      // d3.selectAll(".circle-catcher")
-      //   .style("display", d => (d.province == Prov) ? "block" : "none");
-
+      removeInactiveCircles(inactive_circles)
+      .then(function(resolvedPromise){
+      		return repaintStrokes(inactive, active)
+      	}
+    	).then(function(resolvedPromise){
+    			return setActiveCircleRadius(active_circles);
+    		}
+    	).then(function(resolvedPromise){
+    		return zoomAndPanMap(active);
+    	}).then(function(translate){
+    			return translateAndScaleProvincialSeats(translate);
+    		}
+    	).then(function(translate){
+    		scaleVoronoi(translate, selected_prov, inactive_circles);
+    	}).then(function(){
+        if (type == "update"){
+          filterCirclesPr([Prov])
+        }
+      });
     }
 
     //makeProvMap("KP");
@@ -678,8 +833,6 @@ function makeProvMaps(){
     $('.provinceButt').click(function() {
 
       selected_prov = $(this).attr("value");
-
-      d3.select("#prov_title").remove();
 
       makeProvMap(selected_prov, "update");
     })
@@ -731,6 +884,8 @@ function makeProvMaps(){
     }
 
   }
+
+  //svg_g.attr("pointer-events", "all").call(zoom);
 
   function zoomed() {
     //g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
