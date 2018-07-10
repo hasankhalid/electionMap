@@ -103,7 +103,7 @@ function abbreviate(party) {
           return 'BNP-A';
           break;
       default:
-          return party;
+          return 'Other';
   }
 }
 
