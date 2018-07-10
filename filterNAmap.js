@@ -58,8 +58,14 @@ var rest_parties = unique_parties.diff(parties_in_legend)
 //
 //console.log(rest_parties);
 // get size of the na seat circles
-function getCircleSize(voteMargin){
-  return base_bubble + ((voteMargin/ 100) * margin_range)
+function getCircleSize(voteMargin, scale){
+  if (scale == null){
+    return base_bubble + ((voteMargin/ 100) * margin_range)
+  }
+  else {
+    (base_bubble * scale) + ((voteMargin/ 100) * margin_range * scale)
+  }
+
 }
 
 // master function for filtering
