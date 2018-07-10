@@ -444,11 +444,16 @@ function createCartogram(){
             tooltip.append('div')
               .classed('cartotoolfooter', true)
               .html(function(d){
-                if (min_seat === max_seat) {
-                  return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + '</span>'
+                if (selected_district_WS === 'Larkana') {
+                  return '<span>Total seats: ' + total_seats + '</span><span>NA 204, NA 205, NA 207</span>'
                 }
                 else {
-                  return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + ' - NA' + max_seat + '</span>'
+                  if (min_seat === max_seat) {
+                    return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + '</span>'
+                  }
+                  else {
+                    return '<span>Total seats: ' + total_seats + '</span><span>NA' +  min_seat + ' - NA' + max_seat + '</span>'
+                  }
                 }
               })
 
@@ -733,22 +738,20 @@ function createCartogram(){
 
       // vote share legend
       var seatLegDiv = legendDiv.append("div")
-                                .classed("seatLegDiv", true)
-                                .style("max-width", '350px')
-                                .style('min-width', '300px')
+                                .classed("seatLegDiv", true);
 
       seatLegDiv.append('p')
                 .text('Number of Seats')
                 .style('font-size', '12px')
                 .style('text-align', 'center')
-                .style('margin-bottom', '1px');
+                .style('margin-bottom', '5px');
 
       var seatLegSVG = seatLegDiv.append("svg")
                                 .classed("seatLegSVG", true)
-                              //  .attr('width', 350)
-                              //  .attr('height', 90);
-                                .attr("preserveAspectRatio", "xMinYMin meet")
-                                .attr("viewBox", "0 0 350 90")
+                                .attr('width', 350)
+                                .attr('height', 90);
+                              //  .attr("preserveAspectRatio", "xMinYMin meet")
+                              //  .attr("viewBox", "0 0 350 90")
 
       seatLegSVG.append("g")
         .attr("class", "seatLegG")
