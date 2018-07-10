@@ -33,6 +33,13 @@ function createChord() {
     d3.select("#legendcontain")
       .selectAll('*')
       .remove()
+
+    d3.select('#barsvg')
+      .remove()
+
+    d3.select("#majorityVote")
+      .selectAll('*')
+      .remove()
   }
 
   removeAllDisplay();

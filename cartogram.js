@@ -10,6 +10,13 @@ function createCartogram(){
     d3.select("#legendcontain")
       .selectAll('*')
       .remove()
+
+      d3.select('#barsvg')
+        .remove()
+
+      d3.select("#majorityVote")
+        .selectAll('*')
+        .remove()
   }
 
   removeAllDisplay();
@@ -74,7 +81,7 @@ function createCartogram(){
                           .text("Pakistan Tehreek-e-Insaf")
                           .style("text-anchor", "middle")
                           .style("font-size", "13px")
-                          .style("fill", "#9E9E9E")
+                          .style("fill", "#9E9E9E");
 
     console.log(party_title.node().getBoundingClientRect());
 
