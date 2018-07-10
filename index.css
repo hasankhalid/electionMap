@@ -729,6 +729,23 @@ g.legendOrdinal text{
   width: 100%; /* only required for <img /> */
 }
 
+#infoText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 20px;
+  font-size: 18px;
+  color: #757575;
+}
+
+#infoPict {
+  width: 120px;
+  padding-right: 20px;
+  border-right-color: #e0e0e0;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
 #legendcontain {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -748,6 +765,22 @@ g.legendOrdinal text{
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+  }
+
+  #infoText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    font-size: 13px;
+  }
+
+  #infoPict {
+    width: 75px;
+    padding-right: 20px;
+    border-right-color: #e0e0e0;
+    border-right-width: 1px;
+    border-right-style: solid;
   }
 }
 

@@ -10,10 +10,16 @@ function createNAMap(){
     d3.select("#legendcontain")
       .selectAll('*')
       .remove()
+
+    d3.select('#barsvg')
+      .remove()
+
+    d3.select("#majorityVote")
+      .selectAll('*')
+      .remove()
   }
 
   removeAllDisplay();
-
   function drawNAMap(){
 
     ////////////////////////////////////
@@ -757,6 +763,12 @@ function createNAMap(){
     //     })
     //   };
     //
+
+    d3.select('#barsvg')
+      .remove()
+
+    makeSummBar(NA_summary);
+
   }
 
 

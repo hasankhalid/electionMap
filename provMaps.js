@@ -144,9 +144,14 @@ function makeProvMaps(){
     d3.select("#legendcontain")
       .selectAll('*')
       .remove()
+
+    d3.select("#barcontain")
+      .select('#barsvg')
+      .remove()
   }
 
   removeAllDisplay();
+  makeSummBar(PK_summary);
 
   // defining the svg view port for the map within the div
   var svg = map_block.append("svg")
@@ -833,8 +838,32 @@ function makeProvMaps(){
     $('.provinceButt').click(function() {
 
       selected_prov = $(this).attr("value");
-
+      summval = $(this).attr("summval");
+      d3.select("#prov_title").remove();
       makeProvMap(selected_prov, "update");
+
+      function updatebar() {
+        d3.select('#barsvg')
+          .remove();
+
+        switch(summval) {
+            case "PK":
+                return makeSummBar(PK_summary);
+                break;
+            case "PP":
+                return makeSummBar(PP_summary);
+                break;
+            case "PS":
+                return makeSummBar(PS_summary);
+                break;
+            case "PB":
+                return makeSummBar(PB_summary);
+                break;
+        }
+      }
+
+      updatebar();
+
     })
 
     // preprocessing_data
