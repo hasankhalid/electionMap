@@ -299,15 +299,6 @@
           $('#flow').hide();
           $(".disclaimer").css('margin-bottom', '0px');
           $('#2008disclaim').show().addClass('animated fadeInDefault');
-
-          d3.select("#vizcontain")
-            .selectAll('*')
-            .remove()
-
-          // remove all contents of legend
-          d3.select("#legendcontain")
-            .selectAll('*')
-            .remove()
         }
         else {
           $('#flow').show()
@@ -342,6 +333,9 @@
           setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
           createNAMap();
           $(".disclaimer").css('margin-bottom', '15px');
+        }
+        else if (electionYear === 2008) {
+
         }
       });
       $(".PA").click(function() {
