@@ -64,7 +64,7 @@
 
     <div id="2008disclaim"class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimerchord" style="background-color: red; color: white;">
       <div class="container">
-        <p style="margin-bottom: 0px;">The visualizations for elections 2008 are currently under development. The tool will be live soon</p>
+        <p style="margin-bottom: 0px;">The visualizations for elections 2008 are currently under development. The visualizations will be live soon</p>
       </div>
     </div>
 
@@ -284,10 +284,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="utils.js"></script>
-
     <script async src="provMaps.js"></script>
     <script src="bar.js"></script>
     <script src="namap.js"></script>
+    <script src="namap_2008.js"></script>
     <script async src="cartogram.js"></script>
     <script async src="chord.js"></script>
     <script async src="filterNAmap.js"></script>
@@ -302,8 +302,7 @@
 
         if (electionYear === 2008) {
           $('#flow').hide();
-          $(".disclaimer").css('margin-bottom', '0px');
-          $('#2008disclaim').show().addClass('animated fadeInDefault');
+          create08NAMap();
         }
         else {
           $('#flow').show()
@@ -340,7 +339,9 @@
           $(".disclaimer").css('margin-bottom', '15px');
         }
         else if (electionYear === 2008) {
-
+          create08NAMap();
+          $('#2008disclaim').hide();
+          $(".disclaimer").css('margin-bottom', '15px');
         }
       });
       $(".PA").click(function() {
@@ -356,6 +357,26 @@
           setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);
           makeProvMaps();
           $(".disclaimer").css('margin-bottom', '15px');
+        }
+        else if (electionYear === 2008) {
+          $('#2008disclaim').show().addClass('animated fadeInDefault');
+          $(".disclaimer").css('margin-bottom', '0px');
+
+          d3.select("#vizcontain")
+            .selectAll('*')
+            .remove()
+
+          // remove all contents of legend
+          d3.select("#legendcontain")
+            .selectAll('*')
+            .remove()
+
+          d3.select('#barsvg')
+            .remove()
+
+          d3.select("#majorityVote")
+            .selectAll('*')
+            .remove()
         }
         $("#votesharedropdown").hide();
         $("#provincefilterbutt").hide();
@@ -376,6 +397,26 @@
         if (electionYear === 2013) {
           createCartogram();
           $(".disclaimer").css('margin-bottom', '15px');
+        }
+        else if (electionYear === 2008) {
+          $('#2008disclaim').show().addClass('animated fadeInDefault');
+          $(".disclaimer").css('margin-bottom', '0px');
+
+          d3.select("#vizcontain")
+            .selectAll('*')
+            .remove()
+
+          // remove all contents of legend
+          d3.select("#legendcontain")
+            .selectAll('*')
+            .remove()
+
+          d3.select('#barsvg')
+            .remove()
+
+          d3.select("#majorityVote")
+            .selectAll('*')
+            .remove()
         }
         $("#cartogram").show().addClass('animated fadeInDefault');
         $("#filterdropdown").hide();

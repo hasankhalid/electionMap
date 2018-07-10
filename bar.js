@@ -168,12 +168,42 @@ function makeSummBar(result){
     .style('fill', d => ordinal(abbreviate(d.key)))
     .attr('class', d => d.key)
     .on('mouseover', function(d, i){
-      console.log(abbreviate(d.key))
-      console.log(ordinal(abbreviate(d.key)))
-      console.log(d)
+      d3.select('body').append('div')
+        .classed('chordtool', true)
+        .classed('animated', true)
+        .classed('fadeIn', true)
+        .attr('id', 'hoverbox')
+
+        var seats = d[0][1] - d[0][0];
+
+        d3.select('.chordtool')
+          .append('div')
+          .classed('party', true)
+          .html(function(){
+            return '<span style="padding: 2px;">' + d.key + ' won ' + seats + (seats > 1 ? " seats" : " seat") + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+          })
+        d3.select('.chordtool')
+          .append('div')
+          .classed('cpartyicon', true)
+          .html(image(d.key));
+
+          var hoverbox = document.getElementById('hoverbox');
+          d3.select('.chordtool').style('top', d3.event.pageY - hoverbox.offsetHeight - 18 + "px");
+
+          if (window.innerWidth < 450) {
+            d3.select('.chordtool').style('left', window.innerWidth/2 - hoverbox.offsetWidth/2 + "px");
+          }
+          else {
+            if (d3.event.pageX < window.innerWidth/2) {
+              d3.select('.chordtool').style('left', d3.event.pageX + 4 + "px");
+            }
+            else {
+              d3.select('.chordtool').style('left', d3.event.pageX - hoverbox.offsetWidth - 8 + "px");
+            }
+          }
     })
     .on('mouseout', function(d, i){
-      console.log(d.key + 'out!');
+      d3.select(".chordtool").remove();
     });
 
   // summBarG.append('rect')
