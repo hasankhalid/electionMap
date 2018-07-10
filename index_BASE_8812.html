@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+  <head>
+    <link rel="icon" href="./resources/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./resources/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Electoral Map</title>
+    <link rel="stylesheet" type="text/css" href="animate.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" type="text/css" href="./ionrange/ion.rangeSlider.css">
+    <link rel="stylesheet" type="text/css" href="./ionrange/ion.rangeSlider.skinNice.css">
+  </head>
+  <body>
+    <div class='applicationWrap' onclick="void(0)">
+
+    <nav class="navbar navbar-expand-lg navbar-dark whitenav">
+      <div class="container">
+        <div>
+          <img class="navbar-brand logo" id="plotreelogo" src="./resources/logo.svg"></img>
+        </div>
+
+        <ul class="navbar-nav electionbuttcontain">
+          <li class="nav-item">
+            <div style="display: flex">
+              <img class="ballot" src="./resources/ballot1.svg"></img>
+              <span year="2008" class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div style="display: flex">
+              <img class="ballot" src="./resources/ballot2.svg"></img>
+              <span year="2013" class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2013</span>
+            </div>
+          </li>
+          <li class="nav-item socialicons">
+            <div style="display: flex; align-items: center; height: 100%; color: #57068c; font-size: 20px;">
+              <i style="margin-right: 10px; margin-left: 20px;" class="fab fa-twitter socicon plotreetwitter"></i>
+              <i class="fab fa-linkedin-in socicon plotreelinkedin"></i>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimer">
+      <div class="container">
+        <p style="margin-bottom: 0px;">The data for the results presented on this site are reported by the Election Commision of Pakistan on this <a href="https://www.ecp.gov.pk/ResultDetails.aspx?EleId=3&Election=General%20Election%2011%20May%202013"><span style="text-decoration: none; color: #FFEB3B;">web page</span></a>. The data are updated till May 11, 2013.</p>
+      </div>
+    </div>
+
+    <div id="chorddisclaim"class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimerchord">
+      <div class="container">
+        <p style="margin-bottom: 0px;">This visualization contains data of 263 NA seats for which results for both 2008 and 2013 elections are reported on the ECP website.</p>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer">
+      <div class="btn-group" role="Select Visualization" aria-label="Basic example">
+        <button id="NA" type="button" class="btn btn-light btnnavigate navbutt active">National Assembly</button>
+        <button id="PA" type="button" class="btn btn-light btnnavigate navbutt PA">Provincial Assembly</button>
+        <button id="flow" type="button" class="btn btn-light btnnavigate navbutt">Flow of NA seats</button>
+        <button id="dwvs" type="button" class="btn btn-light btnnavigate navbutt dwvs">District Wise Vote Share</button>
+        <div id="mobiledrop" class="dropdown">
+          <a class="btn btn-light dropdown-toggle btnnavigate" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+          </a>
+          <div style="width: 100%" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item navbutt mobilenav PA">Provincial Assembly</a>
+            <a class="dropdown-item navbutt mobilenav dwvs">District Wise Vote Share</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="filterdropdown" style="margin-bottom: 10px; margin-top: -5px; z-index: 9">
+      <div class="dropdown">
+        <a class="btn btn-primary dropdown-toggle filterbutton" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; border: 0px;" href="#" role="button" id="dropdownFilterLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Filter
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownFilterLink">
+          <a class="dropdown-item filteritem" id="partyfilterbutt" style="cursor: pointer;">Party</a>
+          <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
+          <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-primary filterbutton" id="resetAll" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px; border: 0px;">Reset</button>
+
+      <div class="dropdown" id="dropdownProvinceLink">
+        <a class="btn btn-primary dropdown-toggle filterbutton" style="border: 0px; margin-left: 5px; font-size: 12px;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Province
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownProvinceLink">
+          <a class="dropdown-item filteritem provinceButt" value="KP" id="kpProvinceButt" style="cursor: pointer;">Khyber Pakhtunkhwa</a>
+          <a class="dropdown-item filteritem provinceButt" value="Punjab" id="punProvinceButt" style="cursor: pointer;">Punjab</a>
+          <a class="dropdown-item filteritem provinceButt" value="Balochistan" id="balProvinceButt" style="cursor: pointer;">Balochistan</a>
+          <a class="dropdown-item filteritem provinceButt" value="Sindh" id="sindhProvinceButt" style="cursor: pointer;">Sindh</a>
+        </div>
+      </div>
+    </div>
+    <div class="filterscontstantheight">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="partyFilters">
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partycheck" toggleClass="disabled" value="null" id="displayAll">
+            <label class="form-check-label" for="displayAll">All</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Tehreek-e-Insaf" active="disabled" id="PTIfilter">
+            <label class="form-check-label" for="PTIfilter">PTI</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League (N)" active="disabled" id="PMLNfilter">
+            <label class="form-check-label" for="PMLNfilter">PMLN</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Jamiat Ulama-e-Islam (F)" active="disabled" id="JUIFfilter">
+            <label class="form-check-label" for="JUIFfilter">JUIF</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League" active="disabled" id="PMLfilter">
+            <label class="form-check-label" for="INDfilter">PML</label>
+          </div>
+        </div>
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Peoples Party Parliamentarians" active="disabled" id="PPPPfilter">
+            <label class="form-check-label" for="PMLfilter">PPPP</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Independent" active="disabled" id="Indfilter">
+            <label class="form-check-label" for="PPPPfilter">Ind.</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pakistan Muslim League (F)" active="disabled" id="PMLFfilter">
+            <label class="form-check-label" for="PMLFfilter">PMLF</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Muttahida Qaumi Movement Pakistan" active="disabled" id="MQMfilter">
+            <label class="form-check-label" for="MQMfilter">MQM</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partyfilter" value="Rest" active="disabled" id="Restfilter">
+            <label class="form-check-label" for="Restfilter">Rest</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="provinceFilters">
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincecheck" toggleClass="provinceDisabled" id="displayAll">
+            <label class="form-check-label" for="displayAll">All</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="Punjab" active="disabled" id="PUNfilter">
+            <label class="form-check-label" for="PUNfilter">Punjab</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="Sindh" active="disabled" id="SNDfilter">
+            <label class="form-check-label" for="SNDfilter">Sindh</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="FATA" active="disabled" id="FATAfilter">
+            <label class="form-check-label" for="FATAfilter">FATA</label>
+          </div>
+        </div>
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="Balochistan" active="disabled" id="BALfilter">
+            <label class="form-check-label" for="BALfilter">Balochistan</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" active="disabled" value="KP" id="KPKfilter">
+            <label class="form-check-label" for="KPKfilter">KPK</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input provincefilter" value="ICT" active="disabled" id="ICTfilter">
+            <label class="form-check-label" for="ICTfilter">ICT</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="rangeFilters">
+        <div style="width: 275px">
+          <input type="text" id="voteMargin" name="vote_margin" value="" />
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="votesharedropdown"class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="container">
+        <div id="voteshareoptions" class="dropdown">
+          <a class="btn btn-light dropdown-toggle btnnavigate" style="padding: 5px;" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Party
+          </a>
+          <div style="width: 200px" class="dropdown-menu">
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PTI" value= "Pakistan Tehreek-e-Insaf">Pakistan Tehreek e Insaf</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PMLN" value = "Pakistan Muslim League (N)">Pakistan Muslim League (N)</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PPP" value = "Pakistan Peoples Party Parliamentarians">Pakistan Peoples Party</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="JUIF" value = "Jamiat Ulama-e-Islam (F)">Jamiat Ulama-e-Islam (F)</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="ind" value = "Independent" >Independent</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="ANP" value = "Awami National Party" >Awami National Party</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="MQM" value = "Muttahida Qaumi Movement Pakistan">Muttahida Qaumi Movement</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 viz">
+      <div>
+        <div style="max-width: 750px; margin-left: auto; margin-right: auto;">
+          <div class="container" id="vizcontain">
+          </div>
+        </div>
+      </div>
+      <div class="container" id="legendcontain">
+      </div>
+    </div>
+
+    <footer id="footer" style="width: 100%; background: #303F9F;">
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div style="display: flex; justify-content: center;" class="container">
+          <img style="width: 100px; height: 100px;" src="./resources/ballotfoot.svg"></img>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 footercol" style="margin-top: 20px;">
+        <div style="display: flex; flex-direction: column; color: white; font-size: 14px;" class="container">
+          <p class="plotreename" style="margin-bottom: 0px;">Designed and developed by <span class="footlink plotreeweb">Plotree Info Design</span> © 2018</p>
+       </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 footercol" style="margin-top: 20px;">
+        <div style="display: flex; flex-direction: column; color: white; font-size: 14px;" class="container">
+          <p class="footerdesc" style="margin-bottom: 0px; align-self: center;">Plotree is an information design studio based in Lahore. We help organizations communicate insights underlying their data through interactive web based visualizations. Get in touch and collaborate with us to bring your data to life on your websites, publications or presentations.</p>
+       </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 20px;">
+        <div style="display: flex; justify-content: center; color: white; font-size: 14px;" class="container">
+          <i style="font-size: 20px" class="fas fa-link footsocicon plotreeweb"></i>
+          <i style="font-size: 20px; margin-right: 15px; margin-left: 15px;" class="fab fa-twitter footsocicon plotreetwitter"></i>
+          <i style="font-size: 20px" class="fab fa-linkedin-in footsocicon plotreelinkedin"></i>
+       </div>
+      </div>
+    </footer>
+  </div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="./ionrange/ion.rangeSlider.min.js"></script>
+    <script async src="elections_2013.js"></script>
+    <script async src="elections_2008.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
+    <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="utils.js"></script>
+
+    <script async src="provMaps.js"></script>
+    <script src="namap.js"></script>
+    <script async src="cartogram-compiled.min.js"></script>
+    <script async src="chord-compiled.min.js"></script>
+    <script async src="filterNAmap-compiled.min.js"></script>
+
+    <script>
+
+      var electionYear = 2013;
+
+      $(".electlink").click(function() {
+        electionYear = parseInt($(this).attr('year'));
+
+        if (electionYear === 2008) {
+          $('#flow').hide()
+        }
+        else {
+          $('#flow').show()
+        }
+      })
+
+      $(window).on('load', function() {
+        createNAMap();
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+      })
+
+      $("#NA").click(function() {
+        $(this).addClass('active');
+        $(".PA").removeClass('active');
+        $("#flow").removeClass('active');
+        $(".dwvs").removeClass('active');
+        $("#votesharedropdown").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
+        $("#chorddisclaim").hide();
+        $("#dropdownProvinceLink").hide();
+        $("#footer").css('margin-top', '0px');
+        $("#NAmap").show().addClass('animated fadeInDefault');
+        $(".filterscontstantheight").show();
+        $("#provincefilterbutt").show();
+        $("#filterdropdown").show().addClass('animated fadeInDefault');
+        $(".filtercontainer").hide();
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+        createNAMap();
+      });
+      $(".PA").click(function() {
+        $(this).addClass('active');
+        $("#NA").removeClass('active');
+        $("#flow").removeClass('active');
+        $(".dwvs").removeClass('active');
+        $("#chorddisclaim").hide();
+        $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
+        $("#filterdropdown").show().addClass('animated fadeInDefault');
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);
+        makeProvMaps();
+        $("#votesharedropdown").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
+        $("#provincefilterbutt").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").show();
+      });
+      $(".dwvs").click(function() {
+        $(this).addClass('active');
+        $("#NA").removeClass('active');
+        $("#flow").removeClass('active');
+        $(".PA").removeClass('active');
+        $("#chorddisclaim").hide();
+        $("#chorddiagram").hide();
+        $("#dropdownProvinceLink").hide();
+        $(".disclaimer").css('margin-bottom', '15px');
+        $("#votesharedropdown").show().addClass('animated fadeInDefault');
+        $("#votesharedropdown").css('position', 'relative');
+        $("#votesharedropdown").css('z-index', '1');
+        createCartogram();
+        $("#cartogram").show().addClass('animated fadeInDefault');
+        $("#filterdropdown").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").hide();
+      });
+      $("#flow").click(function() {
+        $(this).addClass('active');
+        $(".PA").removeClass('active');
+        $("#NA").removeClass('active');
+        $(".dwvs").removeClass('active');
+        $("#votesharedropdown").hide();
+        $("#dropdownProvinceLink").hide();
+        $(".disclaimer").css('margin-bottom', '0px');
+        $("#NAmap").hide();
+        $("#cartogram").hide();
+        createChord();
+        $("#chorddisclaim").show().addClass('animated fadeInDefault');
+        $("#footer").css('margin-top', '0px');
+        $("#filterdropdown").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").hide();
+      });
+
+      $(".plotreelinkedin").click(function() {
+        window.open('https://www.linkedin.com/company/plotree/', '_blank');
+      });
+
+      $(".plotreetwitter").click(function() {
+        window.open('https://twitter.com/plotreeViz', '_blank');
+      });
+
+      $(".plotreeweb").click(function() {
+        window.open('https://plotree.studio/', '_blank');
+      });
+
+      $("#partyfilterbutt").click(function() {
+        $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
+        $("#provinceFilters").hide();
+        $('#rangeFilters').hide();
+      });
+
+      $("#provincefilterbutt").click(function() {
+        $("#provinceFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
+        $("#partyFilters").hide();
+        $('#rangeFilters').hide()
+      });
+
+      $("#votemarginbutt").click(function() {
+        $("#provinceFilters").hide();
+        $("#partyFilters").hide();
+        $('#rangeFilters').show().addClass('animated fadeInDefault').css('display', 'flex');
+      });
+
+      //Filter functions follow
+
+      //variables so filterNAmap is only called once
+      var parties = [];
+      var provinces = [];
+      var margin = [];
+
+      //For each partyfilter classed element, this function checks its active prop. In case the button is selected, it sets it to active and pushes the party, else it removes party
+      $('.partyfilter').change(function() {
+        var isActive = $(this).attr("active");
+        if(isActive === "disabled") {
+          this.setAttribute("active", "active");
+          parties.push($(this).attr("value"));
+          $('#displayAll').prop('checked', false);
+          $('#displayAll').attr("toggleClass", "disabled")
+        }
+        else {
+          this.setAttribute("active", "disabled");
+          var index = parties.indexOf($(this).attr("value"));
+          if (index >= 0) {
+            parties.splice(index, 1);
+          }
+        }
+      })
+
+      $('.provincefilter').change(function() {
+        var isActive = $(this).attr("active");
+        if(isActive === "disabled") {
+          this.setAttribute("active", "active");
+          provinces.push($(this).attr("value"));
+          $('.provincecheck').prop('checked', false);
+          $('.provincecheck').attr("toggleClass", "provinceDisabled");
+        }
+        else {
+          this.setAttribute("active", "disabled");
+          var index = provinces.indexOf($(this).attr("value"));
+          if (index >= 0) {
+            provinces.splice(index, 1);
+          }
+        }
+      })
+
+      $('.partycheck').change(function() {
+        var toggleValue = $(this).attr("toggleClass")
+        if(toggleValue === "disabled") {
+          this.setAttribute("toggleClass", "active")
+          $('.partyfilter').attr("active", "disabled");
+          $('.partyfilter').prop('checked', false);
+          parties = [];
+        }
+        else {
+          this.setAttribute("toggleClass", "disabled")
+          $('.partyfilter').attr("disabled", false);
+        }
+      })
+
+      $('.provincecheck').change(function() {
+        var toggleValue = $(this).attr("toggleClass")
+        if(toggleValue === "provinceDisabled") {
+          this.setAttribute("toggleClass", "active")
+          $('.provincefilter').attr("active", "disabled");
+          $('.provincefilter').prop('checked', false);
+          provinces = [];
+        }
+        else {
+          this.setAttribute("toggleClass", "provinceDisabled")
+          $('.provincefilter').attr("disabled", false);
+        }
+      })
+
+      $("#voteMargin").ionRangeSlider({
+          type: "double",
+          grid: true,
+          min: 0,
+          max: 100,
+          from: 0,
+          to: 100,
+          postfix: " %"
+      });
+
+      margin.push($("#voteMargin").data("ionRangeSlider").result.from);
+      margin.push($("#voteMargin").data("ionRangeSlider").result.to);
+
+      $('#voteMargin, input:checkbox').change(function() {
+        // Saving Ion range instance to var
+        var slider = $("#voteMargin").data("ionRangeSlider");
+        // Get values
+        var from = slider.result.from;
+        var to = slider.result.to;
+        margin[0] = from;
+        margin[1] = to;
+        if (provinces.length == 0 && parties.length == 0) {
+          filterCircles(null, null, margin);
+        }
+        else if (provinces.length == 0 && parties.length > 0) {
+          filterCircles(null, parties, margin);
+        }
+        else if (parties.length == 0 && provinces.length > 0) {
+          filterCircles(provinces, null, margin);
+        }
+        else {
+          filterCircles(provinces, parties, margin);
+        }
+      });
+
+
+      $("#resetAll, #NA, .PA, .dwvs, #flow").click(function() {
+        filterCircles(null, null, null);
+        $('.provincefilter').attr("active", "disabled");
+        $('.provincefilter').prop('checked', false);
+        provinces = [];
+        $('.partyfilter').attr("active", "disabled");
+        $('.partyfilter').prop('checked', false);
+        parties = [];
+        $('.provincecheck').prop('checked', false);
+        $('.provincecheck').attr("toggleClass", "provinceDisabled");
+        $('#displayAll').prop('checked', false);
+        $('#displayAll').attr("toggleClass", "disabled")
+        $("#voteMargin").data("ionRangeSlider").reset();
+        margin = [];
+      });
+
+
+    </script>
+
+  </body>
+</html>
