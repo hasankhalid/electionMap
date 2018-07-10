@@ -683,6 +683,103 @@ function makeProvMaps(){
       makeProvMap(selected_prov, "update");
     })
 
+    /////////////////////////////////////////////////
+    ////////////// Legend for parties ///////////////
+    /////////////////////////////////////////////////
+
+    var parties_legend = [
+      "Pakistan Tehreek-e-Insaf",
+      "Jamiat Ulama-e-Islam (F)",
+      "Pakistan Muslim League (N)",
+      "Independent",
+      "Pakistan Muslim League",
+      "Pakistan Peoples Party Parliamentarians",
+      "Pakistan Muslim League (F)",
+      "Muttahida Qaumi Movement Pakistan",
+      "Other"
+    ];
+    // define parts abbs and colors
+    var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Rest"))
+    var parties_colors = parties_legend.map(d => (d != "Other" ? colorScale(d) : "#03A9F4"))
+
+    // defining ordinal scale for the legend
+    var ordinal = d3.scaleOrdinal()
+                    .domain(parties_legend_abb)
+                    .range(parties_colors);
+
+    var party_legend_div = d3.select("#legendcontain")
+                        .append("div")
+                        .classed("partyLegendSVGDiv", true)
+
+
+    party_legend_div.append('p')
+                  .text('Political Party')
+                  .style('font-size', '12px')
+                  .style('text-align', 'center')
+                  .style('margin-bottom', '-10px');
+
+    var party_legend_svg = party_legend_div.append("svg")
+                                          .classed("partyLegendSVG", true)
+                                          .attr('width', 280)
+                                          .attr('height', 50);
+
+    party_legend_svg.append("g")
+      .attr("class", "legendOrdinal")
+      .attr("transform", "translate(20,20)");
+    //
+    var legendOrdinal = d3.legendColor()
+      .shapePadding(3)
+      .shapeWidth(25)
+      .shapeHeight(10)
+      .scale(ordinal)
+      .orient('horizontal');
+
+    party_legend_svg.select(".legendOrdinal")
+      .call(legendOrdinal);
+
+    var VM_legend_div = d3.select("#legendcontain")
+                        .append("div")
+                        .classed("VMLegendSVGDiv", true)
+
+    VM_legend_div.append('p')
+                  .text('Vote Margin')
+                  .style('font-size', '12px')
+                  .style('text-align', 'center')
+                  .style('margin-bottom', '-10px');
+
+    var VM_legend_svg =  VM_legend_div.append("svg")
+                                      .classed("VMLegendSVG", true)
+                                      .attr('width', 170)
+                                      .attr('height', 50);
+
+    var circLegDomain = [0,25,50,75,100];
+    var circLegRange = circLegDomain.map(d => getCircleSize(d) * 1.770600970553169 * 0.7);
+    var circLegDomain = circLegDomain.map(d => d + "%");
+
+    var circLegScale = d3.scaleOrdinal().domain(circLegDomain).range(circLegRange);
+
+    VM_legend_svg.append("g")
+      .attr("class", "legendSize")
+      .attr("transform", "translate(25, 20)");
+
+    var legendSize = d3.legendSize()
+      .scale(circLegScale )
+      .shape('circle')
+      .shapePadding(20)
+      .labelOffset(15)
+      .orient('horizontal');
+
+    VM_legend_svg.select(".legendSize")
+      .call(legendSize);
+
+    // changing the style of legend text and circles
+    d3.selectAll(".VMLegendSVG text")
+      .style('font-size', 9);
+
+    d3.selectAll(".VMLegendSVG circle")
+      .style('fill', 'none')
+      .style('stroke', 'black');
+
     // preprocessing_data
     function voteDataPreP(data){
       return data.map(function(d){
