@@ -86,7 +86,9 @@ function create08NAMap(){
       "Muttahida Qaumi Movement Pakistan",
       "Pashtoonkhwa Milli Awami Party",
       "National Party",
-      "Balochistan National Party"
+      "Balochistan National Party",
+      "MUTTHIDA MAJLIS-E-AMAL PAKISTAN",
+      "Balochistan National Party (Awami)"
     ];
 
     // defining colors mapping to parties / other color is mapped to multiple parties
@@ -109,6 +111,8 @@ function create08NAMap(){
       other_color,
       "#FF8A65",
       "#BDBDBD",
+      other_color,
+      other_color,
       other_color,
       other_color,
       other_color
@@ -216,16 +220,37 @@ function create08NAMap(){
 
       // adding vote margin and radius and init radius to results
       result.forEach(function(d){
+        if (d["Valid Votes"] == 0){
+          d["Valid Votes"] = d3.sum(d.results.map(d => d.votes))
+          d["Percentage of Votes Polled to Registered Voters"] = ((d3.sum(d.results.map(d => d.votes))/ d["Registered Votes"]) * 100).toFixed(2)
+          d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
+          console.log(d.voteMargin);
+          console.log(getCircleSize(d.voteMargin));
+          console.log(d);
+          console.log(d.results);
+        }
+
         d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
-        d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
-        d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
+        d.radius = getCircleSize(d.voteMargin);
+        d.radiusInit = getCircleSize(d.voteMargin);
       })
 
       // adding initial x and y positions of seats/ nodes (start of the force simulation)
+      // some additional processing to deal with missing voter data
       result.forEach(function(d){
         d.x = getCentroid(d.PrimaryDistrict)[0];
         d.y = getCentroid(d.PrimaryDistrict)[1];
+
       });
+
+
+      //
+      // result.forEach(function(d){
+      //
+      //   }
+      //   //
+      //
+      // })
 
       // assigning results to nodes
       nodes = result;
@@ -641,7 +666,7 @@ function create08NAMap(){
           "Other"
         ];
         // define parts abbs and colors
-        var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Rest"))
+        var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Other"))
         var parties_colors = parties_legend.map(d => (d != "Other" ? colorScale(d) : "#03A9F4"))
 
         // defining ordinal scale for the legend
@@ -767,7 +792,7 @@ function create08NAMap(){
     d3.select('#barsvg')
       .remove()
 
-    makeSummBar(NA_summary);
+    makeSummBar(NA_summary08);
 
   }
 

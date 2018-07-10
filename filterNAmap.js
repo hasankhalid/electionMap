@@ -40,12 +40,14 @@ var unique_parties = [
   "Muttahida Qaumi Movement Pakistan",
   "Pashtoonkhwa Milli Awami Party",
   "National Party",
-  "Balochistan National Party"];
+  "Balochistan National Party",
+  "Balochistan National Party (Awami)",
+  "MUTTHIDA MAJLIS-E-AMAL PAKISTAN"
+];
 
 var parties_in_legend = [
   "Pakistan Tehreek-e-Insaf",
   "Jamiat Ulama-e-Islam (F)",
-  "Awami National Party",
   "Pakistan Muslim League (N)",
   "Independent",
   "Pakistan Muslim League",

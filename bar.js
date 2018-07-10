@@ -4,7 +4,9 @@
 //         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
 // NAtional assembly summary
-var NA_summary = [{"Pakistan Tehreek-e-Insaf":28,"Jamiat Ulama-e-Islam (F)":11,"Other":16,"Pakistan Muslim League (N)":126,"Independent":29,"Pakistan Muslim League":2,"Pakistan Peoples Party Parliamentarians":34,"Pakistan Muslim League (F)":5,"Muttahida Qaumi Movement Pakistan":18}]
+var NA_summary = [{"Pakistan Tehreek-e-Insaf":28,"Jamiat Ulama-e-Islam (F)":11,"Other":16,"Pakistan Muslim League (N)":126,"Independent":29,"Pakistan Muslim League":2,"Pakistan Peoples Party Parliamentarians":34,"Pakistan Muslim League (F)":5,"Muttahida Qaumi Movement Pakistan":18}];
+
+var NA_summary08 = [{"Other":19,"Pakistan Peoples Party Parliamentarians":89,"Independent":30,"Pakistan Muslim League (N)":68,"Pakistan Muslim League":38,"Pakistan Muslim League (F)":3,"Muttahida Qaumi Movement Pakistan":19}];
 
 // Provincial assembly summary
 // KP

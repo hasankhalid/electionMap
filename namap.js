@@ -641,7 +641,7 @@ function createNAMap(){
           "Other"
         ];
         // define parts abbs and colors
-        var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Rest"))
+        var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Other"))
         var parties_colors = parties_legend.map(d => (d != "Other" ? colorScale(d) : "#03A9F4"))
 
         // defining ordinal scale for the legend

@@ -12,6 +12,9 @@ function abbreviate(party) {
       case "Awami National Party":
           return 'ANP';
           break;
+      case "MUTTHIDA MAJLIS-E-AMAL PAKISTAN":
+          return 'MMA';
+          break;
       case "Awami Jamhuri Ittehad Pakistan":
           return 'AJIP';
           break;
