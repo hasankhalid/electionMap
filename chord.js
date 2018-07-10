@@ -455,8 +455,8 @@ function createChord() {
         }
 
         else {
-      //    d3.select(".chordtool").remove();
-        //  d3.select(".chordtoolexpand").remove();
+          d3.select(".chordtool").remove();
+          d3.select(".chordtoolexpand").remove();
         }
       }
     }
