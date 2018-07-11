@@ -302,13 +302,31 @@
 
         if (electionYear === 2008) {
           $('#flow').hide();
+          $('#chorddisclaim').hide();
           create08NAMap();
+          $("#NA").addClass('active');
+          $(".PA").removeClass('active');
+          $("#flow").removeClass('active');
+          $(".dwvs").removeClass('active');
+          $("#dropdownProvinceLink").hide();
+          $("#votesharedropdown").hide();
+          $("#filterdropdown").show().addClass('animated fadeInDefault');
+          $('#partyFilters').hide();
+          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
         }
         else {
           $('#flow').show()
           $('#2008disclaim').hide();
           $(".disclaimer").css('margin-bottom', '15px');
+          $("#NA").addClass('active');
+          $(".PA").removeClass('active');
+          $("#flow").removeClass('active');
+          $(".dwvs").removeClass('active');
+          $("#dropdownProvinceLink").hide();
+          $("#votesharedropdown").hide();
+          $("#filterdropdown").show().addClass('animated fadeInDefault');
           createNAMap();
+          $('#partyFilters').hide();
           setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
         }
       })
@@ -333,15 +351,14 @@
         $("#provincefilterbutt").show();
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
+        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
+        $(".disclaimer").css('margin-bottom', '15px');
         if (electionYear === 2013) {
-          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
           createNAMap();
-          $(".disclaimer").css('margin-bottom', '15px');
         }
         else if (electionYear === 2008) {
           create08NAMap();
           $('#2008disclaim').hide();
-          $(".disclaimer").css('margin-bottom', '15px');
         }
       });
       $(".PA").click(function() {
