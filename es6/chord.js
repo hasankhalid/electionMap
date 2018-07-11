@@ -44,7 +44,7 @@ function createChord() {
 
   removeAllDisplay();
 
-  d3.csv('../essentials/one_one_mapping.csv', function(error, one_one_map){
+  d3.csv('./essentials/one_one_mapping.csv', function(error, one_one_map){
 
     function getWinParty(seat, year){
       var data = year == 2013 ? elections_2013 : elections_2008;
