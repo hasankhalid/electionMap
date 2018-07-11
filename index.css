@@ -817,8 +817,12 @@ g.legendOrdinal text{
 
 @media screen and (max-width: 340px) {
   #partyFilters {
-    font-size: 11px;
+    font-size: 10px;
   }
+}
+
+.youtubelink:hover, .youtubelink:focus {
+  text-decoration: none;
 }
 
 /*d3 styling section 2 */

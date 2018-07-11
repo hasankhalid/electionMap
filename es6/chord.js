@@ -44,7 +44,7 @@ function createChord() {
 
   removeAllDisplay();
 
-  d3.csv('../essentials/one_one_mapping.csv', function(error, one_one_map){
+  d3.csv('./essentials/one_one_mapping.csv', function(error, one_one_map){
 
     function getWinParty(seat, year){
       var data = year == 2013 ? elections_2013 : elections_2008;
@@ -59,6 +59,9 @@ function createChord() {
       d.party_2008_abb = abbreviate(getWinParty(d['2008'], 2008));
       d.party_2013_abb = abbreviate(getWinParty(d['2013'], 2013));
     })
+
+    d3.selectAll("#PA, #NA, #dwvs, #flow")
+      .attr('disabled', null)
 
 
     // console.log(one_one_map);

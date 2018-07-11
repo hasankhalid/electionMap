@@ -99,6 +99,10 @@ function createCartogram(){
 
     // function executed by d3.queue
     function drawCartogram(error, topology, k_topology, pak_topology, pak_prov_topology, na_seats_2013){
+
+      d3.selectAll("#PA, #NA, #dwvs, #flow")
+        .attr('disabled', null)
+
       var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
       var kshmr_path_data = topojson.feature(k_topology, k_topology.objects.JAndKashmir).features;
       var nat_path_data = topojson.feature(pak_topology, pak_topology.objects.Pakistan_NationalBoundary).features;
