@@ -32,13 +32,13 @@
           <li class="nav-item">
             <div style="display: flex">
               <img class="ballot" src="./resources/ballot1.svg"></img>
-              <span year="2008" class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
+              <span id="2008" year="2008" class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
             </div>
           </li>
           <li class="nav-item">
             <div style="display: flex">
               <img class="ballot" src="./resources/ballot2.svg"></img>
-              <span year="2013" class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2013</span>
+              <span id="2013" year="2013" class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2013</span>
             </div>
           </li>
           <li class="nav-item socialicons">
@@ -52,13 +52,13 @@
     </nav>
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimer">
       <div class="container">
-        <p style="margin-bottom: 0px;">The data for the results presented on this site are reported by the Election Commision of Pakistan on this <a href="https://www.ecp.gov.pk/ResultDetails.aspx?EleId=3&Election=General%20Election%2011%20May%202013"><span style="text-decoration: none; color: #FFEB3B;">web page</span></a>. The data are updated till May 11, 2013.</p>
+        <p style="margin-bottom: 0px;">The data for the results presented on this site are reported by the Election Commision of Pakistan on this <a target="_blank" href="https://www.ecp.gov.pk/ResultDetails.aspx?EleId=3&Election=General%20Election%2011%20May%202013"><span style="text-decoration: none; color: #FFEB3B;">web page</span></a>. The data are updated till May 11, 2013.</p>
       </div>
     </div>
 
     <div id="chorddisclaim"class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimerchord">
       <div class="container">
-        <p style="margin-bottom: 0px;">This visualization contains data of 263 NA seats for which results for both 2008 and 2013 elections are reported on the ECP website, To help understand this chart, visit this <a style="text-decoration: underline;" href="https://www.youtube.com/watch?v=Et6fyBQ-euA&feature=youtu.be"><span class="youtubelink" style="text-decoration: none; color: #D32F2F;">link</span></a></p>
+        <p style="margin-bottom: 0px;">This visualization contains data of 263 NA seats for which results for both 2008 and 2013 elections are reported on the ECP website, To help understand this chart, visit this <a target="_blank" style="text-decoration: underline;" href="https://www.youtube.com/watch?v=Et6fyBQ-euA&feature=youtu.be"><span class="youtubelink" style="text-decoration: none; color: #D32F2F;">link</span></a></p>
       </div>
     </div>
 
@@ -296,6 +296,8 @@
 
       var electionYear = 2013;
       var nationalFilter = true;
+      $("#filterdropdown").hide();
+      $("#2013").css('color', '#1976D2');
 
       $(".electlink").click(function() {
         electionYear = parseInt($(this).attr('year'));
@@ -310,10 +312,12 @@
           $(".dwvs").removeClass('active');
           $("#dropdownProvinceLink").hide();
           $("#votesharedropdown").hide();
-          $("#filterdropdown").show().addClass('animated fadeInDefault');
           $('#partyFilters').hide();
+          $("#filterdropdown").hide();
           $("#provinceFilters").hide();
           $('#rangeFilters').hide();
+          $("#2008").css('color', '#1976D2');
+          $("#2013").css('color', '#757575');
         }
         else {
           $('#flow').show()
@@ -325,11 +329,13 @@
           $(".dwvs").removeClass('active');
           $("#dropdownProvinceLink").hide();
           $("#votesharedropdown").hide();
-          $("#filterdropdown").show().addClass('animated fadeInDefault');
           createNAMap();
           $('#partyFilters').hide();
           $("#provinceFilters").hide();
+          $("#filterdropdown").hide();
           $('#rangeFilters').hide();
+          $("#2008").css('color', '#757575');
+          $("#2013").css('color', '#1976D2');
         }
       })
 
@@ -346,11 +352,11 @@
         $("#votesharedropdown").hide();
         $("#chorddisclaim").hide();
         $("#dropdownProvinceLink").hide();
+        $("#filterdropdown").hide();
         $("#footer").css('margin-top', '0px');
         $("#NAmap").show().addClass('animated fadeInDefault');
         $(".filterscontstantheight").show();
         $("#provincefilterbutt").show();
-        $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
         $(".disclaimer").css('margin-bottom', '15px');
         if (electionYear === 2013) {
@@ -366,10 +372,9 @@
         $(this).addClass('active');
         $("#NA").removeClass('active');
         $("#flow").removeClass('active');
+        $("#filterdropdown").hide();
         $(".dwvs").removeClass('active');
         $("#chorddisclaim").hide();
-        $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
-        $("#filterdropdown").show().addClass('animated fadeInDefault');
         if (electionYear === 2013) {
           makeProvMaps();
           $(".disclaimer").css('margin-bottom', '15px');
@@ -377,19 +382,15 @@
         else if (electionYear === 2008) {
           $('#2008disclaim').show().addClass('animated fadeInDefault');
           $(".disclaimer").css('margin-bottom', '0px');
-
           d3.select("#vizcontain")
             .selectAll('*')
             .remove()
-
           // remove all contents of legend
           d3.select("#legendcontain")
             .selectAll('*')
             .remove()
-
           d3.select('#barsvg')
             .remove()
-
           d3.select("#majorityVote")
             .selectAll('*')
             .remove()
@@ -614,6 +615,9 @@
       $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt, .electlink").click(function() {
         if (nationalFilter === true) {
           filterCircles(null, null, null);
+        }
+        else {
+          filterCirclesPr(selectedProvince, null, null);
         }
         $('.provincefilter').attr("active", "disabled");
         $('.provincefilter').prop('checked', false);
