@@ -59,11 +59,11 @@ function create08NAMap(){
 
     // reading in alll the files and defining the execution function
     d3.queue()
-      .defer(d3.json, "pakistan_districts.topojson")
-      .defer(d3.json, "JAndKashmir.topojson")
-      .defer(d3.json, "Pak_prov.topojson")
-      .defer(d3.json, "Pakistan_NationalBoundary.topojson")
-      .defer(d3.csv, "NA_seats_2008.csv")
+      .defer(d3.json, "./essentials/pakistan_districts.topojson")
+      .defer(d3.json, "./essentials/JAndKashmir.topojson")
+      .defer(d3.json, "./essentials/Pak_prov.topojson")
+      .defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson")
+      .defer(d3.csv, "./essentials/NA_seats_2008.csv")
       .await(drawElectMap)
 
     // listing the winning parties
@@ -368,8 +368,8 @@ function create08NAMap(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 20)
-            .style("fill", "none")
-            //.style("fill-opacity", 0.5)
+            .style("fill", "grey")
+            .style("fill-opacity", 0.5)
             .style("pointer-events", "all")
             .style('display', 'none')
 
@@ -539,17 +539,32 @@ function create08NAMap(){
             tooltip.append('div')
             .classed('candidatename', true)
             .html(function(d){
-              return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              if (datum.results[2] ===  undefined) {
+                return '<span class="mobiletoolremove">' + 'N/A'  + '</span>'
+              }
+              else {
+                return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate)  + '</span>'
+              } //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             })
             tooltip.append('div')
             .classed('partyname', true)
             .html(function(d){
-              return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              if (datum.results[2] ===  undefined) {
+                return '<span class="mobiletoolremove">' + 'N/A'  + '</span>'
+              }
+              else {
+                return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              }
             })
             tooltip.append('div')
             .classed('votes', true)
             .html(function(d){
-              return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              if (datum.results[2] ===  undefined) {
+                return '<span class="mobiletoolremove">' + 'N/A'  + '</span>'
+              }
+              else {
+                return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              }
             })
 
             // create the tooltip for na-map

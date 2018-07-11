@@ -14,7 +14,7 @@ SimplePromise.prototype = {
     if (typeof onFulfilled === 'function') {
         fulfilledTask = function () {
             var res = onFulfilled(self.promiseResult);
-            returnValue.resolve(res); 
+            returnValue.resolve(res);
         };
     } else {
         fulfilledTask = function () {
@@ -87,7 +87,7 @@ SimplePromise.prototype = {
     this._doReject(error);
     return this; // enable chaining
 	},
-  _doReject : function(error) { 
+  _doReject : function(error) {
     this.promiseState = 'rejected';
     this.promiseResult = error;
     this._clearAndEnqueueReactions(this.rejectReactions);
@@ -145,8 +145,7 @@ function makeProvMaps(){
       .selectAll('*')
       .remove()
 
-    d3.select("#barcontain")
-      .select('#barsvg')
+    d3.select('#barsvg')
       .remove()
   }
 
@@ -166,12 +165,17 @@ function makeProvMaps(){
   var svg_g = svg.append("g")
                 .classed("map_group_province", "true");
 
-  d3.queue()
-    .defer(d3.json, "pakistan_districts.topojson")
-    .defer(d3.json, "Pak_prov.topojson")
-    .defer(d3.json, "prov2013.json")
-    .defer(d3.csv, "prov_seats_2013.csv")
-    .await(drawProvincial)
+	var startTime = window.performance.now();
+
+  q = d3.queue();
+    q.defer(d3.json, "./essentials/pakistan_districts.topojson")
+    q.defer(d3.json, "./essentials/Pak_prov.topojson")
+    q.defer(d3.json, "./essentials/prov2013.json")
+    q.defer(d3.csv, "./essentials/prov_seats_2013.csv")
+    q.await(drawProvincial)
+
+	console.log(window.performance.now() - startTime);
+
 
   // listing the parties from na map
   var parties = [
@@ -312,7 +316,7 @@ function makeProvMaps(){
 
 
     // assigning results to nodes
-    nodes = result;
+    var nodes_prov = result;
 
 
     /////////////////////////////////////////////////////////
@@ -321,8 +325,8 @@ function makeProvMaps(){
 
     // force with charge, forceX, forceY and collision detection
 
-    var simulation = d3.forceSimulation(nodes)
-                      .force('charge', d3.forceManyBody().strength(0.2))
+    var simulation_prov = d3.forceSimulation(nodes_prov)
+                      .force('charge', d3.forceManyBody().strength(0.3))
                       .force('x', d3.forceX().x(function(d) {
                         return getCentroid(d.PrimaryDistrict)[0];
                       }))
@@ -332,7 +336,7 @@ function makeProvMaps(){
                       .force('collision', d3.forceCollide().radius(function(d) {
                         return d.radius + 0.65;
                       }))
-                      .on('tick', ticked)
+                      .on('tick', ticked_prov)
                       .alpha(0.525)
                       .alphaDecay(0.07)
                       .on('end', function() {end_force()})
@@ -342,7 +346,7 @@ function makeProvMaps(){
       var u = svg.append('g')
                   .classed('na-seats-group', true)
                   .selectAll('.pSeat') // .selectAll('circle')
-                  .data(nodes)
+                  .data(nodes_prov)
 
       // entering all nodes // bubbles
       // initializing position of nodes
@@ -388,7 +392,7 @@ function makeProvMaps(){
       u.exit().remove()
 
 
-      var voronoi = d3.voronoi()
+      var voronoi_prov = d3.voronoi()
                         .x(d => d.x) // with some noise on x and y centers
                         .y(d => d.y)
                         .extent([[0, 0], [width, height]]);
@@ -408,10 +412,10 @@ function makeProvMaps(){
         // making clip circles over the seat circles
         //Append larger circles (that are clipped by clipPaths)
         svg.append('g').classed('clip-circles', true)
-            .selectAll(".circle-catcher.pMap")
-            .data(nodes)
+            .selectAll(".circle-catcher-prov.pMap")
+            .data(nodes_prov)
             .enter().append("circle")
-            .attr("class", function(d,i) { return "circle-catcher pMap " + d.seat; })
+            .attr("class", function(d,i) { return "circle-catcher-prov pMap " + d.seat; })
             //Apply the clipPath element by referencing the one with the same countryCode
             .attr("clip-path", function(d, i) { return "url(#clip" + d.seat + ")"; })
             //Bottom line for safari, which doesn't accept attr for clip-path
@@ -429,7 +433,7 @@ function makeProvMaps(){
 
         translate = [-345.4863342221814,54.93697529051545 + y_offset_tx];
 
-        d3.selectAll(".circle-catcher.pMap")
+        d3.selectAll(".circle-catcher-prov.pMap")
           .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
 
       //  console.log(nodes)
@@ -437,7 +441,7 @@ function makeProvMaps(){
 
         var polygon =  svg.append("defs")
                           .selectAll(".clip")
-                          .data(voronoi.polygons(nodes))
+                          .data(voronoi_prov.polygons(nodes_prov))
                           //First append a clipPath element
                           .enter().append("clipPath")
                           .attr("class", "clip")
@@ -451,7 +455,7 @@ function makeProvMaps(){
           filterCirclesPr(["KP"])
     }
 
-    function ticked() {
+    function ticked_prov() {
            // updating the circle positions
            d3.selectAll(".pSeatCircle")
              .attr('cx', function(d) {
@@ -466,7 +470,7 @@ function makeProvMaps(){
 
     function activateMouseOv(d, i){
       // extract unique class of the hovered voronoi cell (replace "circle-catcher " to get seat)
-      var unique_class = d3.select(this).attr('class').replace("circle-catcher pMap ", "");
+      var unique_class = d3.select(this).attr('class').replace("circle-catcher-prov pMap ", "");
       // selecting the circle with the gotten id (first select group then circle)
       var circle_group = d3.select('g' + "." + unique_class)
       var circle_select = circle_group.select('circle');
@@ -632,7 +636,7 @@ function makeProvMaps(){
 
     function activateMouseOut(d, i){
         // retrieve unique class of voronoi circle catcher
-        var unique_class = d3.select(this).attr('class').replace("circle-catcher pMap ", "");
+        var unique_class = d3.select(this).attr('class').replace("circle-catcher-prov pMap ", "");
         // select the circle with the gotten id
         circle_select = d3.select("circle" + "#" + unique_class);
 
@@ -662,19 +666,19 @@ function makeProvMaps(){
           d3.selectAll('.tool').remove()
     }
 
-    function waitForAllTransitions(transition, callback) { 
-	    var n = 0; 
-	    transition 
-	        .on("start",function() { ++n; }) 
+    function waitForAllTransitions(transition, callback) {
+	    var n = 0;
+	    transition
+	        .on("start",function() { ++n; })
 	        .on("end", function() { if (!--n) {
 	        	callback.apply(this, arguments);
-	        } 
-	    }); 
+	        }
+	    });
   	}
 
   	function removeInactiveCircles(inactive_circles){
 
-  		var sp = new SimplePromise(); 
+  		var sp = new SimplePromise();
   		inactive_circles.transition('circle_trans')
       .duration(300)
       .attr('r', '0').call(waitForAllTransitions,
@@ -687,7 +691,7 @@ function makeProvMaps(){
 
   	function repaintStrokes(inactive, active){
 
-  		var sp = new SimplePromise(); 
+  		var sp = new SimplePromise();
 
   		inactive.transition('map_move')
 			.duration(200)
@@ -707,7 +711,7 @@ function makeProvMaps(){
 
   	function setActiveCircleRadius(active_circles){
 
-  		var sp = new SimplePromise(); 
+  		var sp = new SimplePromise();
 
 			active_circles.transition('circle_trans')
       .duration(0)
@@ -724,7 +728,7 @@ function makeProvMaps(){
 
   	function zoomAndPanMap(active){
 
-  		var sp = new SimplePromise(); 
+  		var sp = new SimplePromise();
 
 			var bounds = path.bounds(active.datum()),
 					dx = bounds[1][0] - bounds[0][0],
@@ -758,7 +762,7 @@ function makeProvMaps(){
 
   		d3.selectAll(".pSeatCircle")
 			.style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
-			 
+
 			d3.selectAll(".pSeatCircle")
 			.transition('zoom_trans')
 			.duration(300)
@@ -774,7 +778,7 @@ function makeProvMaps(){
 
       var sp = new SimplePromise();
 
-  		d3.selectAll(".circle-catcher.pMap")
+  		d3.selectAll(".circle-catcher-prov.pMap")
       .transition('zoom_trans')
       .duration(1)
       .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)")
@@ -786,7 +790,7 @@ function makeProvMaps(){
       inactive_circles.style('opacity', 0);
 
       return sp;
-  	}  	
+  	}
 
     function makeProvMap(Prov, type){
 

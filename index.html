@@ -278,19 +278,19 @@
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./ionrange/ion.rangeSlider.min.js"></script>
-    <script async src="elections_2013.js"></script>
-    <script async src="elections_2008.js"></script>
+    <script async src="./essentials/elections_2013.js"></script>
+    <script async src="./essentials/elections_2008.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
-    <script src="utils.js"></script>
-    <script async src="provMaps.js"></script>
-    <script src="bar.js"></script>
-    <script src="namap.js"></script>
-    <script src="namap_2008.js"></script>
-    <script async src="cartogram.js"></script>
-    <script async src="chord.js"></script>
-    <script async src="filterNAmap.js"></script>
+    <script src="./essentials/utils.js"></script>
+    <script async src="./es6/provMaps.js"></script>
+    <script src="./es6/bar.js"></script>
+    <script src="./es6/namap.js"></script>
+    <script src="./es6/namap_2008.js"></script>
+    <script async src="./es6/cartogram.js"></script>
+    <script async src="./es6/chord.js"></script>
+    <script async src="./es6/filterNAmap.js"></script>
 
     <script>
 
@@ -595,7 +595,7 @@
       });
 
 
-      $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt").click(function() {
+      $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt, .electlink").click(function() {
         if (nationalFilter === true) {
           filterCircles(null, null, null);
         }

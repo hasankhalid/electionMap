@@ -90,11 +90,11 @@ function createCartogram(){
                   .classed("map_group", "true");
     // queue function to read in multiple flat files
     d3.queue()
-      .defer(d3.json, "pakistan_districts.topojson")
-      .defer(d3.json, "JAndKashmir.topojson")
-      .defer(d3.json, "Pakistan_NationalBoundary.topojson")
-      .defer(d3.json, "Pak_prov.topojson")
-      .defer(d3.csv, "NA_seats_2013.csv")
+      .defer(d3.json, "./essentials/pakistan_districts.topojson")
+      .defer(d3.json, "./essentials/JAndKashmir.topojson")
+      .defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson")
+      .defer(d3.json, "./essentials/Pak_prov.topojson")
+      .defer(d3.csv, "./essentials/NA_seats_2013.csv")
       .await(drawCartogram)
 
     // function executed by d3.queue
