@@ -303,6 +303,7 @@
         electionYear = parseInt($(this).attr('year'));
 
         if (electionYear === 2008) {
+          nationalFilter = true;
           $('#flow').hide();
           $('#chorddisclaim').hide();
           create08NAMap();
@@ -320,6 +321,7 @@
           $("#2013").css('color', '#757575');
         }
         else {
+          nationalFilter = true;
           $('#flow').show()
           $('#2008disclaim').hide();
           $(".disclaimer").css('margin-bottom', '15px');

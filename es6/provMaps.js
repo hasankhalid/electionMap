@@ -373,8 +373,8 @@ function makeProvMaps(){
 														.duration(1500)
 														.style('fill-opacity', 0);
 
-												setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault'); }, 1000);
-												setTimeout(function(){ $("#dropdownProvinceLink").show().addClass('animated fadeInDefault'); }, 1000);					
+												setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');; }, 1000);
+												setTimeout(function(){ $("#dropdownProvinceLink").show().addClass('animated fadeInDefault'); }, 1000);
 
 												setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1250);
 

@@ -284,7 +284,7 @@ function createNAMap(){
                             .attr('disabled', null)
 
 
-                          setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault'); }, 1000);
+                          setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');; }, 1000);
 
                           setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1500);
 
