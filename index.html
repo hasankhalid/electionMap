@@ -312,8 +312,6 @@
           $("#votesharedropdown").hide();
           $("#filterdropdown").show().addClass('animated fadeInDefault');
           $('#partyFilters').hide();
-          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
-          $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
           $("#provinceFilters").hide();
           $('#rangeFilters').hide();
         }
@@ -330,8 +328,6 @@
           $("#filterdropdown").show().addClass('animated fadeInDefault');
           createNAMap();
           $('#partyFilters').hide();
-          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
-          $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
           $("#provinceFilters").hide();
           $('#rangeFilters').hide();
         }
@@ -339,7 +335,6 @@
 
       $(window).on('load', function() {
         createNAMap();
-        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
       })
 
       $("#NA").click(function() {
@@ -357,7 +352,6 @@
         $("#provincefilterbutt").show();
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
-        setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2500);
         $(".disclaimer").css('margin-bottom', '15px');
         if (electionYear === 2013) {
           createNAMap();
@@ -377,7 +371,6 @@
         $("#dropdownProvinceLink").show().addClass('animated fadeInDefault');
         $("#filterdropdown").show().addClass('animated fadeInDefault');
         if (electionYear === 2013) {
-          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 2250);
           makeProvMaps();
           $(".disclaimer").css('margin-bottom', '15px');
         }

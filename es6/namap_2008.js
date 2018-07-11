@@ -304,6 +304,9 @@ function create08NAMap(){
 
                             d3.selectAll("#PA, #dwvs, #flow")
                               .attr('disabled', null)
+
+                            setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1500);
+
                         })
 
       //////////////////////////////////////////////////////////////

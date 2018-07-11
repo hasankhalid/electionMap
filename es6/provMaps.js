@@ -372,7 +372,10 @@ function makeProvMaps(){
 														.delay(2500)
 														.duration(1500)
 														.style('fill-opacity', 0);
-												})
+
+												setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1250);
+
+											})
 
 
 	      // a group containing all na seat circles
