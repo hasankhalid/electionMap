@@ -306,7 +306,6 @@
           nationalFilter = true;
           $('#flow').hide();
           $('#chorddisclaim').hide();
-          create08NAMap();
           $("#NA").addClass('active');
           $(".PA").removeClass('active');
           $("#flow").removeClass('active');
@@ -316,6 +315,8 @@
           $("#dropdownProvinceLink").hide();
           $("#votesharedropdown").hide();
           $('#partyFilters').hide();
+          $(".filterscontstantheight").show();
+          create08NAMap();
           $("#filterdropdown").hide();
           $("#provinceFilters").hide();
           $('#rangeFilters').hide();
@@ -333,8 +334,9 @@
           $(".dwvs").removeClass('active');
           $("#dropdownProvinceLink").hide();
           $("#votesharedropdown").hide();
-          createNAMap();
           $('#partyFilters').hide();
+          $(".filterscontstantheight").show();
+          createNAMap();
           $("#provinceFilters").hide();
           $("#filterdropdown").hide();
           $('#rangeFilters').hide();
