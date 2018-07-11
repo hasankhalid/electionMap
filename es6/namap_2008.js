@@ -56,6 +56,14 @@ function create08NAMap(){
     var svg_g = svg.append("g")
               .classed("map_group", "true");
 
+    var status_message = svg.append("text")
+                        .attr("id", "status_message")
+                        .attr('x', '50%')
+                        .attr('y', 10)
+                        .style('text-anchor', 'middle')
+                        .style('fill', '#D32F2F')
+                        .style('font-size', '12px')
+                        .text('Please wait for the layout to stabilize')
 
     // reading in alll the files and defining the execution function
     d3.queue()
@@ -129,6 +137,10 @@ function create08NAMap(){
 
     // execution function (Draws map and gets bubbles positioned on map)
     function drawElectMap(error, topology, k_topology, pak_prov_topology, pak_topology, na_seats_2008){
+
+      d3.selectAll("#PA, #dwvs, #flow")
+        .attr('disabled', true)
+
       // relevant data extracted from topojson files
       var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
       var kshmr_path_data = topojson.feature(k_topology, k_topology.objects.JAndKashmir).features;
@@ -281,6 +293,17 @@ function create08NAMap(){
                           redrawVoronoi()
                           d3.select('svg').selectAll(".circle-catcher")
                             .style('display', 'block')
+
+                          d3.select('#status_message')
+                            .text('All set')
+                            .style('fill', '#1976D2')
+                            .transition('status_trans')
+                            .delay(2500)
+                            .duration(1500)
+                            .style('fill-opacity', 0);
+
+                            d3.selectAll("#PA, #dwvs, #flow")
+                              .attr('disabled', null)
                         })
 
       //////////////////////////////////////////////////////////////
@@ -368,8 +391,8 @@ function create08NAMap(){
             .attr("cy", d => d.y)
             //Make the radius a lot bigger
             .attr("r", 20)
-            .style("fill", "grey")
-            .style("fill-opacity", 0.5)
+            .style("fill", "none")
+          //  .style("fill-opacity", 0.5)
             .style("pointer-events", "all")
             .style('display', 'none')
 

@@ -60,6 +60,9 @@ function createChord() {
       d.party_2013_abb = abbreviate(getWinParty(d['2013'], 2013));
     })
 
+    d3.selectAll("#PA, #NA, #dwvs, #flow")
+      .attr('disabled', null)
+
 
     // console.log(one_one_map);
     // one_one_map = one_one_map.filter(d => d.party_2008 !=null && d.party_2013!=null);
