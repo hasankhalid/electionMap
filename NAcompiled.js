@@ -8,10 +8,13 @@ function createNAMap() {
 
     // remove all contents of legend
     d3.select("#legendcontain").selectAll('*').remove();
+
+    d3.select('#barsvg').remove();
+
+    d3.select("#majorityVote").selectAll('*').remove();
   }
 
   removeAllDisplay();
-
   function drawNAMap() {
 
     ////////////////////////////////////
@@ -42,8 +45,11 @@ function createNAMap() {
     // appending a group in the svg with a class map_group
     var svg_g = svg.append("g").classed("map_group", "true");
 
+    var status_message = svg.append("text").attr("id", "status_message").attr('x', '50%').attr('y', 10).style('text-anchor', 'middle').style('fill', '#D32F2F').style('font-size', '12px').text('Please wait for the layout to stabilize');
+
     // reading in alll the files and defining the execution function
-    d3.queue().defer(d3.json, "pakistan_districts.topojson").defer(d3.json, "JAndKashmir.topojson").defer(d3.json, "Pak_prov.topojson").defer(d3.json, "Pakistan_NationalBoundary.topojson").defer(d3.csv, "NA_seats_2013.csv").await(drawElectMap);
+
+    d3.queue().defer(d3.json, "./essentials/pakistan_districts.topojson").defer(d3.json, "./essentials/JAndKashmir.topojson").defer(d3.json, "./essentials/Pak_prov.topojson").defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson").defer(d3.csv, "./essentials/NA_seats_2013.csv").await(drawElectMap);
 
     // listing the winning parties
     var parties = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Qaumi Watan Party (Sherpao)", "Awami National Party", "Awami Jamhuri Ittehad Pakistan", "Pakistan Muslim League (N)", "Independent", "Jamaat-e-Islami Pakistan", "All Pakistan Muslim League", "Awami Muslim League Pakistan", "Pakistan Muslim League", "Pakistan Muslim League(Z)", "Pakistan Peoples Party Parliamentarians", "National Peoples Party", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Pashtoonkhwa Milli Awami Party", "National Party", "Balochistan National Party"];
@@ -62,6 +68,9 @@ function createNAMap() {
 
     // execution function (Draws map and gets bubbles positioned on map)
     function drawElectMap(error, topology, k_topology, pak_prov_topology, pak_topology, na_seats_2013) {
+
+      d3.selectAll("#PA, #dwvs, #flow").attr('disabled', true);
+
       // relevant data extracted from topojson files
       var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
       var kshmr_path_data = topojson.feature(k_topology, k_topology.objects.JAndKashmir).features;
@@ -153,6 +162,22 @@ function createNAMap() {
         return d.radius + 0.80;
       })).on('tick', ticked).alpha(0.525).alphaDecay(0.07).on('end', function () {
         redrawVoronoi();
+        d3.select('svg').selectAll(".circle-catcher").style('display', 'block');
+
+        // give an 'all set message at force end and transition it out'
+        d3.select('#status_message').text('All set').style('fill', '#1976D2').transition('status_trans').delay(2500).duration(1500).style('fill-opacity', 0);
+
+        d3.selectAll("#PA, #dwvs, #flow").attr('disabled', null);
+
+        setTimeout(function () {
+          $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');;
+        }, 1000);
+
+        $('#dropdownProvinceLink').hide();
+
+        setTimeout(function () {
+          $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
+        }, 1500);
       });
 
       //////////////////////////////////////////////////////////////
@@ -221,9 +246,9 @@ function createNAMap() {
         return d.y;
       })
       //Make the radius a lot bigger
-      .attr("r", 20).style("fill", "none")
+      .attr('r', 20).style("fill", "none")
       //  .style("fill-opacity", 0.5)
-      .style("pointer-events", "all");
+      .style("pointer-events", "all").style('display', 'none');
 
       d3.selectAll('circle.circle-catcher.NAmap').on("mouseover", activateMouseOv).on("mouseout", activateMouseOut);
       //Notice that we now have the mousover events on these circles
@@ -286,7 +311,7 @@ function createNAMap() {
           return function (t) {
             d.radius = i(t);
             that.attr('r', function (d) {
-              return d.radius;
+              return d.radius >= 0 ? d.radius : 0;
             });
             //simulation.nodes(nodes)
           };
@@ -352,13 +377,25 @@ function createNAMap() {
         });
 
         tooltip.append('div').classed('candidatename', true).html(function (d) {
-          return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate) + '</span>'; //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+          if (datum.results[2] === undefined) {
+            return '<span class="mobiletoolremove">' + 'N/A' + '</span>';
+          } else {
+            return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate) + '</span>'; //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+          }
         });
         tooltip.append('div').classed('partyname', true).html(function (d) {
-          return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>'; //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+          if (datum.results[2] === undefined) {
+            return '<span class="mobiletoolremove">' + 'N/A' + '</span>';
+          } else {
+            return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>'; //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+          }
         });
         tooltip.append('div').classed('votes', true).html(function (d) {
-          return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>'; //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+          if (datum.results[2] === undefined) {
+            return '<span class="mobiletoolremove">' + 'N/A' + '</span>';
+          } else {
+            return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>'; //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+          }
         });
 
         // create the tooltip for na-map
@@ -454,7 +491,7 @@ function createNAMap() {
       var parties_legend = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Pakistan Muslim League (N)", "Independent", "Pakistan Muslim League", "Pakistan Peoples Party Parliamentarians", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Other"];
       // define parts abbs and colors
       var parties_legend_abb = parties_legend.map(function (d) {
-        return d != "Other" ? abbreviate(d) : "Rest";
+        return d != "Other" ? abbreviate(d) : "Other";
       });
       var parties_colors = parties_legend.map(function (d) {
         return d != "Other" ? colorScale(d) : "#03A9F4";
@@ -517,6 +554,34 @@ function createNAMap() {
 
       return centroids;
     }
+
+    // keep the preprocessing code in comments
+
+    // preprocessing elections 2013 data:
+    // var election_13 = elections_2013.map(function(d){
+    //   return {
+    //     seat : d.district,
+    //     "Percentage of Votes Polled to Registered Voters" : +d['Percentage of Votes Polled to Registered Voters'].replace(' %', ''),
+    //     "Registered Votes" : +d['Registered Votes'],
+    //     "Votes Polled" : +d['Votes Polled'],
+    //     "Valid Votes" : +d['Valid Votes'],
+    //     "Rejected Votes" : +d['Rejected Votes'],
+    //     "results" : d['results']
+    //     .map(function(candidate){
+    //       return {
+    //         candidate: candidate['candidate'],
+    //         party: candidate['party'],
+    //         votes: +candidate['votes']
+    //       }
+    //     }).sort(function(a,b) {
+    //       return b.votes - a.votes;
+    //     })
+    //   };
+    //
+
+    d3.select('#barsvg').remove();
+
+    makeSummBar(NA_summary);
   }
 
   // call the draw na map function

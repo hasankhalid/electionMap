@@ -1,5 +1,29 @@
 "use strict";
 
+// processing 2008 elections data
+// var election_08 = elections_2008.map(function(d){
+//   return {
+//     seat : d.district,
+//     "Percentage of Votes Polled to Registered Voters" : +d['Percentage of Votes Polled to Registered Voters'].replace(' %', ''),
+//     "Registered Votes" : +d['Registered Votes'],
+//     "Votes Polled" : +d['Votes Polled'],
+//     "Valid Votes" : +d['Valid Votes'],
+//     "Rejected Votes" : +d['Rejected Votes'],
+//     "results" : d['results']
+//     .map(function(candidate){
+//       return {
+//         candidate: candidate['candidate'],
+//         party: candidate['party'],
+//         votes: +candidate['votes']
+//       }
+//     }).sort(function(a,b) {
+//       return b.votes - a.votes;
+//     })
+//   };
+// })
+//
+// console.log(JSON.stringify(election_08));
+
 function createChord() {
   function removeAllDisplay() {
     // remove all contents of viz
@@ -7,11 +31,15 @@ function createChord() {
 
     // remove all contents of legend
     d3.select("#legendcontain").selectAll('*').remove();
+
+    d3.select('#barsvg').remove();
+
+    d3.select("#majorityVote").selectAll('*').remove();
   }
 
   removeAllDisplay();
 
-  d3.csv('one_one_mapping.csv', function (error, one_one_map) {
+  d3.csv('./essentials/one_one_mapping.csv', function (error, one_one_map) {
 
     function getWinParty(seat, year) {
       var data = year == 2013 ? elections_2013 : elections_2008;
@@ -27,6 +55,8 @@ function createChord() {
       d.party_2008_abb = abbreviate(getWinParty(d['2008'], 2008));
       d.party_2013_abb = abbreviate(getWinParty(d['2013'], 2013));
     });
+
+    d3.selectAll("#PA, #NA, #dwvs, #flow").attr('disabled', null);
 
     // console.log(one_one_map);
     // one_one_map = one_one_map.filter(d => d.party_2008 !=null && d.party_2013!=null);
@@ -117,6 +147,23 @@ function createChord() {
       return d3.rgb(color(d.index)).darker();
     }).attr("d", arc);
 
+    // var groupTick = group.selectAll(".group-tick")
+    //   .data(function(d) { return groupTicks(d, 1e3); })
+    //   .enter().append("g")
+    //     .attr("class", "group-tick")
+    //     .attr("transform", function(d) { return "rotate(" + (d.angle * 180 / Math.PI - 90) + ") translate(" + outerRadius + ",0)"; });
+    //
+    // groupTick.append("line")
+    //     .attr("x2", 6);
+    //
+    // groupTick
+    //   .filter(function(d) { return d.value % 5e3 === 0; })
+    //   .append("text")
+    //     .attr("x", 8)
+    //     .attr("dy", ".35em")
+    //     .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180) translate(-16)" : null; })
+    //     .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
+    //     .text(function(d) { return formatValue(d.value); });
 
     g.append("g").attr("class", "ribbons").selectAll("path").data(function (chords) {
       return chords;
@@ -127,6 +174,14 @@ function createChord() {
     }).style('fill-opacity', 0.7).style('stroke-opacity', 0.7);
 
     //console.log(d3.select('.ribbons').data());
+
+    // // Returns an array of tick angles and values for a given group and step.
+    // function groupTicks(d, step) {
+    //   var k = (d.endAngle - d.startAngle) / d.value;
+    //   return d3.range(0, d.value, step).map(function(value) {
+    //     return {value: value, angle: value * k + d.startAngle};
+    //   });
+    // }
 
     // here ends the code for chord from mike bostocks block
 
@@ -289,6 +344,14 @@ function createChord() {
               return '<span>' + party_abbs[d.source.index] + " lost " + lost + (lost > 1 ? " seats" : " seat") + " to " + party_abbs[d.target.index] + '</span>'; //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
             });
 
+            /*      d3.select(this).append("title").append('tspan')
+                    .text(function(d){
+                      return party_abbs[d.source.index] + " gained from " + party_abbs[d.target.index] + " - " + gained + (gained > 1 ? " seats | " : " seat | " )
+                    })
+                   d3.select(this).select("title").append('tspan')
+                    .text(function(d){
+                      return party_abbs[d.source.index] + " lost from " + party_abbs[d.target.index] + " - " + lost + (lost > 1 ? " seats" : " seat");
+                    }) */
           }
         } else {
           d3.select(".chordtool").remove();
@@ -314,7 +377,7 @@ function createChord() {
         return '<img src="./resources/partylogos/kite.svg"></img>';
         break;
       case "PPPP":
-        return '<img style="transform: rotate(45deg);" src="./resources/partylogos/arrow.svg"></img>';
+        return '<img style="transform: rotate(45deg); -ms-transform: rotate(45deg); -webkit-transform: rotate(45deg);" src="./resources/partylogos/arrow.svg"></img>';
         break;
       case "APML":
         return '<img src="./resources/partylogos/eagle.svg"></img>';

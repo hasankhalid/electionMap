@@ -8,6 +8,10 @@ function createCartogram() {
 
     // remove all contents of legend
     d3.select("#legendcontain").selectAll('*').remove();
+
+    d3.select('#barsvg').remove();
+
+    d3.select("#majorityVote").selectAll('*').remove();
   }
 
   removeAllDisplay();
@@ -44,12 +48,18 @@ function createCartogram() {
     //.attr("viewBox", "0 0 1000 600")
     .attr("viewBox", "0 0 636 600").style("fill-opacity", 1).classed("map_in_a_box", "true").attr("id", "cartogram");
 
+    var party_title = svg.append("text").attr("id", "party_title").attr('x', "50%").attr('y', 18).text("Pakistan Tehreek-e-Insaf").style("text-anchor", "middle").style("font-size", "13px").style("fill", "#9E9E9E");
+
+
     var svg_g = svg.append("g").classed("map_group", "true");
     // queue function to read in multiple flat files
-    d3.queue().defer(d3.json, "pakistan_districts.topojson").defer(d3.json, "JAndKashmir.topojson").defer(d3.json, "Pakistan_NationalBoundary.topojson").defer(d3.json, "Pak_prov.topojson").defer(d3.csv, "NA_seats_2013.csv").await(drawCartogram);
+    d3.queue().defer(d3.json, "./essentials/pakistan_districts.topojson").defer(d3.json, "./essentials/JAndKashmir.topojson").defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson").defer(d3.json, "./essentials/Pak_prov.topojson").defer(d3.csv, "./essentials/NA_seats_2013.csv").await(drawCartogram);
 
     // function executed by d3.queue
     function drawCartogram(error, topology, k_topology, pak_topology, pak_prov_topology, na_seats_2013) {
+
+      d3.selectAll("#PA, #NA, #dwvs, #flow").attr('disabled', null);
+
       var path_data = topojson.feature(topology, topology.objects.pakistan_districts).features;
       var kshmr_path_data = topojson.feature(k_topology, k_topology.objects.JAndKashmir).features;
       var nat_path_data = topojson.feature(pak_topology, pak_topology.objects.Pakistan_NationalBoundary).features;
@@ -354,10 +364,14 @@ function createCartogram() {
         });
 
         tooltip.append('div').classed('cartotoolfooter', true).html(function (d) {
-          if (min_seat === max_seat) {
-            return '<span>Total seats: ' + total_seats + '</span><span>NA' + min_seat + '</span>';
+          if (selected_district_WS === 'Larkana') {
+            return '<span>Total seats: ' + total_seats + '</span><span>NA 204, NA 205, NA 207</span>';
           } else {
-            return '<span>Total seats: ' + total_seats + '</span><span>NA' + min_seat + ' - NA' + max_seat + '</span>';
+            if (min_seat === max_seat) {
+              return '<span>Total seats: ' + total_seats + '</span><span>NA' + min_seat + '</span>';
+            } else {
+              return '<span>Total seats: ' + total_seats + '</span><span>NA' + min_seat + ' - NA' + max_seat + '</span>';
+            }
           }
         });
 
@@ -439,16 +453,14 @@ function createCartogram() {
         // make district boundary prominent
         d3.selectAll('path.' + selected_district).transition().duration(100).style('stroke', 'purple').style('stroke-width', 1.5);
 
-        var seconDistricts_select;
-
         // getting selection for secondary districts
         var SD_len = seconDistricts.length;
         if (SD_len == 1) {
-          seconDistricts_select = "path." + seconDistricts[0];
+          var seconDistricts_select = "path." + seconDistricts[0];
         } else if (SD_len > 1) {
           seconDistricts_select = seconDistricts.reduce(createMCSelection);
         } else {
-          seconDistricts_select = "nothing";
+          var seconDistricts_select = "nothing";
         }
 
         // raise selected secondary districts
@@ -487,16 +499,16 @@ function createCartogram() {
         // unselect vote Perc circles
         circle_select.transition("districtSelectTrans").duration(100).style('stroke', "black").style('stroke-width', 0);
 
-        // remove title
+        // remove tooltip
         d3.selectAll('.cartogramtool').remove();
         // remove seat bubble
         d3.select('.seatBubble').remove();
         // remove district boundary
         d3.selectAll('path.' + selected_district).transition().duration(100).style('stroke', 'none').style('stroke-width', 0);
 
-        var seconDistricts_select;
         // selection for secondary districts
         var SD_len = seconDistricts.length;
+        var seconDistricts_select;
         if (SD_len == 1) {
           seconDistricts_select = "path." + seconDistricts[0];
         } else if (SD_len > 1) {
@@ -514,6 +526,8 @@ function createCartogram() {
       $(".cartinput").click(function () {
 
         selected_party = d3.select(this).attr('value');
+        // update party title
+        d3.select('#party_title').text(selected_party);
         update_bubbles(selected_party);
       });
 
@@ -571,14 +585,13 @@ function createCartogram() {
       var seatLegScale = d3.scaleOrdinal().domain(seatLegDomain).range(seatLegRange);
 
       // vote share legend
-      var seatLegDiv = legendDiv.append("div").classed("seatLegDiv", true).style("max-width", '350px').style('min-width', '300px');
+      var seatLegDiv = legendDiv.append("div").classed("seatLegDiv", true);
 
-      seatLegDiv.append('p').text('Number of Seats').style('font-size', '12px').style('text-align', 'center').style('margin-bottom', '1px');
+      seatLegDiv.append('p').text('Number of Seats').style('font-size', '12px').style('text-align', 'center').style('margin-bottom', '5px');
 
-      var seatLegSVG = seatLegDiv.append("svg").classed("seatLegSVG", true)
-      //  .attr('width', 350)
-      //  .attr('height', 90);
-      .attr("preserveAspectRatio", "xMinYMin meet").attr("viewBox", "0 0 350 90");
+      var seatLegSVG = seatLegDiv.append("svg").classed("seatLegSVG", true).attr('width', 350).attr('height', 90);
+      //  .attr("preserveAspectRatio", "xMinYMin meet")
+      //  .attr("viewBox", "0 0 350 90")
 
       seatLegSVG.append("g").attr("class", "seatLegG").attr("transform", "translate(25, 20)");
 
