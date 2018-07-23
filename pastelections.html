@@ -9,7 +9,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.10/lodash.min.js"></script>
     <meta charset="utf-8">
@@ -23,7 +22,7 @@
   <body>
     <div class='applicationWrap' onclick="void(0)">
 
-    <nav class="navbar navbar-expand-lg navbar-dark nav18">
+    <nav class="navbar navbar-expand-lg navbar-dark whitenav">
       <div class="container">
         <div>
           <img class="navbar-brand logo plotreeweb" id="plotreelogo" src="./resources/logo.svg"></img>
@@ -32,14 +31,20 @@
         <ul class="navbar-nav electionbuttcontain">
           <li class="nav-item">
             <div style="display: flex">
-              <img class="ballothome" src="./resources/ballot2.svg"></img>
-              <span id="past" class="electlink" style="margin-right: 20px; align-self: center; margin-left: 5px;">PAST ELECTIONS</span>
+              <img class="ballot" src="./resources/ballot1.svg"></img>
+              <span id="2008" year="2008" class="electlink electlinkpast" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2008</span>
             </div>
           </li>
           <li class="nav-item">
             <div style="display: flex">
-              <img class="ballothome" src="./resources/ballot3.svg"></img>
-              <span id="2018" year="2018" class="electlink" style="align-self: center; margin-left: 5px;">ELECTION 2018</span>
+              <img class="ballot" src="./resources/ballot2.svg"></img>
+              <span id="2013" year="2013" class="electlink electlinkpast" style="margin-right: 20px; align-self: center; margin-left: 5px;">ELECTION 2013</span>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div style="display: flex">
+              <img class="ballot" src="./resources/ballot3.svg"></img>
+              <span id="2018" year="2018" class="electlink electlinkpast" style="align-self: center; margin-left: 5px;">ELECTION 2018</span>
             </div>
           </li>
           <li class="nav-item socialicons">
@@ -51,17 +56,9 @@
         </ul>
       </div>
     </nav>
-
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-direction: column; align-items: center">
-      <div style="display: flex; height: 125px;">
-        <img class="liveBallot" src="./resources/ballot3.svg"></img>
-        <span class="liveTitle" style="margin-right: 20px; align-self: center; margin-left: 5px; font-family: 'Lato', sans-serif; font-weight: 300">PAKISTAN ELECTIONS 2018</span>
-      </div>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 25px;">
-      <div style="display: flex;">
-        <span class="naTitle" style="margin-right: 20px; align-self: center; margin-left: 5px; font-family: 'Lato', sans-serif; font-weight: 300">NATIONAL ASSEMBLY RESULTS</span>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 disclaimer">
+      <div class="container">
+        <p style="margin-bottom: 0px;">The data for the results presented on this site are reported by the Election Commision of Pakistan on this <a target="_blank" href="https://www.ecp.gov.pk/ResultDetails.aspx?EleId=3&Election=General%20Election%2011%20May%202013"><span style="text-decoration: none; color: #FFEB3B;">web page</span></a>. The data are updated till May 11, 2013.</p>
       </div>
     </div>
 
@@ -77,7 +74,7 @@
       </div>
     </div>
 
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer" id="hide2018">
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer">
       <div class="btn-group" role="Select Visualization" aria-label="Basic example">
         <button id="NA" type="button" class="btn btn-light btnnavigate navbutt active">National Assembly</button>
         <button id="PA" type="button" class="btn btn-light btnnavigate navbutt PA">Provincial Assembly</button>
@@ -234,73 +231,25 @@
       </div>
     </div>
 
-    <div class='container-18'>
-      <div class="col-sm-12 col-md-12 col-lg-9 col-xl-9 viz" id="viz2018">
-        <div>
-          <div style="max-width: 750px; margin-left: auto; margin-right: auto;">
-            <div class="container" id="vizcontain">
-            </div>
-          </div>
-        </div>
-        <div class="container" id="legendcontain">
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3" id="update2018">
-        <p style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 18px">LATEST UPDATES</p>
-        <div style="display: flex; flex-direction: column-reverse">
-          <div style="display: flex; font-size: 14px; color: grey;">
-            <div class="updatecircle animated zoomIn">
-              <svg height="12.5" width="12.5">
-                <circle cx="6.25" cy="6.25" r="4" fill="grey" />
-              </svg>
-            </div>
-            <div class="updatetext animated fadeInDefault" style="margin-bottom: 5px;">
-              <span>12:15 PM. NA-1 updated, PTI is currently leading against PMLN by 10 votes</span>
-            </div>
-          </div>
-          <div style="display: flex; font-size: 14px; color: grey;">
-            <div class="updatecircle animated zoomIn">
-              <svg height="12.5" width="12.5">
-                <circle cx="6.25" cy="6.25" r="4" fill="grey" />
-              </svg>
-            </div>
-            <div class="updatetext animated fadeInDefault" style="margin-bottom: 5px;">
-              <span>12:40 PM. NA-5 updated, MMA is currently leading against PPPP by 24 votes</span>
-            </div>
-          </div>
-          <div style="display: flex; font-size: 14px; color: grey;">
-            <div class="updatecircle animated zoomIn">
-              <svg height="12.5" width="12.5">
-                <circle cx="6.25" cy="6.25" r="4" fill="grey" />
-              </svg>
-            </div>
-            <div class="updatetext animated fadeInDefault" style="margin-bottom: 5px;">
-              <span>1:15 PM. NA-135 updated, PMLN is currently leading against PTI by 60 votes</span>
-            </div>
-          </div>
-          <div style="display: flex; font-size: 14px; color: grey;">
-            <div class="updatecircle animated zoomIn">
-              <svg height="12.5" width="12.5">
-                <circle cx="6.25" cy="6.25" r="4" fill="grey" />
-              </svg>
-            </div>
-            <div class="updatetext animated fadeInDefault" style="margin-bottom: 5px;">
-              <span>1:34 PM. NA-257 updated, PPPP is currently leading against GDA by 10 votes</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 viz">
+      <div>
+        <div style="max-width: 750px; margin-left: auto; margin-right: auto;">
+          <div class="container" id="vizcontain">
+          </div>
+        </div>
+      </div>
+      <div class="container" id="legendcontain">
+      </div>
       <div class="container" id="barcontain">
         <div id="majorityVote">
         </div>
       </div>
     </div>
-    <footer id="footer" style="width: 100%; background: #0D47A1;">
+
+    <footer id="footer" style="width: 100%; background: #303F9F;">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div style="display: flex; justify-content: center;" class="container">
-          <img style="width: 100px; height: 100px;" src="./resources/ballotfoot2.svg"></img>
+          <img style="width: 100px; height: 100px;" src="./resources/ballotfoot.svg"></img>
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 footercol" style="margin-top: 20px;">
@@ -342,23 +291,19 @@
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="./essentials/utils.js"></script>
     <script async src="/es6/provMaps.js"></script>
-    <script src="./es6/bar.js"></script>
-    <script src="./es6/namap.js"></script>
-    <script src="./es6/namap_2008.js"></script>
-    <script async src="./es6/cartogram.js"></script>
-    <script async src="./es6/chord.js"></script>
-    <script async src="./es6/filterNAmap.js"></script>
+    <script src="/es6/bar.js"></script>
+    <script src="/es6/namap.js"></script>
+    <script src="/es6/namap_2008.js"></script>
+    <script async src="/es6/cartogram.js"></script>
+    <script async src="/es6/chord.js"></script>
+    <script async src="/es6/filterNAmap.js"></script>
 
     <script>
 
       var electionYear = 2013;
       var nationalFilter = true;
       $("#filterdropdown").hide();
-      $("#2018").css('color', '#1976D2');
-
-      $('#past').click(function(){
-        window.location = "./pastelections.html";
-      })
+      $("#2013").css('color', '#1976D2');
 
       $(".electlink").click(function() {
         electionYear = parseInt($(this).attr('year'));
@@ -384,7 +329,7 @@
           $("#2008").css('color', '#1976D2');
           $("#2013").css('color', '#757575');
         }
-        else {
+        else if (electionYear === 2013) {
           nationalFilter = true;
           $('#flow').show()
           $('#2008disclaim').hide();
@@ -403,6 +348,9 @@
           $('#rangeFilters').hide();
           $("#2008").css('color', '#757575');
           $("#2013").css('color', '#1976D2');
+        }
+        else {
+          window.location = "./index.html"
         }
       })
 
