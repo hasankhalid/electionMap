@@ -113,6 +113,11 @@ body {
   height: 55px;
 }
 
+.nav18 {
+  border-bottom: 2px solid;
+  border-bottom-color: #E0E0E0;
+}
+
 #vizcontain {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -126,6 +131,11 @@ body {
 }
 
 .ballot {
+  height: 25px;
+  width: 25px;
+}
+
+.ballothome {
   height: 25px;
   width: 25px;
 }
@@ -186,11 +196,13 @@ body {
 }
 
 .btnnavigate:active, .btnnavigate:focus {
-  background-color: #EEEEEE;
+  background-color: #1976D2;
+  color: white;
 }
 
 .btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
-  background-color: #EEEEEE !important;
+  background-color: #1976D2 !important;
+  color: white;
 }
 
 .btnnavigate:focus, .btnnavigate:active {
@@ -282,6 +294,14 @@ body {
   }
 }
 
+.liveTitle {
+  font-size: 25px;
+}
+
+.liveBallot {
+  width: 75px;
+}
+
 @media screen and (max-width: 560px) {
   .disclaimer {
     font-size: 12px;
@@ -293,11 +313,11 @@ body {
     text-align: center;
   }
 
-  .whitenav {
+  .whitenav, .nav18 {
     height: 80px;
   }
 
-  .whitenav>.container {
+  .whitenav>.container, .nav18>.container {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -308,6 +328,18 @@ body {
 
   .socialicons {
     display: none;
+  }
+
+  .liveBallot {
+    width: 50px;
+  }
+
+  .liveTitle {
+    font-size: 18px;
+  }
+
+  .naTitle {
+    font-size: 14px;
   }
 
   #PA {
@@ -341,6 +373,39 @@ body {
   .btnnavigate {
     background-color: white;
     color: black;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .whitenav {
+    height: 80px;
+  }
+
+  .whitenav>.container {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .ballot {
+    display: none;
+  }
+  .electlinkpast {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .electlink {
+    font-size: 11px;
+  }
+  .electlinkpast {
+    font-size: 10px;
   }
 }
 
@@ -857,6 +922,38 @@ g.legendOrdinal text{
   will-change: transform;
 }
 
+.container-18 {
+  display: flex;
+}
+
+#viz2018,update2018 {
+  padding: 0px;
+}
+
+#update2018 {
+  text-align: center;
+}
+
+.updatecircle {
+  margin-right: 10px;
+}
+
+#test {
+  display: none;
+}
+
+.updatetext {
+  text-align: left;
+  padding-right: 10px;
+  font-family: 'Lato', sans-serif; font-weight: 300;
+}
+
+@media screen and (max-width: 992px) {
+  .container-18 {
+    flex-direction: column;
+  }
+}
+
 @supports not ((display: -ms-grid) or (display: grid)) {
   .tool {
     display: inline-block;
@@ -960,4 +1057,8 @@ g.legendOrdinal text{
     float: left;
   }
 
+}
+
+#hide2018 {
+  display: none;
 }
