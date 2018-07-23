@@ -771,7 +771,11 @@ g.legendOrdinal text{
   border-color: #1565C0;
 }
 
-#partyFilters {
+#partyFilters, #rangeFiltersTurnout, #rangeFiltersSeat {
+  display: none;
+}
+
+#runnerUpPartyFilters {
   display: none;
 }
 
@@ -890,13 +894,13 @@ g.legendOrdinal text{
   .cartotoolpartydetail {
     font-size: 11px;
   }
-  #partyFilters {
+  #partyFilters, #runnerUpPartyFilters {
     font-size: 12px;
   }
 }
 
 @media screen and (max-width: 340px) {
-  #partyFilters {
+  #partyFilters, #runnerUpPartyFilters {
     font-size: 10px;
   }
 }
