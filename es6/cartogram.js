@@ -1,4 +1,4 @@
-function createCartogram(){
+function createCartogram(year){
 
   function removeAllDisplay(){
     // remove all contents of viz
@@ -78,12 +78,19 @@ function createCartogram(){
                           .attr("id", "party_title")
                           .attr('x', "50%")
                           .attr('y', 18)
-                          .text("Pakistan Tehreek-e-Insaf")
+                          .text(function(d){
+                            if (year == 2013){
+                              return "Pakistan Tehreek-e-Insaf";
+                            }
+                            else if (year == 2008){
+                              return "Pakistan Muslim League (N)";
+                            }
+                          })
                           .style("text-anchor", "middle")
                           .style("font-size", "13px")
                           .style("fill", "#9E9E9E");
 
-    console.log(party_title.node().getBoundingClientRect());
+    //console.log(party_title.node().getBoundingClientRect());
 
 
     var svg_g = svg.append("g")
@@ -94,11 +101,12 @@ function createCartogram(){
       .defer(d3.json, "./essentials/JAndKashmir.topojson")
       .defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson")
       .defer(d3.json, "./essentials/Pak_prov.topojson")
+      .defer(d3.csv, "./essentials/NA_seats_2008.csv")
       .defer(d3.csv, "./essentials/NA_seats_2013.csv")
       .await(drawCartogram)
 
     // function executed by d3.queue
-    function drawCartogram(error, topology, k_topology, pak_topology, pak_prov_topology, na_seats_2013){
+    function drawCartogram(error, topology, k_topology, pak_topology, pak_prov_topology, na_seats_2008, na_seats_2013){
 
       d3.selectAll("#PA, #NA, #dwvs, #flow")
         .attr('disabled', null)
@@ -108,7 +116,7 @@ function createCartogram(){
       var nat_path_data = topojson.feature(pak_topology, pak_topology.objects.Pakistan_NationalBoundary).features;
       var nat_prov_data = topojson.feature(pak_prov_topology, pak_prov_topology.objects.Pak_prov).features;
 
-      console.log(path_data);
+      //console.log(path_data);
 
       // compute centroids of all districts
       var centroids = path_data.map(function (feature){
@@ -174,8 +182,24 @@ function createCartogram(){
             .style("fill", "white")
             .style("fill-opacity", 0.0);
 
+      //console.log(year);
+      //var year = 2008;
+
+      if (year == 2008){
+        na_seats = na_seats_2008
+        elections = elections_2008
+        // default party
+        selected_party = "Pakistan Muslim League (N)"
+      }
+      else if (year == 2013){
+        na_seats = na_seats_2013
+        elections = elections_2013
+        // default party
+        selected_party = "Pakistan Tehreek-e-Insaf";
+      }
+
       // elections data set joined with the seats information
-      var result = join(na_seats_2013, elections_2013, "Seat", "seat", function(election_row, seat_row) {
+      var result = join(na_seats, elections, "Seat", "seat", function(election_row, seat_row) {
         return {
             seat: seat_row['Seat'],
             PrimaryDistrict: seat_row.PrimaryDistrict,
@@ -189,6 +213,14 @@ function createCartogram(){
             results: election_row['results']
         }
       });
+
+      // some processing to address blank data field
+      result.forEach(function(d){
+        //console.log(d3.sum(d.results.map(d => d.votes)))
+        d["Valid Votes"] = d3.sum(d.results.map(d => d.votes));
+      })
+
+      //console.log(result);
 
       // defining the nest function for grouping results by District
       var result_by_dist = d3.nest()
@@ -244,8 +276,6 @@ function createCartogram(){
       var distPartyObj = _.keyBy(votes_by_dist_party, 'key')
       var resDistObj = _.keyBy(result_by_dist, 'key')
 
-      // default party name
-      var selected_party = "Pakistan Tehreek-e-Insaf"
 
       // list number of votes for each district for a particular party
       function list_votes(data_entry, party){
@@ -271,6 +301,8 @@ function createCartogram(){
       var seat_rad_scale = d3.scaleSqrt()
                               .domain([0, 21])
                               .range([0, 69]);
+
+      //console.log(result_by_dist)
 
       // circles representing vote percent
       svg.selectAll('circle')
@@ -362,11 +394,11 @@ function createCartogram(){
 
           // datum of the hovered element
           var selectedDatum = d3.select(this).data()[0]
-          console.log(selectedDatum);
+          //console.log(selectedDatum);
           // district of the hovered element without spaces
           var selected_district_WS = selectedDatum.key;
           var selected_district = whiteSpaceRem(selectedDatum.key);
-          console.log(selected_district);
+          //console.log(selected_district);
 
           // secondary districts for hovered element
           var seconDistricts = selectedDatum.values.map(d => d.SeconDistrict);
@@ -384,7 +416,7 @@ function createCartogram(){
           var seat_arr = resDistObj[d.key].values.map(d => +d.seat.replace("NA-", ""));
           var min_seat = d3.min(seat_arr);
           var max_seat = d3.max(seat_arr);
-          console.log(min_seat, max_seat);
+          //console.log(min_seat, max_seat);
           var partyWinArr = resDistObj[d.key].values.map( d => d.results[0].party);
 
           // how many seats ahas the party won?
@@ -665,7 +697,7 @@ function createCartogram(){
       $(".cartinput").click(function() {
 
         selected_party = d3.select(this).attr('value');
-        console.log(selected_party);
+        //console.log(selected_party);
         // update party title
         d3.select('#party_title').text(selected_party)
         update_bubbles(selected_party);
@@ -792,7 +824,7 @@ function createCartogram(){
               lookupIndex[row[lookupKey]] = row; // create an index for lookup table
           }
 
-          console.log(lookupIndex);
+          //console.log(lookupIndex);
           for (var j = 0; j < m; j++) { // loop through m items
               var y = mainTable[j];
               var x = lookupIndex[y[mainKey]]; // get corresponding row from lookupTable

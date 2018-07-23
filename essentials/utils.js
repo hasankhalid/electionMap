@@ -182,3 +182,8 @@ function image(party){
 function randRange(min, max){
   return (Math.random() * (max - min) + min)
 }
+
+function round2Dec(num, dec_place){
+  var mul = 10**dec_place
+  return Math.round(num * mul) / mul
+}
