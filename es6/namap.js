@@ -233,6 +233,9 @@ function createNAMap(){
         d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
         d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
         d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
+        var vote_turnOut_txt = 'Percentage of Votes Polled to Registered Voters';
+        d[vote_turnOut_txt] = (d[vote_turnOut_txt] != 0) ? d[vote_turnOut_txt] : round2Dec((d["Valid Votes"]/ d["Registered Votes"]) * 100, 2);
+        d[vote_turnOut_txt] = (d[vote_turnOut_txt] != 0) ? d.approxVoteTO = false : d.approxVoteTO = true;
       })
 
       // adding initial x and y positions of seats/ nodes (start of the force simulation)

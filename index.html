@@ -220,6 +220,8 @@
             <a class="dropdown-item cartinput navbutt mobilenav" id="ind" value = "Independent" >Independent</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="ANP" value = "Awami National Party" >Awami National Party</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="MQM" value = "Muttahida Qaumi Movement Pakistan">Muttahida Qaumi Movement</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PML" value = "Pakistan Muslim League">Pakistan Muslim League</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="MMA" value = "MUTTHIDA MAJLIS-E-AMAL PAKISTAN">Muttahida Majlis-e-Amal</a>
           </div>
         </div>
       </div>
@@ -418,28 +420,12 @@
         $("#votesharedropdown").css('position', 'relative');
         $("#votesharedropdown").css('z-index', '1');
         if (electionYear === 2013) {
-          createCartogram();
+          createCartogram(2013);
           $(".disclaimer").css('margin-bottom', '15px');
         }
         else if (electionYear === 2008) {
-          $('#2008disclaim').show().addClass('animated fadeInDefault');
-          $(".disclaimer").css('margin-bottom', '0px');
-
-          d3.select("#vizcontain")
-            .selectAll('*')
-            .remove()
-
-          // remove all contents of legend
-          d3.select("#legendcontain")
-            .selectAll('*')
-            .remove()
-
-          d3.select('#barsvg')
-            .remove()
-
-          d3.select("#majorityVote")
-            .selectAll('*')
-            .remove()
+          createCartogram(2008);
+          $(".disclaimer").css('margin-bottom', '15px');
         }
         $("#cartogram").show().addClass('animated fadeInDefault');
         $("#filterdropdown").hide();

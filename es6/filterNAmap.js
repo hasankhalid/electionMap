@@ -71,7 +71,7 @@ function getCircleSize(voteMargin, scale){
 }
 
 // master function for filtering
-function filterCircles(province, party, voteMargin){
+function filterCircles(province, party, voteMargin, ru_party, voteTurnout, na_range){
 
   // in case the argument is null, do not filter in that category
   // province filter
@@ -99,6 +99,22 @@ function filterCircles(province, party, voteMargin){
       return party.includes(datum);
     }
   }
+  // Runner-up Party filter
+  function filterRUParty(datum){
+    if (ru_party == null){
+      return true;
+    }
+    else {
+      // appending rest parties in case of selected rest
+      if (ru_party.includes("Rest")){
+        ru_party = ru_party.filter(d => d != "Rest")
+        ru_party = ru_party.concat(rest_parties);
+        //console.log(party);
+
+      }
+      return ru_party.includes(datum);
+    }
+  }
   // VoteMargin filter
   function filterVoteMargin(datum){
     if (voteMargin == null) {
@@ -109,11 +125,35 @@ function filterCircles(province, party, voteMargin){
     }
   }
 
+  // Vote Turnout filter
+  function filterVoteTurnout(datum){
+    if (voteTurnout == null) {
+      return true;
+    }
+    else {
+      return (voteTurnout[0] <= datum && datum <= voteTurnout[1]);
+    }
+  }
+
+  function filterNARange(datum){
+    if (na_range == null) {
+      return true;
+    }
+    else {
+      return (na_range[0] <= datum && datum <= na_range[1]);
+    }
+  }
+
   // composite filter combining by and(ing) the above category logicals
   // filteres true means filteres elements whereas false means unfiltered elements
   function compFilter(filtered){
     return function(d){
-      var logical = filterProvince(d.Province) && filterParty(d.results[0].party) && filterVoteMargin(d.voteMargin)
+      var logical = filterProvince(d.Province) &&
+      filterParty(d.results[0].party) &&
+      filterVoteMargin(d.voteMargin) &&
+      filterRUParty(d.results[1].party) &&
+      filterVoteTurnout(d["Percentage of Votes Polled to Registered Voters"]) &&
+      filterNARange(+d.seat.replace("NA-", ""));
       if (filtered == true){
         return logical;
       }
@@ -124,6 +164,11 @@ function filterCircles(province, party, voteMargin){
   }
 
   ///// transition for the na seat circles /////
+
+  var num_filtered = d3.selectAll(".naSeatCircle")
+                      .filter(compFilter(true)).data().length
+
+  //console.log(num_filtered);
 
   // filtered remain
   d3.selectAll(".naSeatCircle")
@@ -186,6 +231,8 @@ function filterCircles(province, party, voteMargin){
   var polygon_exit = d3.selectAll(".clip")
                       .exit()
                       .remove()
+
+  return num_filtered
 }
 
 
@@ -204,7 +251,7 @@ var voronoi = d3.voronoi()
 
 
 // master function for filtering
-function filterCirclesPr(province, party, voteMargin){
+function filterCirclesPr(province, party, voteMargin, ru_party, voteTurnout, na_range){
 
   // in case the argument is null, do not filter in that category
   // province filter
@@ -232,6 +279,22 @@ function filterCirclesPr(province, party, voteMargin){
       return party.includes(datum);
     }
   }
+  // Runner-up Party filter
+  function filterRUParty(datum){
+    if (ru_party == null){
+      return true;
+    }
+    else {
+      // appending rest parties in case of selected rest
+      if (ru_party.includes("Rest")){
+        ru_party = ru_party.filter(d => d != "Rest")
+        ru_party = ru_party.concat(rest_parties);
+        //console.log(party);
+
+      }
+      return ru_party.includes(datum);
+    }
+  }
   // VoteMargin filter
   function filterVoteMargin(datum){
     if (voteMargin == null) {
@@ -241,12 +304,36 @@ function filterCirclesPr(province, party, voteMargin){
       return (voteMargin[0] <= datum && datum <= voteMargin[1]);
     }
   }
+  // Vote Turnout filter
+  function filterVoteTurnout(datum){
+    if (voteTurnout == null) {
+      return true;
+    }
+    else {
+      return (voteTurnout[0] <= datum && datum <= voteTurnout[1]);
+    }
+  }
+
+  function filterNARange(datum){
+    if (na_range == null) {
+      return true;
+    }
+    else {
+      return (na_range[0] <= datum && datum <= na_range[1]);
+    }
+  }
 
   // composite filter combining by and(ing) the above category logicals
   // filteres true means filteres elements whereas false means unfiltered elements
   function compFilter(filtered){
     return function(d){
-      var logical = filterProvince(d.province) && filterParty(d.results[0].party) && filterVoteMargin(d.voteMargin)
+      var logical = filterProvince(d.province) &&
+      filterParty(d.results[0].party) &&
+      filterVoteMargin(d.voteMargin) &&
+      filterRUParty(d.results[1].party) &&
+      filterVoteTurnout(d["Percentage of Votes Polled to Registered Voters"]) &&
+      filterNARange(+d.seat.replace(/P[KPBS]-/, ""));
+
       if (filtered == true){
         return logical;
       }
@@ -257,6 +344,11 @@ function filterCirclesPr(province, party, voteMargin){
   }
 
   ///// transition for the na seat circles /////
+
+  var num_filtered = d3.selectAll(".pSeatCircle")
+    .filter(compFilter(true)).data().length
+
+  //console.log(num_filtered);
 
   // filtered remain
   d3.selectAll(".pSeatCircle")
@@ -319,4 +411,6 @@ function filterCirclesPr(province, party, voteMargin){
   var polygon_exit = d3.selectAll(".clip")
                       .exit()
                       .remove()
+
+  return num_filtered;
 }
