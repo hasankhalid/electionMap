@@ -42,7 +42,8 @@ function createNAMap_2018(type, upd_data){
     "National Party",
     "Balochistan National Party",
     "MUTTHIDA MAJLIS-E-AMAL PAKISTAN",
-    "Balochistan National Party (Awami)"
+    "Balochistan National Party (Awami)",
+    "Grand Democratic Alliance"
   ];
 
   // defining colors mapping to parties / other color is mapped to multiple parties
@@ -69,7 +70,8 @@ function createNAMap_2018(type, upd_data){
     other_color,
     other_color,
     other_color,
-    other_color
+    other_color,
+    "#FF8A65"
   ];
 
   // defining categorical color scale
@@ -294,7 +296,7 @@ function createNAMap_2018(type, upd_data){
         // loop for updated seats
 
         var upd_seats_list = result_upd.map(d => d.seat);
-        var new_data = d3.selectAll('.naSeatCircle').data();
+        var new_data = result;
         upd_seats_list.forEach(function(d){
           new_data.filter(f => f.seat == d)[0].results = result_upd.filter(f => f.seat == d)[0].results
         })
@@ -402,48 +404,83 @@ function createNAMap_2018(type, upd_data){
         u.selectAll('.naSeat_g').remove()
 
         u = u.selectAll('.naSeat_g').data(nodes);
+
+        u.enter()
+          .append('g')
+          .attr('class', d => d.seat)
+          .classed('naSeat_g', true)
+          .append('circle')
+          .attr("class", "naSeatCircle")
+          .classed('2013', true)
+          .classed('namap', true)
+          .merge(u)
+          .attr('cx', function(d) {
+            return d.x;
+          })
+          .attr('cy', function(d) {
+            return d.y;
+          })
+          .style("fill", function(d){
+            if (d.results.length == 0){
+              return '#BDBDBD';
+            }
+            else {
+              return colorScale(d.results[0].party);
+            }
+          })
+          // .attr("party", function(d){
+          //   return d.results[0].party;
+          // })
+          .attr("id", function(d){
+            return d.seat;
+          })
+          .attr('r', 0)
+          .transition('bubble_up')
+          .duration(1000)
+          .ease(d3.easePoly)
+          .attr('r', function(d){
+            return d.radius;
+          })
+          // removing the exit selection
+          u.exit().remove()
+
+          // top parties update vars
+
+
+          party_count = nodes.map(d => (d.results[0] == null) ? null : d.results[0].party);
+
+          function count(arr) { // count occurances
+            var o = {}, i;
+            for (i = 0; i < arr.length; ++i) {
+                if (o[arr[i]]) ++o[arr[i]];
+                else o[arr[i]] = 1;
+            }
+            return o;
+          }
+
+          function weight(arr_in) { // unique sorted by num occurances
+            var o = count(arr_in),
+                arr = [], i;
+            delete(o[null]);
+
+            //for (i in o) arr.push({value: +i, weight: o[i]}); // fast unique only
+
+            arr = Object.keys(o).map(function(d){
+              return {
+                "value": d,
+                "weight": o[d]
+              }
+            })
+            arr.sort(function (a, b) {
+                return a.weight < b.weight;
+            });
+            return arr;
+          }
+
+          //1st
+          console.log(weight(party_count)[0]);
+
       }
-      // in both cases, add nodes and execute force.
-
-      u.enter()
-        .append('g')
-        .attr('class', d => d.seat)
-        .classed('naSeat_g', true)
-        .append('circle')
-        .attr("class", "naSeatCircle")
-        .classed('2013', true)
-        .classed('namap', true)
-        .merge(u)
-        .attr('cx', function(d) {
-          return d.x;
-        })
-        .attr('cy', function(d) {
-          return d.y;
-        })
-        .style("fill", function(d){
-          if (d.results.length == 0){
-            return '#BDBDBD';
-          }
-          else {
-            return colorScale(d.results[0].party);
-          }
-        })
-        // .attr("party", function(d){
-        //   return d.results[0].party;
-        // })
-        .attr("id", function(d){
-          return d.seat;
-        })
-        .attr('r', 0)
-        .transition('bubble_up')
-        .duration(1000)
-        .ease(d3.easePoly)
-        .attr('r', function(d){
-          return d.radius;
-        })
-        // removing the exit selection
-        u.exit().remove()
-
 
 
         ///////////////////////////////////////////////////////////////////
@@ -455,41 +492,6 @@ function createNAMap_2018(type, upd_data){
                         .y(d => d.y /*+ randRange(-1, 1)*/)
                         .extent([[0, 0], [width, height]]);
 
-
-        if (type == "init"){
-          var polygon =  svg.append("defs")
-                            .selectAll(".clip.NAmap")
-                            .data(voronoi.polygons(nodes))
-                            //First append a clipPath element
-                            .enter().append("clipPath")
-                            .attr("class", "clip NAmap")
-                            //Make sure each clipPath will have a unique id (connected to the circle element)
-                            .attr("id", d => (d != null) ? "clipNAmap" + d.data.seat : "clipNAmap" + "NA")
-                            //Then append a path element that will define the shape of the clipPath
-                            .append("path")
-                            .attr("class", "clip-path-circle NAmap")
-                            .call(redrawPolygon)
-
-          //Append larger circles (that are clipped by clipPaths)
-          svg.append('g').classed('clip-circles', true)
-              .classed("NAmap", true)
-              .selectAll(".circle-catcher")
-              .data(nodes)
-              .enter().append("circle")
-              .attr("class", function(d,i) { return "circle-catcher NAmap " + d.seat; })
-              //Apply the clipPath element by referencing the one with the same countryCode
-              .attr("clip-path", function(d, i) { return "url(#clipNAmap" + d.seat + ")"; })
-              //Bottom line for safari, which doesn't accept attr for clip-path
-              .style("clip-path", function(d, i) { return "url(#clipNAmap" + d.seat + ")"; })
-              .attr("cx", d => d.x)
-              .attr("cy", d => d.y)
-              //Make the radius a lot bigger
-              .attr('r', 20)
-              .style("fill", "none")
-              //.style("fill-opacity", 0.5)
-              .style("pointer-events", "all")
-              .style('display', 'none')
-        }
 
         if (type == "update"){
           svg = d3.select("#vizcontain").select("svg")
@@ -826,99 +828,98 @@ function createNAMap_2018(type, upd_data){
         ////////////// Legend for parties ///////////////
         /////////////////////////////////////////////////
 
-        // var parties_legend = [
-        //   "Pakistan Tehreek-e-Insaf",
-        //   "Jamiat Ulama-e-Islam (F)",
-        //   "Pakistan Muslim League (N)",
-        //   "Independent",
-        //   "Pakistan Muslim League",
-        //   "Pakistan Peoples Party Parliamentarians",
-        //   "Pakistan Muslim League (F)",
-        //   "Muttahida Qaumi Movement Pakistan",
-        //   "Other"
-        // ];
-        // // define parts abbs and colors
-        // var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Other"))
-        // var parties_colors = parties_legend.map(d => (d != "Other" ? colorScale(d) : "#03A9F4"))
-        //
-        // // defining ordinal scale for the legend
-        // var ordinal = d3.scaleOrdinal()
-        //                 .domain(parties_legend_abb)
-        //                 .range(parties_colors);
-        //
-        // var party_legend_div = d3.select("#legendcontain")
-        //                     .append("div")
-        //                     .classed("partyLegendSVGDiv", true)
-        //
-        //
-        // party_legend_div.append('p')
-        //               .text('Political Party')
-        //               .style('font-size', '12px')
-        //               .style('text-align', 'center')
-        //               .style('margin-bottom', '-10px');
-        //
-        // var party_legend_svg = party_legend_div.append("svg")
-        //                                       .classed("partyLegendSVG", true)
-        //                                       .attr('width', 280)
-        //                                       .attr('height', 50);
-        //
-        // party_legend_svg.append("g")
-        //   .attr("class", "legendOrdinal")
-        //   .attr("transform", "translate(20,20)");
-        // //
-        // var legendOrdinal = d3.legendColor()
-        //   .shapePadding(3)
-        //   .shapeWidth(25)
-        //   .shapeHeight(10)
-        //   .scale(ordinal)
-        //   .orient('horizontal');
-        //
-        // party_legend_svg.select(".legendOrdinal")
-        //   .call(legendOrdinal);
-        //
-        // var VM_legend_div = d3.select("#legendcontain")
-        //                     .append("div")
-        //                     .classed("VMLegendSVGDiv", true)
-        //
-        // VM_legend_div.append('p')
-        //               .text('Vote Margin')
-        //               .style('font-size', '12px')
-        //               .style('text-align', 'center')
-        //               .style('margin-bottom', '-10px');
-        //
-        // var VM_legend_svg =  VM_legend_div.append("svg")
-        //                                   .classed("VMLegendSVG", true)
-        //                                   .attr('width', 170)
-        //                                   .attr('height', 50);
-        //
-        // var circLegDomain = [0,25,50,75,100];
-        // var circLegRange = circLegDomain.map(d => getCircleSize(d));
-        // var circLegDomain = circLegDomain.map(d => d + "%");
-        //
-        // var circLegScale = d3.scaleOrdinal().domain(circLegDomain).range(circLegRange);
-        //
-        //
-        // VM_legend_svg.append("g")
-        //   .attr("class", "legendSize")
-        //   .attr("transform", "translate(25, 20)");
-        //
-        // var legendSize = d3.legendSize()
-        //   .scale(circLegScale )
-        //   .shape('circle')
-        //   .shapePadding(20)
-        //   .labelOffset(15)
-        //   .orient('horizontal');
-        //
-        // VM_legend_svg.select(".legendSize")
-        //   .call(legendSize);
-        //
-        // // changing the style of legend text and circles
-        // d3.selectAll(".VMLegendSVG text")
-        //   .style('font-size', 9);
-        //
-        // d3.selectAll(".VMLegendSVG circle")
-        //   .style('fill', 'none')
-        //   .style('stroke', 'black');
+        var parties_legend = [
+          "Pakistan Tehreek-e-Insaf",
+          "MUTTHIDA MAJLIS-E-AMAL PAKISTAN",
+          "Pakistan Muslim League (N)",
+          "Independent",
+          "Pakistan Muslim League",
+          "Pakistan Peoples Party Parliamentarians",
+          "Grand Democratic Alliance",
+          "Muttahida Qaumi Movement Pakistan",
+          "Other"
+        ];
+        // define parts abbs and colors
+        var parties_legend_abb = parties_legend.map(d => (d != "Other" ? abbreviate(d) : "Other"))
+        var parties_colors = parties_legend.map(d => (d != "Other" ? colorScale(d) : "#03A9F4"))
+
+        // defining ordinal scale for the legend
+        var ordinal = d3.scaleOrdinal()
+                        .domain(parties_legend_abb)
+                        .range(parties_colors);
+
+        var party_legend_div = d3.select("#legendcontain")
+                            .append("div")
+                            .classed("partyLegendSVGDiv", true)
+
+        party_legend_div.append('p')
+                      .text('Political Party')
+                      .style('font-size', '12px')
+                      .style('text-align', 'center')
+                      .style('margin-bottom', '-10px');
+
+        var party_legend_svg = party_legend_div.append("svg")
+                                              .classed("partyLegendSVG", true)
+                                              .attr('width', 280)
+                                              .attr('height', 50);
+
+        party_legend_svg.append("g")
+          .attr("class", "legendOrdinal")
+          .attr("transform", "translate(20,20)");
+
+        var legendOrdinal = d3.legendColor()
+          .shapePadding(3)
+          .shapeWidth(25)
+          .shapeHeight(10)
+          .scale(ordinal)
+          .orient('horizontal');
+
+        party_legend_svg.select(".legendOrdinal")
+          .call(legendOrdinal);
+        
+        var VM_legend_div = d3.select("#legendcontain")
+                            .append("div")
+                            .classed("VMLegendSVGDiv", true)
+
+        VM_legend_div.append('p')
+                      .text('Vote Margin')
+                      .style('font-size', '12px')
+                      .style('text-align', 'center')
+                      .style('margin-bottom', '-10px');
+
+        var VM_legend_svg =  VM_legend_div.append("svg")
+                                          .classed("VMLegendSVG", true)
+                                          .attr('width', 170)
+                                          .attr('height', 50);
+
+        var circLegDomain = [0,25,50,75,100];
+        var circLegRange = circLegDomain.map(d => getCircleSize(d));
+        var circLegDomain = circLegDomain.map(d => d + "%");
+
+        var circLegScale = d3.scaleOrdinal().domain(circLegDomain).range(circLegRange);
+
+
+        VM_legend_svg.append("g")
+          .attr("class", "legendSize")
+          .attr("transform", "translate(25, 20)");
+
+        var legendSize = d3.legendSize()
+          .scale(circLegScale )
+          .shape('circle')
+          .shapePadding(20)
+          .labelOffset(15)
+          .orient('horizontal');
+
+        VM_legend_svg.select(".legendSize")
+          .call(legendSize);
+
+        // changing the style of legend text and circles
+        d3.selectAll(".VMLegendSVG text")
+          .style('font-size', 9);
+
+        d3.selectAll(".VMLegendSVG circle")
+          .style('fill', 'none')
+          .style('stroke', 'black');
     }
 
     // creating an array with district centrids
