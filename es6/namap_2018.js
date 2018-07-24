@@ -1,5 +1,6 @@
-function createNAMap_2018(type){
+function createNAMap_2018(type, upd_data){
 
+  // remove all contents from #vizContain
   function removeAllDisplay(){
     // remove all contents of viz
     d3.select("#vizcontain")
@@ -76,6 +77,7 @@ function createNAMap_2018(type){
                      .domain(parties)
                      .range(party_colors);
 
+  // while initializing remove all display
   if (type == "init"){
     removeAllDisplay();
   }
@@ -127,6 +129,7 @@ function createNAMap_2018(type){
                           // reading in alll the files and defining the execution function
 
 
+
     }
 
     // ajax calls for both init and update
@@ -137,20 +140,6 @@ function createNAMap_2018(type){
       .defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson")
       .defer(d3.csv, "./essentials/NA_seats_2018.csv")
       .await(drawElectMap)
-
-    ///// Get the centroids csv and turn it into an object /////
-
-    // d3.csv('essentials/NA_2018_centroids.csv', function(na_2018_cent){
-    //   console.log(na_2018_cent);
-    //   var cent_object = {};
-    //   na_2018_cent.forEach(function(d){
-    //     cent_object[d.seat] = [+d.X, +d.Y];
-    //   })
-    //   console.log(JSON.stringify(cent_object));
-    // })
-
-    // defining colors mapping to parties / other color is mapped to multiple parties
-
 
 
 
@@ -239,7 +228,6 @@ function createNAMap_2018(type){
       ////////////// Data Pre-processing  //////////////
       //////////////////////////////////////////////////
 
-
       // comprehensive results by joining the scraped data with basic info of na_seats
       var result = join(na_seats_2018, elections_2018, "Seat", "seat", function(election_row, seat_row) {
         return {
@@ -256,12 +244,39 @@ function createNAMap_2018(type){
         }
       });
 
+      // adding vote margin and radius and init radius to results
+      result.forEach(function(d){
+        //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
+        if (d.results.length == 0){
+          d.radius = 5
+          d.radiusInit = 5
+        }
+        else {
+          d['Valid Votes'] = d.results[0].votes + d.results[1].votes;
+          d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
+          d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
+          d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
+        }
+
+        // d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
+        // d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
+        //var vote_turnOut_txt = 'Percentage of Votes Polled to Registered Voters';
+        //d[vote_turnOut_txt] = (d[vote_turnOut_txt] != 0) ? d[vote_turnOut_txt] : round2Dec((d["Valid Votes"]/ d["Registered Votes"]) * 100, 2);
+        //d[vote_turnOut_txt] = (d[vote_turnOut_txt] != 0) ? d.approxVoteTO = false : d.approxVoteTO = true;
+      })
+
+      // adding initial x and y positions of seats/ nodes (start of the force simulation)
+      result.forEach(function(d){
+        d.x = projection(cent_object_2018[d.seat])[0];
+        d.y = projection(cent_object_2018[d.seat])[1];
+      });
 
 
       // if update join updated data
       if (type == "update"){
+        // data pre-processing for update data
         // comprehensive results by joining the scraped data with basic info of na_seats
-        var result_upd = join(na_seats_2018, elections_2018_upd, "Seat", "seat", function(election_row, seat_row) {
+        var result_upd = join(na_seats_2018, upd_data, "Seat", "seat", function(election_row, seat_row) {
           return {
               seat: seat_row['Seat'],
               PrimaryDistrict: seat_row.PrimaryDistrict,
@@ -277,26 +292,6 @@ function createNAMap_2018(type){
         });
 
 
-        // adding vote margin and radius and init radius to results
-        // result_upd.forEach(function(d){
-        //   //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
-        //   if (d.results.length == 0){
-        //     d.radius = 5
-        //     d.radiusInit = 5
-        //   }
-        //   else {
-        //     d.results = d.results.sort(function(a,b) {
-        //                   return b.votes - a.votes;
-        //                 })
-        //     d['Valid Votes'] = d.results[0].votes + d.results[1].votes;
-        //     d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
-        //     d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
-        //     d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
-        //   }
-        // })
-
-        //console.log(result_upd);
-
         // loop for updated seats
 
         var upd_seats_list = result_upd.map(d => d.seat);
@@ -306,6 +301,7 @@ function createNAMap_2018(type){
         })
 
         // preprocessing for selected seats
+        // adding voteMargins and other stuff
         new_data.forEach(function(d){
           //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
           if (d.results.length == 0){
@@ -319,106 +315,22 @@ function createNAMap_2018(type){
             d['Valid Votes'] = d.results[0].votes + d.results[1].votes;
             d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
             d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
-            d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
 
-            console.log(d);
-            var appendTimeInfoTo = d3.select('.timeupdates')
-                                     .append('div')
-                                     .classed('timeupdateparent', true)
-
-
-              appendTimeInfoTo.append('div')
-                .classed('updatecircle', true)
-                .classed('animated', true)
-                .classed('zoomIn', true)
-                .append('svg')
-                .attr('height' , '12.5')
-                .attr('width', '12.5')
-                .append('circle')
-                .attr('cx', '6.25')
-                .attr('cy', '6.25')
-                .attr('r', '4')
-                .attr('fill', 'grey')
-
-              appendTimeInfoTo.append('div')
-                .classed('updatetext', true)
-                .classed('animated', true)
-                .classed('fadeInDefault', true)
-                .style('margin-bottom', '5px')
-                .append('span')
-                .html(function(){
-                  return '<span> ' + tConvert(new Date().toLocaleTimeString()) + '. ' + d.seat + ' updated, ' + d.results[0].candidate + ', ' + abbreviate(d.results[0].party) + ' is leading against ' + d.results[1].candidate + ', ' + abbreviate(d.results[1].party) + ' by ' + (d.results[0].votes - d.results[1].votes) + ' votes</span>'
-                })
-
+            d.radiusInit = d.radius;
 
           }
+          nodes = new_data;
         })
-
-        // update the data in update phase
-        d3.selectAll('.naSeatCircle')
-          .data(new_data, d => d.seat)
-
-        d3.selectAll('.circle-catcher')
-          .data(new_data, d => d.seat)
-
-        // make bubble transitions in update phase
-        d3.selectAll('.naSeatCircle')
-          .transition('update_trans')
-          .duration(1700)
-          .ease(d3.easeElastic)
-          .attr('r', function(d){
-            //return d.radius;
-            return 5;
-          })
-          .style("fill", function(d){
-            if (d.results.length == 0){
-              return '#BDBDBD';
-            }
-            else {
-              return colorScale(d.results[0].party);
-              //return "black";
-            }
-          })
-
-        //console.log(d3.selectAll('.naSeatCircle').data())
-
       }
 
 
-        // adding vote margin and radius and init radius to results
-        result.forEach(function(d){
-          //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
-          if (d.results.length == 0){
-            d.radius = 5
-            d.radiusInit = 5
-          }
-          else {
-            d['Valid Votes'] = d.results[0].votes + d.results[1].votes;
-            d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
-            d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
-            d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
-          }
 
-          // d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
-          // d.radiusInit = base_bubble + ((d.voteMargin/ 100) * margin_range);
-          //var vote_turnOut_txt = 'Percentage of Votes Polled to Registered Voters';
-          //d[vote_turnOut_txt] = (d[vote_turnOut_txt] != 0) ? d[vote_turnOut_txt] : round2Dec((d["Valid Votes"]/ d["Registered Votes"]) * 100, 2);
-          //d[vote_turnOut_txt] = (d[vote_turnOut_txt] != 0) ? d.approxVoteTO = false : d.approxVoteTO = true;
-        })
 
-        // adding initial x and y positions of seats/ nodes (start of the force simulation)
-        result.forEach(function(d){
-          d.x = projection(cent_object_2018[d.seat])[0];
-          d.y = projection(cent_object_2018[d.seat])[1];
-        });
+      // assigning results to nodes in case of initializing
 
-        // assigning results to nodes
-        var nodes = result;
-
-        if (type == "update"){
-          nodes = d3.select('.naSeatCircle').data();
-        }
-
+      if (type == "init"){
+        nodes = result;
+      }
 
 
 
@@ -470,58 +382,72 @@ function createNAMap_2018(type){
                           }});
                         })
 
-      //////////////////////////////////////////////////////////////
-      ////////////// Adding bubble nodes for na seats //////////////
-      //////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////
+        ////////////// Adding bubble nodes for na seats //////////////
+        //////////////////////////////////////////////////////////////
 
-      if (type == "init"){
-        // a group containing all na seat circles
-        var u = svg.append('g')
-                    .classed('na-seats-group', true)
-                    .selectAll('.naSeat') // .selectAll('circle')
-                    .data(nodes)
+        if (type == "init"){
+          // a group containing all na seat circles
+          var u = svg.append('g')
+                      .classed('na-seats-group', true)
+                      .selectAll('.naSeat') // .selectAll('circle')
+                      .data(nodes)
+        }
 
-        // entering all nodes // bubbles
-        // initializing position of nodes
-        u.enter()
-          .append('g')
-          .attr('class', d => d.seat)
-          .classed('naSeat_g', true)
-          .append('circle')
-          .attr("class", "naSeatCircle")
-          .classed('2013', true)
-          .classed('namap', true)
-          .merge(u)
-          .attr('cx', function(d) {
-            return d.x;
-          })
-          .attr('cy', function(d) {
-            return d.y;
-          })
-          .style("fill", function(d){
-            if (d.results.length == 0){
-              return '#BDBDBD';
-            }
-            else {
-              return colorScale(d.results[0].party);
-            }
-          })
-          // .attr("party", function(d){
-          //   return d.results[0].party;
-          // })
-          .attr("id", function(d){
-            return d.seat;
-          })
-          .attr('r', 0)
-          .transition('bubble_up')
-          .duration(1000)
-          .ease(d3.easePoly)
-          .attr('r', function(d){
-            return d.radius;
-          })
-          // removing the exit selection
-          u.exit().remove()
+      if (type == "update"){
+        //simulation.restart();
+        // update the data in update phase
+
+        nodes = new_data;
+
+        // make a selection of na circles group
+        var u = d3.select("#vizcontain").select("svg").select('g.na-seats-group')
+
+        // remove all
+        u.selectAll('.naSeat_g').remove()
+
+        u = u.selectAll('.naSeat_g').data(nodes);
       }
+      // in both cases, add nodes and execute force.
+
+      u.enter()
+        .append('g')
+        .attr('class', d => d.seat)
+        .classed('naSeat_g', true)
+        .append('circle')
+        .attr("class", "naSeatCircle")
+        .classed('2013', true)
+        .classed('namap', true)
+        .merge(u)
+        .attr('cx', function(d) {
+          return d.x;
+        })
+        .attr('cy', function(d) {
+          return d.y;
+        })
+        .style("fill", function(d){
+          if (d.results.length == 0){
+            return '#BDBDBD';
+          }
+          else {
+            return colorScale(d.results[0].party);
+          }
+        })
+        // .attr("party", function(d){
+        //   return d.results[0].party;
+        // })
+        .attr("id", function(d){
+          return d.seat;
+        })
+        .attr('r', 0)
+        .transition('bubble_up')
+        .duration(1000)
+        .ease(d3.easePoly)
+        .attr('r', function(d){
+          return d.radius;
+        })
+        // removing the exit selection
+        u.exit().remove()
 
 
 
@@ -530,8 +456,8 @@ function createNAMap_2018(type){
         ///////////////////////////////////////////////////////////////////
 
         var voronoi = d3.voronoi()
-                        .x(d => d.x + randRange(-1, 1)) // with some noise on x and y centers
-                        .y(d => d.y + randRange(-1, 1))
+                        .x(d => d.x /*+ randRange(-1, 1)*/) // with some noise on x and y centers
+                        .y(d => d.y /*+ randRange(-1, 1)*/)
                         .extent([[0, 0], [width, height]]);
 
 
@@ -570,15 +496,53 @@ function createNAMap_2018(type){
               .style('display', 'none')
         }
 
+        if (type == "update"){
+          svg = d3.select("#vizcontain").select("svg")
+          svg.select("defs").remove()
+
+          var polygon =  svg.append("defs")
+                            .selectAll(".clip.NAmap")
+                            .data(voronoi.polygons(nodes))
+                            //First append a clipPath element
+                            .enter().append("clipPath")
+                            .attr("class", "clip NAmap")
+                            //Make sure each clipPath will have a unique id (connected to the circle element)
+                            .attr("id", d => (d != null) ? "clipNAmap" + d.data.seat : "clipNAmap" + "NA")
+                            //Then append a path element that will define the shape of the clipPath
+                            .append("path")
+                            .attr("class", "clip-path-circle NAmap")
+                            .call(redrawPolygon)
+
+          svg.select(".clip-circles").remove();
+
+          //Append larger circles (that are clipped by clipPaths)
+          svg.append('g').classed('clip-circles', true)
+              .classed("NAmap", true)
+              .selectAll(".circle-catcher")
+              .data(nodes)
+              .enter().append("circle")
+              .attr("class", function(d,i) { return "circle-catcher NAmap " + d.seat; })
+              //Apply the clipPath element by referencing the one with the same countryCode
+              .attr("clip-path", function(d, i) { return "url(#clipNAmap" + d.seat + ")"; })
+              //Bottom line for safari, which doesn't accept attr for clip-path
+              .style("clip-path", function(d, i) { return "url(#clipNAmap" + d.seat + ")"; })
+              .attr("cx", d => d.x)
+              .attr("cy", d => d.y)
+              //Make the radius a lot bigger
+              .attr('r', 20)
+              .style("fill", "none")
+              //.style("fill-opacity", 0.5)
+              .style("pointer-events", "all")
+              .style('display', 'none')
+
+        }
+
 
 
 
         d3.selectAll('circle.circle-catcher.NAmap')
             .on("mouseover", activateMouseOv)
             .on("mouseout", activateMouseOut)
-            //Notice that we now have the mousover events on these circles
-            // .on("mouseover", activateHover(100))
-            // .on("mouseout",  deactivateHover(100));
 
 
         function redrawPolygon(polygon) {
@@ -612,9 +576,6 @@ function createNAMap_2018(type){
 
         }
 
-      /*  if (simulation.alpha() > 0) {
-          d3.timer(ticked);
-        } */
 
         /////////////////////////////////////////////////////
         ////////////// Adding mouse over event //////////////
