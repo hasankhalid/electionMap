@@ -166,11 +166,23 @@ function image(party){
         case "Jamiat Ulama-e-Islam (F)":
             return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
             break;
+        case "MUTTHIDA MAJLIS-E-AMAL PAKISTAN":
+            return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
+            break;
         case "Jamaat-e-Islami Pakistan":
             return '<img style="width: 100%;" src="./resources/partylogos/balance.svg"></img>';
             break;
         case "Pakistan Muslim League(Z)":
             return '<img style="width: 100%;" src="./resources/partylogos/helicopter.svg"></img>';
+            break;
+        case "Grand Democratic Alliance":
+            return '<img style="width: 100%;" src="./resources/partylogos/star.svg"></img>';
+            break;
+        case "Pak Sarzameen Party":
+            return '<img style="width: 100%;" src="./resources/partylogos/dolphin.svg"></img>';
+            break;
+        case "Awami National Party":
+            return '<img style="width: 100%;" src="./resources/partylogos/lantern.svg"></img>';
             break;
         default:
             return '<img style="width: 90%;" src="./resources/ballot2.svg"></img>';
@@ -186,4 +198,16 @@ function randRange(min, max){
 function round2Dec(num, dec_place){
   var mul = 10**dec_place
   return Math.round(num * mul) / mul
+}
+
+function tConvert (time) {
+  // Check correct time format and split into components
+  time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+  if (time.length > 1) { // If time format correct
+    time = time.slice (1);  // Remove full string match value
+    time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+    time[0] = +time[0] % 12 || 12; // Adjust hours
+  }
+  return time.join (''); // return adjusted time or original string
 }

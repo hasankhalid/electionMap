@@ -928,6 +928,8 @@ g.legendOrdinal text{
 
 .container-18 {
   display: flex;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 #viz2018,update2018 {
@@ -936,6 +938,11 @@ g.legendOrdinal text{
 
 #update2018 {
   text-align: center;
+  height: 500px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  border: 1px solid;
+  border-color: #eee;
 }
 
 .updatecircle {
@@ -1065,4 +1072,10 @@ g.legendOrdinal text{
 
 #hide2018 {
   display: none;
+}
+
+.timeupdateparent {
+  display: flex;
+  font-size: 14px;
+  color: grey;
 }
