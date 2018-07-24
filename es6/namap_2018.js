@@ -529,8 +529,87 @@ function createNAMap_2018(type, upd_data){
 
           console.log(sorted);
 
-          if (sorted.length > 1) {
-            console.log('Yes')
+          if (sorted[0] != undefined) {
+              var appendLeaderTo = d3.select('#firstparty');
+              appendLeaderTo.append('div')
+                .classed('leadStatus', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .html(function() {
+                  return '<p class="leadStatus">LEADING</p>'
+                });
+
+              appendLeaderTo.append('div')
+                .classed('icon-details', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .attr('id', 'iconDetailFirst');
+
+              var icondetails1 = d3.select('#iconDetailFirst');
+              icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
+              icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Currently leads in ' + sorted[0].weight + ' Seats</p>'})
+            }
+            if (sorted[1] != undefined) {
+              var appendRunnerTo = d3.select('#secondparty');
+              appendRunnerTo.append('div')
+                .classed('leadStatus', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .html(function() {
+                  return '<p class="leadStatus">RUNNER UP</p>'
+                });
+
+              appendRunnerTo.append('div')
+                .classed('icon-details', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .attr('id', 'iconDetailSecond');
+
+              var icondetails2 = d3.select('#iconDetailSecond');
+              icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
+              icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Currently leads in ' + sorted[1].weight + ' Seats</p>'})
+            }
+            if (sorted[3] != undefined) {
+              var appendThirdTo = d3.select('#thirdparty');
+              appendThirdTo.append('div')
+                .classed('leadStatus', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .html(function() {
+                  return '<p class="leadStatus">THIRD</p>'
+                });
+
+              appendThirdTo.append('div')
+                .classed('icon-details', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .attr('id', 'iconDetailThird');
+
+              var icondetails3 = d3.select('#iconDetailThird');
+              icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
+              icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Currently leads in ' + sorted[2].weight + ' Seats</p>'})
+
+              var appendTriviaTo = d3.select('#trivia');
+              appendTriviaTo.append('div')
+                .classed('leadStatus', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .html(function() {
+                  return '<p class="leadStatus">TRIVIA</p>'
+                });
+
+              appendTriviaTo.append('div')
+                .classed('icon-details', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .attr('id', 'iconDetailTrivia');
+
+              var icondetails4 = d3.select('#iconDetailTrivia');
+              icondetails4.append('div').classed('lead-18-logo', true).html(function() {
+                return '<img src="./resources/partylogos/majority.svg" class="lead-18-logo"/>'
+              });
+              icondetails4.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">CLEAR MAJORITY?</p><p class="leadSeats">The leading Party needs to secure 130 seats for a clear majority</p>'})
+
           }
 
       }
@@ -689,7 +768,7 @@ function createNAMap_2018(type, upd_data){
               tooltip.append('div')
               .classed('toolhead', true)
               .html(function(d){
-                return '<span class="NA">Data not Available</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+                return '<span class="NA">' + datum.seat + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
               })
 
               tooltip.append('div')
@@ -701,7 +780,7 @@ function createNAMap_2018(type, upd_data){
               tooltip.append('div')
               .classed('toolhead', true)
               .html(function(d){
-                return '<span class="dist">Updates will be available soon</span>'
+                return '<span class="dist">We do not have the results right now. Updates will be available soon</span>'
               })
             }
               // find out the party color by color scale
