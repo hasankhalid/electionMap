@@ -71,7 +71,7 @@ function createNAMap_2018(type, upd_data){
     other_color,
     other_color,
     other_color,
-    other_color,
+    "#4DB6AC",
     other_color,
     "#FF8A65"
   ];
@@ -252,8 +252,8 @@ function createNAMap_2018(type, upd_data){
       result.forEach(function(d){
         //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
         if (d.results.length == 0){
-          d.radius = 5
-          d.radiusInit = 5
+          d.radius = 4.5
+          d.radiusInit = 4.5
         }
         else {
           d['Valid Votes'] = d.results[0].votes + d.results[1].votes;
@@ -321,8 +321,8 @@ function createNAMap_2018(type, upd_data){
         new_data.forEach(function(d){
           //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
           if (d.results.length == 0){
-            d.radius = 5
-            d.radiusInit = 5
+            d.radius = 4.5
+            d.radiusInit = 4.5
           }
           else {
             d.results = d.results.sort(function(a,b) {
@@ -469,10 +469,15 @@ function createNAMap_2018(type, upd_data){
           })
           .style("fill", function(d){
             if (d.results.length == 0){
-              return '#BDBDBD';
+              return '#D3D3D3';
             }
             else {
-              return colorScale(d.results[0].party);
+              if (parties.includes(d.results[0].party)){
+                return colorScale(d.results[0].party);
+              }
+              else{
+                return other_color;
+              }
             }
           })
           // .attr("party", function(d){
@@ -588,27 +593,6 @@ function createNAMap_2018(type, upd_data){
               var icondetails3 = d3.select('#iconDetailThird');
               icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
               icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Currently leads in ' + sorted[2].weight + ' Seats</p>'})
-
-              var appendTriviaTo = d3.select('#trivia');
-              appendTriviaTo.append('div')
-                .classed('leadStatus', true)
-                .classed('animated', true)
-                .classed('fadeInDefault', true)
-                .html(function() {
-                  return '<p class="leadStatus">TRIVIA</p>'
-                });
-
-              appendTriviaTo.append('div')
-                .classed('icon-details', true)
-                .classed('animated', true)
-                .classed('fadeInDefault', true)
-                .attr('id', 'iconDetailTrivia');
-
-              var icondetails4 = d3.select('#iconDetailTrivia');
-              icondetails4.append('div').classed('lead-18-logo', true).html(function() {
-                return '<img src="./resources/partylogos/majority.svg" class="lead-18-logo"/>'
-              });
-              icondetails4.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">CLEAR MAJORITY?</p><p class="leadSeats">The leading Party needs to secure 130 seats for a clear majority</p>'})
 
           }
 
@@ -780,7 +764,7 @@ function createNAMap_2018(type, upd_data){
               tooltip.append('div')
               .classed('toolhead', true)
               .html(function(d){
-                return '<span class="dist">We do not have the results right now. Updates will be available soon</span>'
+                return '<span class="dist" style="color: #9E9E9E">We are in the process of compiling results for this seat. Updates will be available soon</span>'
               })
             }
               // find out the party color by color scale
