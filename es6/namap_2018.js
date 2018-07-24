@@ -127,8 +127,9 @@ function createNAMap_2018(type, upd_data){
                           .style('text-anchor', 'middle')
                           .style('fill', '#D32F2F')
                           .style('font-size', '12px')
-                          .text('Please wait for the layout to stabilize')
-                          // reading in all the files and defining the execution function
+                          .text('Updating data, vote information and layout')
+                          // reading in alll the files and defining the execution function
+
 
 
     }
@@ -316,12 +317,40 @@ function createNAMap_2018(type, upd_data){
             d['Valid Votes'] = d.results[0].votes + d.results[1].votes;
             d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
             d.radius = base_bubble + ((d.voteMargin/ 100) * margin_range);
+
             d.radiusInit = d.radius;
+
+            var appendTimeInfoTo = d3.select('.timeupdates')
+                                     .append('div')
+                                     .classed('timeupdateparent', true)
+
+
+              appendTimeInfoTo.append('div')
+                .classed('updatecircle', true)
+                .classed('animated', true)
+                .classed('zoomIn', true)
+                .append('svg')
+                .attr('height' , '12.5')
+                .attr('width', '12.5')
+                .append('circle')
+                .attr('cx', '6.25')
+                .attr('cy', '6.25')
+                .attr('r', '4')
+                .attr('fill', 'grey')
+
+              appendTimeInfoTo.append('div')
+                .classed('updatetext', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .style('margin-bottom', '5px')
+                .append('span')
+                .html(function(){
+                  return '<span> ' + tConvert(new Date().toLocaleTimeString()) + '. ' + d.seat + ' updated, ' + d.results[0].candidate + ', ' + abbreviate(d.results[0].party) + ' is leading against ' + d.results[1].candidate + ', ' + abbreviate(d.results[1].party) + ' by ' + (d.results[0].votes - d.results[1].votes) + ' votes</span>'
+                })
 
           }
           nodes = new_data;
         })
-
       }
 
 
@@ -356,10 +385,10 @@ function createNAMap_2018(type, upd_data){
                         .alpha(0.525)
                         .alphaDecay(0.07)
                         .on('end', function() {
+
                           redrawVoronoi();
                           d3.select('svg').selectAll(".circle-catcher")
                             .style('display', 'block')
-
                           // give an 'all set message at force end and transition it out'
                           d3.select('#status_message')
                             .text('All set')
@@ -371,12 +400,16 @@ function createNAMap_2018(type, upd_data){
 
                           d3.selectAll("#PA, #dwvs, #flow")
                             .attr('disabled', null)
+                            setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');; }, 1000);
+                            setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1500);
 
-
-                          setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');; }, 1000);
-
-                          setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1500);
-
+                          $.ajax({url: "http://192.168.10.16:3000/api/results", success: function(result){
+                            if (type == "init") {
+                              console.log(result);
+                              createNAMap_2018("update", result);
+                              liveResults(createNAMap_2018);
+                            }
+                          }});
                         })
 
         //////////////////////////////////////////////////////////////
@@ -603,19 +636,26 @@ function createNAMap_2018(type, upd_data){
                 }
             	})
               .attr('fill', function(d){
-                return d3.rgb(colorScale(d.results[0].party)).darker();
+                if (d.results[0] === undefined) {
+                  return '#bdbdbd'
+                }
+                else {
+                  return d3.rgb(colorScale(d.results[0].party)).darker();
+                }
               })
               .attr('stroke', function(d){
-                return d3.rgb(colorScale(d.results[0].party)).darker();
+                if (d.results[0] === undefined) {
+                  return d3.rgb('#bdbdbd').darker();
+                }
+                else {
+                  return d3.rgb(colorScale(d.results[0].party)).darker();
+                }
               })
               .attr('stroke-width', 2);
 
             // extract the datum attached to the hovered circle
-            datum = circle_select.data()[0]
-            // find out the party color by color scale
-            color = colorScale(datum.results[0].party);
+            var datum = circle_select.data()[0];
 
-            // append tooltip
             d3.select('body').append('div')
               .classed('animated', true)
               .classed('zoomIn', true)
@@ -624,107 +664,105 @@ function createNAMap_2018(type, upd_data){
             // tooltip selection
             var tooltip = d3.select('.tool');
 
-            tooltip.append('div')
-            .classed('toolhead', true)
-            .html(function(d){
-              return '<span class="NA">' + datum.seat + ' </span><span class="turnout">(' + datum["Percentage of Votes Polled to Registered Voters"] + '% voter turnout)</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
 
-            tooltip.append('div')
-            .classed('partyicon', true)
-            .html(image(datum.results[0].party));
+            if(datum.results[0] === undefined) {
+              tooltip.append('div')
+              .classed('toolhead', true)
+              .html(function(d){
+                return '<span class="NA">Data not Available</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
 
-            tooltip.append('div')
-            .classed('toolhead', true)
-            .html(function(d){
-              return '<span class="dist">District: </span><span class="turnout">' + datum.PrimaryDistrict + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
+              tooltip.append('div')
+              .classed('partyicon', true)
+              .html(function() {
+                return '<img style="width: 100%;" src="./resources/ballot3.svg"></img>';
+              });
 
-            tooltip.append('div')
-            .classed('nametitle', true)
-            .html(function(d){
-              return '<span>Name</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
+              tooltip.append('div')
+              .classed('toolhead', true)
+              .html(function(d){
+                return '<span class="dist">Updates will be available soon</span>'
+              })
+            }
+              // find out the party color by color scale
 
-            tooltip.append('div')
-            .classed('partytitle', true)
-            .html(function(d){
-              return '<span>Party</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
+              // append tooltip
 
-            tooltip.append('div')
-            .classed('voteTitle', true)
-            .html(function(d){
-              return '<span>Votes</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
+            else {
 
-            //colored bar on top of tooltip showing the victorious party
-            tooltip.append('div')
-            .classed('partyColorToolBar', true)
-            .style('background-color', color)
+              var color = colorScale(datum.results[0].party);
 
-            tooltip.append('div')
-            .classed('candidatename', true)
-            .html(function(d){
-              return '<span>' + titleCase(datum.results[0].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
-            tooltip.append('div')
-            .classed('partyname', true)
-            .html(function(d){
-              return '<span>' + abbreviate(datum.results[0].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
-            tooltip.append('div')
-            .classed('votes', true)
-            .html(function(d){
-              return '<span>' + datum.results[0].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
+              tooltip.append('div')
+              .classed('toolhead', true)
+              .html(function(d){
+                return '<span class="NA">' + datum.seat + ' </span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
 
-            tooltip.append('div')
-            .classed('candidatename', true)
-            .html(function(d){
-              return '<span>' + titleCase(datum.results[1].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
-            tooltip.append('div')
-            .classed('partyname', true)
-            .html(function(d){
-              return '<span>' + abbreviate(datum.results[1].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
-            tooltip.append('div')
-            .classed('votes', true)
-            .html(function(d){
-              return '<span>' + datum.results[1].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-            })
+              tooltip.append('div')
+              .classed('partyicon', true)
+              .html(image(datum.results[0].party));
 
-            tooltip.append('div')
-            .classed('candidatename', true)
-            .html(function(d){
-              if (datum.results[2] ===  undefined) {
-                return '<span class="mobiletoolremove">' + 'N/A'  + '</span>'
-              }
-              else {
-                return '<span class="mobiletoolremove">' + titleCase(datum.results[2].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-              }
-            })
-            tooltip.append('div')
-            .classed('partyname', true)
-            .html(function(d){
-              if (datum.results[2] ===  undefined) {
-                return '<span class="mobiletoolremove">' + 'N/A'  + '</span>'
-              }
-              else {
-                return '<span class="mobiletoolremove">' + abbreviate(datum.results[2].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-              }
-            })
-            tooltip.append('div')
-            .classed('votes', true)
-            .html(function(d){
-              if (datum.results[2] ===  undefined) {
-                return '<span class="mobiletoolremove">' + 'N/A'  + '</span>'
-              }
-              else {
-                return '<span class="mobiletoolremove">' + datum.results[2].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
-              }
-            })
+              tooltip.append('div')
+              .classed('toolhead', true)
+              .html(function(d){
+                return '<span class="dist">District: </span><span class="turnout">' + datum.PrimaryDistrict + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+
+              tooltip.append('div')
+              .classed('nametitle', true)
+              .html(function(d){
+                return '<span>Name</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+
+              tooltip.append('div')
+              .classed('partytitle', true)
+              .html(function(d){
+                return '<span>Party</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+
+              tooltip.append('div')
+              .classed('voteTitle', true)
+              .html(function(d){
+                return '<span>Votes</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+
+              //colored bar on top of tooltip showing the victorious party
+              tooltip.append('div')
+              .classed('partyColorToolBar', true)
+              .style('background-color', color)
+
+              tooltip.append('div')
+              .classed('candidatename', true)
+              .html(function(d){
+                return '<span>' + titleCase(datum.results[0].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+              tooltip.append('div')
+              .classed('partyname', true)
+              .html(function(d){
+                return '<span>' + abbreviate(datum.results[0].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+              tooltip.append('div')
+              .classed('votes', true)
+              .html(function(d){
+                return '<span>' + datum.results[0].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+
+              tooltip.append('div')
+              .classed('candidatename', true)
+              .html(function(d){
+                return '<span>' + titleCase(datum.results[1].candidate) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+              tooltip.append('div')
+              .classed('partyname', true)
+              .html(function(d){
+                return '<span>' + abbreviate(datum.results[1].party) + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+              tooltip.append('div')
+              .classed('votes', true)
+              .html(function(d){
+                return '<span>' + datum.results[1].votes + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+              })
+            }
 
             // create the tooltip for na-map
             //createTooltip(tooltip, datum);
@@ -793,10 +831,20 @@ function createNAMap_2018(type, upd_data){
               }
             })
             .attr('fill', function(d){
-              return colorScale(d.results[0].party);
+              if (d.results[0] === undefined) {
+                return '#bdbdbd';
+              }
+              else {
+                return colorScale(d.results[0].party);
+              }
             })
             .attr('stroke', function(d){
-              d3.rgb(colorScale(d.results[0].party));
+              if (d.results[0] === undefined) {
+                return '#bdbdbd';
+              }
+              else {
+                d3.rgb(colorScale(d.results[0].party));
+              }
             })
             .attr('stroke-width', 0);
 
@@ -965,7 +1013,6 @@ function createNAMap_2018(type, upd_data){
       .remove()
 
     //makeSummBar(NA_summary);
-
   }
 
 

@@ -102,6 +102,9 @@
           <a class="dropdown-item filteritem" id="partyfilterbutt" style="cursor: pointer;">Party</a>
           <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
           <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
+          <a class="dropdown-item filteritem" id="runnerupbutt" style="cursor: pointer;">Runner Up</a>
+          <a class="dropdown-item filteritem" id="voteturnoutbutt" style="cursor: pointer;">Vote Turnout</a>
+          <a class="dropdown-item filteritem" id="seatbutt" style="cursor: pointer;">Seat</a>
         </div>
       </div>
 
@@ -168,6 +171,53 @@
         </div>
       </div>
 
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="runnerUpPartyFilters">
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input partycheckrun" toggleClass="disabled" value="null" id="displayAllrunup">
+            <label class="form-check-label" for="displayAllrunup">All</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Pakistan Tehreek-e-Insaf" active="disabled" id="PTIfilter">
+            <label class="form-check-label" for="PTIfilter">PTI</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Pakistan Muslim League (N)" active="disabled" id="PMLNfilter">
+            <label class="form-check-label" for="PMLNfilter">PMLN</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Jamiat Ulama-e-Islam (F)" active="disabled" id="JUIFfilter">
+            <label class="form-check-label" for="JUIFfilter">JUIF</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Pakistan Muslim League" active="disabled" id="PMLfilter">
+            <label class="form-check-label" for="INDfilter">PML</label>
+          </div>
+        </div>
+        <div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Pakistan Peoples Party Parliamentarians" active="disabled" id="PPPPfilter">
+            <label class="form-check-label" for="PMLfilter">PPPP</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Independent" active="disabled" id="Indfilter">
+            <label class="form-check-label" for="PPPPfilter">Ind.</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Pakistan Muslim League (F)" active="disabled" id="PMLFfilter">
+            <label class="form-check-label" for="PMLFfilter">PMLF</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Muttahida Qaumi Movement Pakistan" active="disabled" id="MQMfilter">
+            <label class="form-check-label" for="MQMfilter">MQM</label>
+          </div>
+          <div class="form-group form-check form-check-inline">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Rest" active="disabled" id="Restfilter">
+            <label class="form-check-label" for="Restfilter">Other</label>
+          </div>
+        </div>
+      </div>
+
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="provinceFilters">
         <div>
           <div class="form-group form-check form-check-inline">
@@ -205,7 +255,17 @@
 
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="rangeFilters">
         <div style="width: 275px">
-          <input type="text" id="voteMargin" name="vote_margin" value="" />
+          <input type="text" id="voteMargin" name="vote_margin" value="" />>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="rangeFiltersTurnout">
+        <div style="width: 275px">
+          <input type="text" id="voteTurnout" name="vote_turnout" value="" />
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="rangeFiltersSeat">
+        <div style="width: 275px">
+          <input type="text" id="naSeat" name="na_seat" value="" />
         </div>
       </div>
     </div>
@@ -219,13 +279,15 @@
             Select Party
           </a>
           <div style="width: 200px" class="dropdown-menu">
-            <a class="dropdown-item cartinput navbutt mobilenav" id="PTI" value= "Pakistan Tehreek-e-Insaf">Pakistan Tehreek e Insaf</a>
+            <a class="dropdown-item cartinput navbutt mobilenav eighthide" id="PTI" value= "Pakistan Tehreek-e-Insaf">Pakistan Tehreek e Insaf</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="PMLN" value = "Pakistan Muslim League (N)">Pakistan Muslim League (N)</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="PPP" value = "Pakistan Peoples Party Parliamentarians">Pakistan Peoples Party</a>
-            <a class="dropdown-item cartinput navbutt mobilenav" id="JUIF" value = "Jamiat Ulama-e-Islam (F)">Jamiat Ulama-e-Islam (F)</a>
+            <a class="dropdown-item cartinput navbutt mobilenav eighthide" id="JUIF" value = "Jamiat Ulama-e-Islam (F)">Jamiat Ulama-e-Islam (F)</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="ind" value = "Independent" >Independent</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="ANP" value = "Awami National Party" >Awami National Party</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="MQM" value = "Muttahida Qaumi Movement Pakistan">Muttahida Qaumi Movement</a>
+            <a class="dropdown-item cartinput navbutt mobilenav" id="PML" value = "Pakistan Muslim League">Pakistan Muslim League</a>
+            <a class="dropdown-item cartinput navbutt mobilenav thirteenhide" id="MMA" value = "MUTTHIDA MAJLIS-E-AMAL PAKISTAN">Muttahida Majlis-e-Amal</a>
           </div>
         </div>
       </div>
@@ -358,6 +420,16 @@
         createNAMap();
       })
 
+      $("#naSeat").ionRangeSlider({
+          type: "double",
+          grid: true,
+          min: 1,
+          max: 272,
+          from: 1,
+          to: 272,
+          prefix: "NA "
+      });
+
       $("#NA").click(function() {
         nationalFilter = true;
         $(this).addClass('active');
@@ -374,6 +446,13 @@
         $("#provincefilterbutt").show();
         $(".filtercontainer").hide();
         $(".disclaimer").css('margin-bottom', '15px');
+        var slider = $("#naSeat").data("ionRangeSlider");
+        slider.update({
+            min: 1,
+            max: 272,
+            from: 1,
+            to: 272
+        });
         if (electionYear === 2013) {
           createNAMap();
         }
@@ -390,6 +469,13 @@
         $("#filterdropdown").hide();
         $(".dwvs").removeClass('active');
         $("#chorddisclaim").hide();
+        var slider = $("#naSeat").data("ionRangeSlider");
+        slider.update({
+            min: 1,
+            max: 99,
+            from: 1,
+            to: 99
+        });
         if (electionYear === 2013) {
           makeProvMaps();
           $(".disclaimer").css('margin-bottom', '15px');
@@ -427,28 +513,17 @@
         $("#votesharedropdown").css('position', 'relative');
         $("#votesharedropdown").css('z-index', '1');
         if (electionYear === 2013) {
-          createCartogram();
+          createCartogram(2013);
+          $(".thirteenhide").hide();
+          $(".eighthide").show();
           $(".disclaimer").css('margin-bottom', '15px');
         }
         else if (electionYear === 2008) {
-          $('#2008disclaim').show().addClass('animated fadeInDefault');
-          $(".disclaimer").css('margin-bottom', '0px');
-
-          d3.select("#vizcontain")
-            .selectAll('*')
-            .remove()
-
-          // remove all contents of legend
-          d3.select("#legendcontain")
-            .selectAll('*')
-            .remove()
-
-          d3.select('#barsvg')
-            .remove()
-
-          d3.select("#majorityVote")
-            .selectAll('*')
-            .remove()
+          createCartogram(2008);
+          $(".eighthide").hide();
+          $(".thirteenhide").show();
+          $(".disclaimer").css('margin-bottom', '15px');
+          $('#2008disclaim').hide();
         }
         $("#cartogram").show().addClass('animated fadeInDefault');
         $("#filterdropdown").hide();
@@ -487,36 +562,68 @@
 
       $("#partyfilterbutt").click(function() {
         $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
+        $("#runnerUpPartyFilters").hide();
         $("#provinceFilters").hide();
         $('#rangeFilters').hide();
+        $('#rangeFiltersTurnout').hide();
+        $('#rangeFiltersSeat').hide();
+      });
+
+      $("#runnerupbutt").click(function() {
+        $("#runnerUpPartyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
+        $("#provinceFilters").hide();
+        $('#rangeFilters').hide();
+        $("#partyFilters").hide();
+        $('#rangeFiltersTurnout').hide();
+        $('#rangeFiltersSeat').hide();
       });
 
       $("#provincefilterbutt").click(function() {
         $("#provinceFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
         $("#partyFilters").hide();
-        $('#rangeFilters').hide()
+        $("#runnerUpPartyFilters").hide();
+        $('#rangeFilters').hide();
+        $('#rangeFiltersTurnout').hide();
+        $('#rangeFiltersSeat').hide();
       });
 
       $("#votemarginbutt").click(function() {
         $("#provinceFilters").hide();
         $("#partyFilters").hide();
+        $("#runnerUpPartyFilters").hide();
         $('#rangeFilters').show().addClass('animated fadeInDefault').css('display', 'flex');
+        $('#rangeFiltersTurnout').hide();
+        $('#rangeFiltersSeat').hide();
+      });
+
+      $("#voteturnoutbutt").click(function() {
+        $("#provinceFilters").hide();
+        $("#partyFilters").hide();
+        $("#runnerUpPartyFilters").hide();
+        $('#rangeFilters').hide();
+        $('#rangeFiltersTurnout').show().addClass('animated fadeInDefault').css('display', 'flex');
+        $('#rangeFiltersSeat').hide();
+      });
+
+      $("#seatbutt").click(function() {
+        $("#provinceFilters").hide();
+        $("#partyFilters").hide();
+        $("#runnerUpPartyFilters").hide();
+        $('#rangeFilters').hide();
+        $('#rangeFiltersTurnout').hide();
+        $('#rangeFiltersSeat').show().addClass('animated fadeInDefault').css('display', 'flex');
       });
 
       //Filter functions follow
 
       //variables so filterNAmap is only called once
       var parties = [];
+      var runupparties = [];
       var provinces = [];
       var margin = [];
+      var turnout = [];
+      var seats = [];
       var selectedProvince = ["KP"];
-
-      $('.provinceButt').click(function() {
-        var selectedprov = $(this).attr("value");
-        selectedProvince = [];
-        selectedProvince.push(selectedprov);
-        console.log(selectedProvince);
-      })
 
       //For each partyfilter classed element, this function checks its active prop. In case the button is selected, it sets it to active and pushes the party, else it removes party
       $('.partyfilter').change(function() {
@@ -532,6 +639,23 @@
           var index = parties.indexOf($(this).attr("value"));
           if (index >= 0) {
             parties.splice(index, 1);
+          }
+        }
+      })
+
+      $('.runneruppartyfilter').change(function() {
+        var isActive = $(this).attr("active");
+        if(isActive === "disabled") {
+          this.setAttribute("active", "active");
+          runupparties.push($(this).attr("value"));
+          $('#displayAllrunup').prop('checked', false);
+          $('#displayAllrunup').attr("toggleClass", "disabled")
+        }
+        else {
+          this.setAttribute("active", "disabled");
+          var index = runupparties.indexOf($(this).attr("value"));
+          if (index >= 0) {
+            runupparties.splice(index, 1);
           }
         }
       })
@@ -567,6 +691,20 @@
         }
       })
 
+      $('.partycheckrun').change(function() {
+        var toggleValue = $(this).attr("toggleClass")
+        if(toggleValue === "disabled") {
+          this.setAttribute("toggleClass", "active")
+          $('.runneruppartyfilter').attr("active", "disabled");
+          $('.runneruppartyfilter').prop('checked', false);
+          runupparties = [];
+        }
+        else {
+          this.setAttribute("toggleClass", "disabled")
+          $('.runneruppartyfilter').attr("disabled", false);
+        }
+      })
+
       $('.provincecheck').change(function() {
         var toggleValue = $(this).attr("toggleClass")
         if(toggleValue === "provinceDisabled") {
@@ -591,37 +729,121 @@
           postfix: " %"
       });
 
+      $("#voteTurnout").ionRangeSlider({
+          type: "double",
+          grid: true,
+          min: 0,
+          max: 100,
+          from: 0,
+          to: 100,
+          postfix: " %"
+      });
+
+      $('.provinceButt').click(function() {
+        var selectedprov = $(this).attr("value");
+        selectedProvince = [];
+        selectedProvince.push(selectedprov);
+        var slider = $("#naSeat").data("ionRangeSlider");
+        if (selectedprov === 'KP') {
+          slider.update({
+              min: 1,
+              max: 99,
+              from: 1,
+              to: 99
+          });
+        }
+        else if (selectedprov === 'Punjab') {
+          slider.update({
+              min: 1,
+              max: 297,
+              from: 1,
+              to: 297
+          });
+        }
+        else if (selectedprov === 'Balochistan') {
+          slider.update({
+              min: 1,
+              max: 51,
+              from: 1,
+              to: 51
+          });
+        }
+        else if (selectedprov === 'Sindh') {
+          slider.update({
+              min: 1,
+              max: 128,
+              from: 1,
+              to: 128
+          });
+        }
+      })
+
       margin.push($("#voteMargin").data("ionRangeSlider").result.from);
       margin.push($("#voteMargin").data("ionRangeSlider").result.to);
 
-      $('#voteMargin, input:checkbox').change(function() {
+      turnout.push($("#voteTurnout").data("ionRangeSlider").result.from);
+      turnout.push($("#voteTurnout").data("ionRangeSlider").result.to);
+
+      seats.push($("#naSeat").data("ionRangeSlider").result.from);
+      seats.push($("#naSeat").data("ionRangeSlider").result.to);
+
+      $('#voteMargin, #voteTurnout, #naSeat, input:checkbox').change(function() {
         // Saving Ion range instance to var
         var slider = $("#voteMargin").data("ionRangeSlider");
+        var sliderturn = $("#voteTurnout").data("ionRangeSlider");
+        var sliderseat = $("#naSeat").data("ionRangeSlider");
         // Get values
         var from = slider.result.from;
         var to = slider.result.to;
+        var turnfrom = sliderturn.result.from;
+        var turnto = sliderturn.result.to;
+        var seatfrom = sliderseat.result.from;
+        var seatto = sliderseat.result.to;
         margin[0] = from;
         margin[1] = to;
+        turnout[0] = turnfrom;
+        turnout[1] = turnto;
+        seats[0] = seatfrom;
+        seats[1] = seatto;
+
         if (nationalFilter === true) {
-          if (provinces.length == 0 && parties.length == 0) {
-            filterCircles(null, null, margin);
+          if (provinces.length == 0 && parties.length == 0 && runupparties.length == 0) {
+            filterCircles(null, null, margin, null, turnout, seats);
           }
-          else if (provinces.length == 0 && parties.length > 0) {
-            filterCircles(null, parties, margin);
+          else if (provinces.length == 0 && runupparties.length == 0 && parties.length > 0) {
+            filterCircles(null, parties, margin, null, turnout, seats);
           }
-          else if (parties.length == 0 && provinces.length > 0) {
-            filterCircles(provinces, null, margin);
+          else if (provinces.length == 0 && runupparties.length > 0 && parties.length == 0) {
+            filterCircles(null, null, margin, runupparties, turnout, seats);
+          }
+          else if (provinces.length > 0 && runupparties.length == 0 && parties.length == 0) {
+            filterCircles(provinces, null, margin, null, turnout, seats);
+          }
+          else if (provinces.length == 0 && runupparties.length > 0 && parties.length > 0) {
+            filterCircles(null, parties, margin, runupparties, turnout, seats);
+          }
+          else if (provinces.length > 0 && runupparties.length == 0 && parties.length > 0) {
+            filterCircles(provinces, parties, margin, null, turnout, seats);
+          }
+          else if (parties.length == 0 && provinces.length > 0 && runupparties.length > 0) {
+            filterCircles(provinces, null, margin, runupparties, turnout, seats);
           }
           else {
-            filterCircles(provinces, parties, margin);
+            filterCircles(provinces, parties, margin, runupparties, turnout, seats);
           }
         }
         if (nationalFilter === false) {
-          if (parties.length === 0) {
-            filterCirclesPr(selectedProvince, null, margin);
+          if (parties.length === 0 && runupparties.length === 0) {
+            filterCirclesPr(selectedProvince, null, margin, null, turnout, seats);
+          }
+          else if (parties.length > 0 && runupparties.length === 0) {
+            filterCirclesPr(selectedProvince, parties, margin, null, turnout, seats);
+          }
+          else if (parties.length === 0 && runupparties.length > 0) {
+            filterCirclesPr(selectedProvince, null, margin, runupparties, turnout, seats);
           }
           else {
-            filterCirclesPr(selectedProvince, parties, margin);
+            filterCirclesPr(selectedProvince, parties, margin, runupparties, turnout, seats);
           }
         }
       });
@@ -643,9 +865,14 @@
         $('.provincecheck').prop('checked', false);
         $('.provincecheck').attr("toggleClass", "provinceDisabled");
         $('#displayAll').prop('checked', false);
-        $('#displayAll').attr("toggleClass", "disabled")
+        $('#displayAll').attr("toggleClass", "disabled");
+        $('#displayAllrunup').prop('checked', false);
+        $('#displayAllrunup').attr("toggleClass", "disabled");
         $("#voteMargin").data("ionRangeSlider").reset();
         margin = [];
+        turnout = [];
+        runupparties = [];
+        seats = [];
       });
 
 

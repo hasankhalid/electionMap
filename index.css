@@ -771,7 +771,11 @@ g.legendOrdinal text{
   border-color: #1565C0;
 }
 
-#partyFilters {
+#partyFilters, #rangeFiltersTurnout, #rangeFiltersSeat {
+  display: none;
+}
+
+#runnerUpPartyFilters {
   display: none;
 }
 
@@ -890,13 +894,13 @@ g.legendOrdinal text{
   .cartotoolpartydetail {
     font-size: 11px;
   }
-  #partyFilters {
+  #partyFilters, #runnerUpPartyFilters {
     font-size: 12px;
   }
 }
 
 @media screen and (max-width: 340px) {
-  #partyFilters {
+  #partyFilters, #runnerUpPartyFilters {
     font-size: 10px;
   }
 }
@@ -924,6 +928,8 @@ g.legendOrdinal text{
 
 .container-18 {
   display: flex;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 #viz2018,update2018 {
@@ -932,6 +938,11 @@ g.legendOrdinal text{
 
 #update2018 {
   text-align: center;
+  height: 500px;
+  overflow-y: scroll;
+  border-radius: 5px;
+  border: 1px solid;
+  border-color: #eee;
 }
 
 .updatecircle {
@@ -948,9 +959,32 @@ g.legendOrdinal text{
   font-family: 'Lato', sans-serif; font-weight: 300;
 }
 
+.leaders-18 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 50px;
+  height: 175px;
+  position: relative;
+}
+
+.leadStatus {
+  position: absolute;
+  top: 0;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  color: #9E9E9E;
+  text-decoration: underline;
+}
+
 @media screen and (max-width: 992px) {
   .container-18 {
     flex-direction: column;
+  }
+  .leaders-18 {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
@@ -1061,4 +1095,48 @@ g.legendOrdinal text{
 
 #hide2018 {
   display: none;
+}
+
+.timeupdateparent {
+  display: flex;
+  font-size: 14px;
+  color: grey;
+}
+
+.leadTitle, .leaders-18 {
+  font-family: 'Lato', sans-serif; font-weight: 300;
+}
+
+.leadTitle {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 30px;
+  padding: 0px 65px;
+}
+
+.leaderInformation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0px 15px;
+}
+
+.icon-details {
+  display: flex;
+}
+
+.lead-18-logo {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.partyTitle {
+  font-size: 20px;
+  text-align: left;
+}
+
+.leadSeats {
+  font-size: 16px;
 }
