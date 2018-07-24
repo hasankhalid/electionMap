@@ -1,3 +1,5 @@
+var update_no = 0;
+
 function createNAMap_2018(type, upd_data){
 
   // remove all contents from #vizContain
@@ -297,7 +299,19 @@ function createNAMap_2018(type, upd_data){
         // loop for updated seats
 
         var upd_seats_list = result_upd.map(d => d.seat);
-        var new_data = result;
+        var new_data;
+
+        if (d3.selectAll('.naSeatCircle').data().length ==0){
+          new_data = result
+        }
+        else{
+          new_data = d3.selectAll('.naSeatCircle').data();
+        }
+
+
+
+        console.log(new_data);
+        console.log(result_upd);
         upd_seats_list.forEach(function(d){
           new_data.filter(f => f.seat == d)[0].results = result_upd.filter(f => f.seat == d)[0].results
         })
@@ -403,7 +417,7 @@ function createNAMap_2018(type, upd_data){
                             setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');; }, 1000);
                             setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1500);
 
-                          $.ajax({url: "http://192.168.10.16:3000/api/results", success: function(result){
+                          $.ajax({url: "https://election-res.herokuapp.com/api/results", success: function(result){
                             if (type == "init") {
                               console.log(result);
                               createNAMap_2018("update", result);
@@ -511,7 +525,13 @@ function createNAMap_2018(type, upd_data){
           }
 
           //1st
-          console.log(weight(party_count)[0]);
+          var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
+
+          console.log(sorted);
+
+          if (sorted.length > 1) {
+            console.log('Yes')
+          }
 
       }
 
@@ -896,78 +916,82 @@ function createNAMap_2018(type, upd_data){
                         .domain(parties_legend_abb)
                         .range(parties_colors);
 
-        var party_legend_div = d3.select("#legendcontain")
-                            .append("div")
-                            .classed("partyLegendSVGDiv", true)
-
-        party_legend_div.append('p')
-                      .text('Political Party')
-                      .style('font-size', '12px')
-                      .style('text-align', 'center')
-                      .style('margin-bottom', '-10px');
-
-        var party_legend_svg = party_legend_div.append("svg")
-                                              .classed("partyLegendSVG", true)
-                                              .attr('width', 280)
-                                              .attr('height', 50);
-
-        party_legend_svg.append("g")
-          .attr("class", "legendOrdinal")
-          .attr("transform", "translate(20,20)");
-
-        var legendOrdinal = d3.legendColor()
-          .shapePadding(3)
-          .shapeWidth(25)
-          .shapeHeight(10)
-          .scale(ordinal)
-          .orient('horizontal');
-
-        party_legend_svg.select(".legendOrdinal")
-          .call(legendOrdinal);
-        
-        var VM_legend_div = d3.select("#legendcontain")
-                            .append("div")
-                            .classed("VMLegendSVGDiv", true)
-
-        VM_legend_div.append('p')
-                      .text('Vote Margin')
-                      .style('font-size', '12px')
-                      .style('text-align', 'center')
-                      .style('margin-bottom', '-10px');
-
-        var VM_legend_svg =  VM_legend_div.append("svg")
-                                          .classed("VMLegendSVG", true)
-                                          .attr('width', 170)
-                                          .attr('height', 50);
-
-        var circLegDomain = [0,25,50,75,100];
-        var circLegRange = circLegDomain.map(d => getCircleSize(d));
-        var circLegDomain = circLegDomain.map(d => d + "%");
-
-        var circLegScale = d3.scaleOrdinal().domain(circLegDomain).range(circLegRange);
+        if (type === "init") {
 
 
-        VM_legend_svg.append("g")
-          .attr("class", "legendSize")
-          .attr("transform", "translate(25, 20)");
+          var party_legend_div = d3.select("#legendcontain")
+                              .append("div")
+                              .classed("partyLegendSVGDiv", true)
 
-        var legendSize = d3.legendSize()
-          .scale(circLegScale )
-          .shape('circle')
-          .shapePadding(20)
-          .labelOffset(15)
-          .orient('horizontal');
+          party_legend_div.append('p')
+                        .text('Political Party')
+                        .style('font-size', '12px')
+                        .style('text-align', 'center')
+                        .style('margin-bottom', '-10px');
 
-        VM_legend_svg.select(".legendSize")
-          .call(legendSize);
+          var party_legend_svg = party_legend_div.append("svg")
+                                                .classed("partyLegendSVG", true)
+                                                .attr('width', 280)
+                                                .attr('height', 50);
 
-        // changing the style of legend text and circles
-        d3.selectAll(".VMLegendSVG text")
-          .style('font-size', 9);
+          party_legend_svg.append("g")
+            .attr("class", "legendOrdinal")
+            .attr("transform", "translate(20,20)");
 
-        d3.selectAll(".VMLegendSVG circle")
-          .style('fill', 'none')
-          .style('stroke', 'black');
+          var legendOrdinal = d3.legendColor()
+            .shapePadding(3)
+            .shapeWidth(25)
+            .shapeHeight(10)
+            .scale(ordinal)
+            .orient('horizontal');
+
+          party_legend_svg.select(".legendOrdinal")
+            .call(legendOrdinal);
+
+          var VM_legend_div = d3.select("#legendcontain")
+                              .append("div")
+                              .classed("VMLegendSVGDiv", true)
+
+          VM_legend_div.append('p')
+                        .text('Vote Margin')
+                        .style('font-size', '12px')
+                        .style('text-align', 'center')
+                        .style('margin-bottom', '-10px');
+
+          var VM_legend_svg =  VM_legend_div.append("svg")
+                                            .classed("VMLegendSVG", true)
+                                            .attr('width', 170)
+                                            .attr('height', 50);
+
+          var circLegDomain = [0,25,50,75,100];
+          var circLegRange = circLegDomain.map(d => getCircleSize(d));
+          var circLegDomain = circLegDomain.map(d => d + "%");
+
+          var circLegScale = d3.scaleOrdinal().domain(circLegDomain).range(circLegRange);
+
+
+          VM_legend_svg.append("g")
+            .attr("class", "legendSize")
+            .attr("transform", "translate(25, 20)");
+
+          var legendSize = d3.legendSize()
+            .scale(circLegScale )
+            .shape('circle')
+            .shapePadding(20)
+            .labelOffset(15)
+            .orient('horizontal');
+
+          VM_legend_svg.select(".legendSize")
+            .call(legendSize);
+
+          // changing the style of legend text and circles
+          d3.selectAll(".VMLegendSVG text")
+            .style('font-size', 9);
+
+          d3.selectAll(".VMLegendSVG circle")
+            .style('fill', 'none')
+            .style('stroke', 'black');
+        }
     }
 
     // creating an array with district centrids
