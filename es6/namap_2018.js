@@ -129,7 +129,7 @@ function createNAMap_2018(type, upd_data){
                           .style('text-anchor', 'middle')
                           .style('fill', '#D32F2F')
                           .style('font-size', '12px')
-                          .text('Updating data, vote information and layout')
+                          .text('Gathering data, current votes and layout information')
                           // reading in alll the files and defining the execution function
 
 
