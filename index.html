@@ -337,6 +337,7 @@
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="./ionrange/ion.rangeSlider.min.js"></script>
+    <script async src="./essentials/elections_2018.js"></script>
     <script async src="./essentials/elections_2013.js"></script>
     <script async src="./essentials/elections_2008.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
@@ -347,6 +348,7 @@
     <script src="./es6/bar.js"></script>
     <script src="./es6/namap.js"></script>
     <script src="./es6/namap_2008.js"></script>
+    <script src="./es6/namap_2018.js"></script>
     <script async src="./es6/cartogram.js"></script>
     <script async src="./es6/chord.js"></script>
     <script async src="./es6/filterNAmap.js"></script>
@@ -409,7 +411,7 @@
       })
 
       $(window).on('load', function() {
-        createNAMap();
+        createNAMap_2018("init");
       })
 
       $("#NA").click(function() {
