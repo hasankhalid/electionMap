@@ -1,5 +1,3 @@
-var update_no = 0;
-
 function createNAMap_2018(type, upd_data){
 
   // remove all contents from #vizContain
@@ -71,10 +69,13 @@ function createNAMap_2018(type, upd_data){
     other_color,
     other_color,
     other_color,
-    other_color,
+    "#4DB6AC",
     other_color,
     "#FF8A65"
   ];
+
+  console.log(parties.length)
+  console.log(party_colors.length)
 
   // defining categorical color scale
   var colorScale = d3.scaleOrdinal()
@@ -252,8 +253,8 @@ function createNAMap_2018(type, upd_data){
       result.forEach(function(d){
         //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
         if (d.results.length == 0){
-          d.radius = 5
-          d.radiusInit = 5
+          d.radius = 4.5
+          d.radiusInit = 4.5
         }
         else {
           d['Valid Votes'] = d.results[0].votes + d.results[1].votes;
@@ -321,8 +322,8 @@ function createNAMap_2018(type, upd_data){
         new_data.forEach(function(d){
           //d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
           if (d.results.length == 0){
-            d.radius = 5
-            d.radiusInit = 5
+            d.radius = 4.5
+            d.radiusInit = 4.5
           }
           else {
             d.results = d.results.sort(function(a,b) {
@@ -469,10 +470,15 @@ function createNAMap_2018(type, upd_data){
           })
           .style("fill", function(d){
             if (d.results.length == 0){
-              return '#BDBDBD';
+              return '#D3D3D3';
             }
             else {
-              return colorScale(d.results[0].party);
+              if (parties.includes(d.results[0].party)){
+                return colorScale(d.results[0].party);
+              }
+              else{
+                return other_color;
+              }
             }
           })
           // .attr("party", function(d){
