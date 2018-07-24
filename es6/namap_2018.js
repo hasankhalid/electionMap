@@ -318,6 +318,34 @@ function createNAMap_2018(type, upd_data){
 
             d.radiusInit = d.radius;
 
+            var appendTimeInfoTo = d3.select('.timeupdates')
+                                     .append('div')
+                                     .classed('timeupdateparent', true)
+
+
+              appendTimeInfoTo.append('div')
+                .classed('updatecircle', true)
+                .classed('animated', true)
+                .classed('zoomIn', true)
+                .append('svg')
+                .attr('height' , '12.5')
+                .attr('width', '12.5')
+                .append('circle')
+                .attr('cx', '6.25')
+                .attr('cy', '6.25')
+                .attr('r', '4')
+                .attr('fill', 'grey')
+
+              appendTimeInfoTo.append('div')
+                .classed('updatetext', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .style('margin-bottom', '5px')
+                .append('span')
+                .html(function(){
+                  return '<span> ' + tConvert(new Date().toLocaleTimeString()) + '. ' + d.seat + ' updated, ' + d.results[0].candidate + ', ' + abbreviate(d.results[0].party) + ' is leading against ' + d.results[1].candidate + ', ' + abbreviate(d.results[1].party) + ' by ' + (d.results[0].votes - d.results[1].votes) + ' votes</span>'
+                })
+
           }
           nodes = new_data;
         })
@@ -376,7 +404,7 @@ function createNAMap_2018(type, upd_data){
                           $.ajax({url: "http://192.168.10.16:3000/api/results", success: function(result){
                             if (type == "init") {
                               console.log(result);
-                              createNAMap_2018("update");
+                              createNAMap_2018("update", result);
                               liveResults(createNAMap_2018);
                             }
                           }});
@@ -426,12 +454,18 @@ function createNAMap_2018(type, upd_data){
           return d.y;
         })
         .style("fill", function(d){
-          if (d.results.length == 0){
-            return '#BDBDBD';
+          if (type == "init"){
+            return "none";
           }
           else {
-            return colorScale(d.results[0].party);
+            if (d.results.length == 0){
+              return '#BDBDBD';
+            }
+            else {
+              return colorScale(d.results[0].party);
+            }
           }
+
         })
         // .attr("party", function(d){
         //   return d.results[0].party;
