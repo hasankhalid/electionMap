@@ -29,7 +29,9 @@ function createCartogram(year){
       "Jamiat Ulama-e-Islam (F)",
       "Independent",
       "Awami National Party",
-      "Muttahida Qaumi Movement Pakistan"
+      "Muttahida Qaumi Movement Pakistan",
+      "Pakistan Muslim League",
+      "Muttahida Majlis-e-Amal"
     ]
 
     // replace these with the colors from the naseats map
@@ -40,7 +42,9 @@ function createCartogram(year){
       "#4DB6AC",
       "#CDDC39",
       "#03A9F4",
-      "#BDBDBD"
+      "#BDBDBD",
+      "#4DD0E1",
+      "#4DB6AC"
     ]
 
     // color scale for parties, put in party and it gives you color
