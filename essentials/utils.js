@@ -105,6 +105,9 @@ function abbreviate(party) {
       case "Balochistan National Party (Awami)":
           return 'BNP-A';
           break;
+      case "Grand Democratic Alliance":
+          return 'GDA';
+          break;
       default:
           return 'Other';
   }
