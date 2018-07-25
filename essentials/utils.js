@@ -108,7 +108,6 @@ function abbreviate(party) {
       case "Grand Democratic Alliance":
           return 'GDA';
           break;
-
       case "Pak Sarzameen Party":
           return 'PSP';
           break;

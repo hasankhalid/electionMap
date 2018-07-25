@@ -1,5 +1,3 @@
-var update_no = 0;
-
 function createNAMap_2018(type, upd_data){
 
   // remove all contents from #vizContain
@@ -75,6 +73,9 @@ function createNAMap_2018(type, upd_data){
     other_color,
     "#FF8A65"
   ];
+
+  console.log(parties.length)
+  console.log(party_colors.length)
 
   // defining categorical color scale
   var colorScale = d3.scaleOrdinal()
@@ -599,7 +600,6 @@ function createNAMap_2018(type, upd_data){
               icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Currently leads in ' + sorted[2].weight + ' Seats</p>'})
 
           }
-
       }
 
 
