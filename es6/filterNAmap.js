@@ -20,6 +20,8 @@ Array.prototype.diff = function(a) {
     return this.filter(function(i) {return a.indexOf(i) < 0;});
 };
 
+var global_party_list = ["Pakistan Muslim League (N)","Independent","Pakistan Reh-e- Haq Party","Pakistan Peoples Party Parliamentarians","Pakistan Tehreek-e-Insaf","Awami National Party","All Pakistan Muslim League","MUTTHIDA MAJLIS-E-AMAL PAKISTAN","Pashtoonkhwa Milli Awami Party","Jamiat Ulama-e-lslam Nazaryati Pakistan","Allah-O-Akbar Tehreek","Qaumi Watan Party (Sherpao)","Tehreek Labbaik Pakistan","Pakistan Muslim League","Pak Sarzameen Party","Awami Workers Party","Humdardan-e-Watan Pakistan","Pakistan Justice and Democratic Party","Pakistan Falah Party","Tehrik Jawanan Pakistan","Pakistan Freedom Movement","Pakistan Muslim League(Z)","Pakistan Tehreek-e-lnsaf-Gulalai","Pasban Pakistan","Amun Taraqqi Party","Jamiyat Ulma-e-lslam Pakistan (S)","Pakistan Aman Tehreek","Pakistan Awami Inqelabi League","Mutahiddia Qabail Party","Majlis Wahdat-e-Muslimeen Pakistan","Page missing","National Party","Tehreek-e-Labbaik Islam","Aam Log Party Pakistan","Pakistan Awami League","Pakistan Tehreek-e-lnsaf (Nazriati)","Pakistan Human Rights Party","Pakistan Sunni Tehreek","Awami Muslim League Pakistan","Front National Pakistan","Barabri Party Pakistan","Pakistan Welfare Party","Pakistan Tehreek-e-lnsaniat","Pakistan Awami Raj","Pakistan Quami Yakjehti Party","Pakistan Peoples Party (Shaheed Bhutto)","Muttahida Qaumi Movement Pakistan","Pakistan Siraiki Party (T)","Aam Awam Party","Tehreek Tabdili Nizam Pakistan","Mustaqbil Pakistan","All Pakistan Muslim League (Jinnah)","Sunni Ittehad Council","Jamhoori Watan Party","Pakistan Kissan Ittehad (Ch. Anwar)","Awami Justice Party Pakistan","Illegible","Move on Pakistan","Pakistan Muslim Alliance","Pakistan National Muslim League","Jannat Pakistan Party","Pakistan Muslim League (Council)","Roshan Pakistan League","Pakistan Human Party","Pakistan Muslim League Organization","Awam League","Saraikistan Democratic Party","Pakistan Supreme Democratic","Jamiat Ulema-e-Pakistan (Noorani)","Aam Admi Tehreek Pakistan","Grand Democratic Alliance","Sindh United Party","Tabdeeli Pasand Party (Pakistan)","Mohajir Qaumi Movement (Pakistan)","Tehreek-e-Suba Hazara Pakistan","Pakistan Muslim League sher-e-bangal a.k. Fazal-UI-Haque","Peoples Movement of Pakistan","Balochistan Awami Party","Balochistan National Party","Balochistan National Movement","Balochistan National Party (Awami)","Jamote Qaumi Movement","All Pakistan Tehreek","Hazara Democratic Party","National Peace Council Party"];
+
 //listing unique parties
 var unique_parties = [
   "Pakistan Tehreek-e-Insaf",
@@ -45,6 +47,9 @@ var unique_parties = [
   "MUTTHIDA MAJLIS-E-AMAL PAKISTAN"
 ];
 
+unique_parties = unique_parties.concat(global_party_list);
+unique_parties = unique_parties.filter((v, i, a) => a.indexOf(v) === i);
+
 var parties_in_legend = [
   "Pakistan Tehreek-e-Insaf",
   "Jamiat Ulama-e-Islam (F)",
@@ -54,6 +59,8 @@ var parties_in_legend = [
   "Pakistan Peoples Party Parliamentarians",
   "Pakistan Muslim League (F)",
   "Muttahida Qaumi Movement Pakistan",
+  "MUTTHIDA MAJLIS-E-AMAL PAKISTAN",
+  "Grand Democratic Alliance"
 ];
 
 var rest_parties = unique_parties.diff(parties_in_legend)
@@ -148,10 +155,17 @@ function filterCircles(province, party, voteMargin, ru_party, voteTurnout, na_ra
   // filteres true means filteres elements whereas false means unfiltered elements
   function compFilter(filtered){
     return function(d){
+      // check if result array is empty
+      var filt_party = (d.results.length != 0) ? filterParty(d.results[0].party) : true;
+      var filt_party_ru = (d.results.length != 0) ? filterRUParty(d.results[1].party) : true;
+      var filt_VM = (d.results.length != 0) ? filterVoteMargin(d.voteMargin) : true;
       var logical = filterProvince(d.Province) &&
-      filterParty(d.results[0].party) &&
-      filterVoteMargin(d.voteMargin) &&
-      filterRUParty(d.results[1].party) &&
+      // filterParty(d.results[0].party) &&
+      // filterVoteMargin(d.voteMargin) &&
+      // filterRUParty(d.results[1].party) &&
+      filt_party &&
+      filt_VM &&
+      filt_party_ru &&
       filterVoteTurnout(d["Percentage of Votes Polled to Registered Voters"]) &&
       filterNARange(+d.seat.replace("NA-", ""));
       if (filtered == true){

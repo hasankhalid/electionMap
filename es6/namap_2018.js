@@ -533,12 +533,6 @@ function createNAMap_2018(type, upd_data){
           //1st
           var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
 
-          console.log(sorted);
-
-          if (sorted.length > 1) {
-            console.log('Yes')
-          }
-
       }
 
 

@@ -1,55 +1,55 @@
 Seat,Region,PrimaryDistrict,Province
-NA-1,Chitral,Chitral,Khyber Pakhtunkhua
-NA-2,Swat,Swat,Khyber Pakhtunkhua
-NA-3,Swat,Swat,Khyber Pakhtunkhua
-NA-4,Swat,Swat,Khyber Pakhtunkhua
-NA-5,Upper Dir,Upper Dir,Khyber Pakhtunkhua
-NA-6,Lower Dir,Lower Dir,Khyber Pakhtunkhua
-NA-7,Lower Dir,Lower Dir,Khyber Pakhtunkhua
-NA-8,Malakand,Malakand,Khyber Pakhtunkhua
-NA-9,Buner,Buner,Khyber Pakhtunkhua
-NA-10,Shangla,Shangla,Khyber Pakhtunkhua
-NA-11,Kohistan,Kohistan,Khyber Pakhtunkhua
-NA-12,Batagram,Batagram,Khyber Pakhtunkhua
-NA-13,Mansehra,Mansehra,Khyber Pakhtunkhua
-NA-14,Mansehra,Mansehra,Khyber Pakhtunkhua
-NA-15,Abbottabad,Abbottabad,Khyber Pakhtunkhua
-NA-16,Abbottabad,Abbottabad,Khyber Pakhtunkhua
-NA-17,Haripur,Haripur,Khyber Pakhtunkhua
-NA-18,Swabi,Swabi,Khyber Pakhtunkhua
-NA-19,Swabi,Swabi,Khyber Pakhtunkhua
-NA-20,Mardan,Mardan,Khyber Pakhtunkhua
-NA-21,Mardan,Mardan,Khyber Pakhtunkhua
-NA-22,Mardan,Mardan,Khyber Pakhtunkhua
-NA-23,Charsadda,Charsadda,Khyber Pakhtunkhua
-NA-24,Charsadda,Charsadda,Khyber Pakhtunkhua
-NA-25,Nowshera,Nowshera,Khyber Pakhtunkhua
-NA-26,Nowshera,Nowshera,Khyber Pakhtunkhua
-NA-27,Peshawar,Peshawar,Khyber Pakhtunkhua
-NA-28,Peshawar,Peshawar,Khyber Pakhtunkhua
-NA-29,Peshawar,Peshawar,Khyber Pakhtunkhua
-NA-30,Peshawar,Peshawar,Khyber Pakhtunkhua
-NA-31,Peshawar,Peshawar,Khyber Pakhtunkhua
-NA-32,Kohat,Kohat,Khyber Pakhtunkhua
-NA-33,Hangu,Hangu,Khyber Pakhtunkhua
-NA-34,Karak,Karak,Khyber Pakhtunkhua
-NA-35,Bannu,Bannu,Khyber Pakhtunkhua
-NA-36,Lakki Marwat,Lakki Marwat,Khyber Pakhtunkhua
-NA-37,Tank,Tank,Khyber Pakhtunkhua
-NA-38,Dera Ismail Khan,Dera Ismail Khan,Khyber Pakhtunkhua
-NA-39,Dera Ismail Khan,Dera Ismail Khan,Khyber Pakhtunkhua
-NA-40,Bajaur Agency,Bajaur Agency,F.A.T.A
-NA-41,Bajaur Agency,Bajaur Agency,F.A.T.A
-NA-42,Bajaur Agency,Bajaur Agency,F.A.T.A
-NA-43,Mohmand Agency,Mohmand Agency,F.A.T.A
-NA-44,Khyber Agency,Khyber Agency,F.A.T.A
-NA-45,Khyber Agency,Khyber Agency,F.A.T.A
-NA-46,Kurram Agency,Kurram Agency,F.A.T.A
-NA-47,Orakzai Agency,Orakzai Agency,F.A.T.A
-NA-48,North Waziristan Agency,North Waziristan Agency,F.A.T.A
-NA-49,South Waziristan Agency,South Waziristan Agency,F.A.T.A
-NA-50,South Waziristan Agency,South Waziristan Agency,F.A.T.A
-NA-51,FR Bannu-FR DI Khan-FR DI Khan-FR Lakki Marwat-FR Peshawar-FR Peshawar,FR Tank,F.A.T.A
+NA-1,Chitral,Chitral,KP
+NA-2,Swat,Swat,KP
+NA-3,Swat,Swat,KP
+NA-4,Swat,Swat,KP
+NA-5,Upper Dir,Upper Dir,KP
+NA-6,Lower Dir,Lower Dir,KP
+NA-7,Lower Dir,Lower Dir,KP
+NA-8,Malakand,Malakand,KP
+NA-9,Buner,Buner,KP
+NA-10,Shangla,Shangla,KP
+NA-11,Kohistan,Kohistan,KP
+NA-12,Batagram,Batagram,KP
+NA-13,Mansehra,Mansehra,KP
+NA-14,Mansehra,Mansehra,KP
+NA-15,Abbottabad,Abbottabad,KP
+NA-16,Abbottabad,Abbottabad,KP
+NA-17,Haripur,Haripur,KP
+NA-18,Swabi,Swabi,KP
+NA-19,Swabi,Swabi,KP
+NA-20,Mardan,Mardan,KP
+NA-21,Mardan,Mardan,KP
+NA-22,Mardan,Mardan,KP
+NA-23,Charsadda,Charsadda,KP
+NA-24,Charsadda,Charsadda,KP
+NA-25,Nowshera,Nowshera,KP
+NA-26,Nowshera,Nowshera,KP
+NA-27,Peshawar,Peshawar,KP
+NA-28,Peshawar,Peshawar,KP
+NA-29,Peshawar,Peshawar,KP
+NA-30,Peshawar,Peshawar,KP
+NA-31,Peshawar,Peshawar,KP
+NA-32,Kohat,Kohat,KP
+NA-33,Hangu,Hangu,KP
+NA-34,Karak,Karak,KP
+NA-35,Bannu,Bannu,KP
+NA-36,Lakki Marwat,Lakki Marwat,KP
+NA-37,Tank,Tank,KP
+NA-38,Dera Ismail Khan,Dera Ismail Khan,KP
+NA-39,Dera Ismail Khan,Dera Ismail Khan,KP
+NA-40,Bajaur Agency,Bajaur Agency,FATA
+NA-41,Bajaur Agency,Bajaur Agency,FATA
+NA-42,Bajaur Agency,Bajaur Agency,FATA
+NA-43,Mohmand Agency,Mohmand Agency,FATA
+NA-44,Khyber Agency,Khyber Agency,FATA
+NA-45,Khyber Agency,Khyber Agency,FATA
+NA-46,Kurram Agency,Kurram Agency,FATA
+NA-47,Orakzai Agency,Orakzai Agency,FATA
+NA-48,North Waziristan Agency,North Waziristan Agency,FATA
+NA-49,South Waziristan Agency,South Waziristan Agency,FATA
+NA-50,South Waziristan Agency,South Waziristan Agency,FATA
+NA-51,FR Bannu-FR DI Khan-FR DI Khan-FR Lakki Marwat-FR Peshawar-FR Peshawar,FR Tank,FATA
 NA-52,Islamabad,Islamabad,ICT
 NA-53,Islamabad,Islamabad,ICT
 NA-54,Islamabad,Islamabad,ICT

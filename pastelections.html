@@ -255,7 +255,7 @@
 
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="rangeFilters">
         <div style="width: 275px">
-          <input type="text" id="voteMargin" name="vote_margin" value="" />>
+          <input type="text" id="voteMargin" name="vote_margin" value="" />
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 filtercontainer" id="rangeFiltersTurnout">
@@ -383,6 +383,9 @@
           $("#dropdownProvinceLink").hide();
           $("#votesharedropdown").hide();
           $('#partyFilters').hide();
+          $('#naSeat').hide();
+          $('#voteTurnout').hide();
+          $('#runnerUpPartyFilters').hide();
           $(".filterscontstantheight").show();
           create08NAMap();
           $("#filterdropdown").hide();
@@ -402,6 +405,9 @@
           $(".dwvs").removeClass('active');
           $("#dropdownProvinceLink").hide();
           $("#votesharedropdown").hide();
+          $('#naSeat').hide();
+          $('#voteTurnout').hide();
+          $('#runnerUpPartyFilters').hide();
           $('#partyFilters').hide();
           $(".filterscontstantheight").show();
           createNAMap();
@@ -849,7 +855,7 @@
       });
 
 
-      $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt, .electlink").click(function() {
+      $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt, .electlinkpast").click(function() {
         if (nationalFilter === true) {
           filterCircles(null, null, null);
         }
@@ -861,6 +867,9 @@
         provinces = [];
         $('.partyfilter').attr("active", "disabled");
         $('.partyfilter').prop('checked', false);
+
+        $('.runneruppartyfilter').attr("active", "disabled");
+        $('.runneruppartyfilter').prop('checked', false);
         parties = [];
         $('.provincecheck').prop('checked', false);
         $('.provincecheck').attr("toggleClass", "provinceDisabled");
