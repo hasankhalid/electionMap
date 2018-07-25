@@ -5,7 +5,10 @@ function liveResults(updateFunction){
         //socket.emit('connInfo',{username : 'testUser'}); //change with actual username
     });
     socket.on('update', function (data) {
-				document.getElementById('hoverbox').innerHTML = '';
+				var tootip = document.getElementById('hoverbox');
+				if(tootip){
+					tootip.innerHTML = '';
+				}
         updateFunction('update', data);
     });
     socket.on('disconnect', function(reason){
