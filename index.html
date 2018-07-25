@@ -77,7 +77,6 @@
           <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
           <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
           <a class="dropdown-item filteritem" id="runnerupbutt" style="cursor: pointer;">Runner Up</a>
-          <a class="dropdown-item filteritem" id="voteturnoutbutt" style="cursor: pointer; display: hidden;">Vote Turnout</a>
           <a class="dropdown-item filteritem" id="seatbutt" style="cursor: pointer;">Seat</a>
         </div>
       </div>
@@ -104,7 +103,7 @@
             <label class="form-check-label" for="INDfilter">PML</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input partyfilter" toggleClass="disabled" value="Pak Sarzameen Party" id="PSPfilter">
+            <input type="checkbox" class="form-check-input partyfilter" value="Pak Sarzameen Party" active="disabled" id="PSPfilter">
             <label class="form-check-label" for="PSPfilter">PSP</label>
           </div>
         </div>
@@ -151,7 +150,7 @@
             <label class="form-check-label" for="PMLfilter">PML</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input runneruppartyfilter" toggleClass="disabled" value="Pak Sarzameen Party" id="PSPfilter">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Pak Sarzameen Party" active="disabled" id="PSPfilter">
             <label class="form-check-label" for="PSPfilter">PSP</label>
           </div>
         </div>
@@ -302,10 +301,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="./essentials/utils.js"></script>
-    <script src="./es6/bar.js"></script>
-    <script src="./es6/namap_2018.js"></script>
-
-    <script async src="./es6/filterNAmap.js"></script>
+    <script src="./es6/namap_2018_compiled.js"></script>
+    <script async src="./es6/filterNAmap_compiled.js"></script>
 
     <script>
 
@@ -345,33 +342,35 @@
       });
 
       $("#partyfilterbutt").click(function() {
-        $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
         $("#provinceFilters").hide();
         $('#rangeFilters').hide();
+        $("#runnerUpPartyFilters").hide();
+        $('#rangeFiltersSeat').hide();
+        $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
       });
 
       $("#runnerupbutt").click(function() {
-        $("#runnerUpPartyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
         $("#provinceFilters").hide();
         $('#rangeFilters').hide();
         $("#partyFilters").hide();
-        $('#rangeFiltersTurnout').hide();
         $('#rangeFiltersSeat').hide();
+        $("#runnerUpPartyFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
       });
 
       $("#provincefilterbutt").click(function() {
-        $("#provinceFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
         $("#partyFilters").hide();
         $('#rangeFilters').hide()
+        $("#runnerUpPartyFilters").hide();
+        $('#rangeFiltersSeat').hide();
+        $("#provinceFilters").show().addClass('animated fadeInDefault').css('display', 'flex');
       });
 
       $("#votemarginbutt").click(function() {
         $("#provinceFilters").hide();
         $("#partyFilters").hide();
         $("#runnerUpPartyFilters").hide();
-        $('#rangeFilters').show().addClass('animated fadeInDefault').css('display', 'flex');
-        $('#rangeFiltersTurnout').hide();
         $('#rangeFiltersSeat').hide();
+        $('#rangeFilters').show().addClass('animated fadeInDefault').css('display', 'flex');
       });
 
       $("#voteturnoutbutt").click(function() {
@@ -379,7 +378,6 @@
         $("#partyFilters").hide();
         $("#runnerUpPartyFilters").hide();
         $('#rangeFilters').hide();
-        $('#rangeFiltersTurnout').show().addClass('animated fadeInDefault').css('display', 'flex');
         $('#rangeFiltersSeat').hide();
       });
 
@@ -388,7 +386,6 @@
         $("#partyFilters").hide();
         $("#runnerUpPartyFilters").hide();
         $('#rangeFilters').hide();
-        $('#rangeFiltersTurnout').hide();
         $('#rangeFiltersSeat').show().addClass('animated fadeInDefault').css('display', 'flex');
       });
 
@@ -514,7 +511,7 @@
       seats.push($("#naSeat").data("ionRangeSlider").result.from);
       seats.push($("#naSeat").data("ionRangeSlider").result.to);
 
-      $('#voteMargin, #voteTurnout, #naSeat, input:checkbox').change(function() {
+      function filterSeats() {
         // Saving Ion range instance to var
         var slider = $("#voteMargin").data("ionRangeSlider");
         var sliderseat = $("#naSeat").data("ionRangeSlider");
@@ -564,7 +561,11 @@
             filterCirclesPr(selectedProvince, parties, margin);
           }
         }
-      });
+      }
+
+      $('#voteMargin, #voteTurnout, #naSeat, input:checkbox').change(
+        filterSeats
+      );
 
 
       $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt, .electlink").click(function() {
@@ -585,7 +586,6 @@
         $('#displayAll').prop('checked', false);
         $('#displayAll').attr("toggleClass", "disabled")
         $("#voteMargin").data("ionRangeSlider").reset();
-        $("#voteTurnout").data("ionRangeSlider").reset();
         $("#naSeat").data("ionRangeSlider").reset();
 
         margin = [];

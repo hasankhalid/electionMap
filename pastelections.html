@@ -352,12 +352,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="./essentials/utils.js"></script>
-    <script async src="/es6/provMaps.js"></script>
-    <script src="/es6/bar.js"></script>
-    <script src="/es6/namap.js"></script>
-    <script src="/es6/namap_2008.js"></script>
-    <script async src="/es6/cartogram.js"></script>
-    <script async src="/es6/chord.js"></script>
+    <script async src="/es6/provMaps_compiled.js"></script>
+    <script src="/es6/bar_compiled.js"></script>
+    <script src="/es6/namap_compiled.js"></script>
+    <script src="/es6/namap_2008_compiled.js"></script>
+    <script async src="/es6/cartogram_compiled.js"></script>
+    <script async src="/es6/chord_compiled.js"></script>
     <script async src="/es6/filterNAmap.js"></script>
 
     <script>
@@ -878,6 +878,8 @@
         $('#displayAllrunup').prop('checked', false);
         $('#displayAllrunup').attr("toggleClass", "disabled");
         $("#voteMargin").data("ionRangeSlider").reset();
+        $("#voteTurnout").data("ionRangeSlider").reset();
+        $("#naSeat").data("ionRangeSlider").reset();
         margin = [];
         turnout = [];
         runupparties = [];

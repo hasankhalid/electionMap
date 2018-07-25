@@ -414,12 +414,16 @@ function createNAMap_2018(type, upd_data){
                             setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');; }, 1000);
                             setTimeout(function(){ $("#partyFilters").show().addClass('animated fadeInDefault').css('display', 'flex'); }, 1500);
 
-                          $.ajax({url: "https://election-res.herokuapp.com/api/results", success: function(result){
-                            if (type == "init") {
-                              createNAMap_2018("update", result);
-                              liveResults(createNAMap_2018);
-                            }
-                          }});
+                          if (type == "init") {
+                            $.ajax({url: "https://election-res.herokuapp.com/api/results", success: function(result){
+                                createNAMap_2018("update", result);
+                                liveResults(createNAMap_2018);
+                            }});
+                          }
+                          else {
+                            window.filterSeats();
+                          }
+
                         })
 
         //////////////////////////////////////////////////////////////
