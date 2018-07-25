@@ -130,7 +130,7 @@ function createNAMap_2018(type, upd_data){
                           .style('text-anchor', 'middle')
                           .style('fill', '#D32F2F')
                           .style('font-size', '12px')
-                          .text('Updating data, vote information and layout')
+                          .text('Gathering data, current votes and layout information')
                           // reading in alll the files and defining the execution function
 
 
@@ -309,10 +309,6 @@ function createNAMap_2018(type, upd_data){
           new_data = d3.selectAll('.naSeatCircle').data();
         }
 
-
-
-        console.log(new_data);
-        console.log(result_upd);
         upd_seats_list.forEach(function(d){
           new_data.filter(f => f.seat == d)[0].results = result_upd.filter(f => f.seat == d)[0].results
         })
@@ -420,7 +416,6 @@ function createNAMap_2018(type, upd_data){
 
                           $.ajax({url: "https://election-res.herokuapp.com/api/results", success: function(result){
                             if (type == "init") {
-                              console.log(result);
                               createNAMap_2018("update", result);
                               liveResults(createNAMap_2018);
                             }
@@ -532,7 +527,79 @@ function createNAMap_2018(type, upd_data){
 
           //1st
           var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
+          if (sorted[0] != undefined) {
+            d3.select("#firstparty")
+              .selectAll('*')
+              .remove();
 
+              var appendLeaderTo = d3.select('#firstparty');
+              appendLeaderTo.append('div')
+                .classed('leadStatus', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .html(function() {
+                  return '<p class="leadStatus">LEADING</p>'
+                });
+
+              appendLeaderTo.append('div')
+                .classed('icon-details', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .attr('id', 'iconDetailFirst');
+
+              var icondetails1 = d3.select('#iconDetailFirst');
+              icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
+              icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Currently leads in ' + sorted[0].weight + ' Seats</p>'})
+            }
+            if (sorted[1] != undefined) {
+              d3.select("#secondparty")
+                .selectAll('*')
+                .remove();
+
+              var appendRunnerTo = d3.select('#secondparty');
+              appendRunnerTo.append('div')
+                .classed('leadStatus', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .html(function() {
+                  return '<p class="leadStatus">RUNNER UP</p>'
+                });
+
+              appendRunnerTo.append('div')
+                .classed('icon-details', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .attr('id', 'iconDetailSecond');
+
+              var icondetails2 = d3.select('#iconDetailSecond');
+              icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
+              icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Currently leads in ' + sorted[1].weight + ' Seats</p>'})
+            }
+            if (sorted[3] != undefined) {
+              d3.select("#thirdparty")
+                .selectAll('*')
+                .remove();
+
+              var appendThirdTo = d3.select('#thirdparty');
+              appendThirdTo.append('div')
+                .classed('leadStatus', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .html(function() {
+                  return '<p class="leadStatus">THIRD</p>'
+                });
+
+              appendThirdTo.append('div')
+                .classed('icon-details', true)
+                .classed('animated', true)
+                .classed('fadeInDefault', true)
+                .attr('id', 'iconDetailThird');
+
+              var icondetails3 = d3.select('#iconDetailThird');
+              icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
+              icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Currently leads in ' + sorted[2].weight + ' Seats</p>'})
+
+          }
       }
 
 
@@ -657,7 +724,7 @@ function createNAMap_2018(type, upd_data){
             	})
               .attr('fill', function(d){
                 if (d.results[0] === undefined) {
-                  return '#bdbdbd'
+                  return '#D3D3D3'
                 }
                 else {
                   return d3.rgb(colorScale(d.results[0].party)).darker();
@@ -665,7 +732,7 @@ function createNAMap_2018(type, upd_data){
               })
               .attr('stroke', function(d){
                 if (d.results[0] === undefined) {
-                  return d3.rgb('#bdbdbd').darker();
+                  return d3.rgb('#D3D3D3').darker();
                 }
                 else {
                   return d3.rgb(colorScale(d.results[0].party)).darker();
@@ -689,7 +756,7 @@ function createNAMap_2018(type, upd_data){
               tooltip.append('div')
               .classed('toolhead', true)
               .html(function(d){
-                return '<span class="NA">Data not Available</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
+                return '<span class="NA">' + datum.seat + '</span>' //+ ' vs ' + d.results[1].party + " ("+d.PrimaryDistrict+ " "+ d.seat +")";
               })
 
               tooltip.append('div')
@@ -701,7 +768,7 @@ function createNAMap_2018(type, upd_data){
               tooltip.append('div')
               .classed('toolhead', true)
               .html(function(d){
-                return '<span class="dist">Updates will be available soon</span>'
+                return '<span class="dist" style="color: #9E9E9E">We are in the process of compiling results for this seat. Updates will be available soon</span>'
               })
             }
               // find out the party color by color scale
@@ -852,7 +919,7 @@ function createNAMap_2018(type, upd_data){
             })
             .attr('fill', function(d){
               if (d.results[0] === undefined) {
-                return '#bdbdbd';
+                return '#D3D3D3';
               }
               else {
                 return colorScale(d.results[0].party);
@@ -860,7 +927,7 @@ function createNAMap_2018(type, upd_data){
             })
             .attr('stroke', function(d){
               if (d.results[0] === undefined) {
-                return '#bdbdbd';
+                return '#D3D3D3';
               }
               else {
                 d3.rgb(colorScale(d.results[0].party));

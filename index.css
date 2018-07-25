@@ -971,11 +971,11 @@ g.legendOrdinal text{
 .leadStatus {
   position: absolute;
   top: 0;
-  text-align: center;
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
   color: #9E9E9E;
   text-decoration: underline;
+  width: 300px;
 }
 
 @media screen and (max-width: 992px) {
@@ -1114,6 +1114,9 @@ g.legendOrdinal text{
   justify-content: flex-start;
   margin-bottom: 30px;
   padding: 0px 65px;
+  margin-top: 30px;
+  border-top: 1px solid;
+  border-color: #eee;
 }
 
 .leaderInformation {

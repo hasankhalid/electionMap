@@ -77,7 +77,7 @@
           <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
           <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
           <a class="dropdown-item filteritem" id="runnerupbutt" style="cursor: pointer;">Runner Up</a>
-          <a class="dropdown-item filteritem" id="voteturnoutbutt" style="cursor: pointer;">Vote Turnout</a>
+          <a class="dropdown-item filteritem" id="voteturnoutbutt" style="cursor: pointer; display: hidden;">Vote Turnout</a>
           <a class="dropdown-item filteritem" id="seatbutt" style="cursor: pointer;">Seat</a>
         </div>
       </div>
@@ -104,7 +104,7 @@
             <label class="form-check-label" for="INDfilter">PML</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input partyfilter" toggleClass="disabled" value="null" id="PSPfilter">
+            <input type="checkbox" class="form-check-input partyfilter" toggleClass="disabled" value="Pak Sarzameen Party" id="PSPfilter">
             <label class="form-check-label" for="PSPfilter">PSP</label>
           </div>
         </div>
@@ -143,12 +143,12 @@
             <label class="form-check-label" for="PMLNfilter">PMLN</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Muttahida Majlis-e-Amal" active="disabled" id="JUIFfilter">
-            <label class="form-check-label" for="JUIFfilter">MMA</label>
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Muttahida Majlis-e-Amal" active="disabled" id="MMAfilter">
+            <label class="form-check-label" for="MMAfilter">MMA</label>
           </div>
           <div class="form-group form-check form-check-inline">
             <input type="checkbox" class="form-check-input runneruppartyfilter" value="Pakistan Muslim League" active="disabled" id="PMLfilter">
-            <label class="form-check-label" for="INDfilter">PML</label>
+            <label class="form-check-label" for="PMLfilter">PML</label>
           </div>
           <div class="form-group form-check form-check-inline">
             <input type="checkbox" class="form-check-input runneruppartyfilter" toggleClass="disabled" value="Pak Sarzameen Party" id="PSPfilter">
@@ -165,8 +165,8 @@
             <label class="form-check-label" for="PPPPfilter">Ind.</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Grand Democratic Alliance" active="disabled" id="PMLFfilter">
-            <label class="form-check-label" for="PMLFfilter">GDA</label>
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Grand Democratic Alliance" active="disabled" id="GDAfilter">
+            <label class="form-check-label" for="GDAfilter">GDA</label>
           </div>
           <div class="form-group form-check form-check-inline">
             <input type="checkbox" class="form-check-input runneruppartyfilter" value="Muttahida Qaumi Movement Pakistan" active="disabled" id="MQMfilter">
@@ -245,44 +245,17 @@
       </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 leadTitle">
-        <img class="liveBallot" style="width: 50px;" src="./resources/ballot3.svg"></img>
-        <p style="margin-left: 5px; margin-bottom: 0px;">CURRENTLY LEADING</p>
+        <img class="liveBallot" style="width: 50px; margin-top: 30px;" src="./resources/ballot3.svg"></img>
+        <p style="margin-left: 5px; margin-bottom: 0px; margin-top: 30px;">CURRENTLY LEADING</p>
     </div>
     <div class="container-18" id="firstLeadRow">
       <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 leaders-18" id="firstparty">
-
       </div>
       <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 leaders-18" id="secondparty">
-        <p class='leadStatus'>RUNNER UP</p>
-        <div class="icon-details">
-          <img src="./resources/partylogos/tiger.svg" class="lead-18-logo"/>
-          <div class="leaderInformation">
-            <p class="partyTitle">Pakistan Muslim League (N)</p>
-            <p class="leadSeats">Currently leads in 20 Seats</p>
-          </div>
-        </div>
       </div>
     </div>
     <div class="container-18" id="secondLeadRow">
       <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 leaders-18" id="thirdparty">
-        <p class='leadStatus'>THIRD</p>
-        <div class="icon-details">
-          <img src="./resources/partylogos/arrow.svg" class="lead-18-logo"/>
-          <div class="leaderInformation">
-            <p class="partyTitle">Pakistan People's Party Parliamentarians</p>
-            <p class="leadSeats">Currently leads in 20 Seats</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 leaders-18" id="trivia">
-        <p class='leadStatus'>TRIVIA</p>
-        <div class="icon-details">
-          <img src="./resources/partylogos/majority.svg" class="lead-18-logo"/>
-          <div class="leaderInformation">
-            <p class="partyTitle">SIMPLE MAJORITY?</p>
-            <p class="leadSeats">The Winning Party needs 130 seads for a simple majority</p>
-          </div>
-        </div>
       </div>
     </div>
 
