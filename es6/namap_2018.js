@@ -308,10 +308,6 @@ function createNAMap_2018(type, upd_data){
           new_data = d3.selectAll('.naSeatCircle').data();
         }
 
-
-
-        console.log(new_data);
-        console.log(result_upd);
         upd_seats_list.forEach(function(d){
           new_data.filter(f => f.seat == d)[0].results = result_upd.filter(f => f.seat == d)[0].results
         })
@@ -419,7 +415,6 @@ function createNAMap_2018(type, upd_data){
 
                           $.ajax({url: "https://election-res.herokuapp.com/api/results", success: function(result){
                             if (type == "init") {
-                              console.log(result);
                               createNAMap_2018("update", result);
                               liveResults(createNAMap_2018);
                             }
@@ -531,10 +526,11 @@ function createNAMap_2018(type, upd_data){
 
           //1st
           var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
-
-          console.log(sorted);
-
           if (sorted[0] != undefined) {
+            d3.select("#firstparty")
+              .selectAll('*')
+              .remove();
+
               var appendLeaderTo = d3.select('#firstparty');
               appendLeaderTo.append('div')
                 .classed('leadStatus', true)
@@ -555,6 +551,10 @@ function createNAMap_2018(type, upd_data){
               icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Currently leads in ' + sorted[0].weight + ' Seats</p>'})
             }
             if (sorted[1] != undefined) {
+              d3.select("#secondparty")
+                .selectAll('*')
+                .remove();
+
               var appendRunnerTo = d3.select('#secondparty');
               appendRunnerTo.append('div')
                 .classed('leadStatus', true)
@@ -575,6 +575,10 @@ function createNAMap_2018(type, upd_data){
               icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Currently leads in ' + sorted[1].weight + ' Seats</p>'})
             }
             if (sorted[3] != undefined) {
+              d3.select("#thirdparty")
+                .selectAll('*')
+                .remove();
+
               var appendThirdTo = d3.select('#thirdparty');
               appendThirdTo.append('div')
                 .classed('leadStatus', true)
@@ -720,7 +724,7 @@ function createNAMap_2018(type, upd_data){
             	})
               .attr('fill', function(d){
                 if (d.results[0] === undefined) {
-                  return '#bdbdbd'
+                  return '#D3D3D3'
                 }
                 else {
                   return d3.rgb(colorScale(d.results[0].party)).darker();
@@ -728,7 +732,7 @@ function createNAMap_2018(type, upd_data){
               })
               .attr('stroke', function(d){
                 if (d.results[0] === undefined) {
-                  return d3.rgb('#bdbdbd').darker();
+                  return d3.rgb('#D3D3D3').darker();
                 }
                 else {
                   return d3.rgb(colorScale(d.results[0].party)).darker();
@@ -915,7 +919,7 @@ function createNAMap_2018(type, upd_data){
             })
             .attr('fill', function(d){
               if (d.results[0] === undefined) {
-                return '#bdbdbd';
+                return '#D3D3D3';
               }
               else {
                 return colorScale(d.results[0].party);
@@ -923,7 +927,7 @@ function createNAMap_2018(type, upd_data){
             })
             .attr('stroke', function(d){
               if (d.results[0] === undefined) {
-                return '#bdbdbd';
+                return '#D3D3D3';
               }
               else {
                 d3.rgb(colorScale(d.results[0].party));
