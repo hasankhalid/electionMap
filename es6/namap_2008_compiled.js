@@ -51,15 +51,17 @@ function create08NAMap() {
     d3.queue().defer(d3.json, "./essentials/pakistan_districts.topojson").defer(d3.json, "./essentials/JAndKashmir.topojson").defer(d3.json, "./essentials/Pak_prov.topojson").defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson").defer(d3.csv, "./essentials/NA_seats_2008.csv").await(drawElectMap);
 
     // listing the winning parties
-    var parties = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Qaumi Watan Party (Sherpao)", "Awami National Party", "Awami Jamhuri Ittehad Pakistan", "Pakistan Muslim League (N)", "Independent", "Jamaat-e-Islami Pakistan", "All Pakistan Muslim League", "Awami Muslim League Pakistan", "Pakistan Muslim League", "Pakistan Muslim League(Z)", "Pakistan Peoples Party Parliamentarians", "National Peoples Party", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Pashtoonkhwa Milli Awami Party", "National Party", "Balochistan National Party", "MUTTHIDA MAJLIS-E-AMAL PAKISTAN", "Balochistan National Party (Awami)"];
+    var parties = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Qaumi Watan Party (Sherpao)", "Awami National Party", "Awami Jamhuri Ittehad Pakistan", "Pakistan Muslim League (N)", "Independent", "Jamaat-e-Islami Pakistan", "All Pakistan Muslim League", "Awami Muslim League Pakistan", "Pakistan Muslim League", "Pakistan Muslim League(Z)", "Pakistan Peoples Party Parliamentarians", "National Peoples Party", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Pashtoonkhwa Milli Awami Party", "National Party", "Balochistan National Party", "MUTTHIDA MAJLIS-E-AMAL PAKISTAN", "Balochistan National Party (Awami)", "Mutahida Majlis-e-Amal Pakistan"];
 
     // defining colors mapping to parties / other color is mapped to multiple parties
     var other_color = "#03A9F4";
 
-    var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#CDDC39", other_color, other_color, other_color, "#4DD0E1", other_color, "#607D8B", other_color, "#FF8A65", "#BDBDBD", other_color, other_color, other_color, other_color, other_color];
+    var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#CDDC39", other_color, other_color, other_color, "#4DD0E1", other_color, "#607D8B", other_color, "#FF8A65", "#BDBDBD", other_color, other_color, other_color, other_color, other_color, "#4DB6AC"];
 
     // defining categorical color scale
     var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
+
+    console.log(colorScale("Mutahida Majlis-e-Amal Pakistan"));
 
     ////////////////////////////////////////////////
     ////////////// Execution function //////////////

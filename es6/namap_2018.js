@@ -43,7 +43,8 @@ function createNAMap_2018(type, upd_data){
     "Balochistan National Party",
     "MUTTHIDA MAJLIS-E-AMAL PAKISTAN",
     "Balochistan National Party (Awami)",
-    "Grand Democratic Alliance"
+    "Grand Democratic Alliance",
+    "Mutahida Majlis-e-Amal Pakistan"
   ];
 
   // defining colors mapping to parties / other color is mapped to multiple parties
@@ -71,11 +72,13 @@ function createNAMap_2018(type, upd_data){
     other_color,
     "#4DB6AC",
     other_color,
-    "#FF8A65"
+    "#FF8A65",
+    "#4DB6AC"
   ];
 
   console.log(parties.length)
   console.log(party_colors.length)
+  console.log(colorScale("Mutahida Majlis-e-Amal Pakistan"));
 
   // defining categorical color scale
   var colorScale = d3.scaleOrdinal()
