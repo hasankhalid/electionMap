@@ -61,7 +61,7 @@ function create08NAMap() {
     // defining categorical color scale
     var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
 
-    console.log(colorScale("Mutahida Majlis-e-Amal Pakistan"));
+
 
     ////////////////////////////////////////////////
     ////////////// Execution function //////////////
