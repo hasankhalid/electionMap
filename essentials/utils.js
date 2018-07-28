@@ -114,6 +114,9 @@ function abbreviate(party) {
       case "Tehreek Labbaik Pakistan":
           return 'TLP';
           break;
+      case "Mutahida Majlis-e-Amal Pakistan":
+          return 'MMA';
+          break;
       default:
           return 'Other';
   }
