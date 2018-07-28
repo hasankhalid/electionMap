@@ -117,6 +117,9 @@ function abbreviate(party) {
       case "Mutahida Majlis-e-Amal Pakistan":
           return 'MMA';
           break;
+      case "Balochistan Awami Party":
+          return 'BAP';
+          break;
       default:
           return 'Other';
   }
@@ -180,6 +183,12 @@ function image(party){
             break;
         case "MUTTHIDA MAJLIS-E-AMAL PAKISTAN":
             return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
+            break;
+        case "Mutahida Majlis-e-Amal Pakistan":
+            return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
+            break;
+        case "Balochistan Awami Party":
+            return '<img style="width: 100%;" src="./resources/partylogos/mountains.svg"></img>';
             break;
         case "Jamaat-e-Islami Pakistan":
             return '<img style="width: 100%;" src="./resources/partylogos/balance.svg"></img>';

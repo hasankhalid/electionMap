@@ -86,9 +86,27 @@
       </div>
     </div>
 
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 vizbuttonscontainer">
+      <div class="btn-group" role="Select Visualization" aria-label="Basic example">
+        <button id="NA" type="button" class="btn btn-light btnnavigate navbutt butt-18 active" style="font-family: 'Lato', sans-serif; font-weight: 300">NATIONAL ASSEMBLY</button>
+        <button id="PA-18" type="button" class="btn btn-light btnnavigate navbutt butt-18 PA" style="font-family: 'Lato', sans-serif; font-weight: 300">PROVINCIAL ASSEMBLY</button>
+        <button id="dwvs" type="button" class="btn btn-light btnnavigate navbutt butt-18 dwvs" style="font-family: 'Lato', sans-serif; font-weight: 300">DISTRCT WISE VOTE SHARE</button>
+        <div id="mobiledrop" class="dropdown">
+          <a class="btn btn-light dropdown-toggle btnnavigate" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family: 'Lato', sans-serif; font-weight: 300">
+            More
+          </a>
+          <div style="width: 100%" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item navbutt mobilenav dwvs" style="font-family: 'Lato', sans-serif; font-weight: 300">District Wise Vote Share</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 25px;">
       <div style="display: flex;">
         <span class="naTitle" style="margin-right: 20px; align-self: center; margin-left: 5px; font-family: 'Lato', sans-serif; font-weight: 300">NATIONAL ASSEMBLY RESULTS</span>
+        <span class="paTitle" style="margin-right: 20px; align-self: center; margin-left: 5px; font-family: 'Lato', sans-serif; font-weight: 300">PROVINCIAL ASSEMBLY RESULTS</span>
+        <span class="dwTitle" style="margin-right: 20px; align-self: center; margin-left: 5px; font-family: 'Lato', sans-serif; font-weight: 300">DISTRICT WISE VOTE SHARE</span>
       </div>
     </div>
 
@@ -263,25 +281,18 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3" id="update2018">
-        <p style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 18px; margin-top: 15px;">LATEST UPDATES</p>
-        <div class="timeupdates" style="display: flex; flex-direction: column-reverse">
-
+        <p style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 18px; margin-top: 15px;">MAJOR STATISTICS</p>
+        <div class="leaders-18" id="firstparty">
+        </div>
+        <div class="leaders-18" id="secondparty">
+        </div>
+        <div class="leaders-18" id="thirdparty">
         </div>
       </div>
     </div>
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 leadTitle">
         <img class="liveBallot" style="width: 50px; margin-top: 30px;" src="./resources/ballot3.svg"></img>
-        <p style="margin-left: 5px; margin-bottom: 0px; margin-top: 30px;">CURRENTLY LEADING</p>
-    </div>
-    <div class="container-18" id="firstLeadRow">
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 leaders-18" id="firstparty">
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 leaders-18" id="secondparty">
-      </div>
-    </div>
-    <div class="container-18" id="secondLeadRow">
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 leaders-18" id="thirdparty">
-      </div>
+        <p style="margin-left: 5px; margin-bottom: 0px; margin-top: 30px;">OVERALL SEATS</p>
     </div>
 
     <footer id="footer" style="width: 100%; background: #0D47A1;">
@@ -318,6 +329,13 @@
         </div>
       </div>
     </footer>
+    <div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="margin-top: 10px;">
+        <div class="container">
+          <p style="text-align: center; font-size: 13px; color: #0D47A1;">The data for the results presented on this site are reported by the Election Commision of Pakistan on their website. The data are updated till July 28, 2018</p>
+        </div>
+      </div>
+    </div>
   </div>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -365,6 +383,70 @@
 
       $(".plotreeweb").click(function() {
         window.open('https://plotree.studio/', '_blank');
+      });
+
+      $("#NA").click(function() {
+        nationalFilter = true;
+        $(this).addClass('active');
+        $(".PA").removeClass('active');
+        $(".dwvs").removeClass('active');
+        $("#votesharedropdown").hide();
+        $("#dropdownProvinceLink").hide();
+        $("#filterdropdown").hide();
+        $(".naTitle").show().addClass('animated fadeInDefault');
+        $(".paTitle").hide();
+        $(".dwTitle").hide();
+        $("#NAmap").show().addClass('animated fadeInDefault');
+        $(".filterscontstantheight").show();
+        $("#provincefilterbutt").show();
+        $(".filtercontainer").hide();
+        var slider = $("#naSeat").data("ionRangeSlider");
+        slider.update({
+            min: 1,
+            max: 272,
+            from: 1,
+            to: 272
+        });
+        createNAMap_2018("init");
+      });
+      $(".PA").click(function() {
+        nationalFilter = false;
+        $(this).addClass('active');
+        $("#NA").removeClass('active');
+        $("#filterdropdown").hide();
+        $(".dwvs").removeClass('active');
+        $(".naTitle").hide();
+        $(".paTitle").show().addClass('animated fadeInDefault');
+        $(".dwTitle").hide();
+        var slider = $("#naSeat").data("ionRangeSlider");
+        slider.update({
+            min: 1,
+            max: 99,
+            from: 1,
+            to: 99
+        });
+        makeProvMaps();
+        $("#votesharedropdown").hide();
+        $("#provincefilterbutt").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").show();
+      });
+      $(".dwvs").click(function() {
+        $(this).addClass('active');
+        $("#NA").removeClass('active');
+        $(".PA").removeClass('active');
+        $("#dropdownProvinceLink").hide();
+        $(".naTitle").hide();
+        $(".paTitle").hide();
+        $(".dwTitle").show().addClass('animated fadeInDefault');
+        $("#votesharedropdown").show().addClass('animated fadeInDefault');
+        $("#votesharedropdown").css('position', 'relative');
+        $("#votesharedropdown").css('z-index', '1');
+        createCartogram(2013);
+        $("#cartogram").show().addClass('animated fadeInDefault');
+        $("#filterdropdown").hide();
+        $(".filtercontainer").hide();
+        $(".filterscontstantheight").hide();
       });
 
       $("#partyfilterbutt").click(function() {

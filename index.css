@@ -15,6 +15,14 @@ body {
   overflow-x: hidden;
 }
 
+.paTitle {
+  display: none;
+}
+
+.dwTitle {
+  display: none;
+}
+
 .applicationWrap {
   overflow-x: hidden;
 }
@@ -195,14 +203,16 @@ body {
   border-color: #E0E0E0;
 }
 
+.butt-18 {
+  font-size: 12px;
+}
+
 .btnnavigate:active, .btnnavigate:focus {
-  background-color: #1976D2;
-  color: white;
+  background-color: #EEEEEE;
 }
 
 .btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
-  background-color: #1976D2 !important;
-  color: white;
+  background-color: #EEEEEE !important;
 }
 
 .btnnavigate:focus, .btnnavigate:active {
@@ -962,29 +972,14 @@ g.legendOrdinal text{
 .leaders-18 {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0px 50px;
-  height: 175px;
+  justify-content: center;
+  height: 125px;
   position: relative;
-}
-
-.leadStatus {
-  position: absolute;
-  top: 0;
-  font-size: 14px;
-  font-family: 'Roboto', sans-serif;
-  color: #9E9E9E;
-  text-decoration: underline;
-  width: 300px;
 }
 
 @media screen and (max-width: 992px) {
   .container-18 {
     flex-direction: column;
-  }
-  .leaders-18 {
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 
@@ -1111,7 +1106,7 @@ g.legendOrdinal text{
   font-size: 24px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-bottom: 30px;
   padding: 0px 65px;
   margin-top: 30px;
@@ -1123,7 +1118,7 @@ g.legendOrdinal text{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0px 15px;
+  width: 215px;
 }
 
 .icon-details {
@@ -1131,15 +1126,61 @@ g.legendOrdinal text{
 }
 
 .lead-18-logo {
-  width: 80px;
+  width: 65px;
   margin-right: 10px;
 }
 
 .partyTitle {
-  font-size: 20px;
+  font-size: 18px;
   text-align: left;
+  margin-bottom: 0.5rem;
 }
 
 .leadSeats {
-  font-size: 16px;
+  font-size: 14px;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 1300px) and (min-width: 994px) {
+  .partyTitle {
+    font-size: 14px;
+  }
+
+  .leadSeats {
+    font-size: 12px;
+  }
+
+  .leaderInformation {
+    width: 160px;
+  }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1040px) {
+  .lead-18-logo {
+    width: 50px;
+  }
+}
+
+@media screen and (max-width: 1040px) and (min-width: 994px) {
+  .lead-18-logo {
+    width: 45px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .lead-18-logo {
+    width: 50px;
+  }
+  .partyTitle {
+    font-size: 14px;
+  }
+
+  .leadSeats {
+    font-size: 12px;
+  }
+
+  .leaderInformation {
+    width: 160px;
+  }
 }

@@ -16,15 +16,12 @@ function createNAMap_2018(type, upd_data) {
   }
 
   // listing the winning parties
-  var parties = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Qaumi Watan Party (Sherpao)", "Awami National Party", "Awami Jamhuri Ittehad Pakistan", "Pakistan Muslim League (N)", "Independent", "Jamaat-e-Islami Pakistan", "All Pakistan Muslim League", "Awami Muslim League Pakistan", "Pakistan Muslim League", "Pakistan Muslim League(Z)", "Pakistan Peoples Party Parliamentarians", "National Peoples Party", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Pashtoonkhwa Milli Awami Party", "National Party", "Balochistan National Party", "MUTTHIDA MAJLIS-E-AMAL PAKISTAN", "Balochistan National Party (Awami)", "Grand Democratic Alliance", "Mutahida Majlis-e-Amal Pakistan"];
+  var parties = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Qaumi Watan Party (Sherpao)", "Awami National Party", "Awami Jamhuri Ittehad Pakistan", "Pakistan Muslim League (N)", "Independent", "Jamaat-e-Islami Pakistan", "All Pakistan Muslim League", "Awami Muslim League Pakistan", "Pakistan Muslim League", "Pakistan Muslim League(Z)", "Pakistan Peoples Party Parliamentarians", "National Peoples Party", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Pashtoonkhwa Milli Awami Party", "National Party", "Balochistan National Party", "MUTTHIDA MAJLIS-E-AMAL PAKISTAN", "Balochistan National Party (Awami)", "Grand Democratic Alliance", "Mutahida Majlis-e-Amal Pakistan", "Balochistan Awami Party"];
 
   // defining colors mapping to parties / other color is mapped to multiple parties
   var other_color = "#03A9F4";
 
-  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#CDDC39", other_color, other_color, other_color, "#4DD0E1", other_color, "#607D8B", other_color, "#FF8A65", "#BDBDBD", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC"];
-
-  console.log(parties.length);
-  console.log(party_colors.length);
+  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#FDD835", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#80CBC4", other_color, "#FF8A65", "#80CBC4", "#E53935"];
 
   // defining categorical color scale
   var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
@@ -79,7 +76,7 @@ function createNAMap_2018(type, upd_data) {
     // execution function (Draws map and gets bubbles positioned on map)
     function drawElectMap(error, topology, k_topology, pak_prov_topology, pak_topology, na_seats_2018) {
 
-      d3.selectAll("#PA, #dwvs, #flow").attr('disabled', true);
+      d3.selectAll("#PA-18, #dwvs, #flow").attr('disabled', true);
 
       // draw map just for init
       if (type == "init") {
@@ -266,7 +263,7 @@ function createNAMap_2018(type, upd_data) {
         // give an 'all set message at force end and transition it out'
         d3.select('#status_message').text('All set').style('fill', '#1976D2').transition('status_trans').delay(2500).duration(1500).style('fill-opacity', 0);
 
-        d3.selectAll("#PA, #dwvs, #flow").attr('disabled', null);
+        d3.selectAll("#PA-18, #dwvs, #flow").attr('disabled', null);
         setTimeout(function () {
           $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');;
         }, 1500);
@@ -274,7 +271,6 @@ function createNAMap_2018(type, upd_data) {
         if (type == "init") {
           $.ajax({ url: "https://election-res.herokuapp.com/api/results", success: function success(result) {
               createNAMap_2018("update", result);
-              liveResults(createNAMap_2018);
             } });
         } else {
           window.filterSeats();
@@ -381,48 +377,39 @@ function createNAMap_2018(type, upd_data) {
           d3.select("#firstparty").selectAll('*').remove();
 
           var appendLeaderTo = d3.select('#firstparty');
-          appendLeaderTo.append('div').classed('leadStatus', true).classed('animated', true).classed('fadeInDefault', true).html(function () {
-            return '<p class="leadStatus">LEADING</p>';
-          });
 
           appendLeaderTo.append('div').classed('icon-details', true).classed('animated', true).classed('fadeInDefault', true).attr('id', 'iconDetailFirst');
 
           var icondetails1 = d3.select('#iconDetailFirst');
           icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
           icondetails1.append('div').classed('leaderInformation', true).html(function () {
-            return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Currently leads in ' + sorted[0].weight + ' Seats</p>';
+            return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">has won ' + sorted[0].weight + ' Seats</p>';
           });
         }
         if (sorted[1] != undefined) {
           d3.select("#secondparty").selectAll('*').remove();
 
           var appendRunnerTo = d3.select('#secondparty');
-          appendRunnerTo.append('div').classed('leadStatus', true).classed('animated', true).classed('fadeInDefault', true).html(function () {
-            return '<p class="leadStatus">RUNNER UP</p>';
-          });
 
           appendRunnerTo.append('div').classed('icon-details', true).classed('animated', true).classed('fadeInDefault', true).attr('id', 'iconDetailSecond');
 
           var icondetails2 = d3.select('#iconDetailSecond');
           icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
           icondetails2.append('div').classed('leaderInformation', true).html(function () {
-            return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Currently leads in ' + sorted[1].weight + ' Seats</p>';
+            return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">has won ' + sorted[1].weight + ' Seats</p>';
           });
         }
         if (sorted[3] != undefined) {
           d3.select("#thirdparty").selectAll('*').remove();
 
           var appendThirdTo = d3.select('#thirdparty');
-          appendThirdTo.append('div').classed('leadStatus', true).classed('animated', true).classed('fadeInDefault', true).html(function () {
-            return '<p class="leadStatus">THIRD</p>';
-          });
 
           appendThirdTo.append('div').classed('icon-details', true).classed('animated', true).classed('fadeInDefault', true).attr('id', 'iconDetailThird');
 
           var icondetails3 = d3.select('#iconDetailThird');
           icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
           icondetails3.append('div').classed('leaderInformation', true).html(function () {
-            return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Currently leads in ' + sorted[2].weight + ' Seats</p>';
+            return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">has won ' + sorted[2].weight + ' Seats</p>';
           });
         }
       }
