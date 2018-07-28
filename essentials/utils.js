@@ -205,6 +205,9 @@ function image(party){
         case "Awami National Party":
             return '<img style="width: 100%;" src="./resources/partylogos/lantern.svg"></img>';
             break;
+        case "Awami Muslim League Pakistan":
+            return '<img style="width: 100%;" src="./resources/partylogos/pen-and-ink.svg"></img>';
+            break;
         default:
             return '<img style="width: 90%;" src="./resources/ballot2.svg"></img>';
             break;

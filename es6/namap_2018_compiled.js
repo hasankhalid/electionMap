@@ -21,7 +21,7 @@ function createNAMap_2018(type, upd_data) {
   // defining colors mapping to parties / other color is mapped to multiple parties
   var other_color = "#03A9F4";
 
-  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#FDD835", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#80CBC4", other_color, "#FF8A65", "#80CBC4", "#E53935"];
+  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#FDD835", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935"];
 
   // defining categorical color scale
   var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
