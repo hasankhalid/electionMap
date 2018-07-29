@@ -1,273 +1,273 @@
-Seat,PrimaryDistrict,SeconDistrict,Province
-NA-1,Chitral,,KP
-NA-2,Swat,,KP
-NA-3,Swat,,KP
-NA-4,Swat,,KP
-NA-5,Upper Dir,,KP
-NA-6,Lower Dir,,KP
-NA-7,Lower Dir,,KP
-NA-8,Malakand,,KP
-NA-9,Buner,,KP
-NA-10,Shangla,,KP
-NA-11,Kohistan,,KP
-NA-12,Batagram,,KP
-NA-13,Mansehra,,KP
-NA-14,Mansehra,,KP
-NA-15,Abbottabad,,KP
-NA-16,Abbottabad,,KP
-NA-17,Haripur,,KP
-NA-18,Swabi,,KP
-NA-19,Swabi,,KP
-NA-20,Mardan,,KP
-NA-21,Mardan,,KP
-NA-22,Mardan,,KP
-NA-23,Charsadda,,KP
-NA-24,Charsadda,,KP
-NA-25,Nowshera,,KP
-NA-26,Nowshera,,KP
-NA-27,Peshawar,,KP
-NA-28,Peshawar,,KP
-NA-29,Peshawar,,KP
-NA-30,Peshawar,,KP
-NA-31,Peshawar,,KP
-NA-32,Kohat,,KP
-NA-33,Hangu,,KP
-NA-34,Karak,,KP
-NA-35,Bannu,,KP
-NA-36,Lakki Marwat,,KP
-NA-37,Tank,,KP
-NA-38,Dera Ismail Khan,,KP
-NA-39,Dera Ismail Khan,,KP
-NA-40,Bajaur Agency,,FATA
-NA-41,Bajaur Agency,,FATA
-NA-42,Mohmand Agency,,FATA
-NA-43,Khyber Agency,,FATA
-NA-44,Khyber Agency,,FATA
-NA-45,Kurram Agency,,FATA
-NA-46,Kurram Agency,,FATA
-NA-47,Orakzai Agency,,FATA
-NA-48,North Waziristan Agency,,FATA
-NA-49,South Waziristan Agency,,FATA
-NA-50,South Waziristan Agency,,FATA
-NA-51,FR Peshawar,FR Tank - FR Bannu - FR DI Khan - FR Lakki Marwat - FR Kohat,FATA
-NA-52,Islamabad,,ICT
-NA-53,Islamabad,,ICT
-NA-54,Islamabad,,ICT
-NA-55,Attock,,Punjab
-NA-56,Attock,,Punjab
-NA-57,Rawalpindi,,Punjab
-NA-58,Rawalpindi,,Punjab
-NA-59,Rawalpindi,,Punjab
-NA-60,Rawalpindi,,Punjab
-NA-61,Rawalpindi,,Punjab
-NA-62,Rawalpindi,,Punjab
-NA-63,Rawalpindi,,Punjab
-NA-64,Chakwal,,Punjab
-NA-65,Chakwal,,Punjab
-NA-66,Jhelum,,Punjab
-NA-67,Jhelum,,Punjab
-NA-68,Gujrat,,Punjab
-NA-69,Gujrat,,Punjab
-NA-70,Gujrat,,Punjab
-NA-71,Gujrat,,Punjab
-NA-72,Sialkot,,Punjab
-NA-73,Sialkot,,Punjab
-NA-74,Sialkot,,Punjab
-NA-75,Sialkot,,Punjab
-NA-76,Sialkot,,Punjab
-NA-77,Narowal,,Punjab
-NA-78,Narowal,,Punjab
-NA-79,Gujranwala,,Punjab
-NA-80,Gujranwala,,Punjab
-NA-81,Gujranwala,,Punjab
-NA-82,Gujranwala,,Punjab
-NA-83,Gujranwala,,Punjab
-NA-84,Gujranwala,,Punjab
-NA-85,Mandi Bahauddin,,Punjab
-NA-86,Mandi Bahauddin,,Punjab
-NA-87,Hafizabad,,Punjab
-NA-88,Sargodha,,Punjab
-NA-89,Sargodha,,Punjab
-NA-90,Sargodha,,Punjab
-NA-91,Sargodha,,Punjab
-NA-92,Sargodha,,Punjab
-NA-93,Khushab,,Punjab
-NA-94,Khushab,,Punjab
-NA-95,Mianwali,,Punjab
-NA-96,Mianwali,,Punjab
-NA-97,Bhakkar,,Punjab
-NA-98,Bhakkar,,Punjab
-NA-99,Chiniot,,Punjab
-NA-100,Chiniot,,Punjab
-NA-101,Faisalabad,,Punjab
-NA-102,Faisalabad,,Punjab
-NA-103,Faisalabad,,Punjab
-NA-104,Faisalabad,,Punjab
-NA-105,Faisalabad,,Punjab
-NA-106,Faisalabad,,Punjab
-NA-107,Faisalabad,,Punjab
-NA-108,Faisalabad,,Punjab
-NA-109,Faisalabad,,Punjab
-NA-110,Faisalabad,,Punjab
-NA-111,Toba Tek Singh,,Punjab
-NA-112,Toba Tek Singh,,Punjab
-NA-113,Toba Tek Singh,,Punjab
-NA-114,Jhang,,Punjab
-NA-115,Jhang,,Punjab
-NA-116,Jhang,,Punjab
-NA-117,Nankana Sahib,,Punjab
-NA-118,Nankana Sahib,,Punjab
-NA-119,Sheikhupura,,Punjab
-NA-120,Sheikhupura,,Punjab
-NA-121,Sheikhupura,,Punjab
-NA-122,Sheikhupura,,Punjab
-NA-123,Lahore,,Punjab
-NA-124,Lahore,,Punjab
-NA-125,Lahore,,Punjab
-NA-126,Lahore,,Punjab
-NA-127,Lahore,,Punjab
-NA-128,Lahore,,Punjab
-NA-129,Lahore,,Punjab
-NA-130,Lahore,,Punjab
-NA-131,Lahore,,Punjab
-NA-132,Lahore,,Punjab
-NA-133,Lahore,,Punjab
-NA-134,Lahore,,Punjab
-NA-135,Lahore,,Punjab
-NA-136,Lahore,,Punjab
-NA-137,Kasur,,Punjab
-NA-138,Kasur,,Punjab
-NA-139,Kasur,,Punjab
-NA-140,Kasur,,Punjab
-NA-141,Okara,,Punjab
-NA-142,Okara,,Punjab
-NA-143,Okara,,Punjab
-NA-144,Okara,,Punjab
-NA-145,Pakpattan,,Punjab
-NA-146,Pakpattan,,Punjab
-NA-147,Sahiwal,,Punjab
-NA-148,Sahiwal,,Punjab
-NA-149,Sahiwal,,Punjab
-NA-150,Khanewal,,Punjab
-NA-151,Khanewal,,Punjab
-NA-152,Khanewal,,Punjab
-NA-153,Khanewal,,Punjab
-NA-154,Multan,,Punjab
-NA-155,Multan,,Punjab
-NA-156,Multan,,Punjab
-NA-157,Multan,,Punjab
-NA-158,Multan,,Punjab
-NA-159,Multan,,Punjab
-NA-160,Lodhran,,Punjab
-NA-161,Lodhran,,Punjab
-NA-162,Vehari,,Punjab
-NA-163,Vehari,,Punjab
-NA-164,Vehari,,Punjab
-NA-165,Vehari,,Punjab
-NA-166,Bahawalnagar,,Punjab
-NA-167,Bahawalnagar,,Punjab
-NA-168,Bahawalnagar,,Punjab
-NA-169,Bahawalnagar,,Punjab
-NA-170,Bahawalpur,,Punjab
-NA-171,Bahawalpur,,Punjab
-NA-172,Bahawalpur,,Punjab
-NA-173,Bahawalpur,,Punjab
-NA-174,Bahawalpur,,Punjab
-NA-175,Rahim Yar Khan,,Punjab
-NA-176,Rahim Yar Khan,,Punjab
-NA-177,Rahim Yar Khan,,Punjab
-NA-178,Rahim Yar Khan,,Punjab
-NA-179,Rahim Yar Khan,,Punjab
-NA-180,Rahim Yar Khan,,Punjab
-NA-181,Muzaffargarh,,Punjab
-NA-182,Muzaffargarh,,Punjab
-NA-183,Muzaffargarh,,Punjab
-NA-184,Muzaffargarh,,Punjab
-NA-185,Muzaffargarh,,Punjab
-NA-186,Muzaffargarh,,Punjab
-NA-187,Layyah,,Punjab
-NA-188,Layyah,,Punjab
-NA-189,Dera Ghazi Khan,,Punjab
-NA-190,Dera Ghazi Khan,,Punjab
-NA-191,Dera Ghazi Khan,,Punjab
-NA-192,Dera Ghazi Khan,,Punjab
-NA-193,Rajanpur,,Punjab
-NA-194,Rajanpur,,Punjab
-NA-195,Rajanpur,,Punjab
-NA-196,Jacobabad,,Sindh
-NA-197,Kashmore,,Sindh
-NA-198,Shikarpur,,Sindh
-NA-199,Shikarpur,,Sindh
-NA-200,Larkana,,Sindh
-NA-201,Larkana,,Sindh
-NA-202,Kambar-Shahdadkot,,Sindh
-NA-203,Kambar-Shahdadkot,,Sindh
-NA-204,Ghotki,,Sindh
-NA-205,Ghotki,,Sindh
-NA-206,Sukkur,,Sindh
-NA-207,Sukkur,,Sindh
-NA-208,Khairpur,,Sindh
-NA-209,Khairpur,,Sindh
-NA-210,Khairpur,,Sindh
-NA-211,Naushehro Feroze,,Sindh
-NA-212,Naushehro Feroze,,Sindh
-NA-213,Shaheed Benazirabad,,Sindh
-NA-214,Shaheed Benazirabad,,Sindh
-NA-215,Sanghar,,Sindh
-NA-216,Sanghar,,Sindh
-NA-217,Sanghar,,Sindh
-NA-218,Mirpurkhas,,Sindh
-NA-219,Mirpurkhas,,Sindh
-NA-220,Umerkot,,Sindh
-NA-221,Tharparkar,,Sindh
-NA-222,Tharparkar,,Sindh
-NA-223,Matiari,,Sindh
-NA-224,Tando Allah Yar,,Sindh
-NA-225,Hyderabad,,Sindh
-NA-226,Hyderabad,,Sindh
-NA-227,Hyderabad,,Sindh
-NA-228,Tando Muhammad Khan,,Sindh
-NA-229,Badin,,Sindh
-NA-230,Badin,,Sindh
-NA-231,Sajawal,,Sindh
-NA-232,Thatta,,Sindh
-NA-233,Jamshoro,,Sindh
-NA-234,Dadu,,Sindh
-NA-235,Dadu,,Sindh
-NA-236,Karachi,,Sindh
-NA-237,Karachi,,Sindh
-NA-238,Karachi,,Sindh
-NA-239,Karachi,,Sindh
-NA-240,Karachi,,Sindh
-NA-241,Karachi,,Sindh
-NA-242,Karachi,,Sindh
-NA-243,Karachi,,Sindh
-NA-244,Karachi,,Sindh
-NA-245,Karachi,,Sindh
-NA-246,Karachi,,Sindh
-NA-247,Karachi,,Sindh
-NA-248,Karachi,,Sindh
-NA-249,Karachi,,Sindh
-NA-250,Karachi,,Sindh
-NA-251,Karachi,,Sindh
-NA-252,Karachi,,Sindh
-NA-253,Karachi,,Sindh
-NA-254,Karachi,,Sindh
-NA-255,Karachi,,Sindh
-NA-256,Karachi,,Sindh
-NA-257,Killa Saifullah,Zhob - Sherani,Balochistan
-NA-258,Loralai,Musakhail - Ziarat - Harnai,Balochistan
-NA-259,Dera Bugti,Kohlu - Barkhan - Sibi - Lehri,Balochistan
-NA-260,Nasirabad,Kacchi - Jhal Magsi,Balochistan
-NA-261,Jaffarabad,Sohbatpur,Balochistan
-NA-262,Pishin,,Balochistan
-NA-263,Killa Abdullah,,Balochistan
-NA-264,Quetta,,Balochistan
-NA-265,Quetta,,Balochistan
-NA-266,Quetta,,Balochistan
-NA-267,Mastung,Kalat,Balochistan
-NA-268,Chaghi,Nushki - Kharan,Balochistan
-NA-269,Khuzdar,,Balochistan
-NA-270,Panjgur,Washuk - Awaran,Balochistan
-NA-271,Kech,,Balochistan
-NA-272,Lasbela,Gwadar,Balochistan
+Seat,PrimaryDistrict,SeconDistrict,Province,FemaleTurnout,MaleTurnout,TotalTurnout
+NA-1,Chitral,,KP,61.57,60.49,60.96
+NA-2,Swat,,KP,24.95,57.03,43.28
+NA-3,Swat,,KP,18.78,56.75,40.35
+NA-4,Swat,,KP,20.47,53.08,39.22
+NA-5,Upper Dir,,KP,37.92,55.16,48.25
+NA-6,Lower Dir,,KP,35.47,58.41,48.9
+NA-7,Lower Dir,,KP,31.24,52.89,44.21
+NA-8,Malakand,,KP,38.27,55.93,48.24
+NA-9,Buner,,KP,21.36,55.64,40.62
+NA-10,Shangla,,KP,7.81,54.47,34.27
+NA-11,Kohistan,,KP,27.93,50.4,40.89
+NA-12,Batagram,,KP,13.48,50.8,35.49
+NA-13,Mansehra,,KP,43.55,54.21,49.55
+NA-14,Mansehra,,KP,37.32,44.77,41.49
+NA-15,Abbottabad,,KP,48.77,52.03,50.56
+NA-16,Abbottabad,,KP,45.92,53.16,49.83
+NA-17,Haripur,,KP,50.07,54.06,52.22
+NA-18,Swabi,,KP,34.28,50.47,43.39
+NA-19,Swabi,,KP,33.17,55.27,45.66
+NA-20,Mardan,,KP,33.82,53.42,45.16
+NA-21,Mardan,,KP,32.47,55.63,45.9
+NA-22,Mardan,,KP,42.72,57.89,51.59
+NA-23,Charsadda,,KP,28.77,52.03,42.18
+NA-24,Charsadda,,KP,31.61,55.94,45.29
+NA-25,Nowshera,,KP,38.87,56.64,48.79
+NA-26,Nowshera,,KP,40.5,57.1,49.86
+NA-27,Peshawar,,KP,28.92,57.87,45.83
+NA-28,Peshawar,,KP,28.83,56.08,44.71
+NA-29,Peshawar,,KP,24.78,51.57,40.62
+NA-30,Peshawar,,KP,27.09,51.17,40.64
+NA-31,Peshawar,,KP,28.1,52.7,39.64
+NA-32,Kohat,,KP,33.1,43.5,38.94
+NA-33,Hangu,,KP,19.09,36.98,29.46
+NA-34,Karak,,KP,47.23,51.63,49.68
+NA-35,Bannu,,KP,28.83,52.98,42.55
+NA-36,Lakki Marwat,,KP,38.82,58.86,50.06
+NA-37,Tank,,KP,43.56,43.8,43.7
+NA-38,Dera Ismail Khan,,KP,47.14,60.97,54.82
+NA-39,Dera Ismail Khan,,KP,3,3.76,3.44
+NA-40,Bajaur Agency,,FATA,25.99,51.66,40.9
+NA-41,Bajaur Agency,,FATA,25.95,46.55,38.16
+NA-42,Mohmand Agency,,FATA,6.33,27.95,0.12
+NA-43,Khyber Agency,,FATA,26.16,47.17,37.9
+NA-44,Khyber Agency,,FATA,9.49,37.29,25.31
+NA-45,Kurram Agency,,FATA,31.66,37.43,34.97
+NA-46,Kurram Agency,,FATA,43.87,42.63,43.17
+NA-47,Orakzai Agency,,FATA,27.17,37.27,32.87
+NA-48,North Waziristan Agency,,FATA,8.19,29.28,23.32
+NA-49,South Waziristan Agency,,FATA,14.77,25.67,15.1
+NA-50,South Waziristan Agency,,FATA,16.75,40.21,33
+NA-51,FR Peshawar,FR Tank - FR Bannu - FR DI Khan - FR Lakki Marwat - FR Kohat,FATA,36.5,45.45,41.89
+NA-52,Islamabad,,ICT,60.96,67.13,64.25
+NA-53,Islamabad,,ICT,51.36,61.07,56.53
+NA-54,Islamabad,,ICT,49.45,58.45,54.24
+NA-55,Attock,,Punjab,35.05,58.16,53.46
+NA-56,Attock,,Punjab,63.03,62.19,53.2
+NA-57,Rawalpindi,,Punjab,51.4,58.83,55.32
+NA-58,Rawalpindi,,Punjab,54.76,52.94,53.81
+NA-59,Rawalpindi,,Punjab,56.44,60.87,58.78
+NA-60,Rawalpindi,,Punjab,0,0,0
+NA-61,Rawalpindi,,Punjab,45.59,56.6,51.38
+NA-62,Rawalpindi,,Punjab,44.87,58.2,52
+NA-63,Rawalpindi,,Punjab,52.72,63.01,58.13
+NA-64,Chakwal,,Punjab,60.72,55.67,58.14
+NA-65,Chakwal,,Punjab,59.01,55.81,57.35
+NA-66,Jhelum,,Punjab,52.88,51.07,51.94
+NA-67,Jhelum,,Punjab,51.94,51.8,51.87
+NA-68,Gujrat,,Punjab,56.31,50.31,53
+NA-69,Gujrat,,Punjab,44.49,48.35,46.6
+NA-70,Gujrat,,Punjab,51.85,47.99,49.73
+NA-71,Gujrat,,Punjab,52.69,49.28,50.87
+NA-72,Sialkot,,Punjab,59.34,57.16,58.1
+NA-73,Sialkot,,Punjab,48.28,55.09,51.99
+NA-74,Sialkot,,Punjab,56.09,54.85,55.43
+NA-75,Sialkot,,Punjab,55.18,56.35,55.84
+NA-76,Sialkot,,Punjab,58.1,57.33,57.67
+NA-77,Narowal,,Punjab,56.32,53.78,54.86
+NA-78,Narowal,,Punjab,53.58,56.2,55.06
+NA-79,Gujranwala,,Punjab,53.83,61.9,54.65
+NA-80,Gujranwala,,Punjab,47.63,57.75,53.36
+NA-81,Gujranwala,,Punjab,43.13,56.62,50.58
+NA-82,Gujranwala,,Punjab,43.95,58.52,52.26
+NA-83,Gujranwala,,Punjab,49.46,59.23,55.07
+NA-84,Gujranwala,,Punjab,52.87,60.62,57.36
+NA-85,Mandi Bahauddin,,Punjab,52.75,54.01,53.44
+NA-86,Mandi Bahauddin,,Punjab,52.17,57.24,55.05
+NA-87,Hafizabad,,Punjab,54.9,62.42,59.13
+NA-88,Sargodha,,Punjab,55.34,58.54,57.1
+NA-89,Sargodha,,Punjab,52.27,64.21,58.93
+NA-90,Sargodha,,Punjab,46.64,58.44,52.97
+NA-91,Sargodha,,Punjab,56.37,61.95,59.46
+NA-92,Sargodha,,Punjab,55.33,58.03,56.81
+NA-93,Khushab,,Punjab,56.09,59.45,57.86
+NA-94,Khushab,,Punjab,56.78,61.88,59.49
+NA-95,Mianwali,,Punjab,51.57,56.61,54.29
+NA-96,Mianwali,,Punjab,52.24,62.71,57.94
+NA-97,Bhakkar,,Punjab,60.66,70.24,65.96
+NA-98,Bhakkar,,Punjab,63.57,71.57,67.98
+NA-99,Chiniot,,Punjab,51.1,59.19,55.56
+NA-100,Chiniot,,Punjab,56,66.28,61.67
+NA-101,Faisalabad,,Punjab,53.53,61.85,58.19
+NA-102,Faisalabad,,Punjab,48.03,60.07,54.67
+NA-103,Faisalabad,,Punjab,0,0,0
+NA-104,Faisalabad,,Punjab,52.54,58.55,55.87
+NA-105,Faisalabad,,Punjab,51.17,61.4,56.84
+NA-106,Faisalabad,,Punjab,52.13,64.24,58.92
+NA-107,Faisalabad,,Punjab,49.06,64.43,57.52
+NA-108,Faisalabad,,Punjab,48.57,63.93,57.01
+NA-109,Faisalabad,,Punjab,50.56,64.44,58.04
+NA-110,Faisalabad,,Punjab,48.7,63.9,57.01
+NA-111,Toba Tek Singh,,Punjab,55.27,60.74,58.32
+NA-112,Toba Tek Singh,,Punjab,57.68,60.46,59.21
+NA-113,Toba Tek Singh,,Punjab,57.35,61.89,59.89
+NA-114,Jhang,,Punjab,59.08,64.95,62.44
+NA-115,Jhang,,Punjab,52.24,61.62,57.38
+NA-116,Jhang,,Punjab,58.71,64.74,62.15
+NA-117,Nankana Sahib,,Punjab,54.43,61.51,58.39
+NA-118,Nankana Sahib,,Punjab,53.32,62.6,58.63
+NA-119,Sheikhupura,,Punjab,48.25,61.55,56.04
+NA-120,Sheikhupura,,Punjab,53.26,63.79,59.34
+NA-121,Sheikhupura,,Punjab,48.98,61.56,56.15
+NA-122,Sheikhupura,,Punjab,53.05,61.2,57.82
+NA-123,Lahore,,Punjab,40.4,59.23,51.12
+NA-124,Lahore,,Punjab,40.28,54.9,48.49
+NA-125,Lahore,,Punjab,0,0,51.53
+NA-126,Lahore,,Punjab,46.19,57.31,52.25
+NA-127,Lahore,,Punjab,42.94,56.85,50.74
+NA-128,Lahore,,Punjab,47.51,61,55.2
+NA-129,Lahore,,Punjab,47.99,58.88,53.95
+NA-130,Lahore,,Punjab,48.07,57.36,52.99
+NA-131,Lahore,,Punjab,47.53,56.8,52.59
+NA-132,Lahore,,Punjab,52.29,65.87,60.45
+NA-133,Lahore,,Punjab,44.88,57.73,51.89
+NA-134,Lahore,,Punjab,46.46,58.51,53.39
+NA-135,Lahore,,Punjab,48.7,58.26,53.94
+NA-136,Lahore,,Punjab,47.93,61.9,56.08
+NA-137,Kasur,,Punjab,52.98,63.46,58.9
+NA-138,Kasur,,Punjab,56.11,66.98,62.38
+NA-139,Kasur,,Punjab,55.41,63.46,59.98
+NA-140,Kasur,,Punjab,54.3,65.37,60.65
+NA-141,Okara,,Punjab,56.74,63.01,60.23
+NA-142,Okara,,Punjab,52.39,60.44,56.8
+NA-143,Okara,,Punjab,54.27,61.27,58.21
+NA-144,Okara,,Punjab,52.48,61.11,57.41
+NA-145,Pakpattan,,Punjab,53.46,60.89,57.61
+NA-146,Pakpattan,,Punjab,56.27,62.29,59.55
+NA-147,Sahiwal,,Punjab,50.62,60.37,56.04
+NA-148,Sahiwal,,Punjab,51.83,59.42,56.09
+NA-149,Sahiwal,,Punjab,55.02,58.39,56.91
+NA-150,Khanewal,,Punjab,54.63,63.92,59.87
+NA-151,Khanewal,,Punjab,55.56,61.02,58.62
+NA-152,Khanewal,,Punjab,56.64,60.16,58.62
+NA-153,Khanewal,,Punjab,60.4,61.98,61.29
+NA-154,Multan,,Punjab,50.67,62.46,57.04
+NA-155,Multan,,Punjab,40.63,56.71,49.26
+NA-156,Multan,,Punjab,41.42,56.92,49.86
+NA-157,Multan,,Punjab,52.77,60.95,57.26
+NA-158,Multan,,Punjab,53.96,59.09,56.75
+NA-159,Multan,,Punjab,55.1,57.64,56.48
+NA-160,Lodhran,,Punjab,58.15,61.77,60.19
+NA-161,Lodhran,,Punjab,55.45,59.57,57.72
+NA-162,Vehari,,Punjab,52.62,58.46,55.91
+NA-163,Vehari,,Punjab,55.04,59.98,57.86
+NA-164,Vehari,,Punjab,53.85,60.46,57.57
+NA-165,Vehari,,Punjab,53.18,58.81,56.38
+NA-166,Bahawalnagar,,Punjab,56.86,67.32,62.91
+NA-167,Bahawalnagar,,Punjab,50.91,61.18,56.81
+NA-168,Bahawalnagar,,Punjab,54.47,59.85,57.51
+NA-169,Bahawalnagar,,Punjab,58.34,61.82,60.33
+NA-170,Bahawalpur,,Punjab,46.06,57.58,52.29
+NA-171,Bahawalpur,,Punjab,57.74,61.65,59.95
+NA-172,Bahawalpur,,Punjab,62.35,65.39,64.07
+NA-173,Bahawalpur,,Punjab,54.59,57.17,56.02
+NA-174,Bahawalpur,,Punjab,51.71,53.43,52.66
+NA-175,Rahim Yar Khan,,Punjab,55.07,57.55,56.49
+NA-176,Rahim Yar Khan,,Punjab,52.38,56.67,54.84
+NA-177,Rahim Yar Khan,,Punjab,51.75,56.86,54.7
+NA-178,Rahim Yar Khan,,Punjab,51.07,59.95,56.19
+NA-179,Rahim Yar Khan,,Punjab,54.08,59.78,57.24
+NA-180,Rahim Yar Khan,,Punjab,56.13,60.87,58.85
+NA-181,Muzaffargarh,,Punjab,57.25,66.76,62.56
+NA-182,Muzaffargarh,,Punjab,56.45,64.78,60.98
+NA-183,Muzaffargarh,,Punjab,59.54,66.27,63.21
+NA-184,Muzaffargarh,,Punjab,57.94,58.98,58.51
+NA-185,Muzaffargarh,,Punjab,56.87,58.87,57.99
+NA-186,Muzaffargarh,,Punjab,61.85,58.85,60.12
+NA-187,Layyah,,Punjab,59.37,66.57,63.44
+NA-188,Layyah,,Punjab,58.94,68.22,64.01
+NA-189,Dera Ghazi Khan,,Punjab,45.03,58.05,52.35
+NA-190,Dera Ghazi Khan,,Punjab,48.09,54.22,51.66
+NA-191,Dera Ghazi Khan,,Punjab,47.04,53.3,50.53
+NA-192,Dera Ghazi Khan,,Punjab,55.19,54.65,54.88
+NA-193,Rajanpur,,Punjab,54.51,56.58,55.67
+NA-194,Rajanpur,,Punjab,55.42,63.45,59.89
+NA-195,Rajanpur,,Punjab,57.07,68.44,63.52
+NA-196,Jacobabad,,Sindh,39.73,48.8,44.58
+NA-197,Kashmore,,Sindh,30.07,40.4,36.37
+NA-198,Shikarpur,,Sindh,46.73,53.05,50.13
+NA-199,Shikarpur,,Sindh,47.87,51.34,49.74
+NA-200,Larkana,,Sindh,45.77,50.33,48.24
+NA-201,Larkana,,Sindh,52,53.29,52.71
+NA-202,Kambar-Shahdadkot,,Sindh,42.04,43.28,42.72
+NA-203,Kambar-Shahdadkot,,Sindh,34.77,36.84,35.93
+NA-204,Ghotki,,Sindh,53.45,62.14,58.37
+NA-205,Ghotki,,Sindh,46.24,53.54,50.36
+NA-206,Sukkur,,Sindh,53.63,61.77,58.14
+NA-207,Sukkur,,Sindh,36.99,54.44,46.46
+NA-208,Khairpur,,Sindh,48.23,53.09,50.86
+NA-209,Khairpur,,Sindh,55.9,55.97,55.94
+NA-210,Khairpur,,Sindh,47.47,52.45,50.2
+NA-211,Naushehro Feroze,,Sindh,54.15,56.57,55.48
+NA-212,Naushehro Feroze,,Sindh,53,56.03,54.68
+NA-213,Shaheed Benazirabad,,Sindh,41.78,51.02,46.86
+NA-214,Shaheed Benazirabad,,Sindh,52.48,58.56,55.79
+NA-215,Sanghar,,Sindh,51.96,57.25,54.86
+NA-216,Sanghar,,Sindh,55.6,59.24,57.61
+NA-217,Sanghar,,Sindh,42.41,52.43,47.86
+NA-218,Mirpurkhas,,Sindh,45.39,54.89,50.63
+NA-219,Mirpurkhas,,Sindh,50.38,55.87,53.39
+NA-220,Umerkot,,Sindh,61.31,62.51,61.95
+NA-221,Tharparkar,,Sindh,72.83,65.39,68.68
+NA-222,Tharparkar,,Sindh,71.4,70.51,70.91
+NA-223,Matiari,,Sindh,50.17,57.45,54.06
+NA-224,Tando Allah Yar,,Sindh,50.11,57.44,54.04
+NA-225,Hyderabad,,Sindh,43.43,52.26,48.1
+NA-226,Hyderabad,,Sindh,30.76,46.67,39.58
+NA-227,Hyderabad,,Sindh,29.34,47.98,39.88
+NA-228,Tando Muhammad Khan,,Sindh,46.04,59.63,53.5
+NA-229,Badin,,Sindh,47.6,57.46,52.95
+NA-230,Badin,,Sindh,51.34,63.83,58.7
+NA-231,Sajawal,,Sindh,34.38,55.26,45.89
+NA-232,Thatta,,Sindh,34.24,50.92,43.41
+NA-233,Jamshoro,,Sindh,52.53,59.45,56.35
+NA-234,Dadu,,Sindh,48.63,51.84,50.41
+NA-235,Dadu,,Sindh,48.07,50.95,49.67
+NA-236,Karachi,,Sindh,45.86,53.69,50.39
+NA-237,Karachi,,Sindh,36.59,46.43,42.22
+NA-238,Karachi,,Sindh,35.53,49.53,43.99
+NA-239,Karachi,,Sindh,36.9,47.07,42.4
+NA-240,Karachi,,Sindh,29.81,43.08,37.38
+NA-241,Karachi,,Sindh,29.04,41.25,36.27
+NA-242,Karachi,,Sindh,32.51,42.58,38.56
+NA-243,Karachi,,Sindh,37.61,44.31,41.13
+NA-244,Karachi,,Sindh,37.69,45.44,41.9
+NA-245,Karachi,,Sindh,31.79,42.32,37.49
+NA-246,Karachi,,Sindh,31.89,43.46,38.49
+NA-247,Karachi,,Sindh,34.61,45.04,40.26
+NA-248,Karachi,,Sindh,33.3,46.27,41.11
+NA-249,Karachi,,Sindh,30.89,45.18,39.58
+NA-250,Karachi,,Sindh,27.19,43.99,37.4
+NA-251,Karachi,,Sindh,36.5,48.86,43.81
+NA-252,Karachi,,Sindh,32.32,44.31,39.6
+NA-253,Karachi,,Sindh,31.52,43.06,38.11
+NA-254,Karachi,,Sindh,338.57,43.75,39.19
+NA-255,Karachi,,Sindh,32.39,42.3,37.9
+NA-256,Karachi,,Sindh,37.03,44.89,41.24
+NA-257,Killa Saifullah,Zhob - Sherani,Balochistan,33.23,56.99,46.85
+NA-258,Loralai,Musakhail - Ziarat - Harnai,Balochistan,40.8,61.64,52.67
+NA-259,Dera Bugti,Kohlu - Barkhan - Sibi - Lehri,Balochistan,37.59,49.58,44.79
+NA-260,Nasirabad,Kacchi - Jhal Magsi,Balochistan,34.75,42.43,39.14
+NA-261,Jaffarabad,Sohbatpur,Balochistan,34.09,43.02,38.88
+NA-262,Pishin,,Balochistan,44.91,49.98,47.87
+NA-263,Killa Abdullah,,Balochistan,37.22,43.17,41.03
+NA-264,Quetta,,Balochistan,31.93,44.8,39.76
+NA-265,Quetta,,Balochistan,29.72,42.23,36.79
+NA-266,Quetta,,Balochistan,24.95,40.76,34.29
+NA-267,Mastung,Kalat,Balochistan,43.75,52.17,48.65
+NA-268,Chaghi,Nushki - Kharan,Balochistan,20.68,20.65,20.58
+NA-269,Khuzdar,,Balochistan,52.56,55.61,54.32
+NA-270,Panjgur,Washuk - Awaran,Balochistan,39.04,41.55,40.47
+NA-271,Kech,,Balochistan,43.2,36.66,39.5
+NA-272,Lasbela,Gwadar,Balochistan,53.73,55.27,56.01
