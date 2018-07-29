@@ -269,7 +269,7 @@ function createNAMap_2018(type, upd_data) {
         }, 1500);
 
         if (type == "init") {
-          $.ajax({ url: "https://election-res.herokuapp.com/api/results", success: function success(result) {
+          $.ajax({ url: "./essentials/NA_seats_2018.csv", success: function success(result) {
               createNAMap_2018("update", result);
             } });
         } else {

@@ -302,7 +302,9 @@
             <a class="dropdown-item cartinput navbutt mobilenav" id="ANP" value = "Awami National Party" >Awami National Party</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="MQM" value = "Muttahida Qaumi Movement Pakistan">Muttahida Qaumi Movement</a>
             <a class="dropdown-item cartinput navbutt mobilenav" id="PML" value = "Pakistan Muslim League">Pakistan Muslim League</a>
-            <a class="dropdown-item cartinput navbutt mobilenav thirteenhide" id="MMA" value = "MUTTHIDA MAJLIS-E-AMAL PAKISTAN">Muttahida Majlis-e-Amal</a>
+            <a class="dropdown-item cartinput navbutt mobilenav thirteenhide" id="MMA" value = "Muttahida Majlis-e-Amal Pakistan">Muttahida Majlis-e-Amal</a>
+            <a class="dropdown-item cartinput navbutt mobilenav thirteenhide" id="TLP" value = "Tehreek-e-Labbaik Pakistan">Tehreek-e-Labbaik Pakistan</a>
+            <a class="dropdown-item cartinput navbutt mobilenav thirteenhide" id="TLP" value = "Balochistan Awami Party">Balochistan Awami Party</a>
           </div>
         </div>
       </div>
@@ -384,8 +386,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"></script>
     <script type="text/javascript" src="https://d3js.org/topojson.v2.min.js"></script>
     <script src="./essentials/utils.js"></script>
+    <script src="./essentials/elections_2018.js"></script>
     <script src="./essentials/prov_2018.js"></script>
-    <script src="./es6/namap_2018_compiled.js"></script>
+    <script src="./es6/cartogram_compiled.js"></script>
+    <script src="./es6/namap_2018_unlive.js"></script>
     <script async src="./es6/filterNAmap_compiled.js"></script>
 
     <script>
@@ -486,7 +490,7 @@
         $("#filterdropdown").hide();
         $(".filtercontainer").hide();
         $(".filterscontstantheight").hide();
-        createCartogram(2013);
+        createCartogram(2018);
       });
 
       $("#partyfilterbutt").click(function() {

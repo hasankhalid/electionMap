@@ -464,6 +464,10 @@ g.legendOrdinal text{
   grid-column: span 10;
 }
 
+.toolmfturnout {
+  grid-column: span 12;
+}
+
 .partyColorToolBar {
   position: absolute;
   top: 0;
@@ -983,6 +987,35 @@ g.legendOrdinal text{
   }
 }
 
+#mfcontain {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.genderturnout {
+  display: flex;
+  align-items: flex-end;
+}
+
+.gendericon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.mfpercent {
+  font-size: 12px;
+}
+
+.tdetail {
+  font-size: 11px;
+  color: #616161;
+  margin-left: 3px;
+}
+
+
+
 @supports not ((display: -ms-grid) or (display: grid)) {
   .tool {
     display: inline-block;
@@ -990,6 +1023,11 @@ g.legendOrdinal text{
 
   .toolhead {
     width: 75%;
+    float: left;
+  }
+
+  .toolmfturnout {
+    width: 100%;
     float: left;
   }
 

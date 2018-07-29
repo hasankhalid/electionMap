@@ -1,273 +1,273 @@
-Seat,Region,PrimaryDistrict,Province
-NA-1,Chitral,Chitral,KP
-NA-2,Swat,Swat,KP
-NA-3,Swat,Swat,KP
-NA-4,Swat,Swat,KP
-NA-5,Upper Dir,Upper Dir,KP
-NA-6,Lower Dir,Lower Dir,KP
-NA-7,Lower Dir,Lower Dir,KP
-NA-8,Malakand,Malakand,KP
-NA-9,Buner,Buner,KP
-NA-10,Shangla,Shangla,KP
-NA-11,Kohistan,Kohistan,KP
-NA-12,Batagram,Batagram,KP
-NA-13,Mansehra,Mansehra,KP
-NA-14,Mansehra,Mansehra,KP
-NA-15,Abbottabad,Abbottabad,KP
-NA-16,Abbottabad,Abbottabad,KP
-NA-17,Haripur,Haripur,KP
-NA-18,Swabi,Swabi,KP
-NA-19,Swabi,Swabi,KP
-NA-20,Mardan,Mardan,KP
-NA-21,Mardan,Mardan,KP
-NA-22,Mardan,Mardan,KP
-NA-23,Charsadda,Charsadda,KP
-NA-24,Charsadda,Charsadda,KP
-NA-25,Nowshera,Nowshera,KP
-NA-26,Nowshera,Nowshera,KP
-NA-27,Peshawar,Peshawar,KP
-NA-28,Peshawar,Peshawar,KP
-NA-29,Peshawar,Peshawar,KP
-NA-30,Peshawar,Peshawar,KP
-NA-31,Peshawar,Peshawar,KP
-NA-32,Kohat,Kohat,KP
-NA-33,Hangu,Hangu,KP
-NA-34,Karak,Karak,KP
-NA-35,Bannu,Bannu,KP
-NA-36,Lakki Marwat,Lakki Marwat,KP
-NA-37,Tank,Tank,KP
-NA-38,Dera Ismail Khan,Dera Ismail Khan,KP
-NA-39,Dera Ismail Khan,Dera Ismail Khan,KP
-NA-40,Bajaur Agency,Bajaur Agency,FATA
-NA-41,Bajaur Agency,Bajaur Agency,FATA
-NA-42,Bajaur Agency,Bajaur Agency,FATA
-NA-43,Mohmand Agency,Mohmand Agency,FATA
-NA-44,Khyber Agency,Khyber Agency,FATA
-NA-45,Khyber Agency,Khyber Agency,FATA
-NA-46,Kurram Agency,Kurram Agency,FATA
-NA-47,Orakzai Agency,Orakzai Agency,FATA
-NA-48,North Waziristan Agency,North Waziristan Agency,FATA
-NA-49,South Waziristan Agency,South Waziristan Agency,FATA
-NA-50,South Waziristan Agency,South Waziristan Agency,FATA
-NA-51,FR Bannu-FR DI Khan-FR DI Khan-FR Lakki Marwat-FR Peshawar-FR Peshawar,FR Tank,FATA
-NA-52,Islamabad,Islamabad,ICT
-NA-53,Islamabad,Islamabad,ICT
-NA-54,Islamabad,Islamabad,ICT
-NA-55,Attock,Attock,Punjab
-NA-56,Attock,Attock,Punjab
-NA-57,Rawalpindi,Rawalpindi,Punjab
-NA-58,Rawalpindi,Rawalpindi,Punjab
-NA-59,Rawalpindi,Rawalpindi,Punjab
-NA-60,Rawalpindi,Rawalpindi,Punjab
-NA-61,Rawalpindi,Rawalpindi,Punjab
-NA-62,Rawalpindi,Rawalpindi,Punjab
-NA-63,Rawalpindi,Rawalpindi,Punjab
-NA-64,Chakwal,Chakwal,Punjab
-NA-65,Chakwal,Chakwal,Punjab
-NA-66,Jhelum,Jhelum,Punjab
-NA-67,Jhelum,Jhelum,Punjab
-NA-68,Gujrat,Gujrat,Punjab
-NA-69,Gujrat,Gujrat,Punjab
-NA-70,Gujrat,Gujrat,Punjab
-NA-71,Gujrat,Gujrat,Punjab
-NA-72,Sialkot,Sialkot,Punjab
-NA-73,Sialkot,Sialkot,Punjab
-NA-74,Sialkot,Sialkot,Punjab
-NA-75,Sialkot,Sialkot,Punjab
-NA-76,Sialkot,Sialkot,Punjab
-NA-77,Narowal,Narowal,Punjab
-NA-78,Narowal,Narowal,Punjab
-NA-79,Gujranwala,Gujranwala,Punjab
-NA-80,Gujranwala,Gujranwala,Punjab
-NA-81,Gujranwala,Gujranwala,Punjab
-NA-82,Gujranwala,Gujranwala,Punjab
-NA-83,Gujranwala,Gujranwala,Punjab
-NA-84,Gujranwala,Gujranwala,Punjab
-NA-85,Mandi Bahauddin,Mandi Bahauddin,Punjab
-NA-86,Mandi Bahauddin,Mandi Bahauddin,Punjab
-NA-87,Hafizabad,Hafizabad,Punjab
-NA-88,Sargodha,Sargodha,Punjab
-NA-89,Sargodha,Sargodha,Punjab
-NA-90,Sargodha,Sargodha,Punjab
-NA-91,Sargodha,Sargodha,Punjab
-NA-92,Sargodha,Sargodha,Punjab
-NA-93,Khushab,Khushab,Punjab
-NA-94,Khushab,Khushab,Punjab
-NA-95,Mianwali,Mianwali,Punjab
-NA-96,Mianwali,Mianwali,Punjab
-NA-97,Bhakkar,Bhakkar,Punjab
-NA-98,Bhakkar,Bhakkar,Punjab
-NA-99,Chiniot,Chiniot,Punjab
-NA-100,Chiniot,Chiniot,Punjab
-NA-101,Faisalabad,Faisalabad,Punjab
-NA-102,Faisalabad,Faisalabad,Punjab
-NA-103,Faisalabad,Faisalabad,Punjab
-NA-104,Faisalabad,Faisalabad,Punjab
-NA-105,Faisalabad,Faisalabad,Punjab
-NA-106,Faisalabad,Faisalabad,Punjab
-NA-107,Faisalabad,Faisalabad,Punjab
-NA-108,Faisalabad,Faisalabad,Punjab
-NA-109,Faisalabad,Faisalabad,Punjab
-NA-110,Faisalabad,Faisalabad,Punjab
-NA-111,Toba Tek Singh,Toba Tek Singh,Punjab
-NA-112,Toba Tek Singh,Toba Tek Singh,Punjab
-NA-113,Toba Tek Singh,Toba Tek Singh,Punjab
-NA-114,Jhang,Jhang,Punjab
-NA-115,Jhang,Jhang,Punjab
-NA-116,Jhang,Jhang,Punjab
-NA-117,Nankana Sahib,Nankana Sahib,Punjab
-NA-118,Nankana Sahib,Nankana Sahib,Punjab
-NA-119,Sheikhupura,Sheikhupura,Punjab
-NA-120,Sheikhupura,Sheikhupura,Punjab
-NA-121,Sheikhupura,Sheikhupura,Punjab
-NA-122,Sheikhupura,Sheikhupura,Punjab
-NA-123,Lahore,Lahore,Punjab
-NA-124,Lahore,Lahore,Punjab
-NA-125,Lahore,Lahore,Punjab
-NA-126,Lahore,Lahore,Punjab
-NA-127,Lahore,Lahore,Punjab
-NA-128,Lahore,Lahore,Punjab
-NA-129,Lahore,Lahore,Punjab
-NA-130,Lahore,Lahore,Punjab
-NA-131,Lahore,Lahore,Punjab
-NA-132,Lahore,Lahore,Punjab
-NA-133,Lahore,Lahore,Punjab
-NA-134,Lahore,Lahore,Punjab
-NA-135,Lahore,Lahore,Punjab
-NA-136,Lahore,Lahore,Punjab
-NA-137,Kasur,Kasur,Punjab
-NA-138,Kasur,Kasur,Punjab
-NA-139,Kasur,Kasur,Punjab
-NA-140,Kasur,Kasur,Punjab
-NA-141,Okara,Okara,Punjab
-NA-142,Okara,Okara,Punjab
-NA-143,Okara,Okara,Punjab
-NA-144,Okara,Okara,Punjab
-NA-145,Pakpattan,Pakpattan,Punjab
-NA-146,Pakpattan,Pakpattan,Punjab
-NA-147,Sahiwal,Sahiwal,Punjab
-NA-148,Sahiwal,Sahiwal,Punjab
-NA-149,Sahiwal,Sahiwal,Punjab
-NA-150,Khanewal,Khanewal,Punjab
-NA-151,Khanewal,Khanewal,Punjab
-NA-152,Khanewal,Khanewal,Punjab
-NA-153,Khanewal,Khanewal,Punjab
-NA-154,Multan,Multan,Punjab
-NA-155,Multan,Multan,Punjab
-NA-156,Multan,Multan,Punjab
-NA-157,Multan,Multan,Punjab
-NA-158,Multan,Multan,Punjab
-NA-159,Multan,Multan,Punjab
-NA-160,Lodhran,Lodhran,Punjab
-NA-161,Lodhran,Lodhran,Punjab
-NA-162,Vehari,Vehari,Punjab
-NA-163,Vehari,Vehari,Punjab
-NA-164,Vehari,Vehari,Punjab
-NA-165,Vehari,Vehari,Punjab
-NA-166,Bahawalnagar,Bahawalnagar,Punjab
-NA-167,Bahawalnagar,Bahawalnagar,Punjab
-NA-168,Bahawalnagar,Bahawalnagar,Punjab
-NA-169,Bahawalnagar,Bahawalnagar,Punjab
-NA-170,Bahawalpur,Bahawalpur,Punjab
-NA-171,Bahawalpur,Bahawalpur,Punjab
-NA-172,Bahawalpur,Bahawalpur,Punjab
-NA-173,Bahawalpur,Bahawalpur,Punjab
-NA-174,Bahawalpur,Bahawalpur,Punjab
-NA-175,Rahim Yar Khan,Rahim Yar Khan,Punjab
-NA-176,Rahim Yar Khan,Rahim Yar Khan,Punjab
-NA-177,Rahim Yar Khan,Rahim Yar Khan,Punjab
-NA-178,Rahim Yar Khan,Rahim Yar Khan,Punjab
-NA-179,Rahim Yar Khan,Rahim Yar Khan,Punjab
-NA-180,Rahim Yar Khan,Rahim Yar Khan,Punjab
-NA-181,Muzaffargarh,Muzaffargarh,Punjab
-NA-182,Muzaffargarh,Muzaffargarh,Punjab
-NA-183,Muzaffargarh,Muzaffargarh,Punjab
-NA-184,Muzaffargarh,Muzaffargarh,Punjab
-NA-185,Muzaffargarh,Muzaffargarh,Punjab
-NA-186,Muzaffargarh,Muzaffargarh,Punjab
-NA-187,Layyah,Layyah,Punjab
-NA-188,Layyah,Layyah,Punjab
-NA-189,Dera Ghazi Khan,Dera Ghazi Khan,Punjab
-NA-190,Dera Ghazi Khan,Dera Ghazi Khan,Punjab
-NA-191,Dera Ghazi Khan,Dera Ghazi Khan,Punjab
-NA-192,Dera Ghazi Khan,Dera Ghazi Khan,Punjab
-NA-193,Rajanpur,Rajanpur,Punjab
-NA-194,Rajanpur,Rajanpur,Punjab
-NA-195,Rajanpur,Rajanpur,Punjab
-NA-196,Jacobabad,Jacobabad,Sindh
-NA-197,Kashmore,Kashmore,Sindh
-NA-198,Shikarpur,Shikarpur,Sindh
-NA-199,Shikarpur,Shikarpur,Sindh
-NA-200,Larkana,Larkana,Sindh
-NA-201,Larkana,Larkana,Sindh
-NA-202,Kambar-Shahdadkot,Kambar-Shahdadkot,Sindh
-NA-203,Kambar-Shahdadkot,Kambar-Shahdadkot,Sindh
-NA-204,Ghotki,Ghotki,Sindh
-NA-205,Ghotki,Ghotki,Sindh
-NA-206,Sukkur,Sukkur,Sindh
-NA-207,Sukkur,Sukkur,Sindh
-NA-208,Khairpur,Khairpur,Sindh
-NA-209,Khairpur,Khairpur,Sindh
-NA-210,Khairpur,Khairpur,Sindh
-NA-211,Naushehro Feroze,Naushehro Feroze,Sindh
-NA-212,Naushehro Feroze,Naushehro Feroze,Sindh
-NA-213,Shaheed Benazirabad,Shaheed Benazirabad,Sindh
-NA-214,Shaheed Benazirabad,Shaheed Benazirabad,Sindh
-NA-215,Sanghar,Sanghar,Sindh
-NA-216,Sanghar,Sanghar,Sindh
-NA-217,Sanghar,Sanghar,Sindh
-NA-218,Mirpurkhas,Mirpurkhas,Sindh
-NA-219,Mirpurkhas,Mirpurkhas,Sindh
-NA-220,Umerkot,Umerkot,Sindh
-NA-221,Tharparkar,Tharparkar,Sindh
-NA-222,Tharparkar,Tharparkar,Sindh
-NA-223,Matiari,Matiari,Sindh
-NA-224,Tando Allah Yar,Tando Allah Yar,Sindh
-NA-225,Hyderabad,Hyderabad,Sindh
-NA-226,Hyderabad,Hyderabad,Sindh
-NA-227,Hyderabad,Hyderabad,Sindh
-NA-228,Tando Muhammad Khan,Tando Muhammad Khan,Sindh
-NA-229,Badin,Badin,Sindh
-NA-230,Badin,Badin,Sindh
-NA-231,Sajawal,Sajawal,Sindh
-NA-232,Thatta,Thatta,Sindh
-NA-233,Jamshoro,Jamshoro,Sindh
-NA-234,Dadu,Dadu,Sindh
-NA-235,Dadu,Dadu,Sindh
-NA-236,Karachi,Karachi,Sindh
-NA-237,Karachi,Karachi,Sindh
-NA-238,Karachi,Karachi,Sindh
-NA-239,Karachi,Karachi,Sindh
-NA-240,Karachi,Karachi,Sindh
-NA-241,Karachi,Karachi,Sindh
-NA-242,Karachi,Karachi,Sindh
-NA-243,Karachi,Karachi,Sindh
-NA-244,Karachi,Karachi,Sindh
-NA-245,Karachi,Karachi,Sindh
-NA-246,Karachi,Karachi,Sindh
-NA-247,Karachi,Karachi,Sindh
-NA-248,Karachi,Karachi,Sindh
-NA-249,Karachi,Karachi,Sindh
-NA-250,Karachi,Karachi,Sindh
-NA-251,Karachi,Karachi,Sindh
-NA-252,Karachi,Karachi,Sindh
-NA-253,Karachi,Karachi,Sindh
-NA-254,Karachi,Karachi,Sindh
-NA-255,Karachi,Karachi,Sindh
-NA-256,Karachi,Karachi,Sindh
-NA-257,Killa Saifullah - Zhob-Sherani,Zhob,Balochistan
-NA-258,Loralai - Musakhalil - Ziarat - Dukki - Harnai,Loralai,Balochistan
-NA-259,Dera  Bugti - Kohlu - Barkhan - Sibi - Lehri ,Kohlu,Balochistan
-NA-260,Nasirabad,Nasirabad,Balochistan
-NA-261,Jaffarabad - Sohbatpur,Jaffarabad,Balochistan
-NA-262,Kacchi - Jhal Magsi,Kachhi,Balochistan
-NA-263,Pishin,Pishin,Balochistan
-NA-264,Killa Abdullah,Killa Abdullah,Balochistan
-NA-265,Quetta,Quetta,Balochistan
-NA-266,Quetta,Quetta,Balochistan
-NA-267,Quetta,Quetta,Balochistan
-NA-268,Mastung - Chaghi -Kalat - Shaheed Sikandrabad - Nushki,Chaghi,Balochistan
-NA-269,Khuzdar,Khuzdar,Balochistan
-NA-270,Panjgoor - Washuk - Awaran - Kharan,Washuk,Balochistan
-NA-271,Kech,Kech,Balochistan
-NA-272,Lasbela - Gwadar ,Gwadar,Balochistan
+Seat,PrimaryDistrict,SeconDistrict,Province
+NA-1,Chitral,,KP
+NA-2,Swat,,KP
+NA-3,Swat,,KP
+NA-4,Swat,,KP
+NA-5,Upper Dir,,KP
+NA-6,Lower Dir,,KP
+NA-7,Lower Dir,,KP
+NA-8,Malakand,,KP
+NA-9,Buner,,KP
+NA-10,Shangla,,KP
+NA-11,Kohistan,,KP
+NA-12,Batagram,,KP
+NA-13,Mansehra,,KP
+NA-14,Mansehra,,KP
+NA-15,Abbottabad,,KP
+NA-16,Abbottabad,,KP
+NA-17,Haripur,,KP
+NA-18,Swabi,,KP
+NA-19,Swabi,,KP
+NA-20,Mardan,,KP
+NA-21,Mardan,,KP
+NA-22,Mardan,,KP
+NA-23,Charsadda,,KP
+NA-24,Charsadda,,KP
+NA-25,Nowshera,,KP
+NA-26,Nowshera,,KP
+NA-27,Peshawar,,KP
+NA-28,Peshawar,,KP
+NA-29,Peshawar,,KP
+NA-30,Peshawar,,KP
+NA-31,Peshawar,,KP
+NA-32,Kohat,,KP
+NA-33,Hangu,,KP
+NA-34,Karak,,KP
+NA-35,Bannu,,KP
+NA-36,Lakki Marwat,,KP
+NA-37,Tank,,KP
+NA-38,Dera Ismail Khan,,KP
+NA-39,Dera Ismail Khan,,KP
+NA-40,Bajaur Agency,,FATA
+NA-41,Bajaur Agency,,FATA
+NA-42,Mohmand Agency,,FATA
+NA-43,Khyber Agency,,FATA
+NA-44,Khyber Agency,,FATA
+NA-45,Kurram Agency,,FATA
+NA-46,Kurram Agency,,FATA
+NA-47,Orakzai Agency,,FATA
+NA-48,North Waziristan Agency,,FATA
+NA-49,South Waziristan Agency,,FATA
+NA-50,South Waziristan Agency,,FATA
+NA-51,FR Peshawar,FR Tank - FR Bannu - FR DI Khan - FR Lakki Marwat - FR Kohat,FATA
+NA-52,Islamabad,,ICT
+NA-53,Islamabad,,ICT
+NA-54,Islamabad,,ICT
+NA-55,Attock,,Punjab
+NA-56,Attock,,Punjab
+NA-57,Rawalpindi,,Punjab
+NA-58,Rawalpindi,,Punjab
+NA-59,Rawalpindi,,Punjab
+NA-60,Rawalpindi,,Punjab
+NA-61,Rawalpindi,,Punjab
+NA-62,Rawalpindi,,Punjab
+NA-63,Rawalpindi,,Punjab
+NA-64,Chakwal,,Punjab
+NA-65,Chakwal,,Punjab
+NA-66,Jhelum,,Punjab
+NA-67,Jhelum,,Punjab
+NA-68,Gujrat,,Punjab
+NA-69,Gujrat,,Punjab
+NA-70,Gujrat,,Punjab
+NA-71,Gujrat,,Punjab
+NA-72,Sialkot,,Punjab
+NA-73,Sialkot,,Punjab
+NA-74,Sialkot,,Punjab
+NA-75,Sialkot,,Punjab
+NA-76,Sialkot,,Punjab
+NA-77,Narowal,,Punjab
+NA-78,Narowal,,Punjab
+NA-79,Gujranwala,,Punjab
+NA-80,Gujranwala,,Punjab
+NA-81,Gujranwala,,Punjab
+NA-82,Gujranwala,,Punjab
+NA-83,Gujranwala,,Punjab
+NA-84,Gujranwala,,Punjab
+NA-85,Mandi Bahauddin,,Punjab
+NA-86,Mandi Bahauddin,,Punjab
+NA-87,Hafizabad,,Punjab
+NA-88,Sargodha,,Punjab
+NA-89,Sargodha,,Punjab
+NA-90,Sargodha,,Punjab
+NA-91,Sargodha,,Punjab
+NA-92,Sargodha,,Punjab
+NA-93,Khushab,,Punjab
+NA-94,Khushab,,Punjab
+NA-95,Mianwali,,Punjab
+NA-96,Mianwali,,Punjab
+NA-97,Bhakkar,,Punjab
+NA-98,Bhakkar,,Punjab
+NA-99,Chiniot,,Punjab
+NA-100,Chiniot,,Punjab
+NA-101,Faisalabad,,Punjab
+NA-102,Faisalabad,,Punjab
+NA-103,Faisalabad,,Punjab
+NA-104,Faisalabad,,Punjab
+NA-105,Faisalabad,,Punjab
+NA-106,Faisalabad,,Punjab
+NA-107,Faisalabad,,Punjab
+NA-108,Faisalabad,,Punjab
+NA-109,Faisalabad,,Punjab
+NA-110,Faisalabad,,Punjab
+NA-111,Toba Tek Singh,,Punjab
+NA-112,Toba Tek Singh,,Punjab
+NA-113,Toba Tek Singh,,Punjab
+NA-114,Jhang,,Punjab
+NA-115,Jhang,,Punjab
+NA-116,Jhang,,Punjab
+NA-117,Nankana Sahib,,Punjab
+NA-118,Nankana Sahib,,Punjab
+NA-119,Sheikhupura,,Punjab
+NA-120,Sheikhupura,,Punjab
+NA-121,Sheikhupura,,Punjab
+NA-122,Sheikhupura,,Punjab
+NA-123,Lahore,,Punjab
+NA-124,Lahore,,Punjab
+NA-125,Lahore,,Punjab
+NA-126,Lahore,,Punjab
+NA-127,Lahore,,Punjab
+NA-128,Lahore,,Punjab
+NA-129,Lahore,,Punjab
+NA-130,Lahore,,Punjab
+NA-131,Lahore,,Punjab
+NA-132,Lahore,,Punjab
+NA-133,Lahore,,Punjab
+NA-134,Lahore,,Punjab
+NA-135,Lahore,,Punjab
+NA-136,Lahore,,Punjab
+NA-137,Kasur,,Punjab
+NA-138,Kasur,,Punjab
+NA-139,Kasur,,Punjab
+NA-140,Kasur,,Punjab
+NA-141,Okara,,Punjab
+NA-142,Okara,,Punjab
+NA-143,Okara,,Punjab
+NA-144,Okara,,Punjab
+NA-145,Pakpattan,,Punjab
+NA-146,Pakpattan,,Punjab
+NA-147,Sahiwal,,Punjab
+NA-148,Sahiwal,,Punjab
+NA-149,Sahiwal,,Punjab
+NA-150,Khanewal,,Punjab
+NA-151,Khanewal,,Punjab
+NA-152,Khanewal,,Punjab
+NA-153,Khanewal,,Punjab
+NA-154,Multan,,Punjab
+NA-155,Multan,,Punjab
+NA-156,Multan,,Punjab
+NA-157,Multan,,Punjab
+NA-158,Multan,,Punjab
+NA-159,Multan,,Punjab
+NA-160,Lodhran,,Punjab
+NA-161,Lodhran,,Punjab
+NA-162,Vehari,,Punjab
+NA-163,Vehari,,Punjab
+NA-164,Vehari,,Punjab
+NA-165,Vehari,,Punjab
+NA-166,Bahawalnagar,,Punjab
+NA-167,Bahawalnagar,,Punjab
+NA-168,Bahawalnagar,,Punjab
+NA-169,Bahawalnagar,,Punjab
+NA-170,Bahawalpur,,Punjab
+NA-171,Bahawalpur,,Punjab
+NA-172,Bahawalpur,,Punjab
+NA-173,Bahawalpur,,Punjab
+NA-174,Bahawalpur,,Punjab
+NA-175,Rahim Yar Khan,,Punjab
+NA-176,Rahim Yar Khan,,Punjab
+NA-177,Rahim Yar Khan,,Punjab
+NA-178,Rahim Yar Khan,,Punjab
+NA-179,Rahim Yar Khan,,Punjab
+NA-180,Rahim Yar Khan,,Punjab
+NA-181,Muzaffargarh,,Punjab
+NA-182,Muzaffargarh,,Punjab
+NA-183,Muzaffargarh,,Punjab
+NA-184,Muzaffargarh,,Punjab
+NA-185,Muzaffargarh,,Punjab
+NA-186,Muzaffargarh,,Punjab
+NA-187,Layyah,,Punjab
+NA-188,Layyah,,Punjab
+NA-189,Dera Ghazi Khan,,Punjab
+NA-190,Dera Ghazi Khan,,Punjab
+NA-191,Dera Ghazi Khan,,Punjab
+NA-192,Dera Ghazi Khan,,Punjab
+NA-193,Rajanpur,,Punjab
+NA-194,Rajanpur,,Punjab
+NA-195,Rajanpur,,Punjab
+NA-196,Jacobabad,,Sindh
+NA-197,Kashmore,,Sindh
+NA-198,Shikarpur,,Sindh
+NA-199,Shikarpur,,Sindh
+NA-200,Larkana,,Sindh
+NA-201,Larkana,,Sindh
+NA-202,Kambar-Shahdadkot,,Sindh
+NA-203,Kambar-Shahdadkot,,Sindh
+NA-204,Ghotki,,Sindh
+NA-205,Ghotki,,Sindh
+NA-206,Sukkur,,Sindh
+NA-207,Sukkur,,Sindh
+NA-208,Khairpur,,Sindh
+NA-209,Khairpur,,Sindh
+NA-210,Khairpur,,Sindh
+NA-211,Naushehro Feroze,,Sindh
+NA-212,Naushehro Feroze,,Sindh
+NA-213,Shaheed Benazirabad,,Sindh
+NA-214,Shaheed Benazirabad,,Sindh
+NA-215,Sanghar,,Sindh
+NA-216,Sanghar,,Sindh
+NA-217,Sanghar,,Sindh
+NA-218,Mirpurkhas,,Sindh
+NA-219,Mirpurkhas,,Sindh
+NA-220,Umerkot,,Sindh
+NA-221,Tharparkar,,Sindh
+NA-222,Tharparkar,,Sindh
+NA-223,Matiari,,Sindh
+NA-224,Tando Allah Yar,,Sindh
+NA-225,Hyderabad,,Sindh
+NA-226,Hyderabad,,Sindh
+NA-227,Hyderabad,,Sindh
+NA-228,Tando Muhammad Khan,,Sindh
+NA-229,Badin,,Sindh
+NA-230,Badin,,Sindh
+NA-231,Sajawal,,Sindh
+NA-232,Thatta,,Sindh
+NA-233,Jamshoro,,Sindh
+NA-234,Dadu,,Sindh
+NA-235,Dadu,,Sindh
+NA-236,Karachi,,Sindh
+NA-237,Karachi,,Sindh
+NA-238,Karachi,,Sindh
+NA-239,Karachi,,Sindh
+NA-240,Karachi,,Sindh
+NA-241,Karachi,,Sindh
+NA-242,Karachi,,Sindh
+NA-243,Karachi,,Sindh
+NA-244,Karachi,,Sindh
+NA-245,Karachi,,Sindh
+NA-246,Karachi,,Sindh
+NA-247,Karachi,,Sindh
+NA-248,Karachi,,Sindh
+NA-249,Karachi,,Sindh
+NA-250,Karachi,,Sindh
+NA-251,Karachi,,Sindh
+NA-252,Karachi,,Sindh
+NA-253,Karachi,,Sindh
+NA-254,Karachi,,Sindh
+NA-255,Karachi,,Sindh
+NA-256,Karachi,,Sindh
+NA-257,Killa Saifullah,Zhob - Sherani,Balochistan
+NA-258,Loralai,Musakhail - Ziarat - Harnai,Balochistan
+NA-259,Dera Bugti,Kohlu - Barkhan - Sibi - Lehri,Balochistan
+NA-260,Nasirabad,Kacchi - Jhal Magsi,Balochistan
+NA-261,Jaffarabad,Sohbatpur,Balochistan
+NA-262,Pishin,,Balochistan
+NA-263,Killa Abdullah,,Balochistan
+NA-264,Quetta,,Balochistan
+NA-265,Quetta,,Balochistan
+NA-266,Quetta,,Balochistan
+NA-267,Mastung,Kalat,Balochistan
+NA-268,Chaghi,Nushki - Kharan,Balochistan
+NA-269,Khuzdar,,Balochistan
+NA-270,Panjgur,Washuk - Awaran,Balochistan
+NA-271,Kech,,Balochistan
+NA-272,Lasbela,Gwadar,Balochistan

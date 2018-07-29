@@ -17,10 +17,10 @@ function createCartogram(year) {
   removeAllDisplay();
 
   function drawVotePercMap() {
-    var parties = ["Pakistan Tehreek-e-Insaf", "Pakistan Muslim League (N)", "Pakistan Peoples Party Parliamentarians", "Jamiat Ulama-e-Islam (F)", "Independent", "Awami National Party", "Muttahida Qaumi Movement Pakistan", "Pakistan Muslim League", "Muttahida Majlis-e-Amal"];
+    var parties = ["Pakistan Tehreek-e-Insaf", "Pakistan Muslim League (N)", "Pakistan Peoples Party Parliamentarians", "Jamiat Ulama-e-Islam (F)", "Independent", "Awami National Party", "Muttahida Qaumi Movement Pakistan", "Pakistan Muslim League", "Muttahida Majlis-e-Amal", "Balochistan Awami Party", "Tehreek-e-Labbaik Pakistan"];
 
     // replace these with the colors from the naseats map
-    var party_colors = ["#9C27B0", "#81C784", "#607D8B", "#4DB6AC", "#CDDC39", "#03A9F4", "#BDBDBD", "#4DD0E1", "#4DB6AC"];
+    var party_colors = ["#9C27B0", "#81C784", "#607D8B", "#4DB6AC", "#CDDC39", "#03A9F4", "#BDBDBD", "#4DD0E1", "#4DB6AC", "#E53935", "#795548"];
 
     // color scale for parties, put in party and it gives you color
     var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
@@ -49,7 +49,7 @@ function createCartogram(year) {
     .attr("viewBox", "0 0 636 600").style("fill-opacity", 1).classed("map_in_a_box", "true").attr("id", "cartogram");
 
     var party_title = svg.append("text").attr("id", "party_title").attr('x', "50%").attr('y', 18).text(function (d) {
-      if (year == 2013) {
+      if (year == 2013 || year == 2018) {
         return "Pakistan Tehreek-e-Insaf";
       } else if (year == 2008) {
         return "Pakistan Muslim League (N)";
@@ -61,10 +61,10 @@ function createCartogram(year) {
 
     var svg_g = svg.append("g").classed("map_group", "true");
     // queue function to read in multiple flat files
-    d3.queue().defer(d3.json, "./essentials/pakistan_districts.topojson").defer(d3.json, "./essentials/JAndKashmir.topojson").defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson").defer(d3.json, "./essentials/Pak_prov.topojson").defer(d3.csv, "./essentials/NA_seats_2008.csv").defer(d3.csv, "./essentials/NA_seats_2013.csv").await(drawCartogram);
+    d3.queue().defer(d3.json, "./essentials/pakistan_districts.topojson").defer(d3.json, "./essentials/JAndKashmir.topojson").defer(d3.json, "./essentials/Pakistan_NationalBoundary.topojson").defer(d3.json, "./essentials/Pak_prov.topojson").defer(d3.csv, "./essentials/NA_seats_2008.csv").defer(d3.csv, "./essentials/NA_seats_2013.csv").defer(d3.csv, "./essentials/NA_seats_2018.csv").await(drawCartogram);
 
     // function executed by d3.queue
-    function drawCartogram(error, topology, k_topology, pak_topology, pak_prov_topology, na_seats_2008, na_seats_2013) {
+    function drawCartogram(error, topology, k_topology, pak_topology, pak_prov_topology, na_seats_2008, na_seats_2013, na_seats_2018) {
 
       d3.selectAll("#PA, #NA, #dwvs, #flow").attr('disabled', null);
 
@@ -125,6 +125,12 @@ function createCartogram(year) {
       } else if (year == 2013) {
         na_seats = na_seats_2013;
         elections = elections_2013;
+        // default party
+        selected_party = "Pakistan Tehreek-e-Insaf";
+      }
+      else if (year == 2018) {
+        na_seats = na_seats_2018;
+        elections = election_2018_ann;
         // default party
         selected_party = "Pakistan Tehreek-e-Insaf";
       }
@@ -246,7 +252,7 @@ function createCartogram(year) {
       // scale for radius (number of seats)
       var seat_rad_scale = d3.scaleSqrt().domain([0, 21]).range([0, 69]);
 
-      //console.log(result_by_dist)
+      console.log(result_by_dist)
 
       // circles representing vote percent
       svg.selectAll('circle').data(result_by_dist).enter().append('circle').attr("cx", function (d) {
@@ -258,6 +264,10 @@ function createCartogram(year) {
       }).style("fill-opacity", 0.7).each(function (d, i) {
         var total_votes = list_votes(d, selected_party);
         var total_valid_votes = list_valid_votes(d);
+        console.log(d.key);
+        console.log(d.values.map(d => d.seat));
+        console.log(total_votes);
+        console.log(total_valid_votes);
         d.ValidVotesTotal = d3.sum(total_valid_votes);
         d.VotePerc = d3.sum(total_votes) / d3.sum(total_valid_votes) * 100;
         d.VotePerc = Math.round(d.VotePerc * 10) / 10;
@@ -265,6 +275,7 @@ function createCartogram(year) {
         // total_votes = list_votes(d);
         // total_valid_votes = list_valid_votes(d);
         // return (total_votes.length > 0) ? rad_scale((total_votes.reduce(function(a, b) { return a+b } ))/ (total_valid_votes.reduce(function(a, b){ return a+b }))) : 0;
+        // console.log(d.VotePerc);
         return rad_scale(d.VotePerc);
       }).attr('class', function (d) {
         return 'votePerc ' + d.key;

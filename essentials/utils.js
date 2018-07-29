@@ -114,11 +114,17 @@ function abbreviate(party) {
       case "Tehreek Labbaik Pakistan":
           return 'TLP';
           break;
+      case "Tehreek-e-Labbaik Pakistan":
+          return 'TLP';
+          break;
       case "Mutahida Majlis-e-Amal Pakistan":
           return 'MMA';
           break;
       case "Balochistan Awami Party":
           return 'BAP';
+          break;
+      case "Muttahida Majlis-e-Amal Pakistan":
+          return 'MMA';
           break;
       default:
           return 'Other';
@@ -187,6 +193,9 @@ function image(party){
         case "Mutahida Majlis-e-Amal Pakistan":
             return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
             break;
+        case "Muttahida Majlis-e-Amal Pakistan":
+            return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
+            break;
         case "Balochistan Awami Party":
             return '<img style="width: 100%;" src="./resources/partylogos/cow-silhouette.svg"></img>';
             break;
@@ -198,6 +207,9 @@ function image(party){
             break;
         case "Grand Democratic Alliance":
             return '<img style="width: 100%;" src="./resources/partylogos/star.svg"></img>';
+            break;
+        case "Tehreek-e-Labbaik Pakistan":
+            return '<img style="width: 100%;" src="./resources/partylogos/crane.svg"></img>';
             break;
         case "Pak Sarzameen Party":
             return '<img style="width: 100%;" src="./resources/partylogos/dolphin.svg"></img>';
