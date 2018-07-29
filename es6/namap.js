@@ -790,7 +790,7 @@ function createNAMap(){
 
     // keep the preprocessing code in comments
 
-    // preprocessing elections 2013 data:
+    preprocessing elections 2013 data:
     // var election_13 = elections_2013.map(function(d){
     //   return {
     //     seat : d.district,
@@ -810,7 +810,7 @@ function createNAMap(){
     //       return b.votes - a.votes;
     //     })
     //   };
-    //
+    // })
 
     d3.select('#barsvg')
       .remove()

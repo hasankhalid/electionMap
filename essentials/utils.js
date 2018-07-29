@@ -223,3 +223,28 @@ function tConvert (time) {
   }
   return time.join (''); // return adjusted time or original string
 }
+
+
+function processSD(data){
+  var election_data = data.map(function(d){
+        return {
+          seat : d.district,
+          "Percentage of Votes Polled to Registered Voters" : +d['Percentage of Votes Polled to Registered Voters'].replace(' %', ''),
+          "Registered Votes" : +d['Registered Votes'],
+          "Votes Polled" : +d['Votes Polled'],
+          "Valid Votes" : +d['Valid Votes'],
+          "Rejected Votes" : +d['Rejected Votes'],
+          "results" : d['results']
+          .map(function(candidate){
+            return {
+              candidate: candidate['candidate'],
+              party: candidate['party'],
+              votes: +candidate['votes']
+            }
+          }).sort(function(a,b) {
+            return b.votes - a.votes;
+          })
+        };
+      })
+  return election_data;
+}
