@@ -175,6 +175,11 @@ function createNAMap_2018(){
             PrimaryDistrict: seat_row.PrimaryDistrict,
             SeconDistrict: seat_row.SeconDistrict,
             Province: seat_row.Province,
+            // just for 2018
+            MaleTurnout: seat_row.MaleTurnout,
+            FemaleTurnout: seat_row.FemaleTurnout,
+            TotalTurnout: seat_row.TotalTurnout,
+            //
             "Percentage of Votes Polled to Registered Voters": election_row['Percentage of Votes Polled to Registered Voters'],
             "Registered Votes": election_row['Registered Votes'],
             "Rejected Votes": election_row['Rejected Votes'],
@@ -203,6 +208,9 @@ function createNAMap_2018(){
         d.voteMargin = ((d.results[0].votes/ d['Valid Votes']) - (d.results[1].votes/ d['Valid Votes'])) * 100;
         d.radius = getCircleSize(d.voteMargin);
         d.radiusInit = getCircleSize(d.voteMargin);
+
+        // add year 2018 condition later
+        d["Percentage of Votes Polled to Registered Voters"] = d.TotalTurnout
       })
 
       // adding initial x and y positions of seats/ nodes (start of the force simulation)
@@ -327,7 +335,7 @@ function createNAMap_2018(){
                           return projection(cent_object_2018[d.seat])[1];
                         }))
                         .force('collision', d3.forceCollide().radius(function(d) {
-                          return d.radius + 0.80;
+                          return d.radius + 1;
                         }))
                         .on('tick', ticked)
                         .alpha(0.525)
@@ -548,23 +556,56 @@ function createNAMap_2018(){
 
             tooltip.append('div')
             .classed('toolmfturnout', true)
+            .style('margin-top', '-8px')
+            .style('margin-bottom', '4px')
+            .style('font-size', '11px')
+            .style('color', '#757575')
+            .html(function(){
+              return '<span>Turnout Gender Breakdown</span>'
+            })
+
+            tooltip.append('div')
+            .classed('toolmfturnout', true)
             .append('div')
             .classed('malefemalecontain', true)
             .attr('id', 'mfcontain')
+            .style('margin-bottom', '2px')
+
 
             var mfcontain = d3.select('#mfcontain');
 
-            mfcontain.append('div')
-            .classed('genderturnout', true)
-            .html(function(d){
-              return '<img class="gendericon" src="./resources/masculine.svg"/><span class="mfpercent">21%</span><span class="tdetail">turnout</span>'
-            })
 
-            mfcontain.append('div')
-            .classed('genderturnout', true)
-            .html(function(d){
-              return '<img class="gendericon" src="./resources/femenine.svg"/><span class="mfpercent">42.1%</span><span class="tdetail">turnout</span>'
-            })
+            if (datum.MaleTurnout != 0) {
+              mfcontain.append('div')
+              .classed('genderturnout', true)
+              .html(function(d){
+                return '<img class="gendericon" src="./resources/masculine.svg"/><span class="mfpercent">' + datum.MaleTurnout + '% </span><span class="tdetail">male</span>'
+              })
+            }
+            else {
+              mfcontain.append('div')
+              .classed('genderturnout', true)
+              .html(function(d){
+                return '<img class="gendericon" src="./resources/masculine.svg"/><span class="tdetail">Unknown</span>'
+              })
+            }
+
+            if (datum.FemaleTurnout != 0) {
+              mfcontain.append('div')
+              .classed('genderturnout', true)
+              .html(function(d){
+                return '<img class="gendericon" src="./resources/femenine.svg"/><span class="mfpercent">' + datum.FemaleTurnout + '% </span><span class="tdetail">female</span>'
+              })
+            }
+            else {
+              mfcontain.append('div')
+              .classed('genderturnout', true)
+              .html(function(d){
+                return '<img class="gendericon" src="./resources/masculine.svg"/><span class="tdetail">Unknown</span>'
+              })
+            }
+
+
 
 
             tooltip.append('div')
