@@ -80,7 +80,7 @@ function createNAMap_2018(){
       // defining colors mapping to parties / other color is mapped to multiple parties
     var other_color = "#03A9F4";
 
-    var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#66BB6A", "#FDD835", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC"];
+    var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#66BB6A", "#FBC02D", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC"];
 
 
     // defining categorical color scale
@@ -95,7 +95,7 @@ function createNAMap_2018(){
     // execution function (Draws map and gets bubbles positioned on map)
     function drawElectMap(error, topology, k_topology, pak_prov_topology, pak_topology, na_seats_2018){
 
-      d3.selectAll("#PA-18, #dwvs, #flow")
+      d3.selectAll("#PA-18, #dwvs, #flow, #dropdownMenuLink")
         .attr('disabled', true)
 
       // relevant data extracted from topojson files
@@ -353,7 +353,7 @@ function createNAMap_2018(){
                             .duration(1500)
                             .style('fill-opacity', 0);
 
-                            d3.selectAll("#PA-18, #dwvs, #flow")
+                            d3.selectAll("#PA-18, #dwvs, #flow, #dropdownMenuLink")
                               .attr('disabled', null)
 
                             setTimeout(function(){ $("#filterdropdown").show().addClass('animated fadeInDefault').css('display', 'flex');; }, 1000);

@@ -672,6 +672,7 @@ g.legendOrdinal text{
   display: -ms-grid;
   display: grid;
   padding: 15px;
+  z-index: 1000;
   width: 260px;
   -ms-grid-columns: (1fr)[12];
       grid-template-columns: repeat(12, 1fr);

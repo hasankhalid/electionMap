@@ -180,7 +180,7 @@ function makeProvMaps(){
     // defining colors mapping to parties / other color is mapped to multiple parties
   var other_color = "#03A9F4";
 
-  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#8BC34A", "#FDD835", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC"];
+	var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#66BB6A", "#FBC02D", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC"];
 
   // defining categorical color scale
   var colorScale = d3.scaleOrdinal()
@@ -189,7 +189,7 @@ function makeProvMaps(){
 
   function drawProvincial(error, topology, prov_topology, prov2018, prov_seats_2018){
 
-		d3.selectAll("#NA, #dwvs, #flow")
+		d3.selectAll("#NA, #dwvs, #flow, #dropdownMenuLink")
 			.attr('disabled', true)
 
 		if (error) {
@@ -464,7 +464,7 @@ function makeProvMaps(){
 
 	          filterCirclesPr(["KP"])
 
-						d3.selectAll("#NA, #dwvs, #flow")
+						d3.selectAll("#NA, #dwvs, #flow, #dropdownMenuLink")
 							.attr('disabled', null)
 	    }
 
