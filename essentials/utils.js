@@ -188,7 +188,7 @@ function image(party){
             return '<img style="width: 100%;" src="./resources/partylogos/book.svg"></img>';
             break;
         case "Balochistan Awami Party":
-            return '<img style="width: 100%;" src="./resources/partylogos/mountains.svg"></img>';
+            return '<img style="width: 100%;" src="./resources/partylogos/cow-silhouette.svg"></img>';
             break;
         case "Jamaat-e-Islami Pakistan":
             return '<img style="width: 100%;" src="./resources/partylogos/balance.svg"></img>';

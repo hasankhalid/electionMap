@@ -402,7 +402,7 @@ function makeProvMaps() {
 												var removeInactiveCircles = function removeInactiveCircles(inactive_circles) {
 
 																var sp = new SimplePromise();
-																inactive_circles.transition('circle_trans').duration(300).attr('r', '0').call(waitForAllTransitions, function () {
+																inactive_circles.transition('circle_trans').duration(300).attr('opacity', '0').call(waitForAllTransitions, function () {
 																				sp.resolve();
 																});
 
