@@ -152,7 +152,7 @@
             <label class="form-check-label" for="PMLNfilter">PMLN</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input partyfilter" value="Muttahida Majlis-e-Amal" active="disabled" id="MMAfilter">
+            <input type="checkbox" class="form-check-input partyfilter" value="Muttahida Majlis-e-Amal Pakistan" active="disabled" id="MMAfilter">
             <label class="form-check-label" for="MMAfilter">MMA</label>
           </div>
           <div class="form-group form-check form-check-inline">
@@ -199,7 +199,7 @@
             <label class="form-check-label" for="PMLNfilter">PMLN</label>
           </div>
           <div class="form-group form-check form-check-inline">
-            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Muttahida Majlis-e-Amal" active="disabled" id="MMAfilter">
+            <input type="checkbox" class="form-check-input runneruppartyfilter" value="Muttahida Majlis-e-Amal Pakistan" active="disabled" id="MMAfilter">
             <label class="form-check-label" for="MMAfilter">MMA</label>
           </div>
           <div class="form-group form-check form-check-inline">
@@ -388,6 +388,7 @@
     <script src="./essentials/utils.js"></script>
     <script src="./essentials/elections_2018.js"></script>
     <script src="./essentials/prov_2018.js"></script>
+    <script async src="./es6/provMaps_2018.js"></script>
     <script src="./es6/cartogram_compiled.js"></script>
     <script src="./es6/namap_2018_unlive.js"></script>
     <script async src="./es6/filterNAmap_compiled.js"></script>
@@ -662,6 +663,45 @@
           postfix: " %"
       });
 
+      $('.provinceButt').click(function() {
+        var selectedprov = $(this).attr("value");
+        selectedProvince = [];
+        selectedProvince.push(selectedprov);
+        var slider = $("#naSeat").data("ionRangeSlider");
+        if (selectedprov === 'KP') {
+          slider.update({
+              min: 1,
+              max: 99,
+              from: 1,
+              to: 99
+          });
+        }
+        else if (selectedprov === 'Punjab') {
+          slider.update({
+              min: 1,
+              max: 297,
+              from: 1,
+              to: 297
+          });
+        }
+        else if (selectedprov === 'Balochistan') {
+          slider.update({
+              min: 1,
+              max: 51,
+              from: 1,
+              to: 51
+          });
+        }
+        else if (selectedprov === 'Sindh') {
+          slider.update({
+              min: 1,
+              max: 128,
+              from: 1,
+              to: 128
+          });
+        }
+      })
+
 
       margin.push($("#voteMargin").data("ionRangeSlider").result.from);
       margin.push($("#voteMargin").data("ionRangeSlider").result.to);
@@ -712,11 +752,17 @@
           }
         }
         if (nationalFilter === false) {
-          if (parties.length === 0) {
-            filterCirclesPr(selectedProvince, null, margin);
+          if (parties.length === 0 && runupparties.length === 0) {
+            filterCirclesPr(selectedProvince, null, margin, null, turnout, seats);
+          }
+          else if (parties.length > 0 && runupparties.length === 0) {
+            filterCirclesPr(selectedProvince, parties, margin, null, turnout, seats);
+          }
+          else if (parties.length === 0 && runupparties.length > 0) {
+            filterCirclesPr(selectedProvince, null, margin, runupparties, turnout, seats);
           }
           else {
-            filterCirclesPr(selectedProvince, parties, margin);
+            filterCirclesPr(selectedProvince, parties, margin, runupparties, turnout, seats);
           }
         }
       }

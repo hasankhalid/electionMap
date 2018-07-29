@@ -279,6 +279,12 @@ function filterCirclesPr(province, party, voteMargin, ru_party, voteTurnout, na_
   // filteres true means filteres elements whereas false means unfiltered elements
   function compFilter(filtered) {
     return function (d) {
+      try{
+        var abc = (d.results[0].party)
+        abc = (d.results[1].party)
+      }catch(err){
+        console.log(d, "err")
+      }
       var logical = filterProvince(d.province) && filterParty(d.results[0].party) && filterVoteMargin(d.voteMargin) && filterRUParty(d.results[1].party) && filterVoteTurnout(d["Percentage of Votes Polled to Registered Voters"]) && filterNARange(+d.seat.replace(/P[KPBS]-/, ""));
 
       if (filtered == true) {

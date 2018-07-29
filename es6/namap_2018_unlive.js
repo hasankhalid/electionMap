@@ -63,7 +63,7 @@ function createNAMap_2018(){
                         .style('text-anchor', 'middle')
                         .style('fill', '#D32F2F')
                         .style('font-size', '12px')
-                        .text('Please wait for the layout to stabilize')
+                        .text('Gathering data, votes and layout information')
 
     // reading in alll the files and defining the execution function
     d3.queue()
@@ -80,7 +80,7 @@ function createNAMap_2018(){
       // defining colors mapping to parties / other color is mapped to multiple parties
     var other_color = "#03A9F4";
 
-    var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#8BC34A", "#FDD835", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC"];
+    var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#66BB6A", "#FDD835", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC"];
 
 
     // defining categorical color scale
@@ -223,7 +223,92 @@ function createNAMap_2018(){
       // })
 
       // assigning results to nodes
-      nodes = result;
+      var nodes = result;
+
+      var party_count = nodes.map(d => (d.results[0] == null) ? null : d.results[0].party);
+
+      function count(arr) { // count occurances
+        var o = {}, i;
+        for (i = 0; i < arr.length; ++i) {
+            if (o[arr[i]]) ++o[arr[i]];
+            else o[arr[i]] = 1;
+        }
+        return o;
+      }
+
+      function weight(arr_in) { // unique sorted by num occurances
+        var o = count(arr_in),
+            arr = [], i;
+        delete(o[null]);
+
+        //for (i in o) arr.push({value: +i, weight: o[i]}); // fast unique only
+
+        var arr = Object.keys(o).map(function(d){
+          return {
+            "value": d,
+            "weight": o[d]
+          }
+        })
+        arr.sort(function (a, b) {
+            return a.weight < b.weight;
+        });
+        return arr;
+      }
+
+      var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
+      if (sorted[0] != undefined) {
+        d3.select("#firstparty")
+          .selectAll('*')
+          .remove();
+
+          var appendLeaderTo = d3.select('#firstparty');
+
+          appendLeaderTo.append('div')
+            .classed('icon-details', true)
+            .classed('animated', true)
+            .classed('fadeInDefault', true)
+            .attr('id', 'iconDetailFirst');
+
+          var icondetails1 = d3.select('#iconDetailFirst');
+          icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
+          icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Currently leads in ' + sorted[0].weight + ' Seats</p>'})
+        }
+        if (sorted[1] != undefined) {
+          d3.select("#secondparty")
+            .selectAll('*')
+            .remove();
+
+          var appendRunnerTo = d3.select('#secondparty');
+
+          appendRunnerTo.append('div')
+            .classed('icon-details', true)
+            .classed('animated', true)
+            .classed('fadeInDefault', true)
+            .attr('id', 'iconDetailSecond');
+
+          var icondetails2 = d3.select('#iconDetailSecond');
+          icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
+          icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Currently leads in ' + sorted[1].weight + ' Seats</p>'})
+        }
+        if (sorted[3] != undefined) {
+          d3.select("#thirdparty")
+            .selectAll('*')
+            .remove();
+
+          var appendThirdTo = d3.select('#thirdparty');
+
+          appendThirdTo.append('div')
+            .classed('icon-details', true)
+            .classed('animated', true)
+            .classed('fadeInDefault', true)
+            .attr('id', 'iconDetailThird');
+
+          var icondetails3 = d3.select('#iconDetailThird');
+          icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
+          icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Currently leads in ' + sorted[2].weight + ' Seats</p>'})
+
+      }
+
 
 
 
