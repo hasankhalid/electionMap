@@ -54,8 +54,6 @@ function makeSummBar(result) {
   // defining categorical color scale for parties
   var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
 
-  console.log(colorScale("Muttahida Majlis-e-Amal Pakistan"))
-
   // defining the stack layout
   var stack = d3.stack().order(d3.stackOrderDescending);
 
