@@ -142,7 +142,7 @@ function createCartogram(year) {
       var appendTopInfoTo = d3.select('#topHighlightInfo');
 
       appendTopInfoTo.html(function(){
-        return '<p class="animated fadeInDefault highlightinfo" style="margin-top: 15px;">Registered Votes: 104940436</p><p class="animated fadeInDefault highlightinfo" style="font-size: 14px; margin-top: -12px;">Valid Votes: 54365088</p><p class="animated fadeInDefault highlightinfo" style="margin-top: -12px;">Turnout: 51.8%</p>'
+        return '<p class="animated fadeInDefault highlightinfo" style="margin-top: 15px;">Registered Votes: 104,940,436</p><p class="animated fadeInDefault highlightinfo" style="font-size: 14px; margin-top: -12px;">Valid Votes: 54,365,088</p><p class="animated fadeInDefault highlightinfo" style="margin-top: -12px;">Turnout: 51.8%</p>'
       })
 
 
@@ -160,7 +160,7 @@ function createCartogram(year) {
 
       var icondetails1 = d3.select('#iconDetailFirst');
       icondetails1.append('div').classed('lead-18-logo', true).html(image('Pakistan Tehreek-e-Insaf'));
-      icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">Pakistan Tehreek-e-Insaf</p><p class="leadSeats">Total Votes: 16816264</p>'})
+      icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">Pakistan Tehreek-e-Insaf</p><p class="leadSeats">Total Votes: 16,816,264</p>'})
 
       d3.select("#secondparty")
         .selectAll('*')
@@ -176,7 +176,7 @@ function createCartogram(year) {
 
       var icondetails2 = d3.select('#iconDetailSecond');
       icondetails2.append('div').classed('lead-18-logo', true).html(image('Pakistan Muslim League (N)'));
-      icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">Pakistan Muslim League (N)</p><p class="leadSeats">Total Votes: 12894270</p>'})
+      icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">Pakistan Muslim League (N)</p><p class="leadSeats">Total Votes: 12,894,270</p>'})
 
       d3.select("#thirdparty")
         .selectAll('*')
@@ -192,7 +192,7 @@ function createCartogram(year) {
 
       var icondetails3 = d3.select('#iconDetailThird');
       icondetails3.append('div').classed('lead-18-logo', true).html(image('Pakistan Peoples Party Parliamentarians'));
-      icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">Pakistan Peoples Party Parliamentarians</p><p class="leadSeats">Total Votes: 6894296</p>'})
+      icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">Pakistan Peoples Party Parliamentarians</p><p class="leadSeats">Total Votes: 6,894,296</p>'})
 
 
       // elections data set joined with the seats information

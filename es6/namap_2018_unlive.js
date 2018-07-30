@@ -268,7 +268,7 @@ function createNAMap_2018(){
       var appendTopInfoTo = d3.select('#topHighlightInfo');
 
       appendTopInfoTo.html(function(){
-        return '<p class="animated fadeInDefault highlightinfo" style="margin-top: 15px;">Registered Votes: 104940436</p><p class="animated fadeInDefault highlightinfo" style="font-size: 14px; margin-top: -12px;">Valid Votes: 54365088</p><p class="animated fadeInDefault highlightinfo" style="margin-top: -12px;">Turnout: 51.8%</p>'
+        return '<p class="animated fadeInDefault highlightinfo" style="margin-top: 15px;">Registered Votes: 104,940,436</p><p class="animated fadeInDefault highlightinfo" style="font-size: 14px; margin-top: -12px;">Valid Votes: 54,365,088</p><p class="animated fadeInDefault highlightinfo" style="margin-top: -12px;">Turnout: 51.8%</p>'
       })
 
 
@@ -287,7 +287,7 @@ function createNAMap_2018(){
 
           var icondetails1 = d3.select('#iconDetailFirst');
           icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
-          icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Total Votes: 16816264</p>'})
+          icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Total Votes: 16,816,264</p>'})
         }
         if (sorted[1] != undefined) {
           d3.select("#secondparty")
@@ -304,7 +304,7 @@ function createNAMap_2018(){
 
           var icondetails2 = d3.select('#iconDetailSecond');
           icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
-          icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Total Votes: 12894270</p>'})
+          icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Total Votes: 12,894,270</p>'})
         }
         if (sorted[3] != undefined) {
           d3.select("#thirdparty")
@@ -321,7 +321,7 @@ function createNAMap_2018(){
 
           var icondetails3 = d3.select('#iconDetailThird');
           icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
-          icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Total Votes: 6894296</p>'})
+          icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Total Votes: 6,894,296</p>'})
 
       }
 

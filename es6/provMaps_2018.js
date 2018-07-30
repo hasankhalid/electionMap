@@ -827,19 +827,19 @@ function makeProvMaps(){
 
 				function returnTopThree(Province) {
 					if (Province === 'KP') {
-						var KPObject = {ValidVotes: 6756477, RegVotes: 14828027, Turnout: 45.57, Results: [{Party: 'Pakistan Tehreek-e-Insaf', Votes: 2102084},{Party: 'Muttahida Majlis-e-Amal Pakistan', Votes: 1107486}, {Party: 'Awami National Party', Votes: 792691}]};
+						var KPObject = {ValidVotes: '6,756,477', RegVotes: '14,828,027', Turnout: 45.57, Results: [{Party: 'Pakistan Tehreek-e-Insaf', Votes: '2,102,084'},{Party: 'Muttahida Majlis-e-Amal Pakistan', Votes: '1,107,486'}, {Party: 'Awami National Party', Votes: '792,691'}]};
 						return KPObject;
 					}
 					else if (Province === 'Punjab') {
-						var KPObject = {ValidVotes: 34109259, RegVotes: 61911300, Turnout: 55.09, Results: [{Party: 'Pakistan Tehreek-e-Insaf', Votes: 11139638},{Party: 'Pakistan Muslim League (N)', Votes: 10514062}, {Party: 'Pakistan Muslim League', Votes: 391451}]};
+						var KPObject = {ValidVotes: '34,109,259', RegVotes: '61,911,300', Turnout: 55.09, Results: [{Party: 'Pakistan Tehreek-e-Insaf', Votes: '11,139,638'},{Party: 'Pakistan Muslim League (N)', Votes: '10,514,062'}, {Party: 'Pakistan Muslim League', Votes: '391,451'}]};
 						return KPObject;
 					}
 					else if (Province === 'Balochistan') {
-						var KPObject = {ValidVotes: 1793453, RegVotes: 4197284, Turnout: 42.73, Results: [{Party: 'Balochistan Awami Party', Votes: 437108},{Party: 'Muttahida Majlis-e-Amal Pakistan', Votes: 261742}, {Party: 'Balochistan National Party', Votes: 126597}]};
+						var KPObject = {ValidVotes: '1,793,453', RegVotes: '4,197,284', Turnout: 42.73, Results: [{Party: 'Balochistan Awami Party', Votes: '437,108'},{Party: 'Muttahida Majlis-e-Amal Pakistan', Votes: '261,742'}, {Party: 'Balochistan National Party', Votes: '126,597'}]};
 						return KPObject;
 					}
 					else if (Province === 'Sindh') {
-						var KPObject = {ValidVotes: 10633386, RegVotes: 22098581, Turnout: 48.12, Results: [{Party: 'Pakistan Peoples Party Parliamentarians', Votes: 3849176},{Party: 'Pakistan Tehreek-e-Insaf', Votes: 1422940}, {Party: 'Muttahida Qaumi Movement Pakistan', Votes: 773001}]};
+						var KPObject = {ValidVotes: '10,633,386', RegVotes: '22,098,581', Turnout: 48.12, Results: [{Party: 'Pakistan Peoples Party Parliamentarians', Votes: '3,849,176'},{Party: 'Pakistan Tehreek-e-Insaf', Votes: '1,422,940'}, {Party: 'Muttahida Qaumi Movement Pakistan', Votes: '773,001'}]};
 						return KPObject;
 					}
 				}
