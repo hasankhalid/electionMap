@@ -56,7 +56,7 @@ function create08NAMap() {
     // defining colors mapping to parties / other color is mapped to multiple parties
     var other_color = "#03A9F4";
 
-    var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#CDDC39", other_color, other_color, other_color, "#4DD0E1", other_color, "#607D8B", other_color, "#FF8A65", "#BDBDBD", other_color, other_color, other_color, other_color, other_color, "#4DB6AC"];
+    var party_colors = ["#9C27B0", "#4DB6AC", other_color, "#9C27B0", other_color, "#81C784", "#CDDC39", other_color, other_color, other_color, "#4DD0E1", other_color, "#607D8B", other_color, "#FF8A65", "#BDBDBD", other_color, other_color, other_color, "#4DB6AC", other_color, "#4DB6AC"];
 
     // defining categorical color scale
     var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
@@ -513,7 +513,7 @@ function create08NAMap() {
       ////////////// Legend for parties ///////////////
       /////////////////////////////////////////////////
 
-      var parties_legend = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Pakistan Muslim League (N)", "Independent", "Pakistan Muslim League", "Pakistan Peoples Party Parliamentarians", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Other"];
+      var parties_legend = ["Awami National Party", "MUTTHIDA MAJLIS-E-AMAL PAKISTAN", "Pakistan Muslim League (N)", "Independent", "Pakistan Muslim League", "Pakistan Peoples Party Parliamentarians", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Other"];
       // define parts abbs and colors
       var parties_legend_abb = parties_legend.map(function (d) {
         return d != "Other" ? abbreviate(d) : "Other";

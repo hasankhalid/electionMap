@@ -7,7 +7,7 @@
 // NAtional assembly summary
 var NA_summary = [{ "Pakistan Tehreek-e-Insaf": 28, "Jamiat Ulama-e-Islam (F)": 11, "Other": 16, "Pakistan Muslim League (N)": 126, "Independent": 29, "Pakistan Muslim League": 2, "Pakistan Peoples Party Parliamentarians": 34, "Pakistan Muslim League (F)": 5, "Muttahida Qaumi Movement Pakistan": 18 }];
 
-var NA_summary08 = [{ "Other": 19, "Pakistan Peoples Party Parliamentarians": 89, "Independent": 30, "Pakistan Muslim League (N)": 68, "Pakistan Muslim League": 38, "Pakistan Muslim League (F)": 3, "Muttahida Qaumi Movement Pakistan": 19 }];
+var NA_summary08 = [{ "Other": 9, "Pakistan Peoples Party Parliamentarians": 89, "Independent": 30, "Pakistan Muslim League (N)": 68, "Pakistan Muslim League": 38, "Pakistan Muslim League (F)": 3, "Muttahida Qaumi Movement Pakistan": 19, "Awami National Party": 10 }];
 
 var NA_summary18 = [{"Other":6,"Pakistan Peoples Party Parliamentarians":43,"Independent":13,"Pakistan Muslim League (N)":64,"Pakistan Muslim League":4,"Grand Democratic Alliance":2,"Muttahida Qaumi Movement Pakistan":6,"Pakistan Tehreek-e-Insaf":116, "Muttahida Majlis-e-Amal Pakistan":12, "Balochistan Awami Party":4}];
 
@@ -47,7 +47,7 @@ function makeSummBar(result) {
     // defining colors mapping to parties / other color is mapped to multiple parties
   var other_color = "#03A9F4";
 
-  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#66BB6A", "#FBC02D", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC", "#8D6E63"];
+  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#66BB6A", "#FBC02D", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC", other_color];
 
   var bar_height = 20;
   var text_size = 14;
