@@ -401,6 +401,11 @@ function filterCirclesPr(province, party, voteMargin, ru_party, voteTurnout, na_
   // filteres nodes
   var nodes_filtered = nodes.filter(compFilter(true));
 
+
+
+
+  
+
   // update selection/ update clipPaths
   var polygon = d3.selectAll(".clip")
                   .data(voronoi.polygons(nodes_filtered), d => d.data.seat) // make sure to make data joins wrt seat

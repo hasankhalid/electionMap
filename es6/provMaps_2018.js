@@ -259,9 +259,6 @@ function makeProvMaps(){
 
 	    // comprehensive results by joining the scraped data with basic info of na_seats
 	    var result = join(prov_seats_2018, prov2018, "seat", "seat", function(election_row, seat_row) {
-				if(election_row.seat === 'PS-6'){
-					console.log(election_row);
-				}
 	      return {
 	          seat: seat_row['seat'],
 	          PrimaryDistrict: seat_row.district,
@@ -313,6 +310,7 @@ function makeProvMaps(){
 	    // assigning results to nodes
 	    var nodes_prov = result;
 
+			console.log(nodes_prov);
 
 	    /////////////////////////////////////////////////////////
 	    ////////////// Setting up force simulation //////////////
@@ -823,6 +821,96 @@ function makeProvMaps(){
 	      var delay_time = 1000;
 	      var trans_time = 1000;
 	      var trans_bubble_time = 600;
+
+				var provNodesFiltered = nodes_prov.filter(function (node) {
+				  return node.province == selected_prov;
+				});
+
+				var party_count = provNodesFiltered.map(d => (d.results[0] == null) ? null : d.results[0].party);
+
+				function count(arr) { // count occurances
+					var o = {}, i;
+					for (i = 0; i < arr.length; ++i) {
+							if (o[arr[i]]) ++o[arr[i]];
+							else o[arr[i]] = 1;
+					}
+					return o;
+				}
+
+				function weight(arr_in) { // unique sorted by num occurances
+					var o = count(arr_in),
+							arr = [], i;
+					delete(o[null]);
+
+					//for (i in o) arr.push({value: +i, weight: o[i]}); // fast unique only
+
+					var arr = Object.keys(o).map(function(d){
+						return {
+							"value": d,
+							"weight": o[d]
+						}
+					})
+					arr.sort(function (a, b) {
+							return a.weight < b.weight;
+					});
+					return arr;
+				}
+
+				var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
+
+				if (sorted[0] != undefined) {
+					d3.select("#firstparty")
+						.selectAll('*')
+						.remove();
+
+						var appendLeaderTo = d3.select('#firstparty');
+
+						appendLeaderTo.append('div')
+							.classed('icon-details', true)
+							.classed('animated', true)
+							.classed('fadeInDefault', true)
+							.attr('id', 'iconDetailFirst');
+
+						var icondetails1 = d3.select('#iconDetailFirst');
+						icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
+						icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">has won ' + sorted[0].weight + ' PA seats</p>'})
+					}
+					if (sorted[1] != undefined) {
+						d3.select("#secondparty")
+							.selectAll('*')
+							.remove();
+
+						var appendRunnerTo = d3.select('#secondparty');
+
+						appendRunnerTo.append('div')
+							.classed('icon-details', true)
+							.classed('animated', true)
+							.classed('fadeInDefault', true)
+							.attr('id', 'iconDetailSecond');
+
+						var icondetails2 = d3.select('#iconDetailSecond');
+						icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
+						icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">has won ' + sorted[1].weight + ' PA seats</p>'})
+					}
+					if (sorted[3] != undefined) {
+						d3.select("#thirdparty")
+							.selectAll('*')
+							.remove();
+
+						var appendThirdTo = d3.select('#thirdparty');
+
+						appendThirdTo.append('div')
+							.classed('icon-details', true)
+							.classed('animated', true)
+							.classed('fadeInDefault', true)
+							.attr('id', 'iconDetailThird');
+
+						var icondetails3 = d3.select('#iconDetailThird');
+						icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
+						icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">has won ' + sorted[2].weight + ' PA seats</p>'})
+
+				}
+
 
 	      active_circles.style("display", "block");
 	      active_circles.style("opacity", "0");
