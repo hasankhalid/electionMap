@@ -813,12 +813,6 @@
 
 
       $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt, .electlink").click(function() {
-        if (nationalFilter === true) {
-          filterCircles();
-        }
-        else {
-          filterCirclesPr(selectedProvince, null, null);
-        }
         $('.provincefilter').attr("active", "disabled");
         $('.provincefilter').prop('checked', false);
         provinces = [];
@@ -835,12 +829,19 @@
         $('#displayAllrunup').attr("toggleClass", "disabled");
         $("#voteMargin").data("ionRangeSlider").reset();
         $("#naSeat").data("ionRangeSlider").reset();
-
+        $("#voteTurnout").data("ionRangeSlider").reset();
+        turnout = [];
         margin = [];
         runupparties = [];
         seats = [];
-      });
 
+        if (nationalFilter === true) {
+          filterCircles();
+        }
+        else {
+          filterCirclesPr(selectedProvince, null, null, null, null, null);
+        }
+      });
 
     </script>
 

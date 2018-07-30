@@ -912,12 +912,6 @@
 
 
       $("#resetAll, #NA, .PA, .dwvs, #flow, .provinceButt, .electlinkpast").click(function() {
-        if (nationalFilter === true) {
-          filterCircles(null, null, null);
-        }
-        else {
-          filterCirclesPr(selectedProvince, null, null);
-        }
         $('.provincefilter').attr("active", "disabled");
         $('.provincefilter').prop('checked', false);
         provinces = [];
@@ -940,6 +934,12 @@
         turnout = [];
         runupparties = [];
         seats = [];
+        if (nationalFilter === true) {
+          filterCircles(null, null, null);
+        }
+        else {
+          filterCirclesPr(selectedProvince, null, null);
+        }
       });
 
 
