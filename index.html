@@ -121,6 +121,7 @@
           <a class="dropdown-item filteritem" id="provincefilterbutt" style="cursor: pointer;">Province</a>
           <a class="dropdown-item filteritem" id="votemarginbutt" style="cursor: pointer;">Vote Margin</a>
           <a class="dropdown-item filteritem" id="runnerupbutt" style="cursor: pointer;">Runner Up</a>
+          <a class="dropdown-item filteritem" id="voteturnoutbutt" style="cursor: pointer;">Vote Turnout</a>
           <a class="dropdown-item filteritem" id="seatbutt" style="cursor: pointer;">Seat</a>
         </div>
       </div>
@@ -575,7 +576,7 @@
       var runupparties = [];
       var provinces = [];
       var margin = [];
-      var turnout = null;
+      var turnout = [];
       var seats = [];
       var selectedProvince = ["KP"];
 
@@ -683,6 +684,16 @@
           postfix: " %"
       });
 
+      $("#voteTurnout").ionRangeSlider({
+          type: "double",
+          grid: true,
+          min: 0,
+          max: 100,
+          from: 0,
+          to: 100,
+          postfix: " %"
+      });
+
       $('.provinceButt').click(function() {
         var selectedprov = $(this).attr("value");
         selectedProvince = [];
@@ -726,6 +737,9 @@
       margin.push($("#voteMargin").data("ionRangeSlider").result.from);
       margin.push($("#voteMargin").data("ionRangeSlider").result.to);
 
+      turnout.push($("#voteTurnout").data("ionRangeSlider").result.from);
+      turnout.push($("#voteTurnout").data("ionRangeSlider").result.to);
+
       seats.push($("#naSeat").data("ionRangeSlider").result.from);
       seats.push($("#naSeat").data("ionRangeSlider").result.to);
 
@@ -733,6 +747,8 @@
         // Saving Ion range instance to var
         var slider = $("#voteMargin").data("ionRangeSlider");
         var sliderseat = $("#naSeat").data("ionRangeSlider");
+        var sliderturn = $("#voteTurnout").data("ionRangeSlider");
+
         // Get values
         var from = slider.result.from;
         var to = slider.result.to;
@@ -740,6 +756,10 @@
         margin[1] = to;
         var seatfrom = sliderseat.result.from;
         var seatto = sliderseat.result.to;
+        var turnfrom = sliderturn.result.from;
+        var turnto = sliderturn.result.to;
+        turnout[0] = turnfrom;
+        turnout[1] = turnto;
         margin[0] = from;
         margin[1] = to;
         seats[0] = seatfrom;
