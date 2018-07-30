@@ -250,7 +250,7 @@ function createNAMap_2018(){
                           return projection(cent_object_2018[d.seat])[1];
                         }))
                         .force('collision', d3.forceCollide().radius(function(d) {
-                          return d.radius + 1;
+                          return d.radius + .9;
                         }))
                         .on('tick', ticked)
                         .alpha(0.525)

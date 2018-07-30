@@ -239,9 +239,14 @@ function createNAMap(){
       })
 
       // adding initial x and y positions of seats/ nodes (start of the force simulation)
+      // result.forEach(function(d){
+      //   d.x = getCentroid(d.PrimaryDistrict)[0];
+      //   d.y = getCentroid(d.PrimaryDistrict)[1];
+      // });
+
       result.forEach(function(d){
-        d.x = getCentroid(d.PrimaryDistrict)[0];
-        d.y = getCentroid(d.PrimaryDistrict)[1];
+        d.x = projection(cent_object_2013[d.seat])[0];
+        d.y = projection(cent_object_2013[d.seat])[1];
       });
 
       // assigning results to nodes
@@ -258,10 +263,12 @@ function createNAMap(){
       var simulation = d3.forceSimulation(nodes)
                         .force('charge', d3.forceManyBody().strength(0.7))
                         .force('x', d3.forceX().x(function(d) {
-                          return getCentroid(d.PrimaryDistrict)[0];
+                          //return getCentroid(d.PrimaryDistrict)[0];
+                          return projection(cent_object_2013[d.seat])[1];
                         }))
                         .force('y', d3.forceY().y(function(d) {
-                          return getCentroid(d.PrimaryDistrict)[1];
+                          //return getCentroid(d.PrimaryDistrict)[1];
+                          return projection(cent_object_2013[d.seat])[1];
                         }))
                         .force('collision', d3.forceCollide().radius(function(d) {
                           return d.radius + 0.80;
@@ -345,8 +352,8 @@ function createNAMap(){
         ///////////////////////////////////////////////////////////////////
 
         var voronoi = d3.voronoi()
-                        .x(d => d.x + randRange(-1, 1)) // with some noise on x and y centers
-                        .y(d => d.y + randRange(-1, 1))
+                        .x(d => d.x) // with some noise on x and y centers
+                        .y(d => d.y)
                         .extent([[0, 0], [width, height]]);
 
 
@@ -790,7 +797,7 @@ function createNAMap(){
 
     // keep the preprocessing code in comments
 
-    preprocessing elections 2013 data:
+    //preprocessing elections 2013 data:
     // var election_13 = elections_2013.map(function(d){
     //   return {
     //     seat : d.district,
