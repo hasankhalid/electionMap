@@ -8,6 +8,8 @@ var NA_summary = [{"Pakistan Tehreek-e-Insaf":28,"Jamiat Ulama-e-Islam (F)":11,"
 
 var NA_summary08 = [{"Other":19,"Pakistan Peoples Party Parliamentarians":89,"Independent":30,"Pakistan Muslim League (N)":68,"Pakistan Muslim League":38,"Pakistan Muslim League (F)":3,"Muttahida Qaumi Movement Pakistan":19}];
 
+var NA_summary18 = [{"Other":6,"Pakistan Peoples Party Parliamentarians":43,"Independent":13,"Pakistan Muslim League (N)":64,"Pakistan Muslim League":4,"Grand Democratic Alliance":2,"Muttahida Qaumi Movement Pakistan":6,"Pakistan Tehreek-e-Insaf":116, "Muttahida Majlis-e-Amal Pakistan":12, "Balochistan Awami Party":4}];
+
 // Provincial assembly summary
 // KP
 var PK_summary = [{"Pakistan Tehreek-e-Insaf":35,"Pakistan Muslim League (N)":12,"Jamiat Ulama-e-Islam (F)":13,"Other":22,"Independent":14,"Pakistan Peoples Party Parliamentarians":3}];

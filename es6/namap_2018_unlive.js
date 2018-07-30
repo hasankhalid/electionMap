@@ -264,6 +264,14 @@ function createNAMap_2018(){
       }
 
       var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
+
+      var appendTopInfoTo = d3.select('#topHighlightInfo');
+
+      appendTopInfoTo.html(function(){
+        return '<p class="animated fadeInDefault highlightinfo" style="margin-top: 15px;">Registered Votes: 104940436</p><p class="animated fadeInDefault highlightinfo" style="font-size: 14px; margin-top: -12px;">Valid Votes: 54365088</p><p class="animated fadeInDefault highlightinfo" style="margin-top: -12px;">Turnout: 51.8%</p>'
+      })
+
+
       if (sorted[0] != undefined) {
         d3.select("#firstparty")
           .selectAll('*')
@@ -279,7 +287,7 @@ function createNAMap_2018(){
 
           var icondetails1 = d3.select('#iconDetailFirst');
           icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
-          icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">has won ' + sorted[0].weight + ' NA seats</p>'})
+          icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">Total Votes: 16816264</p>'})
         }
         if (sorted[1] != undefined) {
           d3.select("#secondparty")
@@ -296,7 +304,7 @@ function createNAMap_2018(){
 
           var icondetails2 = d3.select('#iconDetailSecond');
           icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
-          icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">has won ' + sorted[1].weight + ' NA seats</p>'})
+          icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">Total Votes: 12894270</p>'})
         }
         if (sorted[3] != undefined) {
           d3.select("#thirdparty")
@@ -313,7 +321,7 @@ function createNAMap_2018(){
 
           var icondetails3 = d3.select('#iconDetailThird');
           icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
-          icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">has won ' + sorted[2].weight + ' NA seats</p>'})
+          icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">Total Votes: 6894296</p>'})
 
       }
 
@@ -811,6 +819,7 @@ function createNAMap_2018(){
           "Pakistan Peoples Party Parliamentarians",
           "Grand Democratic Alliance",
           "Muttahida Qaumi Movement Pakistan",
+          "Balochistan Awami Party",
           "Other"
         ];
         // define parts abbs and colors
@@ -835,7 +844,7 @@ function createNAMap_2018(){
 
         var party_legend_svg = party_legend_div.append("svg")
                                               .classed("partyLegendSVG", true)
-                                              .attr('width', 280)
+                                              .attr('width', 320)
                                               .attr('height', 50);
 
         party_legend_svg.append("g")
@@ -940,7 +949,7 @@ function createNAMap_2018(){
     d3.select('#barsvg')
       .remove()
 
-    makeSummBar(NA_summary08);
+    makeSummBar(NA_summary18);
 
   }
 

@@ -978,13 +978,25 @@ g.legendOrdinal text{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 125px;
+  height: 90px;
   position: relative;
 }
 
 @media screen and (max-width: 992px) {
   .container-18 {
     flex-direction: column;
+  }
+}
+
+.highlightinfo {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+@media screen and (min-width: 992px) {
+  .highlightinfo {
+    text-align: left;
   }
 }
 
@@ -1166,18 +1178,18 @@ g.legendOrdinal text{
 }
 
 .lead-18-logo {
-  width: 65px;
+  width: 50px;
   margin-right: 10px;
 }
 
 .partyTitle {
-  font-size: 18px;
+  font-size: 16px;
   text-align: left;
   margin-bottom: 0.5rem;
 }
 
 .leadSeats {
-  font-size: 14px;
+  font-size: 13px;
   text-align: left;
   margin-bottom: 0.5rem;
 }

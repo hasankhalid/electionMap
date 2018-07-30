@@ -220,6 +220,9 @@ function image(party){
         case "Awami Muslim League Pakistan":
             return '<img style="width: 100%;" src="./resources/partylogos/pen-and-ink.svg"></img>';
             break;
+        case "Balochistan National Party":
+            return '<img style="width: 100%;" src="./resources/partylogos/axe.svg"></img>';
+            break;
         default:
             return '<img style="width: 90%;" src="./resources/ballot2.svg"></img>';
             break;

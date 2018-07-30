@@ -9,6 +9,8 @@ var NA_summary = [{ "Pakistan Tehreek-e-Insaf": 28, "Jamiat Ulama-e-Islam (F)": 
 
 var NA_summary08 = [{ "Other": 19, "Pakistan Peoples Party Parliamentarians": 89, "Independent": 30, "Pakistan Muslim League (N)": 68, "Pakistan Muslim League": 38, "Pakistan Muslim League (F)": 3, "Muttahida Qaumi Movement Pakistan": 19 }];
 
+var NA_summary18 = [{"Other":6,"Pakistan Peoples Party Parliamentarians":43,"Independent":13,"Pakistan Muslim League (N)":64,"Pakistan Muslim League":4,"Grand Democratic Alliance":2,"Muttahida Qaumi Movement Pakistan":6,"Pakistan Tehreek-e-Insaf":116, "Muttahida Majlis-e-Amal Pakistan":12, "Balochistan Awami Party":4}];
+
 // Provincial assembly summary
 // KP
 var PK_summary = [{ "Pakistan Tehreek-e-Insaf": 35, "Pakistan Muslim League (N)": 12, "Jamiat Ulama-e-Islam (F)": 13, "Other": 22, "Independent": 14, "Pakistan Peoples Party Parliamentarians": 3 }];
@@ -19,7 +21,19 @@ var PB_summary = [{ "Pakistan Muslim League (N)": 9, "Other": 22, "Independent":
 // Sindh
 var PS_summary = [{ "Muttahida Qaumi Movement Pakistan": 37, "Pakistan Peoples Party Parliamentarians": 69, "Pakistan Muslim League (F)": 7, "Pakistan Muslim League (N)": 4, "Other": 2, "Pakistan Muslim League": 1, "Independent": 5, "Pakistan Tehreek-e-Insaf": 3 }];
 
+// Provincial assembly summary 2018
+// KP
+var PK_summary_18 = [{ "Pakistan Tehreek-e-Insaf": 65, "Pakistan Muslim League (N)": 5, "Muttahida Majlis-e-Amal Pakistan": 10, "Other": 6, "Independent": 6, "Pakistan Peoples Party Parliamentarians": 3 }];
+// Punjab
+var PP_summary_18 = [{ "Pakistan Muslim League (N)": 129, "Independent": 29, "Pakistan Tehreek-e-Insaf": 123, "Pakistan Muslim League": 7, "Other": 1, "Pakistan Peoples Party Parliamentarians": 6 }];
+// balochistan
+var PB_summary_18 = [{ "Balochistan Awami Party": 15, "Other": 17, "Independent": 5, "Pakistan Tehreek-e-Insaf": 4, "Muttahida Majlis-e-Amal Pakistan": 9 }];
+// Sindh
+var PS_summary_18 = [{ "Muttahida Qaumi Movement Pakistan": 16, "Pakistan Peoples Party Parliamentarians": 76, "Grand Democratic Alliance": 11, "Tehreek-e-Labbaik Pakistan": 2, "Muttahida Majlis-e-Amal Pakistan": 1, "Pakistan Tehreek-e-Insaf": 23 }];
+
 // keysSorted = Object.keys(list).sort(function(a,b){return list[a]-list[b]})
+
+
 
 
 function makeSummBar(result) {
@@ -28,17 +42,19 @@ function makeSummBar(result) {
   var height = 55;
 
   // listing the winning parties
-  var parties = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Qaumi Watan Party (Sherpao)", "Awami National Party", "Awami Jamhuri Ittehad Pakistan", "Pakistan Muslim League (N)", "Independent", "Jamaat-e-Islami Pakistan", "All Pakistan Muslim League", "Awami Muslim League Pakistan", "Pakistan Muslim League", "Pakistan Muslim League(Z)", "Pakistan Peoples Party Parliamentarians", "National Peoples Party", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Pashtoonkhwa Milli Awami Party", "National Party", "Balochistan National Party"];
+  var parties = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Qaumi Watan Party (Sherpao)", "Awami National Party", "Awami Jamhuri Ittehad Pakistan", "Pakistan Muslim League (N)", "Independent", "Jamaat-e-Islami Pakistan", "All Pakistan Muslim League", "Awami Muslim League Pakistan", "Pakistan Muslim League", "Pakistan Muslim League(Z)", "Pakistan Peoples Party Parliamentarians", "National Peoples Party", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Pashtoonkhwa Milli Awami Party", "National Party", "Balochistan National Party", "MUTTHIDA MAJLIS-E-AMAL PAKISTAN", "Balochistan National Party (Awami)", "Grand Democratic Alliance", "Mutahida Majlis-e-Amal Pakistan", "Balochistan Awami Party", "Muttahida Majlis-e-Amal Pakistan", "Tehreek-e-Labbaik Pakistan"];
 
-  // defining colors mapping to parties / other color is mapped to multiple parties
+    // defining colors mapping to parties / other color is mapped to multiple parties
   var other_color = "#03A9F4";
 
-  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#81C784", "#CDDC39", other_color, other_color, other_color, "#4DD0E1", other_color, "#607D8B", other_color, "#FF8A65", "#BDBDBD", other_color, other_color, other_color];
+  var party_colors = ["#9C27B0", "#4DB6AC", other_color, other_color, other_color, "#66BB6A", "#FBC02D", other_color, other_color, other_color, "#4DD0E1", other_color, "#757575", other_color, "#FF8A65", "#F48FB1", other_color, other_color, other_color, "#4DB6AC", other_color, "#FF8A65", "#4DB6AC", "#E53935", "#4DB6AC", "#8D6E63"];
 
   var bar_height = 20;
   var text_size = 14;
   // defining categorical color scale for parties
   var colorScale = d3.scaleOrdinal().domain(parties).range(party_colors);
+
+  console.log(colorScale("Muttahida Majlis-e-Amal Pakistan"))
 
   // defining the stack layout
   var stack = d3.stack().order(d3.stackOrderDescending);
@@ -54,6 +70,18 @@ function makeSummBar(result) {
 
   var majority_party = stacked_data[0].key;
   var majority_seats = stacked_data[0][0][1] - stacked_data[0][0][0];
+
+  if (result === NA_summary18) {
+    d3.select('#majorityVote')
+    .style('font-family', 'Lato')
+    d3.select('#majorityVote')
+    .style('font-weight', '300')
+  }
+  else {
+    d3.select('#majorityVote')
+    .style('font-family', 'Roboto')
+  }
+
 
   d3.select('#majorityVote').style('width', '100%').style('margin-top', '30px').html(function () {
     return '<p style="text-align: center; font-size: 25px; color: #607D8B;">MAJORITY</p>';
@@ -75,7 +103,7 @@ function makeSummBar(result) {
 
   var seat_scale = d3.scaleLinear().domain([0, max_seats]).range([0, 100]);
 
-  var parties_legend = ["Pakistan Tehreek-e-Insaf", "Jamiat Ulama-e-Islam (F)", "Pakistan Muslim League (N)", "Independent", "Pakistan Muslim League", "Pakistan Peoples Party Parliamentarians", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Other"];
+  var parties_legend = ["Pakistan Tehreek-e-Insaf", "Muttahida Majlis-e-Amal Pakistan", "Pakistan Muslim League (N)", "Independent", "Pakistan Muslim League", "Pakistan Peoples Party Parliamentarians", "Pakistan Muslim League (F)", "Muttahida Qaumi Movement Pakistan", "Balochistan Awami Party", "Grand Democratic Alliance", "Jamiat Ulama-e-Islam (F)", "Tehreek-e-Labbaik Pakistan", "Other"];
   // define parts abbs and colors
   var parties_legend_abb = parties_legend.map(function (d) {
     return d != "Other" ? abbreviate(d) : "Other";

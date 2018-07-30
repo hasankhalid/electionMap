@@ -143,7 +143,7 @@ function makeProvMaps(){
   }
 
   removeAllDisplay();
-  //makeSummBar(PK_summary);
+  makeSummBar(PK_summary_18);
 
   // defining the svg view port for the map within the div
   var svg = map_block.append("svg")
@@ -828,37 +828,38 @@ function makeProvMaps(){
 
 				var party_count = provNodesFiltered.map(d => (d.results[0] == null) ? null : d.results[0].party);
 
-				function count(arr) { // count occurances
-					var o = {}, i;
-					for (i = 0; i < arr.length; ++i) {
-							if (o[arr[i]]) ++o[arr[i]];
-							else o[arr[i]] = 1;
+				function returnTopThree(Province) {
+					if (Province === 'KP') {
+						var KPObject = {ValidVotes: 6756477, RegVotes: 14828027, Turnout: 45.57, Results: [{Party: 'Pakistan Tehreek-e-Insaf', Votes: 2102084},{Party: 'Muttahida Majlis-e-Amal Pakistan', Votes: 1107486}, {Party: 'Awami National Party', Votes: 792691}]};
+						return KPObject;
 					}
-					return o;
+					else if (Province === 'Punjab') {
+						var KPObject = {ValidVotes: 34109259, RegVotes: 61911300, Turnout: 55.09, Results: [{Party: 'Pakistan Tehreek-e-Insaf', Votes: 11139638},{Party: 'Pakistan Muslim League (N)', Votes: 10514062}, {Party: 'Pakistan Muslim League', Votes: 391451}]};
+						return KPObject;
+					}
+					else if (Province === 'Balochistan') {
+						var KPObject = {ValidVotes: 1793453, RegVotes: 4197284, Turnout: 42.73, Results: [{Party: 'Balochistan Awami Party', Votes: 437108},{Party: 'Muttahida Majlis-e-Amal Pakistan', Votes: 261742}, {Party: 'Balochistan National Party', Votes: 126597}]};
+						return KPObject;
+					}
+					else if (Province === 'Sindh') {
+						var KPObject = {ValidVotes: 10633386, RegVotes: 22098581, Turnout: 48.12, Results: [{Party: 'Pakistan Peoples Party Parliamentarians', Votes: 3849176},{Party: 'Pakistan Tehreek-e-Insaf', Votes: 1422940}, {Party: 'Muttahida Qaumi Movement Pakistan', Votes: 773001}]};
+						return KPObject;
+					}
 				}
 
-				function weight(arr_in) { // unique sorted by num occurances
-					var o = count(arr_in),
-							arr = [], i;
-					delete(o[null]);
+				var updateHigh = returnTopThree(selected_prov);
 
-					//for (i in o) arr.push({value: +i, weight: o[i]}); // fast unique only
+				d3.select("#topHighlightInfo")
+					.selectAll('*')
+					.remove();
 
-					var arr = Object.keys(o).map(function(d){
-						return {
-							"value": d,
-							"weight": o[d]
-						}
-					})
-					arr.sort(function (a, b) {
-							return a.weight < b.weight;
-					});
-					return arr;
-				}
+				var appendTopInfoTo = d3.select('#topHighlightInfo');
 
-				var sorted = weight(party_count).sort(function(a, b){return b.weight - a.weight});
+				appendTopInfoTo.html(function(){
+					return '<p class="animated fadeInDefault highlightinfo" style="margin-top: 15px;">Registered Votes: ' + updateHigh.RegVotes + '</p><p class="animated fadeInDefault highlightinfo" style="font-size: 14px; margin-top: -12px;">Valid Votes: ' + updateHigh.ValidVotes + '</p><p class="animated fadeInDefault highlightinfo" style="margin-top: -12px;">Turnout: ' + updateHigh.Turnout + '%</p>'
+				})
 
-				if (sorted[0] != undefined) {
+				if (updateHigh.Results[0] != undefined) {
 					d3.select("#firstparty")
 						.selectAll('*')
 						.remove();
@@ -872,10 +873,10 @@ function makeProvMaps(){
 							.attr('id', 'iconDetailFirst');
 
 						var icondetails1 = d3.select('#iconDetailFirst');
-						icondetails1.append('div').classed('lead-18-logo', true).html(image(sorted[0].value));
-						icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[0].value + '</p><p class="leadSeats">has won ' + sorted[0].weight + ' PA seats</p>'})
+						icondetails1.append('div').classed('lead-18-logo', true).html(image(updateHigh.Results[0].Party));
+						icondetails1.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + updateHigh.Results[0].Party + '</p><p class="leadSeats">Total Votes: ' + updateHigh.Results[0].Votes + '</p>'})
 					}
-					if (sorted[1] != undefined) {
+					if (updateHigh.Results[1] != undefined) {
 						d3.select("#secondparty")
 							.selectAll('*')
 							.remove();
@@ -889,10 +890,10 @@ function makeProvMaps(){
 							.attr('id', 'iconDetailSecond');
 
 						var icondetails2 = d3.select('#iconDetailSecond');
-						icondetails2.append('div').classed('lead-18-logo', true).html(image(sorted[1].value));
-						icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[1].value + '</p><p class="leadSeats">has won ' + sorted[1].weight + ' PA seats</p>'})
+						icondetails2.append('div').classed('lead-18-logo', true).html(image(updateHigh.Results[1].Party));
+						icondetails2.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + updateHigh.Results[1].Party + '</p><p class="leadSeats">Total Votes: ' + updateHigh.Results[1].Votes + '</p>'})
 					}
-					if (sorted[3] != undefined) {
+					if (updateHigh.Results[2] != undefined) {
 						d3.select("#thirdparty")
 							.selectAll('*')
 							.remove();
@@ -906,8 +907,8 @@ function makeProvMaps(){
 							.attr('id', 'iconDetailThird');
 
 						var icondetails3 = d3.select('#iconDetailThird');
-						icondetails3.append('div').classed('lead-18-logo', true).html(image(sorted[2].value));
-						icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + sorted[2].value + '</p><p class="leadSeats">has won ' + sorted[2].weight + ' PA seats</p>'})
+						icondetails3.append('div').classed('lead-18-logo', true).html(image(updateHigh.Results[2].Party));
+						icondetails3.append('div').classed('leaderInformation', true).html(function(){ return '<p class="partyTitle">' + updateHigh.Results[2].Party + '</p><p class="leadSeats">Total Votes: ' + updateHigh.Results[2].Votes + '</p>'})
 
 				}
 
@@ -953,20 +954,20 @@ function makeProvMaps(){
 	        d3.select('#barsvg')
 	          .remove();
 
-	   /*     switch(summval) {
+	        switch(summval) {
 	            case "PK":
-	                return makeSummBar(PK_summary);
+	                return makeSummBar(PK_summary_18);
 	                break;
 	            case "PP":
-	                return makeSummBar(PP_summary);
+	                return makeSummBar(PP_summary_18);
 	                break;
 	            case "PS":
-	                return makeSummBar(PS_summary);
+	                return makeSummBar(PS_summary_18);
 	                break;
 	            case "PB":
-	                return makeSummBar(PB_summary);
+	                return makeSummBar(PB_summary_18);
 	                break;
-	        } */
+	        }
 	      }
 
 	      updatebar();
@@ -986,6 +987,7 @@ function makeProvMaps(){
 	      "Pakistan Peoples Party Parliamentarians",
 	      "Pakistan Muslim League (F)",
 	      "Muttahida Qaumi Movement Pakistan",
+				"Balochistan Awami Party",
 	      "Other"
 	    ];
 	    // define parts abbs and colors
@@ -1010,7 +1012,7 @@ function makeProvMaps(){
 
 	    var party_legend_svg = party_legend_div.append("svg")
 	                                          .classed("partyLegendSVG", true)
-	                                          .attr('width', 280)
+	                                          .attr('width', 320)
 	                                          .attr('height', 50);
 
 	    party_legend_svg.append("g")

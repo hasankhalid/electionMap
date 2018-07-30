@@ -321,7 +321,14 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3" id="update2018">
-        <p style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 18px; margin-top: 15px;">HIGHLIGHTS</p>
+        <p class="animated fadeInDefault" style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 18px; margin-top: 15px;">HIGHLIGHTS</p>
+        <div id="topHighlightInfo">
+          <p class="animated fadeInDefault highlightinfo" style="margin-top: 15px;">Registered Votes: 104940436</p>
+          <p class="animated fadeInDefault highlightinfo" style="font-size: 14px; margin-top: -12px;">Valid Votes: 54365088</p>
+          <p class="animated fadeInDefault highlightinfo" style="margin-top: -12px;">Turnout: 51.8%</p>
+        </div>
+        <p class="animated fadeInDefault highlightinfo genderoverall" style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 13px; margin-top: -12px; color: #757575;">Male Turnout: Not Available</p>
+        <p class="animated fadeInDefault highlightinfo genderoverall" style="font-family: 'Lato', sans-serif; font-weight: 300; font-size: 13px; margin-top: -12px; color: #757575;">Female Turnout: Not Available</p>
         <div class="leaders-18" id="firstparty">
         </div>
         <div class="leaders-18" id="secondparty">
@@ -334,6 +341,13 @@
         <img class="liveBallot" style="width: 50px; margin-top: 30px;" src="./resources/ballot3.svg"></img>
         <p style="margin-left: 5px; margin-bottom: 0px; margin-top: 30px;">OVERALL SEATS</p>
     </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <div class="container" id="barcontain">
+        <div id="majorityVote">
+        </div>
+      </div>
+    </div>
+
 
     <footer id="footer" style="width: 100%; background: #0D47A1;">
       <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -388,6 +402,7 @@
     <script src="./essentials/elections_2018.js"></script>
     <script src="./essentials/prov_2018.js"></script>
     <script async src="./es6/provMaps_2018.js"></script>
+    <script async src="./es6/bar_compiled.js"></script>
     <script src="./es6/cartogram_compiled.js"></script>
     <script src="./es6/namap_2018_unlive.js"></script>
     <script async src="./es6/filterNAmap_compiled.js"></script>
@@ -443,6 +458,7 @@
         $("#NAmap").show().addClass('animated fadeInDefault');
         $(".filterscontstantheight").show();
         $("#provincefilterbutt").show();
+        $(".genderoverall").show().addClass('animated fadeInDefault');
         $(".filtercontainer").hide();
         var slider = $("#naSeat").data("ionRangeSlider");
         slider.update({
@@ -462,6 +478,7 @@
         $(".naTitle").hide();
         $(".paTitle").show().addClass('animated fadeInDefault');
         $(".dwTitle").hide();
+        $(".genderoverall").hide();
         var slider = $("#naSeat").data("ionRangeSlider");
         slider.update({
             min: 1,
@@ -482,6 +499,7 @@
         $("#dropdownProvinceLink").hide();
         $(".naTitle").hide();
         $(".paTitle").hide();
+        $(".genderoverall").hide();
         $(".dwTitle").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").show().addClass('animated fadeInDefault');
         $("#votesharedropdown").css('position', 'relative');
