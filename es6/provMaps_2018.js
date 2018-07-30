@@ -309,9 +309,6 @@ function makeProvMaps(){
 
 	    // assigning results to nodes
 	    var nodes_prov = result;
-
-			console.log(nodes_prov);
-
 	    /////////////////////////////////////////////////////////
 	    ////////////// Setting up force simulation //////////////
 	    /////////////////////////////////////////////////////////
@@ -390,7 +387,7 @@ function makeProvMaps(){
 	        .duration(1000)
 	        .ease(d3.easePoly)
 	        .attr('r', function(d, i){
-	          radius = base_bubble + ((d.voteMargin/ 100) * margin_range)
+	          var radius = base_bubble + ((d.voteMargin/ 100) * margin_range)
 	          //console.log(is.nan(radius) ? "Problem!" : "")
 	          return radius;
 
@@ -439,7 +436,7 @@ function makeProvMaps(){
 	            .on("mouseover", activateMouseOv)
 	            .on("mouseout", activateMouseOut);
 
-	        translate = [-345.4863342221814,54.93697529051545 + y_offset_tx];
+	        var translate = [-345.4863342221814,54.93697529051545 + y_offset_tx];
 
 	        d3.selectAll(".circle-catcher.pMap")
 	          .style("transform", "translate3d(" + translate[0] + "px," + translate[1] + "px,0px)" + " scale3d(" + scale + "," + scale + ", 1)");
@@ -753,7 +750,7 @@ function makeProvMaps(){
 						//scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
 
 						// getting the translate coordinates
-						translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
+					  translate = [(width / 2 - scale * x), (height / 2 - scale * (y)) + y_offset_tx];
 
 						svg.transition()
 						.duration(600)
@@ -945,8 +942,8 @@ function makeProvMaps(){
 
 	    $('.provinceButt').click(function() {
 
-	      selected_prov = $(this).attr("value");
-	      summval = $(this).attr("summval");
+	      var selected_prov = $(this).attr("value");
+	      var summval = $(this).attr("summval");
 	      d3.select("#prov_title").remove();
 	      makeProvMap(selected_prov, "update");
 

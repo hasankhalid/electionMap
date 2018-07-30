@@ -312,8 +312,6 @@ function createCartogram(year) {
       // scale for radius (number of seats)
       var seat_rad_scale = d3.scaleSqrt().domain([0, 21]).range([0, 69]);
 
-      console.log(result_by_dist)
-
       // circles representing vote percent
       svg.selectAll('circle').data(result_by_dist).enter().append('circle').attr("cx", function (d) {
         return getCentroid(d.key)[0];
@@ -324,10 +322,6 @@ function createCartogram(year) {
       }).style("fill-opacity", 0.7).each(function (d, i) {
         var total_votes = list_votes(d, selected_party);
         var total_valid_votes = list_valid_votes(d);
-        console.log(d.key);
-        console.log(d.values.map(d => d.seat));
-        console.log(total_votes);
-        console.log(total_valid_votes);
         d.ValidVotesTotal = d3.sum(total_valid_votes);
         d.VotePerc = d3.sum(total_votes) / d3.sum(total_valid_votes) * 100;
         d.VotePerc = Math.round(d.VotePerc * 10) / 10;
